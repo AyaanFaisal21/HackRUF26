@@ -1,0 +1,698 @@
+[
+ {
+  "id": "MSG-0059",
+  "received_at": "2026-09-11T00:37:25.324111+00:00",
+  "channel": "patient_portal",
+  "sender": "(677) 555-2318",
+  "subject": "something happened after my dose",
+  "body": "hi, I and I have been on Butrans. since 08/24/2026 i have had hallucination, drug ineffective, unevaluable event. The treating physician considered this medically significant. is this normal??\n- James Garcia, (677) 555-2318"
+ },
+ {
+  "id": "MSG-0041",
+  "received_at": "2026-09-11T06:30:14.142875+00:00",
+  "channel": "patient_portal",
+  "sender": "grace.brown@gmail.net",
+  "subject": "side effect?",
+  "body": "hi, I am patient L.F. 28-year-old male and I have been on Oxycontin, Oxycodone Hydrochloride, Buprenorphine. since 08/12/2026 i have had drug dependence, product prescribing issue. The treating physician considered this medically significant. should i stop taking it\n- Grace Brown, grace.brown@gmail.net"
+ },
+ {
+  "id": "MSG-0048",
+  "received_at": "2026-09-12T15:06:54.720144+00:00",
+  "channel": "call_note",
+  "sender": null,
+  "subject": null,
+  "body": "CALL LOG 09/12 15:06\nCaller: Dr. Priya Schmidt (MD, Internal Medicine), callback priya.schmidt@clinic.org\nRe: a patient, on Risankizumab\nReported: asthma, onset 26 Dec 2023\nThis was life-threatening and required ICU admission.\nNo further details available at time of call."
+ },
+ {
+  "id": "MSG-0037",
+  "received_at": "2026-09-12T23:22:10.099077+00:00",
+  "channel": "patient_portal",
+  "sender": "maria.silva@health.com",
+  "subject": "side effect?",
+  "body": "hi, I am Maria Novak 37-year-old female and I have been on Oxycontin. since 08/20/2026 i have had overdose, drug dependence. The treating physician considered this medically significant. \n- Maria Silva, maria.silva@health.com"
+ },
+ {
+  "id": "MSG-0059-FU",
+  "received_at": "2026-09-13T01:36:35.400119+00:00",
+  "channel": "email",
+  "sender": "(677) 555-2318",
+  "subject": "Follow-up",
+  "body": "Re: the Butrans report I sent earlier. You asked who the patient was: initials B.S., 43-year-old male."
+ },
+ {
+  "id": "MSG-0030",
+  "received_at": "2026-09-13T02:50:02.178992+00:00",
+  "channel": "fax_pdf",
+  "sender": null,
+  "subject": "SERIOUS ADVERSE EVENT NOTIFICATION",
+  "body": "SERIOUS ADVERSE EVENT NOTIFICATION\nDate: 2026-09-13\nReporting physician: ________\nSubject: patient G.C. 70-year-old female\nSuspect product: Oxaliplatin\nEvent(s): rash pruritic, abdominal pain\nOnset: 2023-12-13\nThe treating physician considered this medically significant.\n[OCR confidence 0.91]"
+ },
+ {
+  "id": "MSG-0038",
+  "received_at": "2026-09-13T08:03:41.471205+00:00",
+  "channel": "patient_portal",
+  "sender": "james.brown@health.org",
+  "subject": "question about my medication",
+  "body": "hi, I am patient G.N. 55-year-old male and I have been on Oxycontin, Oxycodone Hydrochloride. since 2026-08-30 i have had drug dependence, loss of personal independence in daily activities, impaired quality of life. The treating physician considered this medically significant. \n- James Brown, james.brown@health.org"
+ },
+ {
+  "id": "MSG-0052",
+  "received_at": "2026-09-13T10:33:10.782934+00:00",
+  "channel": "patient_portal",
+  "sender": "(335) 555-9058",
+  "subject": "side effect?",
+  "body": "hi, I am patient E.A. 54-year-old female and I have been on Humira, Remicade. since 09/01/2023 i have had blood pressure abnormal, heart rate abnormal. The patient was admitted to hospital. my doctor is on vacation\n- Tom Haddad, (335) 555-9058"
+ },
+ {
+  "id": "MSG-0009",
+  "received_at": "2026-09-13T16:08:55.471858+00:00",
+  "channel": "patient_portal",
+  "sender": "(506) 555-2491",
+  "subject": "side effect?",
+  "body": "hi, I am Luis Schmidt 53-year-old male and I have been on Skyrizi. since 2023-12-01 i have had deafness unilateral, ear pain. The treating physician considered this medically significant. my doctor is on vacation\n- Priya Brown, (506) 555-2491"
+ },
+ {
+  "id": "MSG-0031",
+  "received_at": "2026-09-13T17:48:05.254603+00:00",
+  "channel": "patient_portal",
+  "sender": "olu.garcia@health.org",
+  "subject": "question about my medication",
+  "body": "hi, I am patient N.H. 71-year-old female and I have been on Oxycontin, Oxycodone Hydrochloride. since 08/11/2026 i have had drug dependence, impaired quality of life, unevaluable event. The treating physician considered this medically significant. my doctor is on vacation\n- Olu Garcia, olu.garcia@health.org"
+ },
+ {
+  "id": "MSG-0038-DUP",
+  "received_at": "2026-09-13T18:02:05.711110+00:00",
+  "channel": "call_note",
+  "sender": null,
+  "subject": null,
+  "body": "CALL LOG 09/13 18:02\nCaller: Dr. Tom Lee (MD), callback tomlee@clinic.com\nRe: patient G.N. 54-year-old male, on Oxycontin, Oxycodone Hydrochloride\nReported: drug dependence, loss of personal independence in daily activities, impaired quality of life, onset 2026-09-07\nThe treating physician considered this medically significant.\nNo further details available at time of call."
+ },
+ {
+  "id": "MSG-0033",
+  "received_at": "2026-09-14T00:23:40.304005+00:00",
+  "channel": "patient_portal",
+  "sender": null,
+  "subject": "something happened after my dose",
+  "body": "hi, I am patient L.B. 37-year-old female and I have been on Dilaudid, Fentanyl. since 03 Jan 2012 i have had accidental overdose. Unfortunately the patient passed away. \n"
+ },
+ {
+  "id": "MSG-0027",
+  "received_at": "2026-09-14T15:14:17.566820+00:00",
+  "channel": "patient_portal",
+  "sender": "hana.nguyen@gmail.org",
+  "subject": "side effect?",
+  "body": "hi, I am Ahmed Schmidt 28-year-old male and I have been on Humira. since 01 Jan 2015 i have had osteoarthritis, arthropathy. The treating physician considered this medically significant. should i stop taking it\n- Hana Nguyen, hana.nguyen@gmail.org"
+ },
+ {
+  "id": "MSG-0048-FU",
+  "received_at": "2026-09-14T15:32:31.907135+00:00",
+  "channel": "email",
+  "sender": "priya.schmidt@clinic.org",
+  "subject": "Follow-up",
+  "body": "Re: the Risankizumab report I sent earlier. You asked who the patient was: initials K.F., 43-year-old female."
+ },
+ {
+  "id": "MSG-0028",
+  "received_at": "2026-09-14T19:40:36.548047+00:00",
+  "channel": "patient_portal",
+  "sender": "(582) 555-2064",
+  "subject": "question about my medication",
+  "body": "hi, I am Wei Novak 24-year-old female and I have been on Rinvoq. since January 01, 2023 i have had tibia fracture, pain in extremity, osteoporosis. Hospitalized for observation. my doctor is on vacation\n- Elena Schmidt, (582) 555-2064"
+ },
+ {
+  "id": "MSG-0046",
+  "received_at": "2026-09-14T23:47:36.571502+00:00",
+  "channel": "patient_portal",
+  "sender": "(520) 555-6852",
+  "subject": "question about my medication",
+  "body": "hi, I am patient N.J. 29-year-old female and I have been on Oxycontin, Oxycodone Hydrochloride, Butrans. since 08/20/2026 i have had drug dependence, illness. The treating physician considered this medically significant. \n- Olu Patel, (520) 555-6852"
+ },
+ {
+  "id": "MSG-0005",
+  "received_at": "2026-09-14T23:58:54.484907+00:00",
+  "channel": "patient_portal",
+  "sender": "priya.novak@health.com",
+  "subject": "question about my medication",
+  "body": "hi, I am Tom Khan 83-year-old male and I have been on Venclexta. since 2023-12-01 i have had passed away. Unfortunately the patient passed away. \n- Priya Novak, priya.novak@health.com"
+ },
+ {
+  "id": "MSG-0030-FU",
+  "received_at": "2026-09-15T05:12:58.008720+00:00",
+  "channel": "email",
+  "sender": "(830) 555-3270",
+  "subject": "Follow-up",
+  "body": "Following up on the Oxaliplatin report I sent earlier. I forgot to sign it. This is Luis Brown, RN, reachable at (830) 555-3270."
+ },
+ {
+  "id": "MSG-0037-DUP",
+  "received_at": "2026-09-15T07:48:25.483258+00:00",
+  "channel": "call_note",
+  "sender": null,
+  "subject": null,
+  "body": "CALL LOG 09/15 07:48\nCaller: Dr. Olu Novak (MD), callback olunovak@clinic.com\nRe: patient E.P. 37-year-old female, on Oxycontin\nReported: overdose, drug dependence, onset 2026-09-08\nThe treating physician considered this medically significant.\nNo further details available at time of call."
+ },
+ {
+  "id": "MSG-0033-FU",
+  "received_at": "2026-09-16T03:50:57.200582+00:00",
+  "channel": "email",
+  "sender": "tom.garcia@gmail.org",
+  "subject": "Follow-up",
+  "body": "Following up on case reference MSG-0033. I forgot to sign it. This is Tom Garcia, , reachable at tom.garcia@gmail.org."
+ },
+ {
+  "id": "MSG-0012",
+  "received_at": "2026-09-16T22:26:56.197198+00:00",
+  "channel": "patient_portal",
+  "sender": null,
+  "subject": "question about my medication",
+  "body": "hi, I am Daniel Haddad 75-year-old male and I have been on Carbidopa\\Levodopa. since December 26, 2023 i have had passed away. The patient died. should i stop taking it\n"
+ },
+ {
+  "id": "MSG-0002",
+  "received_at": "2026-09-17T02:01:40.036302+00:00",
+  "channel": "patient_portal",
+  "sender": "(677) 555-8424",
+  "subject": "something happened after my dose",
+  "body": "hi, I am Hana Lee 61-year-old male and I have been on Venclexta. since 12/01/2023 i have had passed away. The patient died. my doctor is on vacation\n- Luis Novak, (677) 555-8424"
+ },
+ {
+  "id": "MSG-0029",
+  "received_at": "2026-09-17T08:40:08.587041+00:00",
+  "channel": "patient_portal",
+  "sender": "ahmed.nguyen@gmail.com",
+  "subject": "something happened after my dose",
+  "body": "hi, I am Olu Patel 51-year-old female and I have been on Dupixent. since August 19, 2026 i have had loss of consciousness, seizure. The treating physician considered this medically significant. \n- Ahmed Nguyen, ahmed.nguyen@gmail.com"
+ },
+ {
+  "id": "MSG-0027-DUP",
+  "received_at": "2026-09-18T08:08:13.375355+00:00",
+  "channel": "call_note",
+  "sender": null,
+  "subject": null,
+  "body": "CALL LOG 09/18 08:08\nCaller: Dr. Grace Haddad (MD), callback gracehaddad@clinic.com\nRe: patient E.T. 28-year-old male, on Humira\nReported: osteoarthritis, arthropathy, onset January 01, 2015\nThe treating physician considered this medically significant.\nNo further details available at time of call."
+ },
+ {
+  "id": "MSG-0020",
+  "received_at": "2026-09-18T16:29:14.285698+00:00",
+  "channel": "email",
+  "sender": null,
+  "subject": "Fwd: patient reaction to Carbidopa\\Levodopa",
+  "body": "Hi there,\n\nI am writing to report that patient H.L. 43-year-old male taking Carbidopa\\Levodopa developed general physical health deterioration, hypertension, dementia on 01 Jan 2023. Hospitalized for observation.\nPlease let me know if you need anything else.\n\nSent from my phone\n"
+ },
+ {
+  "id": "MSG-0012-FU",
+  "received_at": "2026-09-19T05:03:29.468450+00:00",
+  "channel": "email",
+  "sender": "priya.okafor@health.net",
+  "subject": "Follow-up",
+  "body": "Following up on my report from Wednesday about the patient on Carbidopa\\Levodopa. I forgot to sign it. This is Priya Okafor, , reachable at priya.okafor@health.net."
+ },
+ {
+  "id": "MSG-0020-FU",
+  "received_at": "2026-09-20T17:44:51.234365+00:00",
+  "channel": "email",
+  "sender": "sofia.lee@hospital.com",
+  "subject": "Follow-up",
+  "body": "Following up on case reference MSG-0020. I forgot to sign it. This is Dr. Sofia Lee, MD, Internal Medicine, reachable at sofia.lee@hospital.com."
+ },
+ {
+  "id": "MSG-0023",
+  "received_at": "2026-09-21T19:05:50.796530+00:00",
+  "channel": "email",
+  "sender": null,
+  "subject": "Adverse event report - Tysabri",
+  "body": "Hello,\n\nI am writing to report that patient E.T. 43-year-old female taking Tysabri developed breast neoplasm on 01 Sep 2023. Hospitalized for observation.\n\n\n\n"
+ },
+ {
+  "id": "MSG-0040",
+  "received_at": "2026-09-23T00:51:58.045747+00:00",
+  "channel": "patient_portal",
+  "sender": "(528) 555-8549",
+  "subject": "question about my medication",
+  "body": "hi, I am patient A.K. 32-year-old male and I have been on Oxycodone Hydrochloride, Hydrocodone Bitartrate, Acetaminophen\\Oxycodone Hydrochloride. since 08/20/2026 i have had overdose, drug dependence. The treating physician considered this medically significant. should i stop taking it\n- Grace Patel, (528) 555-8549"
+ },
+ {
+  "id": "MSG-0056",
+  "received_at": "2026-09-23T21:25:35.461093+00:00",
+  "channel": "patient_portal",
+  "sender": null,
+  "subject": "something happened after my dose",
+  "body": "hi, I am patient P.P. 38-year-old female and I have been on Oxycodone Hydrochloride, Dilaudid. since September 02, 2026 i have had overdose, prescribed overdose, somnolence. The treating physician considered this medically significant. my doctor is on vacation\n"
+ },
+ {
+  "id": "MSG-0023-FU",
+  "received_at": "2026-09-23T23:00:42.472798+00:00",
+  "channel": "email",
+  "sender": "daniel.brown@clinic.net",
+  "subject": "Follow-up",
+  "body": "Following up on my report from Monday about the patient on Tysabri. I forgot to sign it. This is Dr. Daniel Brown, MD, Internal Medicine, reachable at daniel.brown@clinic.net."
+ },
+ {
+  "id": "MSG-0001",
+  "received_at": "2026-09-24T02:21:41.950455+00:00",
+  "channel": "patient_portal",
+  "sender": "olu.silva@hospital.com",
+  "subject": "something happened after my dose",
+  "body": "hi, I am Maria Lee 64-year-old male and I have been on Venclexta. since September 11, 2026 i have had spinal compression fracture. The treating physician considered this medically significant. should i stop taking it\n- Olu Silva, olu.silva@hospital.com"
+ },
+ {
+  "id": "MSG-0054",
+  "received_at": "2026-09-24T20:01:02.713537+00:00",
+  "channel": "patient_portal",
+  "sender": "ahmed.haddad@clinic.net",
+  "subject": "something happened after my dose",
+  "body": "hi, I am Priya Garcia 75-year-old male and I have been on Buprenorphine. since 24 Sep 2023 i have had overdose, asthenia, somnolence. The treating physician considered this medically significant. my doctor is on vacation\n- Ahmed Haddad, ahmed.haddad@clinic.net"
+ },
+ {
+  "id": "MSG-0015",
+  "received_at": "2026-09-24T21:45:15.859645+00:00",
+  "channel": "call_note",
+  "sender": null,
+  "subject": null,
+  "body": "CALL LOG 09/24 21:45\nCaller: Dr. James Brown (MD, Internal Medicine), callback james.brown@health.com\nRe: patient R.A. 73-year-old male, on Venclexta\nReported: death, off label use, onset 2026-08-20\nThe patient died.\nNo further details available at time of call."
+ },
+ {
+  "id": "MSG-0014",
+  "received_at": "2026-09-24T23:35:39.789039+00:00",
+  "channel": "call_note",
+  "sender": null,
+  "subject": null,
+  "body": "CALL LOG 09/24 23:35\nCaller: Daniel Patel (RN), callback daniel.patel@health.net\nRe: patient A.E. 93-year-old male, on Carbidopa\\Levodopa\nReported: dehydration, general physical health deterioration, metastatic neoplasm, onset January 02, 2024\nThe patient died.\nCaller asks whether to stop the medication - advised to contact prescriber."
+ },
+ {
+  "id": "MSG-0049",
+  "received_at": "2026-09-25T08:49:18.891868+00:00",
+  "channel": "patient_portal",
+  "sender": "tom.nguyen@hospital.com",
+  "subject": "side effect?",
+  "body": "hi, I am patient F.H. 59-year-old male and I have been on Leuprolide Acetate. since 26 Oct 2023 i have had passed away. Unfortunately the patient passed away. should i stop taking it\n- Tom Nguyen, tom.nguyen@hospital.com"
+ },
+ {
+  "id": "MSG-0026",
+  "received_at": "2026-09-25T16:55:40.523552+00:00",
+  "channel": "fax_pdf",
+  "sender": null,
+  "subject": "SERIOUS ADVERSE EVENT NOTIFICATION",
+  "body": "SERIOUS ADVERSE EVENT NOTIFICATION\nDate: 2026-09-25\nReporting physician: ________\nSubject: patient R.D. 42-year-old female\nSuspect product: Denosumab\nEvent(s): spinal fracture\nOnset: 06 Sep 2026\nThe treating physician considered this medically significant.\n[page 1 of 1]"
+ },
+ {
+  "id": "MSG-0019",
+  "received_at": "2026-09-25T21:37:22.554393+00:00",
+  "channel": "patient_portal",
+  "sender": "sofia.lee@gmail.net",
+  "subject": "side effect?",
+  "body": "hi, I am Ahmed Okafor 57-year-old female and I have been on Farxiga. since 2026-09-12 i have had passed away. Unfortunately the patient passed away. my doctor is on vacation\n- Sofia Lee, sofia.lee@gmail.net"
+ },
+ {
+  "id": "MSG-0056-FU",
+  "received_at": "2026-09-26T01:41:57.918684+00:00",
+  "channel": "email",
+  "sender": "priya.garcia@hospital.com",
+  "subject": "Follow-up",
+  "body": "Following up on case reference MSG-0056. I forgot to sign it. This is Priya Garcia, , reachable at priya.garcia@hospital.com."
+ },
+ {
+  "id": "MSG-0022",
+  "received_at": "2026-09-26T01:51:48.539605+00:00",
+  "channel": "patient_portal",
+  "sender": "(934) 555-7381",
+  "subject": "side effect?",
+  "body": "hi, I am patient K.H. 80-year-old male and I have been on Venclexta. since 2023-12-11 i have had acute myeloid leukaemia, lymphadenopathy. The patient died. \n- Maria Garcia, (934) 555-7381"
+ },
+ {
+  "id": "MSG-0025",
+  "received_at": "2026-09-26T07:53:52.218844+00:00",
+  "channel": "patient_portal",
+  "sender": "hana.haddad@gmail.net",
+  "subject": "something happened after my dose",
+  "body": "hi, I am Hana Patel 59-year-old female and I have been on Symbicort. since January 01, 2008 i have had vocal cord disorder, speech disorder. The patient has not regained function and may have lasting disability. should i stop taking it\n- Hana Haddad, hana.haddad@gmail.net"
+ },
+ {
+  "id": "MSG-0010",
+  "received_at": "2026-09-26T17:38:45.708503+00:00",
+  "channel": "email",
+  "sender": "hana.lee@hospital.net",
+  "subject": "Possible side effect, please advise",
+  "body": "Hi there,\n\nI am writing to report that patient H.N. 54-year-old male taking Bisoprolol, Perindopril, Spironolactone developed passed away, product availability issue on 2023-11-28. Unfortunately the patient passed away.\nPlease let me know if you need anything else.\n\nRegards,\nHana Lee\nPharmD\nhana.lee@hospital.net\n"
+ },
+ {
+  "id": "MSG-0004",
+  "received_at": "2026-09-27T01:13:39.807217+00:00",
+  "channel": "patient_portal",
+  "sender": null,
+  "subject": "question about my medication",
+  "body": "hi, I am Sofia Novak 60-year-old female and I have been on Venclexta. since 12/01/2023 i have had passed away. The patient died. is this normal??\n"
+ },
+ {
+  "id": "MSG-0019-DUP",
+  "received_at": "2026-09-27T07:37:49.429230+00:00",
+  "channel": "call_note",
+  "sender": null,
+  "subject": null,
+  "body": "CALL LOG 09/27 07:37\nCaller: Dr. Maria Novak (MD), callback marianovak@mail.com\nRe: patient D.F. 58-year-old female, on Farxiga\nReported: death, onset 29 Aug 2026\nUnfortunately the patient passed away.\nWill send records."
+ },
+ {
+  "id": "MSG-0051",
+  "received_at": "2026-09-27T23:35:09.417198+00:00",
+  "channel": "email",
+  "sender": "maria.silva@health.org",
+  "subject": "Fwd: patient reaction to Oxaliplatin",
+  "body": "Hello,\n\nI am writing to report that a patient taking Oxaliplatin developed hypoaesthesia, pain in extremity on December 16, 2023. The patient was admitted to hospital.\n\n\nBest,\nDr. Maria Silva\nMD, Internal Medicine\nmaria.silva@health.org\n"
+ },
+ {
+  "id": "MSG-0026-FU",
+  "received_at": "2026-09-28T00:15:37.301170+00:00",
+  "channel": "email",
+  "sender": "(685) 555-1286",
+  "subject": "Follow-up",
+  "body": "Following up on my report from Friday about the patient on Denosumab. I forgot to sign it. This is Dr. Grace Khan, MD, Internal Medicine, reachable at (685) 555-1286."
+ },
+ {
+  "id": "MSG-0003",
+  "received_at": "2026-09-28T05:59:07.865547+00:00",
+  "channel": "email",
+  "sender": "(629) 555-3702",
+  "subject": "Possible side effect, please advise",
+  "body": "To whom it may concern,\n\nI am writing to report that patient R.K. 57-year-old female taking Venetoclax, Azacitidine developed myelosuppression, white blood cell count decreased, red blood cell count decreased on 2023-12-16. Hospitalized for observation.\n\n\nBest,\nDr. Elena Novak\nMD, Internal Medicine\n(629) 555-3702\n"
+ },
+ {
+  "id": "MSG-0006",
+  "received_at": "2026-09-28T07:57:50.762762+00:00",
+  "channel": "patient_portal",
+  "sender": null,
+  "subject": "side effect?",
+  "body": "hi, I am Wei Haddad 62-year-old female and I have been on Venclexta. since 2023-12-01 i have had passed away. Unfortunately the patient passed away. is this normal??\n"
+ },
+ {
+  "id": "MSG-0058",
+  "received_at": "2026-09-28T17:16:50.671979+00:00",
+  "channel": "patient_portal",
+  "sender": "olu.brown@hospital.org",
+  "subject": "side effect?",
+  "body": "hi, I am patient M.R. 27-year-old female and I have been on Oxycodone Hydrochloride, Fentanyl. since 05/01/2015 i have had overdose. The patient died. is this normal??\n- Olu Brown, olu.brown@hospital.org"
+ },
+ {
+  "id": "MSG-0004-FU",
+  "received_at": "2026-09-29T02:58:24.191132+00:00",
+  "channel": "email",
+  "sender": "(934) 555-7320",
+  "subject": "Follow-up",
+  "body": "Following up on case reference MSG-0004. I forgot to sign it. This is Ahmed Khan, , reachable at (934) 555-7320."
+ },
+ {
+  "id": "MSG-0021",
+  "received_at": "2026-09-29T10:47:49.577719+00:00",
+  "channel": "email",
+  "sender": null,
+  "subject": "Adverse event report - Carbidopa\\Levodopa",
+  "body": "Hi there,\n\nI am writing to report that patient M.L. 65-year-old male taking Carbidopa\\Levodopa developed discomfort, subdural haematoma, bradykinesia on August 26, 2026. The treating physician considered this medically significant.\nPlease let me know if you need anything else.\n\nRegards\n\nThis email may contain confidential information intended only for the recipient."
+ },
+ {
+  "id": "MSG-0058-DUP",
+  "received_at": "2026-09-29T22:01:32.968838+00:00",
+  "channel": "call_note",
+  "sender": null,
+  "subject": null,
+  "body": "CALL LOG 09/29 22:01\nCaller: Dr. Luis Haddad (MD), callback luishaddad@mail.com\nRe: patient M.R. 26-year-old female, on Oxycodone Hydrochloride, Fentanyl\nReported: overdose, onset 01 May 2015\nThe patient died.\nWill send records."
+ },
+ {
+  "id": "MSG-0051-FU",
+  "received_at": "2026-09-30T00:01:12.247211+00:00",
+  "channel": "email",
+  "sender": "maria.silva@health.org",
+  "subject": "Follow-up",
+  "body": "Re: the Oxaliplatin report I sent earlier. You asked who the patient was: initials S.R., 59-year-old female."
+ },
+ {
+  "id": "MSG-0013",
+  "received_at": "2026-09-30T06:48:57.318674+00:00",
+  "channel": "email",
+  "sender": "ahmed.lee@gmail.com",
+  "subject": "Fwd: patient reaction to Lenalidomide, Darzalex, Dexamethasone",
+  "body": "Dear Safety Team,\n\nI am writing to report that patient K.T. 25-year-old male taking Lenalidomide, Darzalex, Dexamethasone developed plasma cell myeloma on 22 Aug 2026. The treating physician considered this medically significant.\n\n\nThanks,\nDr. Ahmed Lee\nMD, Internal Medicine\nahmed.lee@gmail.com\n"
+ },
+ {
+  "id": "MSG-0006-FU",
+  "received_at": "2026-09-30T11:37:02.101961+00:00",
+  "channel": "email",
+  "sender": "(387) 555-5304",
+  "subject": "Follow-up",
+  "body": "Following up on the Venclexta report I sent earlier. I forgot to sign it. This is Priya Nguyen, , reachable at (387) 555-5304."
+ },
+ {
+  "id": "MSG-0044",
+  "received_at": "2026-09-30T16:42:53.022838+00:00",
+  "channel": "patient_portal",
+  "sender": null,
+  "subject": "question about my medication",
+  "body": "hi, I am patient R.J. 56-year-old male and I have been on Oxycontin, Oxycodone Hydrochloride, Buprenorphine. since 09/26/2026 i have had overdose, drug dependence, learning disability. The treating physician considered this medically significant. is this normal??\n"
+ },
+ {
+  "id": "MSG-0021-FU",
+  "received_at": "2026-10-01T15:29:29.438801+00:00",
+  "channel": "email",
+  "sender": "(517) 555-4569",
+  "subject": "Follow-up",
+  "body": "Following up on case reference MSG-0021. I forgot to sign it. This is Dr. Maria Garcia, MD, Internal Medicine, reachable at (517) 555-4569."
+ },
+ {
+  "id": "MSG-0044-FU",
+  "received_at": "2026-10-02T21:30:36.415873+00:00",
+  "channel": "email",
+  "sender": "amara.patel@clinic.net",
+  "subject": "Follow-up",
+  "body": "Following up on the Oxycontin, Oxycodone Hydrochloride, Buprenorphine report I sent earlier. I forgot to sign it. This is Amara Patel, , reachable at amara.patel@clinic.net."
+ },
+ {
+  "id": "MSG-0055",
+  "received_at": "2026-10-03T06:48:37.754146+00:00",
+  "channel": "patient_portal",
+  "sender": "(962) 555-1791",
+  "subject": "something happened after my dose",
+  "body": "hi, I am Daniel Nguyen 47-year-old female and I have been on Oxycontin, Dilaudid, Hydrocodone Bitartrate And Acetaminophen. since 2012-01-01 i have had overdose, drug dependence. The treating physician considered this medically significant. is this normal??\n- Hana Patel, (962) 555-1791"
+ },
+ {
+  "id": "MSG-0050",
+  "received_at": "2026-10-03T09:58:10.280963+00:00",
+  "channel": "patient_portal",
+  "sender": "(843) 555-6017",
+  "subject": "question about my medication",
+  "body": "hi, I am Olu Schmidt 70-year-old female and I have been on Acetaminophen\\Oxycodone Hydrochloride, Hydrocodone Bitartrate And Acetaminophen. since 2026-09-07 i have had drug dependence, drug ineffective, product availability issue. The treating physician considered this medically significant. \n- Amara Lee, (843) 555-6017"
+ },
+ {
+  "id": "MSG-0024",
+  "received_at": "2026-10-03T20:22:32.782725+00:00",
+  "channel": "email",
+  "sender": "(955) 555-8763",
+  "subject": "RE: safety report",
+  "body": "To whom it may concern,\n\nI am writing to report that patient T.C. 45-year-old female taking Dupixent developed myocardial infarction, inappropriate schedule of product administration on 27 Oct 2023. The treating physician considered this medically significant.\nPlease let me know if you need anything else.\n\nBest,\nDr. Grace Nguyen\nMD, Internal Medicine\n(955) 555-8763\n\nThis email may contain confidential information intended only for the recipient."
+ },
+ {
+  "id": "MSG-0035",
+  "received_at": "2026-10-03T20:23:18.144757+00:00",
+  "channel": "patient_portal",
+  "sender": "hana.lee@gmail.com",
+  "subject": "question about my medication",
+  "body": "hi, I am Wei Silva 57-year-old male and I have been on Oxycontin. since September 16, 2026 i have had overdose, drug dependence. The treating physician considered this medically significant. my doctor is on vacation\n- Hana Lee, hana.lee@gmail.com"
+ },
+ {
+  "id": "MSG-0034",
+  "received_at": "2026-10-04T04:16:26.893485+00:00",
+  "channel": "patient_portal",
+  "sender": "priya.okafor@health.net",
+  "subject": "something happened after my dose",
+  "body": "hi, I am Hana Khan 78-year-old male and I have been on Oxycontin, Oxycodone Hydrochloride. since September 23, 2026 i have had drug dependence, depressed mood. The treating physician considered this medically significant. \n- Priya Okafor, priya.okafor@health.net"
+ },
+ {
+  "id": "MSG-0007",
+  "received_at": "2026-10-04T15:05:09.257066+00:00",
+  "channel": "email",
+  "sender": null,
+  "subject": "Adverse event report - Adalimumab",
+  "body": "Hi there,\n\nI am writing to report that patient N.N. 84-year-old female taking Adalimumab developed passed away, lung neoplasm malignant, rheumatoid arthritis on January 01, 2023. The patient died.\n\n\nRegards\n"
+ },
+ {
+  "id": "MSG-0032",
+  "received_at": "2026-10-04T19:50:47.940123+00:00",
+  "channel": "patient_portal",
+  "sender": "(445) 555-7034",
+  "subject": "question about my medication",
+  "body": "hi, I am James Patel 52-year-old female and I have been on Oxycontin, Acetaminophen\\Oxycodone Hydrochloride\\Oxycodone Terephthalate. since 01 Oct 2026 i have had drug dependence, learning disorder, memory impairment. The treating physician considered this medically significant. \n- Priya Brown, (445) 555-7034"
+ },
+ {
+  "id": "MSG-0042",
+  "received_at": "2026-10-04T21:58:08.255015+00:00",
+  "channel": "call_note",
+  "sender": null,
+  "subject": null,
+  "body": "CALL LOG 10/04 21:58\nCaller: Dr. Hana Haddad (MD, Internal Medicine), callback (781) 555-5385\nRe: patient H.D. 50-year-old male, on Venclexta\nReported: obliterative bronchiolitis, onset 12/01/2023\nThe treating physician considered this medically significant.\nCaller asks whether to stop the medication - advised to contact prescriber."
+ },
+ {
+  "id": "MSG-0036",
+  "received_at": "2026-10-05T01:44:55.022785+00:00",
+  "channel": "patient_portal",
+  "sender": "(708) 555-4283",
+  "subject": "question about my medication",
+  "body": "hi, I am patient M.N. 45-year-old male and I have been on Oxycontin, Dilaudid, Hydrocodone Bitartrate And Acetaminophen. since 09/04/2026 i have had drug dependence, drug withdrawal syndrome. The treating physician considered this medically significant. my doctor is on vacation\n- Sofia Rossi, (708) 555-4283"
+ },
+ {
+  "id": "MSG-0035-DUP",
+  "received_at": "2026-10-05T04:21:43.890271+00:00",
+  "channel": "call_note",
+  "sender": null,
+  "subject": null,
+  "body": "CALL LOG 10/05 04:21\nCaller: Dr. Wei Khan (MD), callback weikhan@clinic.com\nRe: patient N.J. 56-year-old male, on Oxycontin\nReported: overdose, drug dependence, onset September 02, 2026\nThe treating physician considered this medically significant.\nWill send records."
+ },
+ {
+  "id": "MSG-0011",
+  "received_at": "2026-10-05T12:49:46.270530+00:00",
+  "channel": "email",
+  "sender": "(287) 555-2964",
+  "subject": "RE: safety report",
+  "body": "To whom it may concern,\n\nI am writing to report that patient S.A. 36-year-old female taking Venclexta developed death on September 12, 2026. Unfortunately the patient passed away.\n\n\nRegards,\nDr. Elena Lee\nMD, Internal Medicine\n(287) 555-2964\n"
+ },
+ {
+  "id": "MSG-0016",
+  "received_at": "2026-10-06T06:08:22.245312+00:00",
+  "channel": "email",
+  "sender": "(275) 555-4484",
+  "subject": "RE: safety report",
+  "body": "Dear Safety Team,\n\nI am writing to report that patient R.L. 84-year-old male taking Dapagliflozin Propanediol\\Metformin Hydrochloride, Sacubitril\\Valsartan developed ventricular tachycardia, cardio-respiratory arrest, ventricular tachycardia on 11/07/2023. This was life-threatening and required ICU admission.\n\n\nRegards,\nDr. James Rossi\nMD, Internal Medicine\n(275) 555-4484\n\nThis email may contain confidential information intended only for the recipient."
+ },
+ {
+  "id": "MSG-0047",
+  "received_at": "2026-10-06T14:43:53.151849+00:00",
+  "channel": "patient_portal",
+  "sender": null,
+  "subject": "something happened after my dose",
+  "body": "hi, I am Amara Nguyen 24-year-old female and I have been on Oxycontin. since September 09, 2026 i have had overdose, drug dependence, amnesia. The treating physician considered this medically significant. my doctor is on vacation\n"
+ },
+ {
+  "id": "MSG-0007-FU",
+  "received_at": "2026-10-06T22:04:50.029534+00:00",
+  "channel": "email",
+  "sender": "daniel.brown@clinic.com",
+  "subject": "Follow-up",
+  "body": "Following up on the Adalimumab report I sent earlier. I forgot to sign it. This is Dr. Daniel Brown, MD, Internal Medicine, reachable at daniel.brown@clinic.com."
+ },
+ {
+  "id": "MSG-0034-DUP",
+  "received_at": "2026-10-07T03:11:01.384056+00:00",
+  "channel": "email",
+  "sender": "danielokafor@mail.com",
+  "subject": "RE: safety report",
+  "body": "Hello,\n\nI am writing to report that patient P.S. 77-year-old male taking Oxycontin, Oxycodone Hydrochloride developed drug dependence, depressed mood on 2026-09-27. The treating physician considered this medically significant.\nPlease let me know if you need anything else.\n\nRegards,\nDr. Daniel Okafor\nMD\ndanielokafor@mail.com\n\nThis email may contain confidential information intended only for the recipient."
+ },
+ {
+  "id": "MSG-0036-DUP",
+  "received_at": "2026-10-07T07:17:23.758082+00:00",
+  "channel": "call_note",
+  "sender": null,
+  "subject": null,
+  "body": "CALL LOG 10/07 07:17\nCaller: Dr. Hana Khan (MD), callback hanakhan@mail.com\nRe: patient M.N. 44-year-old male, on Oxycontin, Dilaudid, Hydrocodone Bitartrate And Acetaminophen\nReported: drug dependence, drug withdrawal syndrome, onset 26 Sep 2026\nThe treating physician considered this medically significant.\nCaller asks whether to stop the medication - advised to contact prescriber."
+ },
+ {
+  "id": "MSG-0039",
+  "received_at": "2026-10-07T16:03:56.554400+00:00",
+  "channel": "patient_portal",
+  "sender": "elena.silva@gmail.com",
+  "subject": "question about my medication",
+  "body": "hi, I am patient B.J. 41-year-old male and I have been on Oxycontin. since 06 Sep 2026 i have had overdose, drug dependence. The treating physician considered this medically significant. \n- Elena Silva, elena.silva@gmail.com"
+ },
+ {
+  "id": "MSG-0043",
+  "received_at": "2026-10-07T19:36:34.648585+00:00",
+  "channel": "fax_pdf",
+  "sender": null,
+  "subject": "SERIOUS ADVERSE EVENT NOTIFICATION",
+  "body": "SERIOUS ADVERSE EVENT NOTIFICATION\nDate: 2026-10-07\nReporting physician: Dr. Hana Lee\nContact: hana.lee@hospital.net\nSubject: patient L.C. 70-year-old female\nSuspect product: Oxycontin\nEvent(s): drug withdrawal syndrome, product availability issue\nOnset: 26 Dec 2023\nThe treating physician considered this medically significant.\n[OCR confidence 0.91]"
+ },
+ {
+  "id": "MSG-0008",
+  "received_at": "2026-10-08T07:26:08.028303+00:00",
+  "channel": "fax_pdf",
+  "sender": null,
+  "subject": "SERIOUS ADVERSE EVENT NOTIFICATION",
+  "body": "SERIOUS ADVERSE EVENT NOTIFICATION\nDate: 2026-10-08\nReporting physician: Priya Haddad\nContact: (319) 555-8996\nSubject: patient J.M. 48-year-old female\nSuspect product: Amoxicillin, Ciprofloxacin\nEvent(s): urinary tract infection\nOnset: 2026-09-15\nThe treating physician considered this medically significant.\n[OCR confidence 0.91]"
+ },
+ {
+  "id": "MSG-0000",
+  "received_at": "2026-10-08T18:57:38.107894+00:00",
+  "channel": "patient_portal",
+  "sender": "priya.rossi@clinic.net",
+  "subject": "side effect?",
+  "body": "hi, I am Amara Brown 44-year-old male and I have been on Venclexta. since January 01, 2023 i have had leukaemia, septic shock, infection in the blood. Unfortunately the patient passed away. is this normal??\n- Priya Rossi, priya.rossi@clinic.net"
+ },
+ {
+  "id": "MSG-0047-FU",
+  "received_at": "2026-10-08T20:37:45.921280+00:00",
+  "channel": "email",
+  "sender": "tom.patel@gmail.com",
+  "subject": "Follow-up",
+  "body": "Following up on my report from Tuesday about the patient on Oxycontin. I forgot to sign it. This is Tom Patel, , reachable at tom.patel@gmail.com."
+ },
+ {
+  "id": "MSG-0043-DUP",
+  "received_at": "2026-10-08T23:13:15.481936+00:00",
+  "channel": "patient_portal",
+  "sender": "ahmedlee@mail.com",
+  "subject": "side effect?",
+  "body": "hi, I am patient L.C. 69-year-old female and I have been on Oxycontin. since 12/26/2023 i have had drug withdrawal syndrome, product availability issue. The treating physician considered this medically significant. my doctor is on vacation\n- Ahmed Lee, ahmedlee@mail.com"
+ },
+ {
+  "id": "MSG-0057",
+  "received_at": "2026-10-08T23:24:31.970157+00:00",
+  "channel": "patient_portal",
+  "sender": "ahmed.silva@hospital.org",
+  "subject": "question about my medication",
+  "body": "hi, I am patient E.G. 61-year-old female and I have been on Oxycodone Hydrochloride, Acetaminophen\\Oxycodone Hydrochloride, Heroin. since 2026-09-27 i have had overdose, drug dependence, quality of life decreased. The patient has not regained function and may have lasting disability. my doctor is on vacation\n- Ahmed Silva, ahmed.silva@hospital.org"
+ },
+ {
+  "id": "MSG-0045",
+  "received_at": "2026-10-08T23:41:41.026613+00:00",
+  "channel": "patient_portal",
+  "sender": "(409) 555-1515",
+  "subject": "something happened after my dose",
+  "body": "hi, I am Olu Schmidt 82-year-old male and I have been on Oxycontin. since 30 Sep 2026 i have had drug dependence, pain, impaired quality of life. The treating physician considered this medically significant. should i stop taking it\n- Wei Okafor, (409) 555-1515"
+ },
+ {
+  "id": "MSG-0053",
+  "received_at": "2026-10-09T18:42:13.202055+00:00",
+  "channel": "patient_portal",
+  "sender": "ahmed.patel@health.org",
+  "subject": "question about my medication",
+  "body": "hi, I am Amara Khan 59-year-old female and I have been on Acetaminophen\\Oxycodone Hydrochloride. since 04/02/2024 i have had metal poisoning, oropharyngeal pain, nasal discomfort. This was life-threatening and required ICU admission. should i stop taking it\n- Ahmed Patel, ahmed.patel@health.org"
+ },
+ {
+  "id": "MSG-0017",
+  "received_at": "2026-10-10T07:10:42.275304+00:00",
+  "channel": "email",
+  "sender": "(401) 555-6842",
+  "subject": "Possible side effect, please advise",
+  "body": "Hello,\n\nI am writing to report that patient F.P. 34-year-old female taking Venclexta developed brain fog, memory impairment, diarrhoea on 2023-01-01. The treating physician considered this medically significant.\nPlease let me know if you need anything else.\n\nRegards,\nOlu Lee\nRN\n(401) 555-6842\n"
+ },
+ {
+  "id": "MSG-0018",
+  "received_at": "2026-10-10T09:05:04.654171+00:00",
+  "channel": "patient_portal",
+  "sender": "priya.brown@clinic.net",
+  "subject": "side effect?",
+  "body": "hi, I am Sofia Schmidt 49-year-old female and I have been on Farxiga. since 2026-10-03 i have had oral candidiasis. The treating physician considered this medically significant. should i stop taking it\n- Priya Brown, priya.brown@clinic.net"
+ },
+ {
+  "id": "MSG-0017-DUP",
+  "received_at": "2026-10-10T22:11:11.886275+00:00",
+  "channel": "patient_portal",
+  "sender": "ahmedokafor@mail.com",
+  "subject": "something happened after my dose",
+  "body": "hi, I am patient F.P. 34-year-old female and I have been on Venclexta. since 01 Jan 2023 i have had brain fog, memory impairment, diarrhoea. The treating physician considered this medically significant. my doctor is on vacation\n- Ahmed Okafor, ahmedokafor@mail.com"
+ },
+ {
+  "id": "MSG-0018-DUP",
+  "received_at": "2026-10-10T22:11:11.886275+00:00",
+  "channel": "call_note",
+  "sender": null,
+  "subject": null,
+  "body": "CALL LOG 10/10 22:11\nCaller: Dr. Amara Nguyen (MD), callback amaranguyen@clinic.com\nRe: patient T.S. 48-year-old female, on Farxiga\nReported: oral candidiasis, onset 09/21/2026\nThe treating physician considered this medically significant.\nCaller asks whether to stop the medication - advised to contact prescriber."
+ }
+]

@@ -1,0 +1,22 @@
+# Local stand-in for Tiger Cloud. Same engine (TimescaleDB on PostgreSQL 17) with pgvector,
+# pgvectorscale and pgai bundled. For the hackathon deployment point DATABASE_URL at a
+# Tiger Cloud service instead; the schema is identical.
+services:
+  tiger:
+    image: timescale/timescaledb-ha:pg17
+    container_name: dayzero-tiger
+    environment:
+      POSTGRES_USER: dayzero
+      POSTGRES_PASSWORD: dayzero
+      POSTGRES_DB: dayzero
+    ports:
+      - "5433:5432"
+    volumes:
+      - tiger-data:/home/postgres/pgdata/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dayzero -d dayzero"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+volumes:
+  tiger-data:

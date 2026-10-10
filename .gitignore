@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.env
+.DS_Store
+node_modules/
+frontend/dist/
+data/raw/
+spikes/*/data/*
+!spikes/hiddenlabs/data/edish.png
