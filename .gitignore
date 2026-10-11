@@ -6,6 +6,5 @@ __pycache__/
 .DS_Store
 node_modules/
 frontend/dist/
-data/raw/
 spikes/*/data/*
 !spikes/hiddenlabs/data/edish.png

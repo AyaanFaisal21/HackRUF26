@@ -1,5 +1,10 @@
 # Decisions
 
+## 2026-10-11: pivot from Day Zero to Sourced
+
+Day Zero (safety intake with a regulatory clock) was built and working. We replaced it because the urgent case is rare and high-stakes while the daily cost is the menial one: retyping and checking the data every visit leaves behind. The pitch became one line anyone understands, "medical forms that fill themselves, with receipts," and the clinical trial is where it costs the most. The intake code is in git history (`backend/dayzero`, removed in the cleanup commit). The verify-and-sign screen, the audit trail, the model seam, the Tiger setup, and the CDISC conversion carried over.
+
+
 ## Why Day Zero
 
 Fifty-two sheets were read. Three were spiked far enough to find their roadblocks (see `spikes/`). Day Zero won on floor, not ceiling:
