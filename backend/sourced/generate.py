@@ -49,11 +49,18 @@ class Builder:
         self.truth = {"doc_extractions": {}, "planted": [], "visit_truth": {}, "children": []}
 
     # ------------------------------------------------------------ helpers
-    def _doc(self, patient_id, org, kind, doc_date: date, text: str, facts: list[dict], received_offset_days=1):
+    def _layout(self) -> str:
+        return "variant" if self.rng.random() < 0.35 else "standard"
+
+    def _doc(self, patient_id, org, kind, doc_date: date, text: str, facts: list[dict], received_offset_days=1, layout: str = "standard"):
         did = f"DOC-{len(self.documents) + 1:04d}"
         received = datetime.combine(doc_date + timedelta(days=received_offset_days), datetime.min.time(), tzinfo=timezone.utc) + timedelta(hours=self.rng.randint(8, 17))
-        self.documents.append({"id": did, "patient_id": patient_id, "source_org": org, "kind": kind, "received_at": received.isoformat(), "document_date": doc_date.isoformat(),
+        self.documents.append({"id": did, "patient_id": patient_id, "source_org": org, "kind": kind, "layout": layout, "received_at": received.isoformat(), "document_date": doc_date.isoformat(),
                                "text": text, "n_pages": text.count("\f") + 1, "sha256": hashlib.sha256(text.encode()).hexdigest()})
+        import re as _re
+        m = _re.search(r"DOB:? ?(\d{2}/\d{2}/\d{4})", text)
+        if m and not any(f["category"] == "demographic" for f in facts):
+            facts = facts + [{"label": "date of birth", "category": "demographic", "value": m.group(1), "unit": None, "quote": m.group(0), "date": doc_date.isoformat()}]
         for f in facts:
             assert f["quote"] in text, (did, f["quote"])
         self.truth["doc_extractions"][did] = {"document_kind": kind, "document_date": doc_date.isoformat(), "patient_name": None, "patient_identifiers": [], "facts": [
@@ -166,15 +173,20 @@ class Builder:
             when = d2(day)
             rows = [r for r in lb if r["day"] == day]
             lines, facts = [], []
+            layout = self._layout()
             for r in rows:
                 key = CDISC_TO_KEY[r["test"]]
                 label = {"alt": "ALT", "ast": "AST", "bili": "Bilirubin, total", "alp": "Alkaline phosphatase", "creat": "Creatinine", "hgb": "Hemoglobin", "wbc": "WBC", "plat": "Platelets", "glucose": "Glucose"}[key]
-                line = f"{label:<24}{r['value']:>8g}  {r['unit']:<8}  ({r.get('lln') or ''}-{r.get('uln') or ''})"
+                if layout == "variant":   # units before the result, flagged values, a different label style
+                    line = f"{label.upper():<24}{r['unit']:<9}{r['value']:>9g}{' H' if r.get('uln') and r['value'] > r['uln'] else ''}   ref {r.get('lln') or ''}-{r.get('uln') or ''}"
+                else:
+                    line = f"{label:<24}{r['value']:>8g}  {r['unit']:<8}  ({r.get('lln') or ''}-{r.get('uln') or ''})"
                 lines.append(line); facts.append({"label": label, "category": "lab", "value": f"{r['value']:g}", "unit": r["unit"], "date": when.isoformat(), "quote": line.strip()})
+            header = f"{'ANALYTE':<24}{'UNITS':<9}{'VALUE':>9}   REFERENCE" if layout == "variant" else f"{'TEST':<24}{'RESULT':>8}  {'UNITS':<8}  REFERENCE"
             text = (f"{LAB_ORG.upper()}\n1200 River Road, New Brunswick NJ 08901\n\nLABORATORY REPORT\nPatient: {name}    DOB: {birth.strftime('%m/%d/%Y')}    MRN: {rmrn}\n"
                     f"Collected: {_fmt(when, rng)}    Reported: {_fmt(when + timedelta(days=1), rng)}    Ordering: Dr. {rng.choice(LAST)}\n\n"
-                    f"{'TEST':<24}{'RESULT':>8}  {'UNITS':<8}  REFERENCE\n" + "\n".join(lines) + "\n\nH = above reference range, L = below. Results verified by automated analyzer.\nPage 1 of 1")
-            self._doc(pid, LAB_ORG, "lab_report", when, text, facts)
+                    f"{header}\n" + "\n".join(lines) + "\n\nH = above reference range, L = below. Results verified by automated analyzer.\nPage 1 of 1")
+            self._doc(pid, LAB_ORG, "lab_report", when, text, facts, layout=layout)
             if gap_lab_day:
                 self._plant(kind="gap_fill", patient_id=pid, concept="lab_panel", visit=when.isoformat(), note="lab panel exists only in the outside lab report")
         # 2. clinic note at a vitals visit (prefer the weight gap visit)
@@ -184,67 +196,74 @@ class Builder:
             when = d2(day)
             at = {CDISC_TO_KEY[r["test"]]: r["value"] for r in vs if r["day"] == day}
             facts, parts = [], []
+            layout = self._layout(); V = layout == "variant"
             if "sbp" in at and "dbp" in at:
-                q = f"BP {at['sbp']:g}/{at['dbp']:g} mmHg"; parts.append(q)
+                q = f"B/P {at['sbp']:g}/{at['dbp']:g}" if V else f"BP {at['sbp']:g}/{at['dbp']:g} mmHg"; parts.append(q)
                 facts += [{"label": "systolic blood pressure", "category": "vital", "value": f"{at['sbp']:g}", "unit": "mmHg", "quote": q}, {"label": "diastolic blood pressure", "category": "vital", "value": f"{at['dbp']:g}", "unit": "mmHg", "quote": q}]
             if "hr" in at:
-                q = f"HR {at['hr']:g} bpm"; parts.append(q); facts.append({"label": "heart rate", "category": "vital", "value": f"{at['hr']:g}", "unit": "bpm", "quote": q})
+                q = f"P {at['hr']:g}/min" if V else f"HR {at['hr']:g} bpm"; parts.append(q); facts.append({"label": "heart rate", "category": "vital", "value": f"{at['hr']:g}", "unit": "/min" if V else "bpm", "quote": q})
             if "temp" in at:
                 if rng.random() < 0.5:
-                    q = f"Temp {_c_to_f(at['temp'])} F"; facts.append({"label": "temperature", "category": "vital", "value": f"{_c_to_f(at['temp'])}", "unit": "F", "quote": q})
+                    q = f"T {_c_to_f(at['temp'])}°F" if V else f"Temp {_c_to_f(at['temp'])} F"; facts.append({"label": "temperature", "category": "vital", "value": f"{_c_to_f(at['temp'])}", "unit": "°F" if V else "F", "quote": q})
                 else:
-                    q = f"Temp {at['temp']:g} C"; facts.append({"label": "temperature", "category": "vital", "value": f"{at['temp']:g}", "unit": "C", "quote": q})
+                    q = f"T {at['temp']:g}°C" if V else f"Temp {at['temp']:g} C"; facts.append({"label": "temperature", "category": "vital", "value": f"{at['temp']:g}", "unit": "°C" if V else "C", "quote": q})
                 parts.append(q)
             if "weight" in at:
                 w = at["weight"]; roll = rng.random()
                 if gap_weight_day == day and roll < 0.25:
                     roll = 0.9    # the note is the only source at a gap visit, so it must carry the true value
                 if roll < 0.25:   # conflict: wrong value in the note
-                    w2 = round(w + rng.choice([-20, 20, 10, -10]), 1); q = f"Weight {w2:g} kg"
+                    w2 = round(w + rng.choice([-20, 20, 10, -10]), 1); q = f"Wt. {w2:g}kg" if V else f"Weight {w2:g} kg"
                     facts.append({"label": "weight", "category": "vital", "value": f"{w2:g}", "unit": "kg", "quote": q})
                     self._plant(kind="conflict", patient_id=pid, concept="weight", visit=when.isoformat(), doc_value=w2, truth_value=w, note="clinic note weight disagrees with the EHR")
                 elif roll < 0.55:  # unit trap: pounds
-                    lb_ = _kg_to_lb(w); q = f"Weight {lb_:g} lb"
-                    facts.append({"label": "weight", "category": "vital", "value": f"{lb_:g}", "unit": "lb", "quote": q})
+                    lb_ = _kg_to_lb(w); q = f"Wt. {lb_:g} lbs" if V else f"Weight {lb_:g} lb"
+                    facts.append({"label": "weight", "category": "vital", "value": f"{lb_:g}", "unit": "lbs" if V else "lb", "quote": q})
                     self._plant(kind="unit_trap", patient_id=pid, concept="weight", visit=when.isoformat(), doc_value=f"{lb_} lb", truth_value=w, note="weight written in pounds")
                 else:
-                    q = f"Weight {w:g} kg"; facts.append({"label": "weight", "category": "vital", "value": f"{w:g}", "unit": "kg", "quote": q})
+                    q = f"Wt. {w:g}kg" if V else f"Weight {w:g} kg"; facts.append({"label": "weight", "category": "vital", "value": f"{w:g}", "unit": "kg", "quote": q})
                 parts.append(q)
                 if gap_weight_day:
                     self._plant(kind="gap_fill", patient_id=pid, concept="weight", visit=when.isoformat(), note="weight exists only in the clinic note")
             med_line = cond_line = ""
             if rng.random() < 0.45:
                 m = rng.choice(NEW_MEDS); start = when - timedelta(days=rng.randint(3, 40))
-                med_line = f"Started {m[0]} {m[1]} PO {m[2]} on {start.strftime('%m/%d/%Y')} for {m[4]}."
+                med_line = (f"New Rx: {m[0].lower()} {m[1]} by mouth {m[2]} since {start.strftime('%m/%d/%Y')} ({m[4]})." if V else f"Started {m[0]} {m[1]} PO {m[2]} on {start.strftime('%m/%d/%Y')} for {m[4]}.")
                 facts.append({"label": m[0], "category": "medication", "value": m[0], "unit": None, "quote": med_line, "dose": m[1], "frequency": m[2], "route": m[3], "start": start.isoformat(), "indication": m[4], "date": start.isoformat()})
                 self._plant(kind="gap_fill", patient_id=pid, concept="medication", visit=when.isoformat(), doc_value=m[0], note="medication exists only in the clinic note")
             if rng.random() < 0.35:
                 c = rng.choice(CONDITIONS); cond_line = f"Assessment: {c}, stable."
                 facts.append({"label": c, "category": "condition", "value": c, "unit": None, "quote": cond_line, "date": when.isoformat()})
+            symptom = rng.choice([None, ("Mild fatigue over the past week.", "fatigue"), None, ("Sleeping poorly.", "sleeping poorly"), ("Intermittent headaches.", "headaches")])
+            s_line = symptom[0] if symptom else rng.choice(["Reports feeling well.", "No new complaints."])
+            if symptom:
+                facts.append({"label": symptom[1], "category": "condition", "value": symptom[1], "unit": None, "quote": symptom[0], "date": when.isoformat()})
             page1 = (f"{DOC_ORG.upper()} - PROGRESS NOTE\n{'FAX RECEIVED ' + (when + timedelta(days=1)).strftime('%m/%d/%Y %H:%M') + ' FROM 732-555-0199  P.1/2' if rng.random() < 0.5 else ''}\n"
                      f"Patient: {name}   DOB {birth.strftime('%m/%d/%Y')}   MRN {rmrn}\nDate of visit: {_fmt(when, rng)}\n\n"
-                     f"S: Patient presents for follow-up. {rng.choice(['Reports feeling well.', 'Mild fatigue over the past week.', 'No new complaints.', 'Sleeping poorly.'])}\n"
+                     f"S: Patient presents for follow-up. {s_line}\n"
                      f"O: Vitals: {', '.join(parts)}. {rng.choice(['Lungs clear.', 'Heart regular rate and rhythm.', 'No edema.'])}\n")
             page2 = f"\fA/P:\n{cond_line}\n{med_line}\n{rng.choice(['Return in 4 weeks.', 'Labs ordered.', 'Continue current regimen.'])}\n\nElectronically signed, Dr. {rng.choice(FIRST)} {rng.choice(LAST)}, MD\nPage 2 of 2"
-            self._doc(pid, DOC_ORG, "clinic_note", when, page1 + page2, facts)
+            self._doc(pid, DOC_ORG, "clinic_note", when, page1 + page2, facts, layout=layout)
         # 3. pharmacy medication list fax
         if cm and rng.random() < 0.5:
             when = ref + timedelta(days=rng.randint(10, max(11, (cutoff - ref).days)))
             lines, facts = [], []
+            layout = self._layout(); V = layout == "variant"
             for r in cm[:6]:
                 dose = f"{r['dose']:g} {r['dose_unit']}" if r.get("dose") and r.get("dose_unit") else ""
-                if dose and rng.random() < 0.2:
+                if dose and not r.get("end_day") and rng.random() < 0.3:
                     wrong = f"{r['dose'] * 2:g} {r['dose_unit']}"
                     self._plant(kind="conflict", patient_id=pid, concept="medication", visit=when.isoformat(), doc_value=f"{r['name']} {wrong}", truth_value=f"{r['name']} {dose}", note="pharmacy list dose differs from the EHR")
                     dose = wrong
                 start = d2(r["start_day"]).strftime("%m/%d/%Y") if r.get("start_day") else "on file"
-                line = f"{r['name']:<22}{dose:<14}{(r.get('frequency') or ''):<10}{(r.get('route') or ''):<8}started {start}"
+                line = (f"Rx {r['name'].upper()} - {dose or 'dose per label'} - {(r.get('frequency') or 'as directed')} - {(r.get('route') or 'oral').lower()} - from {start}" if V
+                        else f"{r['name']:<22}{dose:<14}{(r.get('frequency') or ''):<10}{(r.get('route') or ''):<8}started {start}")
                 lines.append(line)
                 facts.append({"label": r["name"], "category": "medication", "value": r["name"], "unit": None, "quote": line.strip(), "dose": dose or None, "frequency": r.get("frequency"), "route": r.get("route"),
                               "start": d2(r["start_day"]).isoformat() if r.get("start_day") else None, "date": d2(r["start_day"]).isoformat() if r.get("start_day") else when.isoformat()})
             text = (f"FAX  {when.strftime('%m/%d/%Y')} 09:{rng.randint(10, 59)}  FROM RIVERSIDE PHARMACY 732-555-0142  P.1/1\n\nMEDICATION LIST - {name}   DOB {birth.strftime('%m/%d/%Y')}   MRN {rmrn}\nAs of {_fmt(when, rng)}\n\n"
                     + "\n".join(lines) + "\n\nQuestions: call the pharmacy. This list reflects dispensed prescriptions only.")
-            self._doc(pid, DOC_ORG, "pharmacy_list", when, text, facts)
+            self._doc(pid, DOC_ORG, "pharmacy_list", when, text, facts, layout=layout)
 
     # ------------------------------------------------------------ children
     def build_children(self):
@@ -282,17 +301,20 @@ class Builder:
             self.bundles[pid] = {"resourceType": "Bundle", "type": "collection", "timestamp": self.today.isoformat(), "entry": entries}
             self.truth["children"].append({"patient_id": pid, "immunizations_total": len(given), "in_ehr": len(ehr_vax), "in_document": len(doc_vax), "allergy": allergy, "asthma": asthma, "height": height, "weight": weight})
             # documents from the urgent care: immunization card scan and a visit note
-            card_lines = [f"{v:<16}{when.strftime('%m/%d/%Y')}" for v, when in sorted(doc_vax, key=lambda x: x[1])]
-            facts = [{"label": v, "category": "immunization", "value": v, "unit": None, "date": when.isoformat(), "quote": f"{v:<16}{when.strftime('%m/%d/%Y')}".strip()} for v, when in doc_vax]
+            layout = self._layout(); V = layout == "variant"
+            fmt = (lambda v, when: f"{when.strftime('%Y-%m-%d')}  {v} (dose given)") if V else (lambda v, when: f"{v:<16}{when.strftime('%m/%d/%Y')}")
+            card_lines = [fmt(v, when) for v, when in sorted(doc_vax, key=lambda x: x[1])]
+            facts = [{"label": v, "category": "immunization", "value": v, "unit": None, "date": when.isoformat(), "quote": fmt(v, when).strip()} for v, when in doc_vax]
             card = (f"{PED_DOC_ORG.upper()}\nIMMUNIZATION RECORD (copy of card on file)\nChild: {name}   DOB: {birth.strftime('%m/%d/%Y')}   Record #: {umrn}\n\nVACCINE         DATE GIVEN\n" + "\n".join(card_lines)
                     + "\n\n[scanned copy - lower section illegible]\nPage 1 of 1")
-            self._doc(pid, PED_DOC_ORG, "immunization_record", self.today - timedelta(days=rng.randint(5, 120)), card, facts)
+            self._doc(pid, PED_DOC_ORG, "immunization_record", self.today - timedelta(days=rng.randint(5, 120)), card, facts, layout=layout)
             # the three planted conflicts happen within two days of the pediatrician's visit, so the disagreement is real, not growth
             uc_day = (v1 + timedelta(days=rng.randint(1, 2))) if i < 3 else self.today - timedelta(days=rng.randint(10, 200))
             w_uc = weight + (6 if i < 3 else 0)
             lb_ = _kg_to_lb(w_uc); tf = _c_to_f(round(rng.uniform(36.6, 38.4), 1)); sbp, dbp = rng.randint(94, 114), rng.randint(56, 74)
-            qw, qt, qb = f"Wt {lb_:g} lb", f"Temp {tf:g} F", f"BP {sbp}/{dbp}"
-            facts = [{"label": "weight", "category": "vital", "value": f"{lb_:g}", "unit": "lb", "quote": qw}, {"label": "temperature", "category": "vital", "value": f"{tf:g}", "unit": "F", "quote": qt},
+            layout = self._layout(); V = layout == "variant"
+            qw, qt, qb = (f"WT: {lb_:g} LB", f"TEMP: {tf:g} F", f"B/P {sbp}/{dbp}") if V else (f"Wt {lb_:g} lb", f"Temp {tf:g} F", f"BP {sbp}/{dbp}")
+            facts = [{"label": "weight", "category": "vital", "value": f"{lb_:g}", "unit": "LB" if V else "lb", "quote": qw}, {"label": "temperature", "category": "vital", "value": f"{tf:g}", "unit": "F", "quote": qt},
                      {"label": "systolic blood pressure", "category": "vital", "value": str(sbp), "unit": "mmHg", "quote": qb}, {"label": "diastolic blood pressure", "category": "vital", "value": str(dbp), "unit": "mmHg", "quote": qb}]
             if i < 3:
                 self._plant(kind="conflict", patient_id=pid, concept="weight", visit=uc_day.isoformat(), doc_value=f"{lb_} lb", truth_value=weight, note="urgent care weight disagrees with the pediatrician's record")
@@ -302,9 +324,12 @@ class Builder:
                 qa = f"Allergies: {allergy}"; facts.append({"label": allergy, "category": "allergy", "value": allergy, "unit": None, "quote": qa, "date": uc_day.isoformat()})
             else:
                 qa = "Allergies: NKDA"
+            dx = rng.choice(["viral URI", "otitis media", "pharyngitis", "contusion"]); hr_uc = rng.randint(70, 110)
+            facts.append({"label": dx, "category": "condition", "value": dx, "unit": None, "quote": f"Assessment: {dx}.", "date": uc_day.isoformat()})
+            facts.append({"label": "heart rate", "category": "vital", "value": str(hr_uc), "unit": None, "quote": f"HR {hr_uc}", "date": uc_day.isoformat()})
             note = (f"{PED_DOC_ORG.upper()} - VISIT SUMMARY\nPatient: {name}  DOB {birth.strftime('%m/%d/%Y')}  Record # {umrn}\nDate: {_fmt(uc_day, rng)}\nChief complaint: {rng.choice(['fever and cough', 'ear pain', 'sore throat', 'fall at playground'])}\n"
-                    f"Vitals: {qw}, {qt}, {qb}, HR {rng.randint(70, 110)}\n{qa}\nAssessment: {rng.choice(['viral URI', 'otitis media', 'pharyngitis', 'contusion'])}. Plan: supportive care, return if worse.\nSeen by: {rng.choice(FIRST)} {rng.choice(LAST)}, PA-C\n")
-            self._doc(pid, PED_DOC_ORG, "urgent_care_note", uc_day, note, facts)
+                    f"Vitals: {qw}, {qt}, {qb}, HR {hr_uc}\n{qa}\nAssessment: {dx}. Plan: supportive care, return if worse.\nSeen by: {rng.choice(FIRST)} {rng.choice(LAST)}, PA-C\n")
+            self._doc(pid, PED_DOC_ORG, "urgent_care_note", uc_day, note, facts, layout=layout)
 
     def build(self) -> dict:
         self.build_adults()
