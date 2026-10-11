@@ -28,6 +28,9 @@ inbox:            ## generate a synthetic messy inbox + answer key (offline temp
 load:             ## run the pipeline over the sample inbox and load Tiger
 	$(PY) -m dayzero.cli load --inbox data/samples/inbox.json --answer-key data/samples/answer_key.json
 
+load-trial:       ## load the CDISC pilot trial, generate daily symptom diaries, compute flags
+	$(PY) -m dayzero.cli load-trial
+
 eval:             ## score extraction, validity, day zero and duplicates against the answer key
 	$(PY) -m dayzero.cli evaluate --inbox data/samples/inbox.json --answer-key data/samples/answer_key.json
 
@@ -40,4 +43,4 @@ api:              ## FastAPI on :8000
 web:              ## Vite dev server on :5173 (proxies /api to :8000)
 	cd frontend && npm run dev
 
-demo: db-up db-init load api
+demo: db-up db-init load load-trial api
