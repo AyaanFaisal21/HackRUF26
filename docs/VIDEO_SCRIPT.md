@@ -10,19 +10,19 @@ One Phase 3 trial. Four hundred patients, twelve visits, sixty fields a visit. T
 
 **[0:14, the counter stops; "$19,000,000", "15 to 30%", "17%" fade in one by one]**
 
-The median pivotal trial costs nineteen million dollars. Fifteen to thirty percent of that is the checking. Connectors automate the structured part, and the one independent study of them, TransFAIR, moved seventeen percent of the data. The rest is faxes, notes, and other sites' records.
+The median pivotal trial costs nineteen million dollars. Fifteen to thirty percent of that is the checking. Connectors automate the structured part: the one independent study, TransFAIR, moved seventeen percent of the data. The rest is faxes, notes, and other sites' records.
 
 **[0:32, landing page: hero, then scroll once through "How it works"]**
 
-So we made Sourced. Clinical data that manages itself, with receipts. One ledger per patient, forms that fill from it, a verifier that checks every field, a person who decides only what disagreed. We cover the unglamorous plumbing and keep people in the loop.
+So we made Sourced. Clinical data that manages itself, with receipts. One ledger per patient, forms that fill from it, a verifier on every field, a person deciding only what disagreed. The unglamorous plumbing, with people in the loop.
 
 **[0:48, Patient page for Olu Murphy: "Known at", the documents, the ledger; click the weight concept]**
 
-Here is one patient known to two organizations. The hospital's FHIR record is read by rules. The clinic's faxes are read by the model, which must quote every value, and the quote is located to a page. Both land in one ledger with a receipt on every fact.
+One patient, two organizations. The hospital's FHIR record is read by rules. The clinic's faxes are read by the model, which must quote every value, located to a page. One ledger, a receipt on every fact.
 
 **[1:05, Form review: open Noah Lee's school form from the queue, click the flagged weight]**
 
-Pick a form and a visit. Rules fill it in milliseconds, nearest value first. A second set of rules re-derives every field and compares sources. This weight is flagged: who said what, where, and when; the likely cause from the patient's own history; a suggested decision. The model can give a second reading, but only from the receipts.
+Pick a form and a visit. Rules fill it in milliseconds. A second set of rules re-derives every field and compares sources. This weight is flagged: who said what, where, and when; the likely cause from the patient's own history; a suggested decision. The model can add a second reading, only from the receipts.
 
 **[1:27, apply the suggestion, type a name, sign, open the export, scroll to the history with the chain badge]**
 
@@ -30,11 +30,11 @@ The coordinator decides, signs, exports in the trial database's format, and ever
 
 **[1:44, Metrics: the forms table, then the reader table's "variant layouts" row]**
 
-Proof before autonomy. Against a planted answer key: every field filled and accurate, thirty-five of thirty-five conflicts caught, no false alarms. The regex scripts sites use today read under one percent of a layout they were not written for. The reader reads all of it.
+Proof before autonomy. Against a planted answer key: every field filled and accurate, thirty-five of thirty-five conflicts caught, no false alarms. The regex scripts sites use today read under one percent of an unfamiliar layout. The reader reads all of it.
 
 **[2:00, Documents tab, with the schema slide as an inset: hypertable, compression, continuous aggregate, pgvector]**
 
-All of it lives on Tiger Data. Facts are a hypertable chunked by time, so "nearest reading to this visit" touches only its chunk. Old history compresses in place. The live chart is a continuous aggregate. Document search is pgvector in the same database. One Postgres, four shapes of data.
+It lives on Tiger Data. Facts are a hypertable chunked by time, so "nearest reading to this visit" touches only its chunk. Old history compresses in place. The live chart is a continuous aggregate. Document search is pgvector in the same database. One Postgres, four shapes of data.
 
 **[2:17, Documents: patient id, organization, choose the photo, "store and read the photo"; open the patient page]**
 
@@ -42,7 +42,7 @@ Now the plumbing, live. A photo of a fax from a walk-in clinic. Eight seconds la
 
 **[2:31, fill Vital Signs for 2026-09-06; the weight is flagged; click it]**
 
-Fill the vital signs page. Four values agree with the hospital. One does not: the fax says one hundred ninety pounds, the hospital says seventy-eight kilos, and the patient's own year of readings sides with the hospital. Flagged, explained, suggested, not decided.
+Fill the vital signs page. Four values agree with the hospital. One does not: the fax says one ninety pounds, the hospital says seventy-eight kilos, and the patient's own history sides with the hospital. Flagged, explained, suggested, not decided.
 
 **[2:46, landing page, "How it works", hold]**
 
