@@ -52,15 +52,23 @@ def cmd_load(a):
     for p in w["patients"]:
         org = "Memorial General Hospital" if p["kind"] == "adult" else "Sunrise Pediatrics"
         n_fhir += st.insert_facts(read_fhir_bundle(w["bundles"][p["id"]], p["id"], org))
-    reader = OracleDocReader(w["truth"]["doc_extractions"]) if a.reader == "oracle" else ModelDocReader()
-    reader_name = getattr(reader, "name", a.reader)
     cache_path = SAMPLES / "model_reads.json"
     cache = json.load(open(cache_path)) if (a.reader == "model" and cache_path.exists() and not a.no_cache) else {"reads": {}}
-    if a.reader == "model" and cache.get("reader") not in (None, reader_name):
-        cache = {"reads": {}}   # a different model: start a fresh cache
+    docs = w["documents"][: a.max_docs] if a.max_docs else w["documents"]
+    if a.reader == "oracle":
+        reader = OracleDocReader(w["truth"]["doc_extractions"]); reader_name = "oracle"
+    else:
+        missing = [d for d in docs if d["sha256"] not in cache["reads"]]
+        if missing:
+            reader = ModelDocReader()          # needs a key; exits with a clear message otherwise
+            reader_name = reader.name
+            if cache.get("reader") not in (None, reader_name):
+                cache = {"reads": {}}          # a different model: start a fresh cache
+        else:
+            reader, reader_name = None, cache.get("reader", "model (cached)")
+            print(f"all {len(docs)} documents are in the read cache ({reader_name}); no model call needed")
     emb = get_embedder()
     n_doc = n_skipped = n_failed = n_cached = 0
-    docs = w["documents"][: a.max_docs] if a.max_docs else w["documents"]
     as_doc = lambda d: Document(id=d["id"], patient_id=d["patient_id"], source_org=d["source_org"], kind=d["kind"], received_at=datetime.fromisoformat(d["received_at"]), document_date=date.fromisoformat(d["document_date"]), text=d["text"], n_pages=d["n_pages"])
     def read_one(d):
         doc = as_doc(d)
