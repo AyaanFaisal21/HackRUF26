@@ -15,7 +15,7 @@ function Layout({ children }) {
   useEffect(() => { api.health().then(setHealth).catch(() => setHealth({ ok: false })); }, []);
   return (<>
     <header className="top">
-      <span className="brand">Sourced<small>forms that fill themselves, with receipts</small></span>
+      <span className="brand">Sourced</span>
       <nav><NavLink to="/" end>Home</NavLink><NavLink to="/patients">Patients</NavLink><NavLink to="/queue">Review queue</NavLink><NavLink to="/documents">Documents</NavLink><NavLink to="/metrics">Metrics</NavLink></nav>
       <span className="right">{health ? (health.ok ? `api ok · reader: ${health.model ?? "none, deterministic mode"}` : "api unreachable") : ""}</span>
     </header>
