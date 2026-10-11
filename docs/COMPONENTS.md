@@ -49,6 +49,10 @@ Change a contract only by editing `backend/dayzero/schema.py` and telling the te
 | C6 | API | `api.py` | all endpoints smoke-tested | 2 to 3 |
 | C7 | Frontend | `frontend/` | builds; queue, case detail with highlights, merge, history | 8 to 10 |
 | C8 | Evaluation, packaging, demo | `evaluate.py`, `README.md`, `docs/`, video, slides | oracle eval done; real eval, video, slides not started | 6 to 8 |
+| C9 | Patient profiles and flags | `trials.py`, `db_trials.py`, `sql/trial_schema.sql`, pages `Trials`, `Trial`, `Patient` | done: 254 subjects, daily diaries, 53 flags with logic chains, charts, confirm or dismiss | 3 to 5 |
+| C10 | Physician brief | `brief.py`, `Patient.jsx` | done deterministically; narrative needs a model key; concomitant meds not loaded | 2 to 4 |
+| C11 | Expedited report queue | `forms.py`, pages `FdaQueue`, `FdaForm` | done: pre-filled from cases and from signed briefs, field-by-field verification, mocked submit | 2 to 3 |
+| C12 | Signal watch | `db_trials.signals`, `Signals.jsx` | done: weekly severe-symptom chart from the continuous aggregate, flags by rule, top events | 2 to 3 |
 
 ### C1 Data and ground truth
 
@@ -151,6 +155,13 @@ Remaining:
 - Submission: GitHub link, video link, the JEDI team link for every member.
 
 Done when: a teammate who was not involved clones the repo on a fresh laptop and reaches the queue in under ten minutes.
+
+### C9 to C12, what remains
+
+- C9: load concomitant medications (`cm.xpt`) into the profile and the brief; tune the diary jump rule against `data/samples/trial_answer_key.json`; a flag evaluation table (planted versus found) for the deck.
+- C10: run the narrative with a real key and check it adds no facts; add "similar cases in public data" from openFDA by vector search.
+- C11: E2B(R3)-shaped JSON export next to the form; a real 3500A field map if a judge asks.
+- C12: alert when a term's weekly count exceeds its trailing baseline; click-through from a bar to the subjects behind it.
 
 ## Dependencies and critical path
 

@@ -12,6 +12,8 @@ Drug companies must collect, assess, and report possible side effects. Reports a
 
 ## What it does
 
+Two front doors, one safety picture. Written reports (emails, call notes, portal messages, faxes, site reports) become cases with a regulatory clock. Structured trial data (daily symptom diaries, lab results, recorded events) builds a profile per patient that rules watch continuously. Both end in a physician's hands with the evidence attached, and anything serious, unexpected, and possibly related becomes a pre-filled expedited report that a provider verifies field by field before it goes anywhere.
+
 | Step | Module | How |
 |---|---|---|
 | Intake | `backend/dayzero/schema.py` | One `Message` type for every channel |
@@ -23,6 +25,10 @@ Drug companies must collect, assess, and report possible side effects. Reports a
 | Storage | `sql/schema.sql`, `db.py` | Tiger Data: hypertables for intake and audit trail, continuous aggregate for the volume chart, compression, pgvector index |
 | Review | `api.py`, `frontend/` | Queue sorted by deadline, case view with highlighted evidence, merge decisions, full history |
 | Evaluation | `evaluate.py` | Field accuracy, validity and day-zero accuracy, duplicate recall, against the answer key |
+| Patient profiles | `trials.py`, `db_trials.py` | CDISC pilot subjects, labs, events; synthetic daily symptom diaries with planted patterns; flags with a readable logic chain (Hy's Law, CTCAE grades, persistent or jumping symptoms, site drift) |
+| Physician brief | `brief.py` | Timeline, lab peaks, symptom burden, cohort context, arguments for and against relatedness, regulatory consequence. Never a conclusion. Optional model-written narrative restricted to the assembled facts |
+| Expedited report | `forms.py` | Pre-filled, modelled on the sections of FDA Form 3500A, every field with its source. Provider verifies field by field, signs, then a mocked submission |
+| Model seam | `llm.py` | One interface for structured and free-text calls; Anthropic or OpenAI, whichever key is present; deterministic mode with none |
 
 ## Quickstart
 
@@ -33,7 +39,8 @@ make setup                 # venv + pip + npm
 cp .env.example .env       # add ANTHROPIC_API_KEY for live extraction; leave DAYZERO_EXTRACTOR=oracle for the offline demo
 make db-up                 # local TimescaleDB with pgvector on :5433 (or set DATABASE_URL to Tiger Cloud)
 make db-init               # hypertables, continuous aggregate, vector index
-make load                  # run the pipeline over data/samples/inbox.json and load the database
+make load                  # run the intake pipeline over data/samples/inbox.json and load the database
+make load-trial            # load the CDISC pilot trial, generate daily symptom diaries, compute flags
 make api                   # http://localhost:8000/docs
 make web                   # http://localhost:5173
 ```
@@ -48,7 +55,7 @@ make eval                  # metrics against the answer key
 make test
 ```
 
-Live extraction with the model: set `DAYZERO_EXTRACTOR=claude` and `ANTHROPIC_API_KEY` in `.env`, then `make load` and `make eval`.
+Live extraction with a model: put `ANTHROPIC_API_KEY` or `OPENAI_API_KEY` in `.env`, set `DAYZERO_EXTRACTOR=model`, then `make load` and `make eval`. With no key the whole app still runs in deterministic mode (oracle extraction from the answer key, briefs without a narrative paragraph).
 
 ## Data
 
@@ -69,6 +76,9 @@ FAERS reports are not proof that a drug caused an event. No real patient identif
 | Millions of reports on a free tier | Compression policy on `messages` | `db.stats` |
 | Patient, drug, reporter, case relationships | Plain SQL tables and the `queue` view | `schema.sql` |
 | Semantic duplicate detection | pgvector `vector(384)` with HNSW cosine index | `db.candidates` |
+| 216,000 daily symptom rows per trial, growing every day | Hypertable `diary_entries` with compression after 60 days | `trial_schema.sql` |
+| Weekly symptom burden chart on the signal watch | Continuous aggregate `diary_weekly` | `db_trials.signals` |
+| Lab results over time per patient | Hypertable `lab_results` | `trial_schema.sql` |
 
 ## Rules of the road
 
