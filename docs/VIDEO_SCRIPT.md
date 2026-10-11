@@ -30,7 +30,7 @@ Pick a form and a visit. It fills in milliseconds, every field with a receipt an
 
 **[1:17, click the flagged field. Read "Why it is flagged". Click the receipt, the fax opens highlighted. Back. Choose a value, type a reason, sign, open the export]**
 
-Flagged, not guessed. The field says who recorded what, where, and when. The receipt opens the fax, words highlighted. The coordinator picks, gives a reason, signs. The export is in the trial database's format. Every action is in the audit trail.
+Flagged, not guessed. The field says who recorded what, where, and when. The receipt opens the fax, words highlighted. The coordinator picks, gives a reason, signs. The export is in the trial database's format. Every action is in a hash-chained audit trail.
 
 **[1:35, Metrics tab, scroll to the reader table, hover the "variant layouts" row]**
 
