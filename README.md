@@ -79,6 +79,8 @@ See `data/README.md`.
 
 ## Why Tiger Data
 
+![Sourced on Tiger Data: the schema with live counts](docs/schema.png)
+
 | Need | Feature | Where |
 |---|---|---|
 | A ledger of observations per patient over time, growing every visit | Hypertable `facts` partitioned on observed time, compression policy | `sql/sourced.sql` |
