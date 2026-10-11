@@ -1,6 +1,7 @@
 """Form definitions and the filler. A form is a list of questions; the filler answers each from the ledger with a receipt."""
 from __future__ import annotations
 
+import re
 import time
 from datetime import date, timedelta
 
@@ -38,6 +39,27 @@ FORM_DEFS: list[FormDef] = [
 FORMS = {f.id: f for f in FORM_DEFS}
 
 
+_DOSE = re.compile(r"(-?\d+(?:\.\d+)?)\s*([a-zA-Zµ/%]+)?")
+
+
+def norm_cell(col: str, v) -> str | None:
+    """Comparable form of a list-row cell. Doses compare by number and unit ('81.0 MG QD' == '81 mg'); dates by ISO day; text lowercased."""
+    if v is None:
+        return None
+    s = str(v).strip()
+    if col == "dose":
+        m = _DOSE.search(s)
+        if m:
+            n = float(m.group(1)); u = (m.group(2) or "").lower().rstrip("s")
+            return f"{n:g} {u}".strip()
+        return s.lower()
+    if col in ("start", "end", "date"):
+        return s[:10]
+    if col == "status":
+        return "ended" if s.startswith("ended") else "active"
+    return s.lower()
+
+
 def receipt(fact: dict) -> dict:
     return {k: fact.get(k) for k in ("id", "source_org", "document_id", "page", "span_start", "span_end", "quote", "resource_ref", "extractor", "observed_at", "confidence", "unit", "attrs")}
 
@@ -60,8 +82,8 @@ def fill(store, patient_id: str, form: FormDef, visit_date: date) -> FormInstanc
             for f in facts:
                 if fd.concept == "medication":
                     e = f.get("end_at")
-                    if e and e < visit_date - timedelta(days=fd.window_after):
-                        continue
+                    if e and e < visit_date - timedelta(days=90):
+                        continue   # ended long before the visit
                 k = _row_key(f)
                 row = rows.setdefault(k, {"term": f.get("value_text"), "name": f.get("value_text"), "vaccine": f.get("value_text"), "sources": [], "values": {}})
                 for col in fd.columns:
@@ -73,16 +95,23 @@ def fill(store, patient_id: str, form: FormDef, visit_date: date) -> FormInstanc
                     if col == "dose_number" and not v:
                         v = f.get("attrs", {}).get("dose_number")
                     row["values"].setdefault(col, []).append({"value": str(v) if v is not None else None, "source_org": f["source_org"], "fact_id": f["id"]})
+                if fd.concept == "medication":
+                    e = f.get("end_at")
+                    status = f"ended {e}" if e and e <= visit_date else "active"
+                    row["values"].setdefault("status", []).append({"value": status, "source_org": f["source_org"], "fact_id": f["id"]})
                 row["sources"].append(receipt(f))
             out = []
             for row in rows.values():
                 cells = {}
                 for col, vals in row["values"].items():
-                    distinct = {v["value"] for v in vals if v["value"] is not None}
-                    cells[col] = (sorted(distinct)[0] if len(distinct) == 1 else (sorted(distinct)[0] if distinct else None))
-                    if len(distinct) > 1:
-                        row.setdefault("conflicts", {})[col] = sorted(distinct)
-                out.append({**{c: cells.get(c) for c in fd.columns}, "term": row["term"], "sources": row["sources"], "conflicts": row.get("conflicts", {}), "n_sources": len({s["source_org"] for s in row["sources"]})})
+                    by_norm = {}
+                    for v in vals:
+                        if v["value"] is not None:
+                            by_norm.setdefault(norm_cell(col, v["value"]), v["value"])
+                    cells[col] = sorted(by_norm.values())[0] if by_norm else None
+                    if len(by_norm) > 1:
+                        row.setdefault("conflicts", {})[col] = sorted(by_norm.values())
+                out.append({**{c: cells.get(c) for c in fd.columns}, **({"status": cells.get("status")} if "status" in cells else {}), "term": row["term"], "sources": row["sources"], "conflicts": row.get("conflicts", {}), "n_sources": len({s["source_org"] for s in row["sources"]})})
             out.sort(key=lambda r: (r.get("start") or r.get("date") or "", r["term"] or ""))
             fields.append(FilledField(key=fd.key, label=fd.label, vtype="list", rows=out, confidence=1.0 if out else 0.0))
             continue
