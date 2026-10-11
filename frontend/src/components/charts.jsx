@@ -1,4 +1,3 @@
-import React from "react";
 import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, Tooltip, Legend, CartesianGrid } from "recharts";
 const COLORS = { "Memorial General Hospital": "#1d4ed8", "Riverside Clinic": "#b45309", "Riverside Diagnostics": "#d97706", "Sunrise Pediatrics": "#0e7490", "County Urgent Care": "#be185d" };
 export function FactsOverTime({ rows }) {

@@ -1,4 +1,3 @@
-import React from "react";
 export const fmtDate = (d) => (d ? new Date(d).toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" }) : "");
 export const fmtDT = (d) => (d ? new Date(d).toLocaleString() : "");
 const VERDICT = { agree: ["green", "agree"], single_source: ["blue", "single source"], disagree: ["red", "disagree"], rule_fail: ["red", "check failed"], missing: ["amber", "missing"], empty: ["muted", "empty"] };

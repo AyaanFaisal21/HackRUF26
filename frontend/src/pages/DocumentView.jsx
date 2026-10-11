@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { api } from "../api.js";
 import { Highlight, Kind, Org, Status, fmtDate } from "../components/ui.jsx";
