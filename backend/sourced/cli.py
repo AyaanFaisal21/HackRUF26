@@ -96,7 +96,7 @@ def cmd_load(a):
             st.mark_document(doc.id, "read", reader_name, len(facts))
         except Exception as e:
             n_failed += 1; st.mark_document(doc.id, "failed", reader_name, None); print(f"  {doc.id}: insert failed: {str(e)[:120]}")
-    if a.reader == "model":
+    if a.reader == "model" and n_cached < len(docs) - n_failed:   # only rewrite the cache when new reads were added
         json.dump({"reader": reader_name, "updated": datetime.now().isoformat(timespec="seconds"), "reads": cache["reads"]}, open(cache_path, "w"))
     st.upsert_form_defs(FORM_DEFS); st.refresh_aggregates()
     st.audit("loader", "world_loaded", None, None, None, None, {"patients": len(w["patients"]), "fhir_facts": n_fhir, "document_facts": n_doc, "reader": a.reader})
