@@ -58,7 +58,7 @@
    "reactions": [
     {
      "term": "leukaemia",
-     "onset_date": "2023-01-01",
+     "onset_date": "2026-10-03",
      "outcome": "fatal",
      "evidence": [
       {
@@ -70,7 +70,7 @@
     },
     {
      "term": "septic shock",
-     "onset_date": "2023-01-01",
+     "onset_date": "2026-10-03",
      "outcome": "fatal",
      "evidence": [
       {
@@ -82,7 +82,7 @@
     },
     {
      "term": "infection in the blood",
-     "onset_date": "2023-01-01",
+     "onset_date": "2026-10-03",
      "outcome": "fatal",
      "evidence": [
       {
@@ -102,13 +102,13 @@
     "other_medically_important": true,
     "evidence": [
      {
-      "quote": "Unfortunately the patient passed away.",
+      "quote": "The patient died.",
       "start": null,
       "end": null
      }
     ]
    },
-   "event_date": "2023-01-01",
+   "event_date": "2026-10-03",
    "summary": "Amara Brown 44-year-old male on Venclexta developed leukaemia, septic shock, infection in the blood.",
    "missing_information": [
     "dose"
@@ -178,7 +178,7 @@
    "reactions": [
     {
      "term": "spinal compression fracture",
-     "onset_date": "2026-09-11",
+     "onset_date": "2026-09-21",
      "outcome": "unknown",
      "evidence": [
       {
@@ -204,7 +204,7 @@
      }
     ]
    },
-   "event_date": "2026-09-11",
+   "event_date": "2026-09-21",
    "summary": "Maria Lee 64-year-old male on Venclexta developed spinal compression fracture.",
    "missing_information": [
     "dose"
@@ -274,7 +274,7 @@
    "reactions": [
     {
      "term": "passed away",
-     "onset_date": "2023-12-01",
+     "onset_date": "2026-09-14",
      "outcome": "fatal",
      "evidence": [
       {
@@ -294,13 +294,13 @@
     "other_medically_important": false,
     "evidence": [
      {
-      "quote": "The patient died.",
+      "quote": "Unfortunately the patient passed away.",
       "start": null,
       "end": null
      }
     ]
    },
-   "event_date": "2023-12-01",
+   "event_date": "2026-09-14",
    "summary": "Hana Lee 61-year-old male on Venclexta developed passed away.",
    "missing_information": [
     "dose"
@@ -318,12 +318,12 @@
    "followup_reference": null,
    "patient": {
     "identifiable": true,
-    "initials": "R.K.",
+    "initials": "K.C.",
     "age": 57,
     "sex": "F",
     "evidence": [
      {
-      "quote": "patient R.K.",
+      "quote": "patient K.C.",
       "start": null,
       "end": null
      },
@@ -341,12 +341,12 @@
    },
    "reporter": {
     "identifiable": true,
-    "name": "Dr. Elena Novak",
+    "name": "Dr. Sofia Khan",
     "qualification": "physician",
-    "contact": "(629) 555-3702",
+    "contact": "sofia.khan@health.org",
     "evidence": [
      {
-      "quote": "Dr. Elena Novak",
+      "quote": "Dr. Sofia Khan",
       "start": null,
       "end": null
      }
@@ -383,7 +383,7 @@
    "reactions": [
     {
      "term": "myelosuppression",
-     "onset_date": "2023-12-16",
+     "onset_date": "2026-09-07",
      "outcome": "recovering",
      "evidence": [
       {
@@ -395,7 +395,7 @@
     },
     {
      "term": "white blood cell count decreased",
-     "onset_date": "2023-12-16",
+     "onset_date": "2026-09-07",
      "outcome": "recovering",
      "evidence": [
       {
@@ -407,7 +407,7 @@
     },
     {
      "term": "red blood cell count decreased",
-     "onset_date": "2023-12-16",
+     "onset_date": "2026-09-07",
      "outcome": "not_recovered",
      "evidence": [
       {
@@ -433,8 +433,8 @@
      }
     ]
    },
-   "event_date": "2023-12-16",
-   "summary": "patient R.K. 57-year-old female on Venetoclax, Azacitidine developed myelosuppression, white blood cell count decreased, red blood cell count decreased.",
+   "event_date": "2026-09-07",
+   "summary": "patient K.C. 57-year-old female on Venetoclax, Azacitidine developed myelosuppression, white blood cell count decreased, red blood cell count decreased.",
    "missing_information": [
     "dose"
    ]
@@ -451,12 +451,12 @@
    "followup_reference": null,
    "patient": {
     "identifiable": true,
-    "initials": null,
+    "initials": "C.C.",
     "age": 60,
     "sex": "F",
     "evidence": [
      {
-      "quote": "Sofia Novak",
+      "quote": "patient C.C.",
       "start": null,
       "end": null
      },
@@ -473,149 +473,13 @@
     ]
    },
    "reporter": {
-    "identifiable": false,
-    "name": null,
-    "qualification": "unknown",
-    "contact": null,
-    "evidence": []
-   },
-   "drugs": [
-    {
-     "name": "Venclexta",
-     "role": "suspect",
-     "dose": null,
-     "start_date": null,
-     "evidence": [
-      {
-       "quote": "Venclexta",
-       "start": null,
-       "end": null
-      }
-     ]
-    }
-   ],
-   "reactions": [
-    {
-     "term": "passed away",
-     "onset_date": "2023-12-01",
-     "outcome": "fatal",
-     "evidence": [
-      {
-       "quote": "passed away",
-       "start": null,
-       "end": null
-      }
-     ]
-    }
-   ],
-   "seriousness": {
-    "death": true,
-    "life_threatening": false,
-    "hospitalization": false,
-    "disability": false,
-    "congenital_anomaly": false,
-    "other_medically_important": false,
-    "evidence": [
-     {
-      "quote": "The patient died.",
-      "start": null,
-      "end": null
-     }
-    ]
-   },
-   "event_date": "2023-12-01",
-   "summary": "Sofia Novak 60-year-old female on Venclexta developed passed away.",
-   "missing_information": [
-    "reporter identity",
-    "dose"
-   ]
-  },
-  "truth_case": "23353590",
-  "variant": "no_reporter",
-  "duplicate_of": null,
-  "followup_of": null
- },
- "MSG-0004-FU": {
-  "extraction": {
-   "language": "en",
-   "is_followup": true,
-   "followup_reference": "case reference MSG-0004",
-   "patient": {
-    "identifiable": false,
-    "initials": null,
-    "age": null,
-    "sex": "unknown",
-    "evidence": []
-   },
-   "reporter": {
     "identifiable": true,
-    "name": "Ahmed Khan",
+    "name": "Daniel Khan",
     "qualification": "consumer",
-    "contact": "(934) 555-7320",
+    "contact": "(949) 555-6072",
     "evidence": [
      {
-      "quote": "Ahmed Khan",
-      "start": null,
-      "end": null
-     }
-    ]
-   },
-   "drugs": [],
-   "reactions": [],
-   "seriousness": {
-    "death": false,
-    "life_threatening": false,
-    "hospitalization": false,
-    "disability": false,
-    "congenital_anomaly": false,
-    "other_medically_important": false,
-    "evidence": []
-   },
-   "event_date": null,
-   "summary": "Reporter supplies their identity for an earlier report.",
-   "missing_information": []
-  },
-  "truth_case": "23353590",
-  "variant": "followup",
-  "duplicate_of": null,
-  "followup_of": "MSG-0004"
- },
- "MSG-0005": {
-  "extraction": {
-   "language": "en",
-   "is_followup": false,
-   "followup_reference": null,
-   "patient": {
-    "identifiable": true,
-    "initials": null,
-    "age": 83,
-    "sex": "M",
-    "evidence": [
-     {
-      "quote": "Tom Khan",
-      "start": null,
-      "end": null
-     },
-     {
-      "quote": "83-year-old",
-      "start": null,
-      "end": null
-     },
-     {
-      "quote": "male",
-      "start": null,
-      "end": null
-     }
-    ]
-   },
-   "reporter": {
-    "identifiable": true,
-    "name": "Priya Novak",
-    "qualification": "consumer",
-    "contact": "priya.novak@health.com",
-    "evidence": [
-     {
-      "quote": "Priya Novak",
+      "quote": "Daniel Khan",
       "start": null,
       "end": null
      }
@@ -639,7 +503,7 @@
    "reactions": [
     {
      "term": "passed away",
-     "onset_date": "2023-12-01",
+     "onset_date": "2026-09-12",
      "outcome": "fatal",
      "evidence": [
       {
@@ -665,8 +529,104 @@
      }
     ]
    },
-   "event_date": "2023-12-01",
-   "summary": "Tom Khan 83-year-old male on Venclexta developed passed away.",
+   "event_date": "2026-09-12",
+   "summary": "patient C.C. 60-year-old female on Venclexta developed passed away.",
+   "missing_information": [
+    "dose"
+   ]
+  },
+  "truth_case": "23353590",
+  "variant": "complete",
+  "duplicate_of": null,
+  "followup_of": null
+ },
+ "MSG-0005": {
+  "extraction": {
+   "language": "en",
+   "is_followup": false,
+   "followup_reference": null,
+   "patient": {
+    "identifiable": true,
+    "initials": null,
+    "age": 83,
+    "sex": "M",
+    "evidence": [
+     {
+      "quote": "Priya Novak",
+      "start": null,
+      "end": null
+     },
+     {
+      "quote": "83-year-old",
+      "start": null,
+      "end": null
+     },
+     {
+      "quote": "male",
+      "start": null,
+      "end": null
+     }
+    ]
+   },
+   "reporter": {
+    "identifiable": true,
+    "name": "Grace Okafor",
+    "qualification": "consumer",
+    "contact": "(283) 555-3725",
+    "evidence": [
+     {
+      "quote": "Grace Okafor",
+      "start": null,
+      "end": null
+     }
+    ]
+   },
+   "drugs": [
+    {
+     "name": "Venclexta",
+     "role": "suspect",
+     "dose": null,
+     "start_date": null,
+     "evidence": [
+      {
+       "quote": "Venclexta",
+       "start": null,
+       "end": null
+      }
+     ]
+    }
+   ],
+   "reactions": [
+    {
+     "term": "passed away",
+     "onset_date": "2026-09-27",
+     "outcome": "fatal",
+     "evidence": [
+      {
+       "quote": "passed away",
+       "start": null,
+       "end": null
+      }
+     ]
+    }
+   ],
+   "seriousness": {
+    "death": true,
+    "life_threatening": false,
+    "hospitalization": false,
+    "disability": false,
+    "congenital_anomaly": false,
+    "other_medically_important": false,
+    "evidence": [
+     {
+      "quote": "Unfortunately the patient passed away.",
+      "start": null,
+      "end": null
+     }
+    ]
+   },
+   "event_date": "2026-09-27",
+   "summary": "Priya Novak 83-year-old male on Venclexta developed passed away.",
    "missing_information": [
     "dose"
    ]
@@ -688,7 +648,7 @@
     "sex": "F",
     "evidence": [
      {
-      "quote": "Wei Haddad",
+      "quote": "James Patel",
       "start": null,
       "end": null
      },
@@ -705,11 +665,17 @@
     ]
    },
    "reporter": {
-    "identifiable": false,
-    "name": null,
-    "qualification": "unknown",
-    "contact": null,
-    "evidence": []
+    "identifiable": true,
+    "name": "Olu Rossi",
+    "qualification": "consumer",
+    "contact": "(697) 555-3987",
+    "evidence": [
+     {
+      "quote": "Olu Rossi",
+      "start": null,
+      "end": null
+     }
+    ]
    },
    "drugs": [
     {
@@ -729,7 +695,7 @@
    "reactions": [
     {
      "term": "passed away",
-     "onset_date": "2023-12-01",
+     "onset_date": "2026-09-03",
      "outcome": "fatal",
      "evidence": [
       {
@@ -755,62 +721,16 @@
      }
     ]
    },
-   "event_date": "2023-12-01",
-   "summary": "Wei Haddad 62-year-old female on Venclexta developed passed away.",
+   "event_date": "2026-09-03",
+   "summary": "James Patel 62-year-old female on Venclexta developed passed away.",
    "missing_information": [
-    "reporter identity",
     "dose"
    ]
   },
   "truth_case": "23353592",
-  "variant": "no_reporter",
+  "variant": "complete",
   "duplicate_of": null,
   "followup_of": null
- },
- "MSG-0006-FU": {
-  "extraction": {
-   "language": "en",
-   "is_followup": true,
-   "followup_reference": "the Venclexta report I sent earlier",
-   "patient": {
-    "identifiable": false,
-    "initials": null,
-    "age": null,
-    "sex": "unknown",
-    "evidence": []
-   },
-   "reporter": {
-    "identifiable": true,
-    "name": "Priya Nguyen",
-    "qualification": "consumer",
-    "contact": "(387) 555-5304",
-    "evidence": [
-     {
-      "quote": "Priya Nguyen",
-      "start": null,
-      "end": null
-     }
-    ]
-   },
-   "drugs": [],
-   "reactions": [],
-   "seriousness": {
-    "death": false,
-    "life_threatening": false,
-    "hospitalization": false,
-    "disability": false,
-    "congenital_anomaly": false,
-    "other_medically_important": false,
-    "evidence": []
-   },
-   "event_date": null,
-   "summary": "Reporter supplies their identity for an earlier report.",
-   "missing_information": []
-  },
-  "truth_case": "23353592",
-  "variant": "followup",
-  "duplicate_of": null,
-  "followup_of": "MSG-0006"
  },
  "MSG-0007": {
   "extraction": {
@@ -865,7 +785,7 @@
    "reactions": [
     {
      "term": "passed away",
-     "onset_date": "2023-01-01",
+     "onset_date": "2026-10-06",
      "outcome": "fatal",
      "evidence": [
       {
@@ -877,7 +797,7 @@
     },
     {
      "term": "lung neoplasm malignant",
-     "onset_date": "2023-01-01",
+     "onset_date": "2026-10-06",
      "outcome": "unknown",
      "evidence": [
       {
@@ -889,7 +809,7 @@
     },
     {
      "term": "rheumatoid arthritis",
-     "onset_date": "2023-01-01",
+     "onset_date": "2026-10-06",
      "outcome": "unknown",
      "evidence": [
       {
@@ -915,7 +835,7 @@
      }
     ]
    },
-   "event_date": "2023-01-01",
+   "event_date": "2026-10-06",
    "summary": "patient N.N. 84-year-old female on Adalimumab developed passed away, lung neoplasm malignant, rheumatoid arthritis.",
    "missing_information": [
     "reporter identity",
@@ -931,7 +851,7 @@
   "extraction": {
    "language": "en",
    "is_followup": true,
-   "followup_reference": "the Adalimumab report I sent earlier",
+   "followup_reference": "case reference MSG-0007",
    "patient": {
     "identifiable": false,
     "initials": null,
@@ -941,12 +861,12 @@
    },
    "reporter": {
     "identifiable": true,
-    "name": "Dr. Daniel Brown",
+    "name": "Dr. Amara Haddad",
     "qualification": "physician",
-    "contact": "daniel.brown@clinic.com",
+    "contact": "amara.haddad@clinic.com",
     "evidence": [
      {
-      "quote": "Dr. Daniel Brown",
+      "quote": "Dr. Amara Haddad",
       "start": null,
       "end": null
      }
@@ -978,36 +898,20 @@
    "is_followup": false,
    "followup_reference": null,
    "patient": {
-    "identifiable": true,
-    "initials": "J.M.",
-    "age": 48,
-    "sex": "F",
-    "evidence": [
-     {
-      "quote": "patient J.M.",
-      "start": null,
-      "end": null
-     },
-     {
-      "quote": "48-year-old",
-      "start": null,
-      "end": null
-     },
-     {
-      "quote": "female",
-      "start": null,
-      "end": null
-     }
-    ]
+    "identifiable": false,
+    "initials": null,
+    "age": null,
+    "sex": "unknown",
+    "evidence": []
    },
    "reporter": {
     "identifiable": true,
-    "name": "Priya Haddad",
+    "name": "Elena Silva",
     "qualification": "other_health_professional",
-    "contact": "(319) 555-8996",
+    "contact": "(692) 555-8927",
     "evidence": [
      {
-      "quote": "Priya Haddad",
+      "quote": "Elena Silva",
       "start": null,
       "end": null
      }
@@ -1044,7 +948,7 @@
    "reactions": [
     {
      "term": "urinary tract infection",
-     "onset_date": "2026-09-15",
+     "onset_date": "2026-08-31",
      "outcome": "recovering",
      "evidence": [
       {
@@ -1070,16 +974,62 @@
      }
     ]
    },
-   "event_date": "2026-09-15",
-   "summary": "patient J.M. 48-year-old female on Amoxicillin, Ciprofloxacin developed urinary tract infection.",
+   "event_date": "2026-08-31",
+   "summary": "a patient on Amoxicillin, Ciprofloxacin developed urinary tract infection.",
    "missing_information": [
+    "patient identifier",
     "dose"
    ]
   },
   "truth_case": "23353594",
-  "variant": "complete",
+  "variant": "no_patient",
   "duplicate_of": null,
   "followup_of": null
+ },
+ "MSG-0008-FU": {
+  "extraction": {
+   "language": "en",
+   "is_followup": true,
+   "followup_reference": "my report from Friday about the patient on Amoxicillin, Ciprofloxacin",
+   "patient": {
+    "identifiable": true,
+    "initials": "M.S.",
+    "age": 85,
+    "sex": "F",
+    "evidence": [
+     {
+      "quote": "initials M.S.",
+      "start": null,
+      "end": null
+     }
+    ]
+   },
+   "reporter": {
+    "identifiable": false,
+    "name": null,
+    "qualification": "unknown",
+    "contact": null,
+    "evidence": []
+   },
+   "drugs": [],
+   "reactions": [],
+   "seriousness": {
+    "death": false,
+    "life_threatening": false,
+    "hospitalization": false,
+    "disability": false,
+    "congenital_anomaly": false,
+    "other_medically_important": false,
+    "evidence": []
+   },
+   "event_date": null,
+   "summary": "Reporter supplies the patient identifier for an earlier report.",
+   "missing_information": []
+  },
+  "truth_case": "23353594",
+  "variant": "followup",
+  "duplicate_of": null,
+  "followup_of": "MSG-0008"
  },
  "MSG-0009": {
   "extraction": {
@@ -1088,12 +1038,12 @@
    "followup_reference": null,
    "patient": {
     "identifiable": true,
-    "initials": null,
+    "initials": "K.C.",
     "age": 53,
     "sex": "M",
     "evidence": [
      {
-      "quote": "Luis Schmidt",
+      "quote": "patient K.C.",
       "start": null,
       "end": null
      },
@@ -1111,12 +1061,12 @@
    },
    "reporter": {
     "identifiable": true,
-    "name": "Priya Brown",
+    "name": "Daniel Brown",
     "qualification": "consumer",
-    "contact": "(506) 555-2491",
+    "contact": "(429) 555-9725",
     "evidence": [
      {
-      "quote": "Priya Brown",
+      "quote": "Daniel Brown",
       "start": null,
       "end": null
      }
@@ -1140,7 +1090,7 @@
    "reactions": [
     {
      "term": "deafness unilateral",
-     "onset_date": "2023-12-01",
+     "onset_date": "2026-09-19",
      "outcome": "not_recovered",
      "evidence": [
       {
@@ -1152,7 +1102,7 @@
     },
     {
      "term": "ear pain",
-     "onset_date": "2023-12-01",
+     "onset_date": "2026-09-19",
      "outcome": "not_recovered",
      "evidence": [
       {
@@ -1178,8 +1128,8 @@
      }
     ]
    },
-   "event_date": "2023-12-01",
-   "summary": "Luis Schmidt 53-year-old male on Skyrizi developed deafness unilateral, ear pain.",
+   "event_date": "2026-09-19",
+   "summary": "patient K.C. 53-year-old male on Skyrizi developed deafness unilateral, ear pain.",
    "missing_information": [
     "dose"
    ]
@@ -1196,12 +1146,12 @@
    "followup_reference": null,
    "patient": {
     "identifiable": true,
-    "initials": "H.N.",
+    "initials": "A.A.",
     "age": 54,
     "sex": "M",
     "evidence": [
      {
-      "quote": "patient H.N.",
+      "quote": "patient A.A.",
       "start": null,
       "end": null
      },
@@ -1219,12 +1169,12 @@
    },
    "reporter": {
     "identifiable": true,
-    "name": "Hana Lee",
+    "name": "Grace Schmidt",
     "qualification": "pharmacist",
-    "contact": "hana.lee@hospital.net",
+    "contact": "(399) 555-6640",
     "evidence": [
      {
-      "quote": "Hana Lee",
+      "quote": "Grace Schmidt",
       "start": null,
       "end": null
      }
@@ -1274,7 +1224,7 @@
    "reactions": [
     {
      "term": "passed away",
-     "onset_date": "2023-11-28",
+     "onset_date": "2026-09-22",
      "outcome": "fatal",
      "evidence": [
       {
@@ -1286,7 +1236,7 @@
     },
     {
      "term": "product availability issue",
-     "onset_date": "2023-11-28",
+     "onset_date": "2026-09-22",
      "outcome": "fatal",
      "evidence": [
       {
@@ -1306,14 +1256,14 @@
     "other_medically_important": true,
     "evidence": [
      {
-      "quote": "Unfortunately the patient passed away.",
+      "quote": "The patient died.",
       "start": null,
       "end": null
      }
     ]
    },
-   "event_date": "2023-11-28",
-   "summary": "patient H.N. 54-year-old male on Bisoprolol, Perindopril, Spironolactone developed passed away, product availability issue.",
+   "event_date": "2026-09-22",
+   "summary": "patient A.A. 54-year-old male on Bisoprolol, Perindopril, Spironolactone developed passed away, product availability issue.",
    "missing_information": [
     "dose"
    ]
@@ -1330,17 +1280,17 @@
    "followup_reference": null,
    "patient": {
     "identifiable": true,
-    "initials": "S.A.",
-    "age": 36,
+    "initials": "S.M.",
+    "age": 81,
     "sex": "F",
     "evidence": [
      {
-      "quote": "patient S.A.",
+      "quote": "patient S.M.",
       "start": null,
       "end": null
      },
      {
-      "quote": "36-year-old",
+      "quote": "81-year-old",
       "start": null,
       "end": null
      },
@@ -1353,12 +1303,12 @@
    },
    "reporter": {
     "identifiable": true,
-    "name": "Dr. Elena Lee",
+    "name": "Dr. Hana Okafor",
     "qualification": "physician",
-    "contact": "(287) 555-2964",
+    "contact": "hana.okafor@clinic.net",
     "evidence": [
      {
-      "quote": "Dr. Elena Lee",
+      "quote": "Dr. Hana Okafor",
       "start": null,
       "end": null
      }
@@ -1382,7 +1332,7 @@
    "reactions": [
     {
      "term": "death",
-     "onset_date": "2026-09-12",
+     "onset_date": "2026-09-28",
      "outcome": "fatal",
      "evidence": [
       {
@@ -1408,8 +1358,8 @@
      }
     ]
    },
-   "event_date": "2026-09-12",
-   "summary": "patient S.A. 36-year-old female on Venclexta developed death.",
+   "event_date": "2026-09-28",
+   "summary": "patient S.M. 81-year-old female on Venclexta developed death.",
    "missing_information": [
     "dose"
    ]
@@ -1425,34 +1375,24 @@
    "is_followup": false,
    "followup_reference": null,
    "patient": {
-    "identifiable": true,
+    "identifiable": false,
     "initials": null,
-    "age": 75,
-    "sex": "M",
+    "age": null,
+    "sex": "unknown",
+    "evidence": []
+   },
+   "reporter": {
+    "identifiable": true,
+    "name": "James Novak",
+    "qualification": "consumer",
+    "contact": "(350) 555-8771",
     "evidence": [
      {
-      "quote": "Daniel Haddad",
-      "start": null,
-      "end": null
-     },
-     {
-      "quote": "75-year-old",
-      "start": null,
-      "end": null
-     },
-     {
-      "quote": "male",
+      "quote": "James Novak",
       "start": null,
       "end": null
      }
     ]
-   },
-   "reporter": {
-    "identifiable": false,
-    "name": null,
-    "qualification": "unknown",
-    "contact": null,
-    "evidence": []
    },
    "drugs": [
     {
@@ -1472,7 +1412,7 @@
    "reactions": [
     {
      "term": "passed away",
-     "onset_date": "2023-12-26",
+     "onset_date": "2026-10-01",
      "outcome": "fatal",
      "evidence": [
       {
@@ -1498,15 +1438,15 @@
      }
     ]
    },
-   "event_date": "2023-12-26",
-   "summary": "Daniel Haddad 75-year-old male on Carbidopa\\Levodopa developed passed away.",
+   "event_date": "2026-10-01",
+   "summary": "a patient on Carbidopa\\Levodopa developed passed away.",
    "missing_information": [
-    "reporter identity",
+    "patient identifier",
     "dose"
    ]
   },
   "truth_case": "23353599",
-  "variant": "no_reporter",
+  "variant": "no_patient",
   "duplicate_of": null,
   "followup_of": null
  },
@@ -1514,26 +1454,26 @@
   "extraction": {
    "language": "en",
    "is_followup": true,
-   "followup_reference": "my report from Wednesday about the patient on Carbidopa\\Levodopa",
+   "followup_reference": "my report from Sunday about the patient on Carbidopa\\Levodopa",
    "patient": {
-    "identifiable": false,
-    "initials": null,
-    "age": null,
-    "sex": "unknown",
-    "evidence": []
-   },
-   "reporter": {
     "identifiable": true,
-    "name": "Priya Okafor",
-    "qualification": "consumer",
-    "contact": "priya.okafor@health.net",
+    "initials": "F.F.",
+    "age": 75,
+    "sex": "M",
     "evidence": [
      {
-      "quote": "Priya Okafor",
+      "quote": "initials F.F.",
       "start": null,
       "end": null
      }
     ]
+   },
+   "reporter": {
+    "identifiable": false,
+    "name": null,
+    "qualification": "unknown",
+    "contact": null,
+    "evidence": []
    },
    "drugs": [],
    "reactions": [],
@@ -1547,7 +1487,7 @@
     "evidence": []
    },
    "event_date": null,
-   "summary": "Reporter supplies their identity for an earlier report.",
+   "summary": "Reporter supplies the patient identifier for an earlier report.",
    "missing_information": []
   },
   "truth_case": "23353599",
@@ -1562,17 +1502,17 @@
    "followup_reference": null,
    "patient": {
     "identifiable": true,
-    "initials": "K.T.",
-    "age": 25,
+    "initials": "A.J.",
+    "age": 76,
     "sex": "M",
     "evidence": [
      {
-      "quote": "patient K.T.",
+      "quote": "patient A.J.",
       "start": null,
       "end": null
      },
      {
-      "quote": "25-year-old",
+      "quote": "76-year-old",
       "start": null,
       "end": null
      },
@@ -1584,17 +1524,11 @@
     ]
    },
    "reporter": {
-    "identifiable": true,
-    "name": "Dr. Ahmed Lee",
-    "qualification": "physician",
-    "contact": "ahmed.lee@gmail.com",
-    "evidence": [
-     {
-      "quote": "Dr. Ahmed Lee",
-      "start": null,
-      "end": null
-     }
-    ]
+    "identifiable": false,
+    "name": null,
+    "qualification": "unknown",
+    "contact": null,
+    "evidence": []
    },
    "drugs": [
     {
@@ -1640,7 +1574,7 @@
    "reactions": [
     {
      "term": "plasma cell myeloma",
-     "onset_date": "2026-08-22",
+     "onset_date": "2026-08-24",
      "outcome": "unknown",
      "evidence": [
       {
@@ -1666,16 +1600,62 @@
      }
     ]
    },
-   "event_date": "2026-08-22",
-   "summary": "patient K.T. 25-year-old male on Lenalidomide, Darzalex, Dexamethasone developed plasma cell myeloma.",
+   "event_date": "2026-08-24",
+   "summary": "patient A.J. 76-year-old male on Lenalidomide, Darzalex, Dexamethasone developed plasma cell myeloma.",
    "missing_information": [
+    "reporter identity",
     "dose"
    ]
   },
   "truth_case": "23353601",
-  "variant": "complete",
+  "variant": "no_reporter",
   "duplicate_of": null,
   "followup_of": null
+ },
+ "MSG-0013-FU": {
+  "extraction": {
+   "language": "en",
+   "is_followup": true,
+   "followup_reference": "my report from Friday about the patient on Lenalidomide, Darzalex, Dexamethasone",
+   "patient": {
+    "identifiable": false,
+    "initials": null,
+    "age": null,
+    "sex": "unknown",
+    "evidence": []
+   },
+   "reporter": {
+    "identifiable": true,
+    "name": "Dr. Amara Lee",
+    "qualification": "physician",
+    "contact": "(534) 555-5249",
+    "evidence": [
+     {
+      "quote": "Dr. Amara Lee",
+      "start": null,
+      "end": null
+     }
+    ]
+   },
+   "drugs": [],
+   "reactions": [],
+   "seriousness": {
+    "death": false,
+    "life_threatening": false,
+    "hospitalization": false,
+    "disability": false,
+    "congenital_anomaly": false,
+    "other_medically_important": false,
+    "evidence": []
+   },
+   "event_date": null,
+   "summary": "Reporter supplies their identity for an earlier report.",
+   "missing_information": []
+  },
+  "truth_case": "23353601",
+  "variant": "followup",
+  "duplicate_of": null,
+  "followup_of": "MSG-0013"
  },
  "MSG-0014": {
   "extraction": {
@@ -1684,12 +1664,12 @@
    "followup_reference": null,
    "patient": {
     "identifiable": true,
-    "initials": "A.E.",
+    "initials": "E.F.",
     "age": 93,
     "sex": "M",
     "evidence": [
      {
-      "quote": "patient A.E.",
+      "quote": "patient E.F.",
       "start": null,
       "end": null
      },
@@ -1707,12 +1687,12 @@
    },
    "reporter": {
     "identifiable": true,
-    "name": "Daniel Patel",
+    "name": "Hana Okafor",
     "qualification": "other_health_professional",
-    "contact": "daniel.patel@health.net",
+    "contact": "(264) 555-6340",
     "evidence": [
      {
-      "quote": "Daniel Patel",
+      "quote": "Hana Okafor",
       "start": null,
       "end": null
      }
@@ -1736,7 +1716,7 @@
    "reactions": [
     {
      "term": "dehydration",
-     "onset_date": "2024-01-02",
+     "onset_date": "2026-09-10",
      "outcome": "recovering",
      "evidence": [
       {
@@ -1748,7 +1728,7 @@
     },
     {
      "term": "general physical health deterioration",
-     "onset_date": "2024-01-02",
+     "onset_date": "2026-09-10",
      "outcome": "unknown",
      "evidence": [
       {
@@ -1760,7 +1740,7 @@
     },
     {
      "term": "metastatic neoplasm",
-     "onset_date": "2024-01-02",
+     "onset_date": "2026-09-10",
      "outcome": "fatal",
      "evidence": [
       {
@@ -1786,8 +1766,8 @@
      }
     ]
    },
-   "event_date": "2024-01-02",
-   "summary": "patient A.E. 93-year-old male on Carbidopa\\Levodopa developed dehydration, general physical health deterioration, metastatic neoplasm.",
+   "event_date": "2026-09-10",
+   "summary": "patient E.F. 93-year-old male on Carbidopa\\Levodopa developed dehydration, general physical health deterioration, metastatic neoplasm.",
    "missing_information": [
     "dose"
    ]
@@ -1803,36 +1783,20 @@
    "is_followup": false,
    "followup_reference": null,
    "patient": {
-    "identifiable": true,
-    "initials": "R.A.",
-    "age": 73,
-    "sex": "M",
-    "evidence": [
-     {
-      "quote": "patient R.A.",
-      "start": null,
-      "end": null
-     },
-     {
-      "quote": "73-year-old",
-      "start": null,
-      "end": null
-     },
-     {
-      "quote": "male",
-      "start": null,
-      "end": null
-     }
-    ]
+    "identifiable": false,
+    "initials": null,
+    "age": null,
+    "sex": "unknown",
+    "evidence": []
    },
    "reporter": {
     "identifiable": true,
-    "name": "Dr. James Brown",
+    "name": "Dr. Luis Brown",
     "qualification": "physician",
-    "contact": "james.brown@health.com",
+    "contact": "luis.brown@gmail.net",
     "evidence": [
      {
-      "quote": "Dr. James Brown",
+      "quote": "Dr. Luis Brown",
       "start": null,
       "end": null
      }
@@ -1855,12 +1819,12 @@
    ],
    "reactions": [
     {
-     "term": "death",
-     "onset_date": "2026-08-20",
+     "term": "passed away",
+     "onset_date": "2026-09-29",
      "outcome": "fatal",
      "evidence": [
       {
-       "quote": "death",
+       "quote": "passed away",
        "start": null,
        "end": null
       }
@@ -1868,7 +1832,7 @@
     },
     {
      "term": "off label use",
-     "onset_date": "2026-08-20",
+     "onset_date": "2026-09-29",
      "outcome": "unknown",
      "evidence": [
       {
@@ -1888,22 +1852,68 @@
     "other_medically_important": false,
     "evidence": [
      {
-      "quote": "The patient died.",
+      "quote": "Unfortunately the patient passed away.",
       "start": null,
       "end": null
      }
     ]
    },
-   "event_date": "2026-08-20",
-   "summary": "patient R.A. 73-year-old male on Venclexta developed death, off label use.",
+   "event_date": "2026-09-29",
+   "summary": "a patient on Venclexta developed passed away, off label use.",
    "missing_information": [
+    "patient identifier",
     "dose"
    ]
   },
   "truth_case": "23353603",
-  "variant": "complete",
+  "variant": "no_patient",
   "duplicate_of": null,
   "followup_of": null
+ },
+ "MSG-0015-FU": {
+  "extraction": {
+   "language": "en",
+   "is_followup": true,
+   "followup_reference": "my report from Monday about the patient on Venclexta",
+   "patient": {
+    "identifiable": true,
+    "initials": "S.T.",
+    "age": 52,
+    "sex": "M",
+    "evidence": [
+     {
+      "quote": "initials S.T.",
+      "start": null,
+      "end": null
+     }
+    ]
+   },
+   "reporter": {
+    "identifiable": false,
+    "name": null,
+    "qualification": "unknown",
+    "contact": null,
+    "evidence": []
+   },
+   "drugs": [],
+   "reactions": [],
+   "seriousness": {
+    "death": false,
+    "life_threatening": false,
+    "hospitalization": false,
+    "disability": false,
+    "congenital_anomaly": false,
+    "other_medically_important": false,
+    "evidence": []
+   },
+   "event_date": null,
+   "summary": "Reporter supplies the patient identifier for an earlier report.",
+   "missing_information": []
+  },
+  "truth_case": "23353603",
+  "variant": "followup",
+  "duplicate_of": null,
+  "followup_of": "MSG-0015"
  },
  "MSG-0016": {
   "extraction": {
@@ -1911,36 +1921,20 @@
    "is_followup": false,
    "followup_reference": null,
    "patient": {
-    "identifiable": true,
-    "initials": "R.L.",
-    "age": 84,
-    "sex": "M",
-    "evidence": [
-     {
-      "quote": "patient R.L.",
-      "start": null,
-      "end": null
-     },
-     {
-      "quote": "84-year-old",
-      "start": null,
-      "end": null
-     },
-     {
-      "quote": "male",
-      "start": null,
-      "end": null
-     }
-    ]
+    "identifiable": false,
+    "initials": null,
+    "age": null,
+    "sex": "unknown",
+    "evidence": []
    },
    "reporter": {
     "identifiable": true,
-    "name": "Dr. James Rossi",
+    "name": "Dr. Sofia Haddad",
     "qualification": "physician",
-    "contact": "(275) 555-4484",
+    "contact": "(965) 555-2542",
     "evidence": [
      {
-      "quote": "Dr. James Rossi",
+      "quote": "Dr. Sofia Haddad",
       "start": null,
       "end": null
      }
@@ -1977,7 +1971,7 @@
    "reactions": [
     {
      "term": "ventricular tachycardia",
-     "onset_date": "2023-11-07",
+     "onset_date": "2026-09-06",
      "outcome": "recovered",
      "evidence": [
       {
@@ -1989,7 +1983,7 @@
     },
     {
      "term": "cardio-respiratory arrest",
-     "onset_date": "2023-11-07",
+     "onset_date": "2026-09-06",
      "outcome": "recovered",
      "evidence": [
       {
@@ -2001,7 +1995,7 @@
     },
     {
      "term": "ventricular tachycardia",
-     "onset_date": "2023-11-07",
+     "onset_date": "2026-09-06",
      "outcome": "recovered",
      "evidence": [
       {
@@ -2027,16 +2021,62 @@
      }
     ]
    },
-   "event_date": "2023-11-07",
-   "summary": "patient R.L. 84-year-old male on Dapagliflozin Propanediol\\Metformin Hydrochloride, Sacubitril\\Valsartan developed ventricular tachycardia, cardio-respiratory arrest, ventricular tachycardia.",
+   "event_date": "2026-09-06",
+   "summary": "a patient on Dapagliflozin Propanediol\\Metformin Hydrochloride, Sacubitril\\Valsartan developed ventricular tachycardia, cardio-respiratory arrest, ventricular tachycardia.",
    "missing_information": [
+    "patient identifier",
     "dose"
    ]
   },
   "truth_case": "23353605",
-  "variant": "complete",
+  "variant": "no_patient",
   "duplicate_of": null,
   "followup_of": null
+ },
+ "MSG-0016-FU": {
+  "extraction": {
+   "language": "en",
+   "is_followup": true,
+   "followup_reference": "case reference MSG-0016",
+   "patient": {
+    "identifiable": true,
+    "initials": "M.E.",
+    "age": 84,
+    "sex": "M",
+    "evidence": [
+     {
+      "quote": "initials M.E.",
+      "start": null,
+      "end": null
+     }
+    ]
+   },
+   "reporter": {
+    "identifiable": false,
+    "name": null,
+    "qualification": "unknown",
+    "contact": null,
+    "evidence": []
+   },
+   "drugs": [],
+   "reactions": [],
+   "seriousness": {
+    "death": false,
+    "life_threatening": false,
+    "hospitalization": false,
+    "disability": false,
+    "congenital_anomaly": false,
+    "other_medically_important": false,
+    "evidence": []
+   },
+   "event_date": null,
+   "summary": "Reporter supplies the patient identifier for an earlier report.",
+   "missing_information": []
+  },
+  "truth_case": "23353605",
+  "variant": "followup",
+  "duplicate_of": null,
+  "followup_of": "MSG-0016"
  },
  "MSG-0017": {
   "extraction": {
@@ -2045,17 +2085,17 @@
    "followup_reference": null,
    "patient": {
     "identifiable": true,
-    "initials": "F.P.",
-    "age": 34,
+    "initials": "A.L.",
+    "age": 29,
     "sex": "F",
     "evidence": [
      {
-      "quote": "patient F.P.",
+      "quote": "patient A.L.",
       "start": null,
       "end": null
      },
      {
-      "quote": "34-year-old",
+      "quote": "29-year-old",
       "start": null,
       "end": null
      },
@@ -2068,12 +2108,12 @@
    },
    "reporter": {
     "identifiable": true,
-    "name": "Olu Lee",
+    "name": "Sofia Schmidt",
     "qualification": "other_health_professional",
-    "contact": "(401) 555-6842",
+    "contact": "(219) 555-7297",
     "evidence": [
      {
-      "quote": "Olu Lee",
+      "quote": "Sofia Schmidt",
       "start": null,
       "end": null
      }
@@ -2097,7 +2137,7 @@
    "reactions": [
     {
      "term": "brain fog",
-     "onset_date": "2023-01-01",
+     "onset_date": "2026-09-26",
      "outcome": "not_recovered",
      "evidence": [
       {
@@ -2109,7 +2149,7 @@
     },
     {
      "term": "memory impairment",
-     "onset_date": "2023-01-01",
+     "onset_date": "2026-09-26",
      "outcome": "unknown",
      "evidence": [
       {
@@ -2121,7 +2161,7 @@
     },
     {
      "term": "diarrhoea",
-     "onset_date": "2023-01-01",
+     "onset_date": "2026-09-26",
      "outcome": "not_recovered",
      "evidence": [
       {
@@ -2147,8 +2187,8 @@
      }
     ]
    },
-   "event_date": "2023-01-01",
-   "summary": "patient F.P. 34-year-old female on Venclexta developed brain fog, memory impairment, diarrhoea.",
+   "event_date": "2026-09-26",
+   "summary": "patient A.L. 29-year-old female on Venclexta developed brain fog, memory impairment, diarrhoea.",
    "missing_information": [
     "dose"
    ]
@@ -2156,126 +2196,6 @@
   "truth_case": "23353607",
   "variant": "complete",
   "duplicate_of": null,
-  "followup_of": null
- },
- "MSG-0017-DUP": {
-  "extraction": {
-   "language": "en",
-   "is_followup": false,
-   "followup_reference": null,
-   "patient": {
-    "identifiable": true,
-    "initials": "F.P.",
-    "age": 34,
-    "sex": "F",
-    "evidence": [
-     {
-      "quote": "patient F.P.",
-      "start": null,
-      "end": null
-     },
-     {
-      "quote": "34-year-old",
-      "start": null,
-      "end": null
-     },
-     {
-      "quote": "female",
-      "start": null,
-      "end": null
-     }
-    ]
-   },
-   "reporter": {
-    "identifiable": true,
-    "name": "Ahmed Okafor",
-    "qualification": "consumer",
-    "contact": "ahmedokafor@mail.com",
-    "evidence": [
-     {
-      "quote": "Ahmed Okafor",
-      "start": null,
-      "end": null
-     }
-    ]
-   },
-   "drugs": [
-    {
-     "name": "Venclexta",
-     "role": "suspect",
-     "dose": null,
-     "start_date": null,
-     "evidence": [
-      {
-       "quote": "Venclexta",
-       "start": null,
-       "end": null
-      }
-     ]
-    }
-   ],
-   "reactions": [
-    {
-     "term": "brain fog",
-     "onset_date": "2023-01-01",
-     "outcome": "not_recovered",
-     "evidence": [
-      {
-       "quote": "brain fog",
-       "start": null,
-       "end": null
-      }
-     ]
-    },
-    {
-     "term": "memory impairment",
-     "onset_date": "2023-01-01",
-     "outcome": "unknown",
-     "evidence": [
-      {
-       "quote": "memory impairment",
-       "start": null,
-       "end": null
-      }
-     ]
-    },
-    {
-     "term": "diarrhoea",
-     "onset_date": "2023-01-01",
-     "outcome": "not_recovered",
-     "evidence": [
-      {
-       "quote": "diarrhoea",
-       "start": null,
-       "end": null
-      }
-     ]
-    }
-   ],
-   "seriousness": {
-    "death": false,
-    "life_threatening": false,
-    "hospitalization": false,
-    "disability": false,
-    "congenital_anomaly": false,
-    "other_medically_important": true,
-    "evidence": [
-     {
-      "quote": "The treating physician considered this medically significant.",
-      "start": null,
-      "end": null
-     }
-    ]
-   },
-   "event_date": "2023-01-01",
-   "summary": "patient F.P. 34-year-old female on Venclexta developed brain fog, memory impairment, diarrhoea.",
-   "missing_information": [
-    "dose"
-   ]
-  },
-  "truth_case": "23353607",
-  "variant": "duplicate",
-  "duplicate_of": "MSG-0017",
   "followup_of": null
  },
  "MSG-0018": {
@@ -2285,17 +2205,17 @@
    "followup_reference": null,
    "patient": {
     "identifiable": true,
-    "initials": null,
-    "age": 49,
+    "initials": "J.E.",
+    "age": 81,
     "sex": "F",
     "evidence": [
      {
-      "quote": "Sofia Schmidt",
+      "quote": "patient J.E.",
       "start": null,
       "end": null
      },
      {
-      "quote": "49-year-old",
+      "quote": "81-year-old",
       "start": null,
       "end": null
      },
@@ -2308,12 +2228,12 @@
    },
    "reporter": {
     "identifiable": true,
-    "name": "Priya Brown",
+    "name": "Daniel Patel",
     "qualification": "consumer",
-    "contact": "priya.brown@clinic.net",
+    "contact": "(353) 555-9791",
     "evidence": [
      {
-      "quote": "Priya Brown",
+      "quote": "Daniel Patel",
       "start": null,
       "end": null
      }
@@ -2337,7 +2257,7 @@
    "reactions": [
     {
      "term": "oral candidiasis",
-     "onset_date": "2026-10-03",
+     "onset_date": "2026-10-04",
      "outcome": "unknown",
      "evidence": [
       {
@@ -2363,8 +2283,8 @@
      }
     ]
    },
-   "event_date": "2026-10-03",
-   "summary": "Sofia Schmidt 49-year-old female on Farxiga developed oral candidiasis.",
+   "event_date": "2026-10-04",
+   "summary": "patient J.E. 81-year-old female on Farxiga developed oral candidiasis.",
    "missing_information": [
     "dose"
    ]
@@ -2372,102 +2292,6 @@
   "truth_case": "23353608",
   "variant": "complete",
   "duplicate_of": null,
-  "followup_of": null
- },
- "MSG-0018-DUP": {
-  "extraction": {
-   "language": "en",
-   "is_followup": false,
-   "followup_reference": null,
-   "patient": {
-    "identifiable": true,
-    "initials": "T.S.",
-    "age": 48,
-    "sex": "F",
-    "evidence": [
-     {
-      "quote": "patient T.S.",
-      "start": null,
-      "end": null
-     },
-     {
-      "quote": "48-year-old",
-      "start": null,
-      "end": null
-     },
-     {
-      "quote": "female",
-      "start": null,
-      "end": null
-     }
-    ]
-   },
-   "reporter": {
-    "identifiable": true,
-    "name": "Dr. Amara Nguyen",
-    "qualification": "physician",
-    "contact": "amaranguyen@clinic.com",
-    "evidence": [
-     {
-      "quote": "Dr. Amara Nguyen",
-      "start": null,
-      "end": null
-     }
-    ]
-   },
-   "drugs": [
-    {
-     "name": "Farxiga",
-     "role": "suspect",
-     "dose": null,
-     "start_date": null,
-     "evidence": [
-      {
-       "quote": "Farxiga",
-       "start": null,
-       "end": null
-      }
-     ]
-    }
-   ],
-   "reactions": [
-    {
-     "term": "oral candidiasis",
-     "onset_date": "2026-09-21",
-     "outcome": "unknown",
-     "evidence": [
-      {
-       "quote": "oral candidiasis",
-       "start": null,
-       "end": null
-      }
-     ]
-    }
-   ],
-   "seriousness": {
-    "death": false,
-    "life_threatening": false,
-    "hospitalization": false,
-    "disability": false,
-    "congenital_anomaly": false,
-    "other_medically_important": true,
-    "evidence": [
-     {
-      "quote": "The treating physician considered this medically significant.",
-      "start": null,
-      "end": null
-     }
-    ]
-   },
-   "event_date": "2026-09-21",
-   "summary": "patient T.S. 48-year-old female on Farxiga developed oral candidiasis.",
-   "missing_information": [
-    "dose"
-   ]
-  },
-  "truth_case": "23353608",
-  "variant": "duplicate",
-  "duplicate_of": "MSG-0018",
   "followup_of": null
  },
  "MSG-0019": {
@@ -2478,16 +2302,16 @@
    "patient": {
     "identifiable": true,
     "initials": null,
-    "age": 57,
+    "age": 25,
     "sex": "F",
     "evidence": [
      {
-      "quote": "Ahmed Okafor",
+      "quote": "Hana Lee",
       "start": null,
       "end": null
      },
      {
-      "quote": "57-year-old",
+      "quote": "25-year-old",
       "start": null,
       "end": null
      },
@@ -2500,12 +2324,12 @@
    },
    "reporter": {
     "identifiable": true,
-    "name": "Sofia Lee",
+    "name": "Olu Nguyen",
     "qualification": "consumer",
-    "contact": "sofia.lee@gmail.net",
+    "contact": "(212) 555-6556",
     "evidence": [
      {
-      "quote": "Sofia Lee",
+      "quote": "Olu Nguyen",
       "start": null,
       "end": null
      }
@@ -2529,7 +2353,7 @@
    "reactions": [
     {
      "term": "passed away",
-     "onset_date": "2026-09-12",
+     "onset_date": "2026-09-27",
      "outcome": "fatal",
      "evidence": [
       {
@@ -2549,14 +2373,14 @@
     "other_medically_important": false,
     "evidence": [
      {
-      "quote": "Unfortunately the patient passed away.",
+      "quote": "The patient died.",
       "start": null,
       "end": null
      }
     ]
    },
-   "event_date": "2026-09-12",
-   "summary": "Ahmed Okafor 57-year-old female on Farxiga developed passed away.",
+   "event_date": "2026-09-27",
+   "summary": "Hana Lee 25-year-old female on Farxiga developed passed away.",
    "missing_information": [
     "dose"
    ]
@@ -2566,102 +2390,6 @@
   "duplicate_of": null,
   "followup_of": null
  },
- "MSG-0019-DUP": {
-  "extraction": {
-   "language": "en",
-   "is_followup": false,
-   "followup_reference": null,
-   "patient": {
-    "identifiable": true,
-    "initials": "D.F.",
-    "age": 58,
-    "sex": "F",
-    "evidence": [
-     {
-      "quote": "patient D.F.",
-      "start": null,
-      "end": null
-     },
-     {
-      "quote": "58-year-old",
-      "start": null,
-      "end": null
-     },
-     {
-      "quote": "female",
-      "start": null,
-      "end": null
-     }
-    ]
-   },
-   "reporter": {
-    "identifiable": true,
-    "name": "Dr. Maria Novak",
-    "qualification": "physician",
-    "contact": "marianovak@mail.com",
-    "evidence": [
-     {
-      "quote": "Dr. Maria Novak",
-      "start": null,
-      "end": null
-     }
-    ]
-   },
-   "drugs": [
-    {
-     "name": "Farxiga",
-     "role": "suspect",
-     "dose": null,
-     "start_date": null,
-     "evidence": [
-      {
-       "quote": "Farxiga",
-       "start": null,
-       "end": null
-      }
-     ]
-    }
-   ],
-   "reactions": [
-    {
-     "term": "death",
-     "onset_date": "2026-08-29",
-     "outcome": "fatal",
-     "evidence": [
-      {
-       "quote": "death",
-       "start": null,
-       "end": null
-      }
-     ]
-    }
-   ],
-   "seriousness": {
-    "death": true,
-    "life_threatening": false,
-    "hospitalization": false,
-    "disability": false,
-    "congenital_anomaly": false,
-    "other_medically_important": false,
-    "evidence": [
-     {
-      "quote": "Unfortunately the patient passed away.",
-      "start": null,
-      "end": null
-     }
-    ]
-   },
-   "event_date": "2026-08-29",
-   "summary": "patient D.F. 58-year-old female on Farxiga developed death.",
-   "missing_information": [
-    "dose"
-   ]
-  },
-  "truth_case": "23353609",
-  "variant": "duplicate",
-  "duplicate_of": "MSG-0019",
-  "followup_of": null
- },
  "MSG-0020": {
   "extraction": {
    "language": "en",
@@ -2669,17 +2397,17 @@
    "followup_reference": null,
    "patient": {
     "identifiable": true,
-    "initials": "H.L.",
-    "age": 43,
+    "initials": "K.T.",
+    "age": 35,
     "sex": "M",
     "evidence": [
      {
-      "quote": "patient H.L.",
+      "quote": "patient K.T.",
       "start": null,
       "end": null
      },
      {
-      "quote": "43-year-old",
+      "quote": "35-year-old",
       "start": null,
       "end": null
      },
@@ -2691,11 +2419,17 @@
     ]
    },
    "reporter": {
-    "identifiable": false,
-    "name": null,
-    "qualification": "unknown",
-    "contact": null,
-    "evidence": []
+    "identifiable": true,
+    "name": "Dr. Wei Garcia",
+    "qualification": "physician",
+    "contact": "(713) 555-3914",
+    "evidence": [
+     {
+      "quote": "Dr. Wei Garcia",
+      "start": null,
+      "end": null
+     }
+    ]
    },
    "drugs": [
     {
@@ -2715,7 +2449,7 @@
    "reactions": [
     {
      "term": "general physical health deterioration",
-     "onset_date": "2023-01-01",
+     "onset_date": "2026-09-15",
      "outcome": "unknown",
      "evidence": [
       {
@@ -2727,7 +2461,7 @@
     },
     {
      "term": "hypertension",
-     "onset_date": "2023-01-01",
+     "onset_date": "2026-09-15",
      "outcome": "unknown",
      "evidence": [
       {
@@ -2739,7 +2473,7 @@
     },
     {
      "term": "dementia",
-     "onset_date": "2023-01-01",
+     "onset_date": "2026-09-15",
      "outcome": "unknown",
      "evidence": [
       {
@@ -2759,68 +2493,142 @@
     "other_medically_important": false,
     "evidence": [
      {
-      "quote": "Hospitalized for observation.",
+      "quote": "The patient was admitted to hospital.",
       "start": null,
       "end": null
      }
     ]
    },
-   "event_date": "2023-01-01",
-   "summary": "patient H.L. 43-year-old male on Carbidopa\\Levodopa developed general physical health deterioration, hypertension, dementia.",
+   "event_date": "2026-09-15",
+   "summary": "patient K.T. 35-year-old male on Carbidopa\\Levodopa developed general physical health deterioration, hypertension, dementia.",
    "missing_information": [
-    "reporter identity",
     "dose"
    ]
   },
   "truth_case": "23353612",
-  "variant": "no_reporter",
+  "variant": "complete",
   "duplicate_of": null,
   "followup_of": null
  },
- "MSG-0020-FU": {
+ "MSG-0020-DUP": {
   "extraction": {
    "language": "en",
-   "is_followup": true,
-   "followup_reference": "case reference MSG-0020",
+   "is_followup": false,
+   "followup_reference": null,
    "patient": {
-    "identifiable": false,
-    "initials": null,
-    "age": null,
-    "sex": "unknown",
-    "evidence": []
-   },
-   "reporter": {
     "identifiable": true,
-    "name": "Dr. Sofia Lee",
-    "qualification": "physician",
-    "contact": "sofia.lee@hospital.com",
+    "initials": "K.T.",
+    "age": 36,
+    "sex": "M",
     "evidence": [
      {
-      "quote": "Dr. Sofia Lee",
+      "quote": "patient K.T.",
+      "start": null,
+      "end": null
+     },
+     {
+      "quote": "36-year-old",
+      "start": null,
+      "end": null
+     },
+     {
+      "quote": "male",
       "start": null,
       "end": null
      }
     ]
    },
-   "drugs": [],
-   "reactions": [],
+   "reporter": {
+    "identifiable": true,
+    "name": "Amara Haddad",
+    "qualification": "consumer",
+    "contact": "amarahaddad@clinic.com",
+    "evidence": [
+     {
+      "quote": "Amara Haddad",
+      "start": null,
+      "end": null
+     }
+    ]
+   },
+   "drugs": [
+    {
+     "name": "Carbidopa\\Levodopa",
+     "role": "suspect",
+     "dose": null,
+     "start_date": null,
+     "evidence": [
+      {
+       "quote": "Carbidopa\\Levodopa",
+       "start": null,
+       "end": null
+      }
+     ]
+    }
+   ],
+   "reactions": [
+    {
+     "term": "general physical health deterioration",
+     "onset_date": "2026-09-04",
+     "outcome": "unknown",
+     "evidence": [
+      {
+       "quote": "general physical health deterioration",
+       "start": null,
+       "end": null
+      }
+     ]
+    },
+    {
+     "term": "hypertension",
+     "onset_date": "2026-09-04",
+     "outcome": "unknown",
+     "evidence": [
+      {
+       "quote": "hypertension",
+       "start": null,
+       "end": null
+      }
+     ]
+    },
+    {
+     "term": "dementia",
+     "onset_date": "2026-09-04",
+     "outcome": "unknown",
+     "evidence": [
+      {
+       "quote": "dementia",
+       "start": null,
+       "end": null
+      }
+     ]
+    }
+   ],
    "seriousness": {
     "death": false,
     "life_threatening": false,
-    "hospitalization": false,
+    "hospitalization": true,
     "disability": false,
     "congenital_anomaly": false,
     "other_medically_important": false,
-    "evidence": []
+    "evidence": [
+     {
+      "quote": "The patient was admitted to hospital.",
+      "start": null,
+      "end": null
+     }
+    ]
    },
-   "event_date": null,
-   "summary": "Reporter supplies their identity for an earlier report.",
-   "missing_information": []
+   "event_date": "2026-09-04",
+   "summary": "patient K.T. 36-year-old male on Carbidopa\\Levodopa developed general physical health deterioration, hypertension, dementia.",
+   "missing_information": [
+    "dose"
+   ]
   },
   "truth_case": "23353612",
-  "variant": "followup",
-  "duplicate_of": null,
-  "followup_of": "MSG-0020"
+  "variant": "duplicate",
+  "duplicate_of": "MSG-0020",
+  "followup_of": null
  },
  "MSG-0021": {
   "extraction": {
@@ -2829,12 +2637,12 @@
    "followup_reference": null,
    "patient": {
     "identifiable": true,
-    "initials": "M.L.",
+    "initials": "E.N.",
     "age": 65,
     "sex": "M",
     "evidence": [
      {
-      "quote": "patient M.L.",
+      "quote": "patient E.N.",
       "start": null,
       "end": null
      },
@@ -2875,7 +2683,7 @@
    "reactions": [
     {
      "term": "discomfort",
-     "onset_date": "2026-08-26",
+     "onset_date": "2026-08-24",
      "outcome": "unknown",
      "evidence": [
       {
@@ -2887,7 +2695,7 @@
     },
     {
      "term": "subdural haematoma",
-     "onset_date": "2026-08-26",
+     "onset_date": "2026-08-24",
      "outcome": "unknown",
      "evidence": [
       {
@@ -2899,7 +2707,7 @@
     },
     {
      "term": "bradykinesia",
-     "onset_date": "2026-08-26",
+     "onset_date": "2026-08-24",
      "outcome": "unknown",
      "evidence": [
       {
@@ -2925,8 +2733,8 @@
      }
     ]
    },
-   "event_date": "2026-08-26",
-   "summary": "patient M.L. 65-year-old male on Carbidopa\\Levodopa developed discomfort, subdural haematoma, bradykinesia.",
+   "event_date": "2026-08-24",
+   "summary": "patient E.N. 65-year-old male on Carbidopa\\Levodopa developed discomfort, subdural haematoma, bradykinesia.",
    "missing_information": [
     "reporter identity",
     "dose"
@@ -2941,7 +2749,7 @@
   "extraction": {
    "language": "en",
    "is_followup": true,
-   "followup_reference": "case reference MSG-0021",
+   "followup_reference": "my report from Saturday about the patient on Carbidopa\\Levodopa",
    "patient": {
     "identifiable": false,
     "initials": null,
@@ -2951,12 +2759,12 @@
    },
    "reporter": {
     "identifiable": true,
-    "name": "Dr. Maria Garcia",
+    "name": "Dr. Wei Novak",
     "qualification": "physician",
-    "contact": "(517) 555-4569",
+    "contact": "(273) 555-5187",
     "evidence": [
      {
-      "quote": "Dr. Maria Garcia",
+      "quote": "Dr. Wei Novak",
       "start": null,
       "end": null
      }
@@ -2989,12 +2797,12 @@
    "followup_reference": null,
    "patient": {
     "identifiable": true,
-    "initials": "K.H.",
+    "initials": "L.L.",
     "age": 80,
     "sex": "M",
     "evidence": [
      {
-      "quote": "patient K.H.",
+      "quote": "patient L.L.",
       "start": null,
       "end": null
      },
@@ -3012,12 +2820,12 @@
    },
    "reporter": {
     "identifiable": true,
-    "name": "Maria Garcia",
+    "name": "Ahmed Schmidt",
     "qualification": "consumer",
-    "contact": "(934) 555-7381",
+    "contact": "ahmed.schmidt@gmail.org",
     "evidence": [
      {
-      "quote": "Maria Garcia",
+      "quote": "Ahmed Schmidt",
       "start": null,
       "end": null
      }
@@ -3041,7 +2849,7 @@
    "reactions": [
     {
      "term": "acute myeloid leukaemia",
-     "onset_date": "2023-12-11",
+     "onset_date": "2026-09-20",
      "outcome": "fatal",
      "evidence": [
       {
@@ -3053,7 +2861,7 @@
     },
     {
      "term": "lymphadenopathy",
-     "onset_date": "2023-12-11",
+     "onset_date": "2026-09-20",
      "outcome": "not_recovered",
      "evidence": [
       {
@@ -3079,8 +2887,8 @@
      }
     ]
    },
-   "event_date": "2023-12-11",
-   "summary": "patient K.H. 80-year-old male on Venclexta developed acute myeloid leukaemia, lymphadenopathy.",
+   "event_date": "2026-09-20",
+   "summary": "patient L.L. 80-year-old male on Venclexta developed acute myeloid leukaemia, lymphadenopathy.",
    "missing_information": [
     "dose"
    ]
@@ -3090,6 +2898,114 @@
   "duplicate_of": null,
   "followup_of": null
  },
+ "MSG-0022-DUP": {
+  "extraction": {
+   "language": "en",
+   "is_followup": false,
+   "followup_reference": null,
+   "patient": {
+    "identifiable": true,
+    "initials": "L.L.",
+    "age": 80,
+    "sex": "M",
+    "evidence": [
+     {
+      "quote": "patient L.L.",
+      "start": null,
+      "end": null
+     },
+     {
+      "quote": "80-year-old",
+      "start": null,
+      "end": null
+     },
+     {
+      "quote": "male",
+      "start": null,
+      "end": null
+     }
+    ]
+   },
+   "reporter": {
+    "identifiable": true,
+    "name": "Dr. Amara Nguyen",
+    "qualification": "physician",
+    "contact": "amaranguyen@mail.com",
+    "evidence": [
+     {
+      "quote": "Dr. Amara Nguyen",
+      "start": null,
+      "end": null
+     }
+    ]
+   },
+   "drugs": [
+    {
+     "name": "Venclexta",
+     "role": "suspect",
+     "dose": null,
+     "start_date": null,
+     "evidence": [
+      {
+       "quote": "Venclexta",
+       "start": null,
+       "end": null
+      }
+     ]
+    }
+   ],
+   "reactions": [
+    {
+     "term": "acute myeloid leukaemia",
+     "onset_date": "2026-10-04",
+     "outcome": "fatal",
+     "evidence": [
+      {
+       "quote": "acute myeloid leukaemia",
+       "start": null,
+       "end": null
+      }
+     ]
+    },
+    {
+     "term": "lymphadenopathy",
+     "onset_date": "2026-10-04",
+     "outcome": "not_recovered",
+     "evidence": [
+      {
+       "quote": "lymphadenopathy",
+       "start": null,
+       "end": null
+      }
+     ]
+    }
+   ],
+   "seriousness": {
+    "death": true,
+    "life_threatening": false,
+    "hospitalization": true,
+    "disability": false,
+    "congenital_anomaly": false,
+    "other_medically_important": false,
+    "evidence": [
+     {
+      "quote": "Unfortunately the patient passed away.",
+      "start": null,
+      "end": null
+     }
+    ]
+   },
+   "event_date": "2026-10-04",
+   "summary": "patient L.L. 80-year-old male on Venclexta developed acute myeloid leukaemia, lymphadenopathy.",
+   "missing_information": [
+    "dose"
+   ]
+  },
+  "truth_case": "23353614",
+  "variant": "duplicate",
+  "duplicate_of": "MSG-0022",
+  "followup_of": null
+ },
  "MSG-0023": {
   "extraction": {
    "language": "en",
@@ -3097,12 +3013,12 @@
    "followup_reference": null,
    "patient": {
     "identifiable": true,
-    "initials": "E.T.",
+    "initials": "T.P.",
     "age": 43,
     "sex": "F",
     "evidence": [
      {
-      "quote": "patient E.T.",
+      "quote": "patient T.P.",
       "start": null,
       "end": null
      },
@@ -3119,11 +3035,17 @@
     ]
    },
    "reporter": {
-    "identifiable": false,
-    "name": null,
-    "qualification": "unknown",
-    "contact": null,
-    "evidence": []
+    "identifiable": true,
+    "name": "Dr. Maria Novak",
+    "qualification": "physician",
+    "contact": "maria.novak@hospital.net",
+    "evidence": [
+     {
+      "quote": "Dr. Maria Novak",
+      "start": null,
+      "end": null
+     }
+    ]
    },
    "drugs": [
     {
@@ -3143,7 +3065,7 @@
    "reactions": [
     {
      "term": "breast neoplasm",
-     "onset_date": "2023-09-01",
+     "onset_date": "2026-09-16",
      "outcome": "not_recovered",
      "evidence": [
       {
@@ -3163,68 +3085,22 @@
     "other_medically_important": false,
     "evidence": [
      {
-      "quote": "Hospitalized for observation.",
+      "quote": "The patient was admitted to hospital.",
       "start": null,
       "end": null
      }
     ]
    },
-   "event_date": "2023-09-01",
-   "summary": "patient E.T. 43-year-old female on Tysabri developed breast neoplasm.",
+   "event_date": "2026-09-16",
+   "summary": "patient T.P. 43-year-old female on Tysabri developed breast neoplasm.",
    "missing_information": [
-    "reporter identity",
     "dose"
    ]
   },
   "truth_case": "23353620",
-  "variant": "no_reporter",
+  "variant": "complete",
   "duplicate_of": null,
   "followup_of": null
- },
- "MSG-0023-FU": {
-  "extraction": {
-   "language": "en",
-   "is_followup": true,
-   "followup_reference": "my report from Monday about the patient on Tysabri",
-   "patient": {
-    "identifiable": false,
-    "initials": null,
-    "age": null,
-    "sex": "unknown",
-    "evidence": []
-   },
-   "reporter": {
-    "identifiable": true,
-    "name": "Dr. Daniel Brown",
-    "qualification": "physician",
-    "contact": "daniel.brown@clinic.net",
-    "evidence": [
-     {
-      "quote": "Dr. Daniel Brown",
-      "start": null,
-      "end": null
-     }
-    ]
-   },
-   "drugs": [],
-   "reactions": [],
-   "seriousness": {
-    "death": false,
-    "life_threatening": false,
-    "hospitalization": false,
-    "disability": false,
-    "congenital_anomaly": false,
-    "other_medically_important": false,
-    "evidence": []
-   },
-   "event_date": null,
-   "summary": "Reporter supplies their identity for an earlier report.",
-   "missing_information": []
-  },
-  "truth_case": "23353620",
-  "variant": "followup",
-  "duplicate_of": null,
-  "followup_of": "MSG-0023"
  },
  "MSG-0024": {
   "extraction": {
@@ -3233,12 +3109,12 @@
    "followup_reference": null,
    "patient": {
     "identifiable": true,
-    "initials": "T.C.",
+    "initials": "N.R.",
     "age": 45,
     "sex": "F",
     "evidence": [
      {
-      "quote": "patient T.C.",
+      "quote": "patient N.R.",
       "start": null,
       "end": null
      },
@@ -3255,17 +3131,11 @@
     ]
    },
    "reporter": {
-    "identifiable": true,
-    "name": "Dr. Grace Nguyen",
-    "qualification": "physician",
-    "contact": "(955) 555-8763",
-    "evidence": [
-     {
-      "quote": "Dr. Grace Nguyen",
-      "start": null,
-      "end": null
-     }
-    ]
+    "identifiable": false,
+    "name": null,
+    "qualification": "unknown",
+    "contact": null,
+    "evidence": []
    },
    "drugs": [
     {
@@ -3285,7 +3155,7 @@
    "reactions": [
     {
      "term": "myocardial infarction",
-     "onset_date": "2023-10-27",
+     "onset_date": "2026-08-26",
      "outcome": "recovered",
      "evidence": [
       {
@@ -3297,7 +3167,7 @@
     },
     {
      "term": "inappropriate schedule of product administration",
-     "onset_date": "2023-10-27",
+     "onset_date": "2026-08-26",
      "outcome": "unknown",
      "evidence": [
       {
@@ -3323,16 +3193,62 @@
      }
     ]
    },
-   "event_date": "2023-10-27",
-   "summary": "patient T.C. 45-year-old female on Dupixent developed myocardial infarction, inappropriate schedule of product administration.",
+   "event_date": "2026-08-26",
+   "summary": "patient N.R. 45-year-old female on Dupixent developed myocardial infarction, inappropriate schedule of product administration.",
    "missing_information": [
+    "reporter identity",
     "dose"
    ]
   },
   "truth_case": "23353621",
-  "variant": "complete",
+  "variant": "no_reporter",
   "duplicate_of": null,
   "followup_of": null
+ },
+ "MSG-0024-FU": {
+  "extraction": {
+   "language": "en",
+   "is_followup": true,
+   "followup_reference": "the Dupixent report I sent earlier",
+   "patient": {
+    "identifiable": false,
+    "initials": null,
+    "age": null,
+    "sex": "unknown",
+    "evidence": []
+   },
+   "reporter": {
+    "identifiable": true,
+    "name": "Dr. Elena Nguyen",
+    "qualification": "physician",
+    "contact": "(745) 555-5006",
+    "evidence": [
+     {
+      "quote": "Dr. Elena Nguyen",
+      "start": null,
+      "end": null
+     }
+    ]
+   },
+   "drugs": [],
+   "reactions": [],
+   "seriousness": {
+    "death": false,
+    "life_threatening": false,
+    "hospitalization": false,
+    "disability": false,
+    "congenital_anomaly": false,
+    "other_medically_important": false,
+    "evidence": []
+   },
+   "event_date": null,
+   "summary": "Reporter supplies their identity for an earlier report.",
+   "missing_information": []
+  },
+  "truth_case": "23353621",
+  "variant": "followup",
+  "duplicate_of": null,
+  "followup_of": "MSG-0024"
  },
  "MSG-0025": {
   "extraction": {
@@ -3346,7 +3262,7 @@
     "sex": "F",
     "evidence": [
      {
-      "quote": "Hana Patel",
+      "quote": "Amara Garcia",
       "start": null,
       "end": null
      },
@@ -3364,12 +3280,12 @@
    },
    "reporter": {
     "identifiable": true,
-    "name": "Hana Haddad",
+    "name": "Sofia Khan",
     "qualification": "consumer",
-    "contact": "hana.haddad@gmail.net",
+    "contact": "(958) 555-8542",
     "evidence": [
      {
-      "quote": "Hana Haddad",
+      "quote": "Sofia Khan",
       "start": null,
       "end": null
      }
@@ -3393,7 +3309,7 @@
    "reactions": [
     {
      "term": "vocal cord disorder",
-     "onset_date": "2008-01-01",
+     "onset_date": "2026-09-20",
      "outcome": "not_recovered",
      "evidence": [
       {
@@ -3405,7 +3321,7 @@
     },
     {
      "term": "speech disorder",
-     "onset_date": "2008-01-01",
+     "onset_date": "2026-09-20",
      "outcome": "not_recovered",
      "evidence": [
       {
@@ -3431,8 +3347,8 @@
      }
     ]
    },
-   "event_date": "2008-01-01",
-   "summary": "Hana Patel 59-year-old female on Symbicort developed vocal cord disorder, speech disorder.",
+   "event_date": "2026-09-20",
+   "summary": "Amara Garcia 59-year-old female on Symbicort developed vocal cord disorder, speech disorder.",
    "missing_information": [
     "dose"
    ]
@@ -3442,24 +3358,24 @@
   "duplicate_of": null,
   "followup_of": null
  },
- "MSG-0026": {
+ "MSG-0025-DUP": {
   "extraction": {
    "language": "en",
    "is_followup": false,
    "followup_reference": null,
    "patient": {
     "identifiable": true,
-    "initials": "R.D.",
-    "age": 42,
+    "initials": "J.C.",
+    "age": 60,
     "sex": "F",
     "evidence": [
      {
-      "quote": "patient R.D.",
+      "quote": "patient J.C.",
       "start": null,
       "end": null
      },
      {
-      "quote": "42-year-old",
+      "quote": "60-year-old",
       "start": null,
       "end": null
      },
@@ -3471,11 +3387,125 @@
     ]
    },
    "reporter": {
-    "identifiable": false,
-    "name": null,
-    "qualification": "unknown",
-    "contact": null,
-    "evidence": []
+    "identifiable": true,
+    "name": "Dr. Priya Schmidt",
+    "qualification": "physician",
+    "contact": "priyaschmidt@clinic.com",
+    "evidence": [
+     {
+      "quote": "Dr. Priya Schmidt",
+      "start": null,
+      "end": null
+     }
+    ]
+   },
+   "drugs": [
+    {
+     "name": "Symbicort",
+     "role": "suspect",
+     "dose": null,
+     "start_date": null,
+     "evidence": [
+      {
+       "quote": "Symbicort",
+       "start": null,
+       "end": null
+      }
+     ]
+    }
+   ],
+   "reactions": [
+    {
+     "term": "vocal cord disorder",
+     "onset_date": "2026-09-08",
+     "outcome": "not_recovered",
+     "evidence": [
+      {
+       "quote": "vocal cord disorder",
+       "start": null,
+       "end": null
+      }
+     ]
+    },
+    {
+     "term": "speech disorder",
+     "onset_date": "2026-09-08",
+     "outcome": "not_recovered",
+     "evidence": [
+      {
+       "quote": "speech disorder",
+       "start": null,
+       "end": null
+      }
+     ]
+    }
+   ],
+   "seriousness": {
+    "death": false,
+    "life_threatening": false,
+    "hospitalization": false,
+    "disability": true,
+    "congenital_anomaly": false,
+    "other_medically_important": false,
+    "evidence": [
+     {
+      "quote": "The patient has not regained function and may have lasting disability.",
+      "start": null,
+      "end": null
+     }
+    ]
+   },
+   "event_date": "2026-09-08",
+   "summary": "patient J.C. 60-year-old female on Symbicort developed vocal cord disorder, speech disorder.",
+   "missing_information": [
+    "dose"
+   ]
+  },
+  "truth_case": "23353623",
+  "variant": "duplicate",
+  "duplicate_of": "MSG-0025",
+  "followup_of": null
+ },
+ "MSG-0026": {
+  "extraction": {
+   "language": "en",
+   "is_followup": false,
+   "followup_reference": null,
+   "patient": {
+    "identifiable": true,
+    "initials": "K.T.",
+    "age": 30,
+    "sex": "M",
+    "evidence": [
+     {
+      "quote": "patient K.T.",
+      "start": null,
+      "end": null
+     },
+     {
+      "quote": "30-year-old",
+      "start": null,
+      "end": null
+     },
+     {
+      "quote": "male",
+      "start": null,
+      "end": null
+     }
+    ]
+   },
+   "reporter": {
+    "identifiable": true,
+    "name": "Dr. Olu Khan",
+    "qualification": "physician",
+    "contact": "olu.khan@health.com",
+    "evidence": [
+     {
+      "quote": "Dr. Olu Khan",
+      "start": null,
+      "end": null
+     }
+    ]
    },
    "drugs": [
     {
@@ -3495,7 +3525,7 @@
    "reactions": [
     {
      "term": "spinal fracture",
-     "onset_date": "2026-09-06",
+     "onset_date": "2026-08-29",
      "outcome": "unknown",
      "evidence": [
       {
@@ -3521,62 +3551,16 @@
      }
     ]
    },
-   "event_date": "2026-09-06",
-   "summary": "patient R.D. 42-year-old female on Denosumab developed spinal fracture.",
+   "event_date": "2026-08-29",
+   "summary": "patient K.T. 30-year-old male on Denosumab developed spinal fracture.",
    "missing_information": [
-    "reporter identity",
     "dose"
    ]
   },
   "truth_case": "23353632",
-  "variant": "no_reporter",
+  "variant": "complete",
   "duplicate_of": null,
   "followup_of": null
- },
- "MSG-0026-FU": {
-  "extraction": {
-   "language": "en",
-   "is_followup": true,
-   "followup_reference": "my report from Friday about the patient on Denosumab",
-   "patient": {
-    "identifiable": false,
-    "initials": null,
-    "age": null,
-    "sex": "unknown",
-    "evidence": []
-   },
-   "reporter": {
-    "identifiable": true,
-    "name": "Dr. Grace Khan",
-    "qualification": "physician",
-    "contact": "(685) 555-1286",
-    "evidence": [
-     {
-      "quote": "Dr. Grace Khan",
-      "start": null,
-      "end": null
-     }
-    ]
-   },
-   "drugs": [],
-   "reactions": [],
-   "seriousness": {
-    "death": false,
-    "life_threatening": false,
-    "hospitalization": false,
-    "disability": false,
-    "congenital_anomaly": false,
-    "other_medically_important": false,
-    "evidence": []
-   },
-   "event_date": null,
-   "summary": "Reporter supplies their identity for an earlier report.",
-   "missing_information": []
-  },
-  "truth_case": "23353632",
-  "variant": "followup",
-  "duplicate_of": null,
-  "followup_of": "MSG-0026"
  },
  "MSG-0027": {
   "extraction": {
@@ -3586,16 +3570,16 @@
    "patient": {
     "identifiable": true,
     "initials": null,
-    "age": 28,
+    "age": 52,
     "sex": "M",
     "evidence": [
      {
-      "quote": "Ahmed Schmidt",
+      "quote": "James Silva",
       "start": null,
       "end": null
      },
      {
-      "quote": "28-year-old",
+      "quote": "52-year-old",
       "start": null,
       "end": null
      },
@@ -3608,12 +3592,12 @@
    },
    "reporter": {
     "identifiable": true,
-    "name": "Hana Nguyen",
+    "name": "Ahmed Rossi",
     "qualification": "consumer",
-    "contact": "hana.nguyen@gmail.org",
+    "contact": "(336) 555-9335",
     "evidence": [
      {
-      "quote": "Hana Nguyen",
+      "quote": "Ahmed Rossi",
       "start": null,
       "end": null
      }
@@ -3637,7 +3621,7 @@
    "reactions": [
     {
      "term": "osteoarthritis",
-     "onset_date": "2015-01-01",
+     "onset_date": "2026-09-16",
      "outcome": "recovered",
      "evidence": [
       {
@@ -3649,7 +3633,7 @@
     },
     {
      "term": "arthropathy",
-     "onset_date": "2015-01-01",
+     "onset_date": "2026-09-16",
      "outcome": "unknown",
      "evidence": [
       {
@@ -3675,8 +3659,8 @@
      }
     ]
    },
-   "event_date": "2015-01-01",
-   "summary": "Ahmed Schmidt 28-year-old male on Humira developed osteoarthritis, arthropathy.",
+   "event_date": "2026-09-16",
+   "summary": "James Silva 52-year-old male on Humira developed osteoarthritis, arthropathy.",
    "missing_information": [
     "dose"
    ]
@@ -3693,17 +3677,17 @@
    "followup_reference": null,
    "patient": {
     "identifiable": true,
-    "initials": "E.T.",
-    "age": 28,
+    "initials": "G.G.",
+    "age": 52,
     "sex": "M",
     "evidence": [
      {
-      "quote": "patient E.T.",
+      "quote": "patient G.G.",
       "start": null,
       "end": null
      },
      {
-      "quote": "28-year-old",
+      "quote": "52-year-old",
       "start": null,
       "end": null
      },
@@ -3716,12 +3700,12 @@
    },
    "reporter": {
     "identifiable": true,
-    "name": "Dr. Grace Haddad",
+    "name": "Dr. Maria Khan",
     "qualification": "physician",
-    "contact": "gracehaddad@clinic.com",
+    "contact": "mariakhan@clinic.com",
     "evidence": [
      {
-      "quote": "Dr. Grace Haddad",
+      "quote": "Dr. Maria Khan",
       "start": null,
       "end": null
      }
@@ -3745,7 +3729,7 @@
    "reactions": [
     {
      "term": "osteoarthritis",
-     "onset_date": "2015-01-01",
+     "onset_date": "2026-09-27",
      "outcome": "recovered",
      "evidence": [
       {
@@ -3757,7 +3741,7 @@
     },
     {
      "term": "arthropathy",
-     "onset_date": "2015-01-01",
+     "onset_date": "2026-09-27",
      "outcome": "unknown",
      "evidence": [
       {
@@ -3783,8 +3767,8 @@
      }
     ]
    },
-   "event_date": "2015-01-01",
-   "summary": "patient E.T. 28-year-old male on Humira developed osteoarthritis, arthropathy.",
+   "event_date": "2026-09-27",
+   "summary": "patient G.G. 52-year-old male on Humira developed osteoarthritis, arthropathy.",
    "missing_information": [
     "dose"
    ]
@@ -3802,7 +3786,7 @@
    "patient": {
     "identifiable": true,
     "initials": null,
-    "age": 24,
+    "age": 44,
     "sex": "F",
     "evidence": [
      {
@@ -3811,7 +3795,7 @@
       "end": null
      },
      {
-      "quote": "24-year-old",
+      "quote": "44-year-old",
       "start": null,
       "end": null
      },
@@ -3824,12 +3808,12 @@
    },
    "reporter": {
     "identifiable": true,
-    "name": "Elena Schmidt",
+    "name": "Daniel Schmidt",
     "qualification": "consumer",
     "contact": "(582) 555-2064",
     "evidence": [
      {
-      "quote": "Elena Schmidt",
+      "quote": "Daniel Schmidt",
       "start": null,
       "end": null
      }
@@ -3853,7 +3837,7 @@
    "reactions": [
     {
      "term": "tibia fracture",
-     "onset_date": "2023-01-01",
+     "onset_date": "2026-09-24",
      "outcome": "recovering",
      "evidence": [
       {
@@ -3865,7 +3849,7 @@
     },
     {
      "term": "pain in extremity",
-     "onset_date": "2023-01-01",
+     "onset_date": "2026-09-24",
      "outcome": "unknown",
      "evidence": [
       {
@@ -3877,7 +3861,7 @@
     },
     {
      "term": "osteoporosis",
-     "onset_date": "2023-01-01",
+     "onset_date": "2026-09-24",
      "outcome": "unknown",
      "evidence": [
       {
@@ -3903,8 +3887,8 @@
      }
     ]
    },
-   "event_date": "2023-01-01",
-   "summary": "Wei Novak 24-year-old female on Rinvoq developed tibia fracture, pain in extremity, osteoporosis.",
+   "event_date": "2026-09-24",
+   "summary": "Wei Novak 44-year-old female on Rinvoq developed tibia fracture, pain in extremity, osteoporosis.",
    "missing_information": [
     "dose"
    ]
@@ -3926,7 +3910,7 @@
     "sex": "F",
     "evidence": [
      {
-      "quote": "Olu Patel",
+      "quote": "Wei Garcia",
       "start": null,
       "end": null
      },
@@ -3944,12 +3928,12 @@
    },
    "reporter": {
     "identifiable": true,
-    "name": "Ahmed Nguyen",
+    "name": "Maria Haddad",
     "qualification": "consumer",
-    "contact": "ahmed.nguyen@gmail.com",
+    "contact": "maria.haddad@gmail.org",
     "evidence": [
      {
-      "quote": "Ahmed Nguyen",
+      "quote": "Maria Haddad",
       "start": null,
       "end": null
      }
@@ -3973,7 +3957,7 @@
    "reactions": [
     {
      "term": "loss of consciousness",
-     "onset_date": "2026-08-19",
+     "onset_date": "2026-08-27",
      "outcome": "unknown",
      "evidence": [
       {
@@ -3985,7 +3969,7 @@
     },
     {
      "term": "seizure",
-     "onset_date": "2026-08-19",
+     "onset_date": "2026-08-27",
      "outcome": "unknown",
      "evidence": [
       {
@@ -4011,8 +3995,8 @@
      }
     ]
    },
-   "event_date": "2026-08-19",
-   "summary": "Olu Patel 51-year-old female on Dupixent developed loss of consciousness, seizure.",
+   "event_date": "2026-08-27",
+   "summary": "Wei Garcia 51-year-old female on Dupixent developed loss of consciousness, seizure.",
    "missing_information": [
     "dose"
    ]
@@ -4022,6 +4006,114 @@
   "duplicate_of": null,
   "followup_of": null
  },
+ "MSG-0029-DUP": {
+  "extraction": {
+   "language": "en",
+   "is_followup": false,
+   "followup_reference": null,
+   "patient": {
+    "identifiable": true,
+    "initials": "K.E.",
+    "age": 52,
+    "sex": "F",
+    "evidence": [
+     {
+      "quote": "patient K.E.",
+      "start": null,
+      "end": null
+     },
+     {
+      "quote": "52-year-old",
+      "start": null,
+      "end": null
+     },
+     {
+      "quote": "female",
+      "start": null,
+      "end": null
+     }
+    ]
+   },
+   "reporter": {
+    "identifiable": true,
+    "name": "Dr. Sofia Rossi",
+    "qualification": "physician",
+    "contact": "sofiarossi@clinic.com",
+    "evidence": [
+     {
+      "quote": "Dr. Sofia Rossi",
+      "start": null,
+      "end": null
+     }
+    ]
+   },
+   "drugs": [
+    {
+     "name": "Dupixent",
+     "role": "suspect",
+     "dose": null,
+     "start_date": null,
+     "evidence": [
+      {
+       "quote": "Dupixent",
+       "start": null,
+       "end": null
+      }
+     ]
+    }
+   ],
+   "reactions": [
+    {
+     "term": "loss of consciousness",
+     "onset_date": "2026-08-30",
+     "outcome": "unknown",
+     "evidence": [
+      {
+       "quote": "loss of consciousness",
+       "start": null,
+       "end": null
+      }
+     ]
+    },
+    {
+     "term": "seizure",
+     "onset_date": "2026-08-30",
+     "outcome": "unknown",
+     "evidence": [
+      {
+       "quote": "seizure",
+       "start": null,
+       "end": null
+      }
+     ]
+    }
+   ],
+   "seriousness": {
+    "death": false,
+    "life_threatening": false,
+    "hospitalization": false,
+    "disability": false,
+    "congenital_anomaly": false,
+    "other_medically_important": true,
+    "evidence": [
+     {
+      "quote": "The treating physician considered this medically significant.",
+      "start": null,
+      "end": null
+     }
+    ]
+   },
+   "event_date": "2026-08-30",
+   "summary": "patient K.E. 52-year-old female on Dupixent developed loss of consciousness, seizure.",
+   "missing_information": [
+    "dose"
+   ]
+  },
+  "truth_case": "23353643",
+  "variant": "duplicate",
+  "duplicate_of": "MSG-0029",
+  "followup_of": null
+ },
  "MSG-0030": {
   "extraction": {
    "language": "en",
@@ -4029,12 +4121,12 @@
    "followup_reference": null,
    "patient": {
     "identifiable": true,
-    "initials": "G.C.",
+    "initials": "J.N.",
     "age": 70,
     "sex": "F",
     "evidence": [
      {
-      "quote": "patient G.C.",
+      "quote": "patient J.N.",
       "start": null,
       "end": null
      },
@@ -4051,11 +4143,17 @@
     ]
    },
    "reporter": {
-    "identifiable": false,
-    "name": null,
-    "qualification": "unknown",
-    "contact": null,
-    "evidence": []
+    "identifiable": true,
+    "name": "Ahmed Garcia",
+    "qualification": "other_health_professional",
+    "contact": "ahmed.garcia@gmail.com",
+    "evidence": [
+     {
+      "quote": "Ahmed Garcia",
+      "start": null,
+      "end": null
+     }
+    ]
    },
    "drugs": [
     {
@@ -4075,7 +4173,7 @@
    "reactions": [
     {
      "term": "rash pruritic",
-     "onset_date": "2023-12-13",
+     "onset_date": "2026-09-03",
      "outcome": "recovering",
      "evidence": [
       {
@@ -4087,7 +4185,7 @@
     },
     {
      "term": "abdominal pain",
-     "onset_date": "2023-12-13",
+     "onset_date": "2026-09-03",
      "outcome": "recovering",
      "evidence": [
       {
@@ -4113,62 +4211,16 @@
      }
     ]
    },
-   "event_date": "2023-12-13",
-   "summary": "patient G.C. 70-year-old female on Oxaliplatin developed rash pruritic, abdominal pain.",
+   "event_date": "2026-09-03",
+   "summary": "patient J.N. 70-year-old female on Oxaliplatin developed rash pruritic, abdominal pain.",
    "missing_information": [
-    "reporter identity",
     "dose"
    ]
   },
   "truth_case": "23353644",
-  "variant": "no_reporter",
+  "variant": "complete",
   "duplicate_of": null,
   "followup_of": null
- },
- "MSG-0030-FU": {
-  "extraction": {
-   "language": "en",
-   "is_followup": true,
-   "followup_reference": "the Oxaliplatin report I sent earlier",
-   "patient": {
-    "identifiable": false,
-    "initials": null,
-    "age": null,
-    "sex": "unknown",
-    "evidence": []
-   },
-   "reporter": {
-    "identifiable": true,
-    "name": "Luis Brown",
-    "qualification": "other_health_professional",
-    "contact": "(830) 555-3270",
-    "evidence": [
-     {
-      "quote": "Luis Brown",
-      "start": null,
-      "end": null
-     }
-    ]
-   },
-   "drugs": [],
-   "reactions": [],
-   "seriousness": {
-    "death": false,
-    "life_threatening": false,
-    "hospitalization": false,
-    "disability": false,
-    "congenital_anomaly": false,
-    "other_medically_important": false,
-    "evidence": []
-   },
-   "event_date": null,
-   "summary": "Reporter supplies their identity for an earlier report.",
-   "missing_information": []
-  },
-  "truth_case": "23353644",
-  "variant": "followup",
-  "duplicate_of": null,
-  "followup_of": "MSG-0030"
  },
  "MSG-0031": {
   "extraction": {
@@ -4177,17 +4229,17 @@
    "followup_reference": null,
    "patient": {
     "identifiable": true,
-    "initials": "N.H.",
-    "age": 71,
+    "initials": null,
+    "age": 39,
     "sex": "F",
     "evidence": [
      {
-      "quote": "patient N.H.",
+      "quote": "Elena Lee",
       "start": null,
       "end": null
      },
      {
-      "quote": "71-year-old",
+      "quote": "39-year-old",
       "start": null,
       "end": null
      },
@@ -4200,12 +4252,12 @@
    },
    "reporter": {
     "identifiable": true,
-    "name": "Olu Garcia",
+    "name": "James Patel",
     "qualification": "consumer",
-    "contact": "olu.garcia@health.org",
+    "contact": "(968) 555-7763",
     "evidence": [
      {
-      "quote": "Olu Garcia",
+      "quote": "James Patel",
       "start": null,
       "end": null
      }
@@ -4242,7 +4294,7 @@
    "reactions": [
     {
      "term": "drug dependence",
-     "onset_date": "2026-08-11",
+     "onset_date": "2026-09-08",
      "outcome": "unknown",
      "evidence": [
       {
@@ -4254,7 +4306,7 @@
     },
     {
      "term": "impaired quality of life",
-     "onset_date": "2026-08-11",
+     "onset_date": "2026-09-08",
      "outcome": "unknown",
      "evidence": [
       {
@@ -4266,7 +4318,7 @@
     },
     {
      "term": "unevaluable event",
-     "onset_date": "2026-08-11",
+     "onset_date": "2026-09-08",
      "outcome": "unknown",
      "evidence": [
       {
@@ -4292,8 +4344,8 @@
      }
     ]
    },
-   "event_date": "2026-08-11",
-   "summary": "patient N.H. 71-year-old female on Oxycontin, Oxycodone Hydrochloride developed drug dependence, impaired quality of life, unevaluable event.",
+   "event_date": "2026-09-08",
+   "summary": "Elena Lee 39-year-old female on Oxycontin, Oxycodone Hydrochloride developed drug dependence, impaired quality of life, unevaluable event.",
    "missing_information": [
     "dose"
    ]
@@ -4311,16 +4363,16 @@
    "patient": {
     "identifiable": true,
     "initials": null,
-    "age": 52,
+    "age": 60,
     "sex": "F",
     "evidence": [
      {
-      "quote": "James Patel",
+      "quote": "Olu Lee",
       "start": null,
       "end": null
      },
      {
-      "quote": "52-year-old",
+      "quote": "60-year-old",
       "start": null,
       "end": null
      },
@@ -4333,12 +4385,12 @@
    },
    "reporter": {
     "identifiable": true,
-    "name": "Priya Brown",
+    "name": "Priya Haddad",
     "qualification": "consumer",
-    "contact": "(445) 555-7034",
+    "contact": "(610) 555-8304",
     "evidence": [
      {
-      "quote": "Priya Brown",
+      "quote": "Priya Haddad",
       "start": null,
       "end": null
      }
@@ -4375,7 +4427,7 @@
    "reactions": [
     {
      "term": "drug dependence",
-     "onset_date": "2026-10-01",
+     "onset_date": "2026-09-27",
      "outcome": "unknown",
      "evidence": [
       {
@@ -4387,7 +4439,7 @@
     },
     {
      "term": "learning disorder",
-     "onset_date": "2026-10-01",
+     "onset_date": "2026-09-27",
      "outcome": "unknown",
      "evidence": [
       {
@@ -4399,7 +4451,7 @@
     },
     {
      "term": "memory impairment",
-     "onset_date": "2026-10-01",
+     "onset_date": "2026-09-27",
      "outcome": "unknown",
      "evidence": [
       {
@@ -4425,8 +4477,8 @@
      }
     ]
    },
-   "event_date": "2026-10-01",
-   "summary": "James Patel 52-year-old female on Oxycontin, Acetaminophen\\Oxycodone Hydrochloride\\Oxycodone Terephthalate developed drug dependence, learning disorder, memory impairment.",
+   "event_date": "2026-09-27",
+   "summary": "Olu Lee 60-year-old female on Oxycontin, Acetaminophen\\Oxycodone Hydrochloride\\Oxycodone Terephthalate developed drug dependence, learning disorder, memory impairment.",
    "missing_information": [
     "dose"
    ]
@@ -4442,34 +4494,24 @@
    "is_followup": false,
    "followup_reference": null,
    "patient": {
+    "identifiable": false,
+    "initials": null,
+    "age": null,
+    "sex": "unknown",
+    "evidence": []
+   },
+   "reporter": {
     "identifiable": true,
-    "initials": "L.B.",
-    "age": 37,
-    "sex": "F",
+    "name": "Daniel Khan",
+    "qualification": "consumer",
+    "contact": "daniel.khan@health.com",
     "evidence": [
      {
-      "quote": "patient L.B.",
-      "start": null,
-      "end": null
-     },
-     {
-      "quote": "37-year-old",
-      "start": null,
-      "end": null
-     },
-     {
-      "quote": "female",
+      "quote": "Daniel Khan",
       "start": null,
       "end": null
      }
     ]
-   },
-   "reporter": {
-    "identifiable": false,
-    "name": null,
-    "qualification": "unknown",
-    "contact": null,
-    "evidence": []
    },
    "drugs": [
     {
@@ -4502,7 +4544,7 @@
    "reactions": [
     {
      "term": "accidental overdose",
-     "onset_date": "2012-01-03",
+     "onset_date": "2026-09-26",
      "outcome": "fatal",
      "evidence": [
       {
@@ -4522,21 +4564,21 @@
     "other_medically_important": true,
     "evidence": [
      {
-      "quote": "Unfortunately the patient passed away.",
+      "quote": "The patient died.",
       "start": null,
       "end": null
      }
     ]
    },
-   "event_date": "2012-01-03",
-   "summary": "patient L.B. 37-year-old female on Dilaudid, Fentanyl developed accidental overdose.",
+   "event_date": "2026-09-26",
+   "summary": "a patient on Dilaudid, Fentanyl developed accidental overdose.",
    "missing_information": [
-    "reporter identity",
+    "patient identifier",
     "dose"
    ]
   },
   "truth_case": "23353656",
-  "variant": "no_reporter",
+  "variant": "no_patient",
   "duplicate_of": null,
   "followup_of": null
  },
@@ -4544,7 +4586,168 @@
   "extraction": {
    "language": "en",
    "is_followup": true,
-   "followup_reference": "case reference MSG-0033",
+   "followup_reference": "my report from Sunday about the patient on Dilaudid, Fentanyl",
+   "patient": {
+    "identifiable": true,
+    "initials": "S.A.",
+    "age": 81,
+    "sex": "F",
+    "evidence": [
+     {
+      "quote": "initials S.A.",
+      "start": null,
+      "end": null
+     }
+    ]
+   },
+   "reporter": {
+    "identifiable": false,
+    "name": null,
+    "qualification": "unknown",
+    "contact": null,
+    "evidence": []
+   },
+   "drugs": [],
+   "reactions": [],
+   "seriousness": {
+    "death": false,
+    "life_threatening": false,
+    "hospitalization": false,
+    "disability": false,
+    "congenital_anomaly": false,
+    "other_medically_important": false,
+    "evidence": []
+   },
+   "event_date": null,
+   "summary": "Reporter supplies the patient identifier for an earlier report.",
+   "missing_information": []
+  },
+  "truth_case": "23353656",
+  "variant": "followup",
+  "duplicate_of": null,
+  "followup_of": "MSG-0033"
+ },
+ "MSG-0034": {
+  "extraction": {
+   "language": "en",
+   "is_followup": false,
+   "followup_reference": null,
+   "patient": {
+    "identifiable": true,
+    "initials": "K.E.",
+    "age": 38,
+    "sex": "M",
+    "evidence": [
+     {
+      "quote": "patient K.E.",
+      "start": null,
+      "end": null
+     },
+     {
+      "quote": "38-year-old",
+      "start": null,
+      "end": null
+     },
+     {
+      "quote": "male",
+      "start": null,
+      "end": null
+     }
+    ]
+   },
+   "reporter": {
+    "identifiable": false,
+    "name": null,
+    "qualification": "unknown",
+    "contact": null,
+    "evidence": []
+   },
+   "drugs": [
+    {
+     "name": "Oxycontin",
+     "role": "suspect",
+     "dose": null,
+     "start_date": null,
+     "evidence": [
+      {
+       "quote": "Oxycontin",
+       "start": null,
+       "end": null
+      }
+     ]
+    },
+    {
+     "name": "Oxycodone Hydrochloride",
+     "role": "suspect",
+     "dose": null,
+     "start_date": null,
+     "evidence": [
+      {
+       "quote": "Oxycodone Hydrochloride",
+       "start": null,
+       "end": null
+      }
+     ]
+    }
+   ],
+   "reactions": [
+    {
+     "term": "drug dependence",
+     "onset_date": "2026-08-26",
+     "outcome": "unknown",
+     "evidence": [
+      {
+       "quote": "drug dependence",
+       "start": null,
+       "end": null
+      }
+     ]
+    },
+    {
+     "term": "depressed mood",
+     "onset_date": "2026-08-26",
+     "outcome": "unknown",
+     "evidence": [
+      {
+       "quote": "depressed mood",
+       "start": null,
+       "end": null
+      }
+     ]
+    }
+   ],
+   "seriousness": {
+    "death": false,
+    "life_threatening": false,
+    "hospitalization": false,
+    "disability": false,
+    "congenital_anomaly": false,
+    "other_medically_important": true,
+    "evidence": [
+     {
+      "quote": "The treating physician considered this medically significant.",
+      "start": null,
+      "end": null
+     }
+    ]
+   },
+   "event_date": "2026-08-26",
+   "summary": "patient K.E. 38-year-old male on Oxycontin, Oxycodone Hydrochloride developed drug dependence, depressed mood.",
+   "missing_information": [
+    "reporter identity",
+    "dose"
+   ]
+  },
+  "truth_case": "23353658",
+  "variant": "no_reporter",
+  "duplicate_of": null,
+  "followup_of": null
+ },
+ "MSG-0034-FU": {
+  "extraction": {
+   "language": "en",
+   "is_followup": true,
+   "followup_reference": "the Oxycontin, Oxycodone Hydrochloride report I sent earlier",
    "patient": {
     "identifiable": false,
     "initials": null,
@@ -4554,12 +4757,12 @@
    },
    "reporter": {
     "identifiable": true,
-    "name": "Tom Garcia",
+    "name": "Olu Novak",
     "qualification": "consumer",
-    "contact": "tom.garcia@gmail.org",
+    "contact": "olu.novak@health.net",
     "evidence": [
      {
-      "quote": "Tom Garcia",
+      "quote": "Olu Novak",
       "start": null,
       "end": null
      }
@@ -4580,252 +4783,10 @@
    "summary": "Reporter supplies their identity for an earlier report.",
    "missing_information": []
   },
-  "truth_case": "23353656",
+  "truth_case": "23353658",
   "variant": "followup",
   "duplicate_of": null,
-  "followup_of": "MSG-0033"
- },
- "MSG-0034": {
-  "extraction": {
-   "language": "en",
-   "is_followup": false,
-   "followup_reference": null,
-   "patient": {
-    "identifiable": true,
-    "initials": null,
-    "age": 78,
-    "sex": "M",
-    "evidence": [
-     {
-      "quote": "Hana Khan",
-      "start": null,
-      "end": null
-     },
-     {
-      "quote": "78-year-old",
-      "start": null,
-      "end": null
-     },
-     {
-      "quote": "male",
-      "start": null,
-      "end": null
-     }
-    ]
-   },
-   "reporter": {
-    "identifiable": true,
-    "name": "Priya Okafor",
-    "qualification": "consumer",
-    "contact": "priya.okafor@health.net",
-    "evidence": [
-     {
-      "quote": "Priya Okafor",
-      "start": null,
-      "end": null
-     }
-    ]
-   },
-   "drugs": [
-    {
-     "name": "Oxycontin",
-     "role": "suspect",
-     "dose": null,
-     "start_date": null,
-     "evidence": [
-      {
-       "quote": "Oxycontin",
-       "start": null,
-       "end": null
-      }
-     ]
-    },
-    {
-     "name": "Oxycodone Hydrochloride",
-     "role": "suspect",
-     "dose": null,
-     "start_date": null,
-     "evidence": [
-      {
-       "quote": "Oxycodone Hydrochloride",
-       "start": null,
-       "end": null
-      }
-     ]
-    }
-   ],
-   "reactions": [
-    {
-     "term": "drug dependence",
-     "onset_date": "2026-09-23",
-     "outcome": "unknown",
-     "evidence": [
-      {
-       "quote": "drug dependence",
-       "start": null,
-       "end": null
-      }
-     ]
-    },
-    {
-     "term": "depressed mood",
-     "onset_date": "2026-09-23",
-     "outcome": "unknown",
-     "evidence": [
-      {
-       "quote": "depressed mood",
-       "start": null,
-       "end": null
-      }
-     ]
-    }
-   ],
-   "seriousness": {
-    "death": false,
-    "life_threatening": false,
-    "hospitalization": false,
-    "disability": false,
-    "congenital_anomaly": false,
-    "other_medically_important": true,
-    "evidence": [
-     {
-      "quote": "The treating physician considered this medically significant.",
-      "start": null,
-      "end": null
-     }
-    ]
-   },
-   "event_date": "2026-09-23",
-   "summary": "Hana Khan 78-year-old male on Oxycontin, Oxycodone Hydrochloride developed drug dependence, depressed mood.",
-   "missing_information": [
-    "dose"
-   ]
-  },
-  "truth_case": "23353658",
-  "variant": "complete",
-  "duplicate_of": null,
-  "followup_of": null
- },
- "MSG-0034-DUP": {
-  "extraction": {
-   "language": "en",
-   "is_followup": false,
-   "followup_reference": null,
-   "patient": {
-    "identifiable": true,
-    "initials": "P.S.",
-    "age": 77,
-    "sex": "M",
-    "evidence": [
-     {
-      "quote": "patient P.S.",
-      "start": null,
-      "end": null
-     },
-     {
-      "quote": "77-year-old",
-      "start": null,
-      "end": null
-     },
-     {
-      "quote": "male",
-      "start": null,
-      "end": null
-     }
-    ]
-   },
-   "reporter": {
-    "identifiable": true,
-    "name": "Dr. Daniel Okafor",
-    "qualification": "physician",
-    "contact": "danielokafor@mail.com",
-    "evidence": [
-     {
-      "quote": "Dr. Daniel Okafor",
-      "start": null,
-      "end": null
-     }
-    ]
-   },
-   "drugs": [
-    {
-     "name": "Oxycontin",
-     "role": "suspect",
-     "dose": null,
-     "start_date": null,
-     "evidence": [
-      {
-       "quote": "Oxycontin",
-       "start": null,
-       "end": null
-      }
-     ]
-    },
-    {
-     "name": "Oxycodone Hydrochloride",
-     "role": "suspect",
-     "dose": null,
-     "start_date": null,
-     "evidence": [
-      {
-       "quote": "Oxycodone Hydrochloride",
-       "start": null,
-       "end": null
-      }
-     ]
-    }
-   ],
-   "reactions": [
-    {
-     "term": "drug dependence",
-     "onset_date": "2026-09-27",
-     "outcome": "unknown",
-     "evidence": [
-      {
-       "quote": "drug dependence",
-       "start": null,
-       "end": null
-      }
-     ]
-    },
-    {
-     "term": "depressed mood",
-     "onset_date": "2026-09-27",
-     "outcome": "unknown",
-     "evidence": [
-      {
-       "quote": "depressed mood",
-       "start": null,
-       "end": null
-      }
-     ]
-    }
-   ],
-   "seriousness": {
-    "death": false,
-    "life_threatening": false,
-    "hospitalization": false,
-    "disability": false,
-    "congenital_anomaly": false,
-    "other_medically_important": true,
-    "evidence": [
-     {
-      "quote": "The treating physician considered this medically significant.",
-      "start": null,
-      "end": null
-     }
-    ]
-   },
-   "event_date": "2026-09-27",
-   "summary": "patient P.S. 77-year-old male on Oxycontin, Oxycodone Hydrochloride developed drug dependence, depressed mood.",
-   "missing_information": [
-    "dose"
-   ]
-  },
-  "truth_case": "23353658",
-  "variant": "duplicate",
-  "duplicate_of": "MSG-0034",
-  "followup_of": null
+  "followup_of": "MSG-0034"
  },
  "MSG-0035": {
   "extraction": {
@@ -4834,17 +4795,17 @@
    "followup_reference": null,
    "patient": {
     "identifiable": true,
-    "initials": null,
-    "age": 57,
+    "initials": "K.R.",
+    "age": 24,
     "sex": "M",
     "evidence": [
      {
-      "quote": "Wei Silva",
+      "quote": "patient K.R.",
       "start": null,
       "end": null
      },
      {
-      "quote": "57-year-old",
+      "quote": "24-year-old",
       "start": null,
       "end": null
      },
@@ -4856,17 +4817,11 @@
     ]
    },
    "reporter": {
-    "identifiable": true,
-    "name": "Hana Lee",
-    "qualification": "consumer",
-    "contact": "hana.lee@gmail.com",
-    "evidence": [
-     {
-      "quote": "Hana Lee",
-      "start": null,
-      "end": null
-     }
-    ]
+    "identifiable": false,
+    "name": null,
+    "qualification": "unknown",
+    "contact": null,
+    "evidence": []
    },
    "drugs": [
     {
@@ -4886,7 +4841,7 @@
    "reactions": [
     {
      "term": "overdose",
-     "onset_date": "2026-09-16",
+     "onset_date": "2026-09-15",
      "outcome": "unknown",
      "evidence": [
       {
@@ -4898,7 +4853,7 @@
     },
     {
      "term": "drug dependence",
-     "onset_date": "2026-09-16",
+     "onset_date": "2026-09-15",
      "outcome": "unknown",
      "evidence": [
       {
@@ -4924,124 +4879,62 @@
      }
     ]
    },
-   "event_date": "2026-09-16",
-   "summary": "Wei Silva 57-year-old male on Oxycontin developed overdose, drug dependence.",
+   "event_date": "2026-09-15",
+   "summary": "patient K.R. 24-year-old male on Oxycontin developed overdose, drug dependence.",
    "missing_information": [
+    "reporter identity",
     "dose"
    ]
   },
   "truth_case": "23353659",
-  "variant": "complete",
+  "variant": "no_reporter",
   "duplicate_of": null,
   "followup_of": null
  },
- "MSG-0035-DUP": {
+ "MSG-0035-FU": {
   "extraction": {
    "language": "en",
-   "is_followup": false,
-   "followup_reference": null,
+   "is_followup": true,
+   "followup_reference": "the Oxycontin report I sent earlier",
    "patient": {
-    "identifiable": true,
-    "initials": "N.J.",
-    "age": 56,
-    "sex": "M",
-    "evidence": [
-     {
-      "quote": "patient N.J.",
-      "start": null,
-      "end": null
-     },
-     {
-      "quote": "56-year-old",
-      "start": null,
-      "end": null
-     },
-     {
-      "quote": "male",
-      "start": null,
-      "end": null
-     }
-    ]
+    "identifiable": false,
+    "initials": null,
+    "age": null,
+    "sex": "unknown",
+    "evidence": []
    },
    "reporter": {
     "identifiable": true,
-    "name": "Dr. Wei Khan",
-    "qualification": "physician",
-    "contact": "weikhan@clinic.com",
+    "name": "Maria Brown",
+    "qualification": "consumer",
+    "contact": "maria.brown@hospital.com",
     "evidence": [
      {
-      "quote": "Dr. Wei Khan",
+      "quote": "Maria Brown",
       "start": null,
       "end": null
      }
     ]
    },
-   "drugs": [
-    {
-     "name": "Oxycontin",
-     "role": "suspect",
-     "dose": null,
-     "start_date": null,
-     "evidence": [
-      {
-       "quote": "Oxycontin",
-       "start": null,
-       "end": null
-      }
-     ]
-    }
-   ],
-   "reactions": [
-    {
-     "term": "overdose",
-     "onset_date": "2026-09-02",
-     "outcome": "unknown",
-     "evidence": [
-      {
-       "quote": "overdose",
-       "start": null,
-       "end": null
-      }
-     ]
-    },
-    {
-     "term": "drug dependence",
-     "onset_date": "2026-09-02",
-     "outcome": "unknown",
-     "evidence": [
-      {
-       "quote": "drug dependence",
-       "start": null,
-       "end": null
-      }
-     ]
-    }
-   ],
+   "drugs": [],
+   "reactions": [],
    "seriousness": {
     "death": false,
     "life_threatening": false,
     "hospitalization": false,
     "disability": false,
     "congenital_anomaly": false,
-    "other_medically_important": true,
-    "evidence": [
-     {
-      "quote": "The treating physician considered this medically significant.",
-      "start": null,
-      "end": null
-     }
-    ]
+    "other_medically_important": false,
+    "evidence": []
    },
-   "event_date": "2026-09-02",
-   "summary": "patient N.J. 56-year-old male on Oxycontin developed overdose, drug dependence.",
-   "missing_information": [
-    "dose"
-   ]
+   "event_date": null,
+   "summary": "Reporter supplies their identity for an earlier report.",
+   "missing_information": []
   },
   "truth_case": "23353659",
-  "variant": "duplicate",
-  "duplicate_of": "MSG-0035",
-  "followup_of": null
+  "variant": "followup",
+  "duplicate_of": null,
+  "followup_of": "MSG-0035"
  },
  "MSG-0036": {
   "extraction": {
@@ -5050,17 +4943,17 @@
    "followup_reference": null,
    "patient": {
     "identifiable": true,
-    "initials": "M.N.",
-    "age": 45,
+    "initials": "J.H.",
+    "age": 65,
     "sex": "M",
     "evidence": [
      {
-      "quote": "patient M.N.",
+      "quote": "patient J.H.",
       "start": null,
       "end": null
      },
      {
-      "quote": "45-year-old",
+      "quote": "65-year-old",
       "start": null,
       "end": null
      },
@@ -5073,12 +4966,12 @@
    },
    "reporter": {
     "identifiable": true,
-    "name": "Sofia Rossi",
+    "name": "Tom Nguyen",
     "qualification": "consumer",
-    "contact": "(708) 555-4283",
+    "contact": "(235) 555-6538",
     "evidence": [
      {
-      "quote": "Sofia Rossi",
+      "quote": "Tom Nguyen",
       "start": null,
       "end": null
      }
@@ -5128,7 +5021,7 @@
    "reactions": [
     {
      "term": "drug dependence",
-     "onset_date": "2026-09-04",
+     "onset_date": "2026-10-04",
      "outcome": "unknown",
      "evidence": [
       {
@@ -5140,7 +5033,7 @@
     },
     {
      "term": "drug withdrawal syndrome",
-     "onset_date": "2026-09-04",
+     "onset_date": "2026-10-04",
      "outcome": "recovered",
      "evidence": [
       {
@@ -5166,8 +5059,8 @@
      }
     ]
    },
-   "event_date": "2026-09-04",
-   "summary": "patient M.N. 45-year-old male on Oxycontin, Dilaudid, Hydrocodone Bitartrate And Acetaminophen developed drug dependence, drug withdrawal syndrome.",
+   "event_date": "2026-10-04",
+   "summary": "patient J.H. 65-year-old male on Oxycontin, Dilaudid, Hydrocodone Bitartrate And Acetaminophen developed drug dependence, drug withdrawal syndrome.",
    "missing_information": [
     "dose"
    ]
@@ -5175,140 +5068,6 @@
   "truth_case": "23353660",
   "variant": "complete",
   "duplicate_of": null,
-  "followup_of": null
- },
- "MSG-0036-DUP": {
-  "extraction": {
-   "language": "en",
-   "is_followup": false,
-   "followup_reference": null,
-   "patient": {
-    "identifiable": true,
-    "initials": "M.N.",
-    "age": 44,
-    "sex": "M",
-    "evidence": [
-     {
-      "quote": "patient M.N.",
-      "start": null,
-      "end": null
-     },
-     {
-      "quote": "44-year-old",
-      "start": null,
-      "end": null
-     },
-     {
-      "quote": "male",
-      "start": null,
-      "end": null
-     }
-    ]
-   },
-   "reporter": {
-    "identifiable": true,
-    "name": "Dr. Hana Khan",
-    "qualification": "physician",
-    "contact": "hanakhan@mail.com",
-    "evidence": [
-     {
-      "quote": "Dr. Hana Khan",
-      "start": null,
-      "end": null
-     }
-    ]
-   },
-   "drugs": [
-    {
-     "name": "Oxycontin",
-     "role": "suspect",
-     "dose": null,
-     "start_date": null,
-     "evidence": [
-      {
-       "quote": "Oxycontin",
-       "start": null,
-       "end": null
-      }
-     ]
-    },
-    {
-     "name": "Dilaudid",
-     "role": "suspect",
-     "dose": null,
-     "start_date": null,
-     "evidence": [
-      {
-       "quote": "Dilaudid",
-       "start": null,
-       "end": null
-      }
-     ]
-    },
-    {
-     "name": "Hydrocodone Bitartrate And Acetaminophen",
-     "role": "suspect",
-     "dose": null,
-     "start_date": null,
-     "evidence": [
-      {
-       "quote": "Hydrocodone Bitartrate And Acetaminophen",
-       "start": null,
-       "end": null
-      }
-     ]
-    }
-   ],
-   "reactions": [
-    {
-     "term": "drug dependence",
-     "onset_date": "2026-09-26",
-     "outcome": "unknown",
-     "evidence": [
-      {
-       "quote": "drug dependence",
-       "start": null,
-       "end": null
-      }
-     ]
-    },
-    {
-     "term": "drug withdrawal syndrome",
-     "onset_date": "2026-09-26",
-     "outcome": "recovered",
-     "evidence": [
-      {
-       "quote": "drug withdrawal syndrome",
-       "start": null,
-       "end": null
-      }
-     ]
-    }
-   ],
-   "seriousness": {
-    "death": false,
-    "life_threatening": false,
-    "hospitalization": false,
-    "disability": false,
-    "congenital_anomaly": false,
-    "other_medically_important": true,
-    "evidence": [
-     {
-      "quote": "The treating physician considered this medically significant.",
-      "start": null,
-      "end": null
-     }
-    ]
-   },
-   "event_date": "2026-09-26",
-   "summary": "patient M.N. 44-year-old male on Oxycontin, Dilaudid, Hydrocodone Bitartrate And Acetaminophen developed drug dependence, drug withdrawal syndrome.",
-   "missing_information": [
-    "dose"
-   ]
-  },
-  "truth_case": "23353660",
-  "variant": "duplicate",
-  "duplicate_of": "MSG-0036",
   "followup_of": null
  },
  "MSG-0037": {
@@ -5319,16 +5078,16 @@
    "patient": {
     "identifiable": true,
     "initials": null,
-    "age": 37,
+    "age": 86,
     "sex": "F",
     "evidence": [
      {
-      "quote": "Maria Novak",
+      "quote": "Grace Lee",
       "start": null,
       "end": null
      },
      {
-      "quote": "37-year-old",
+      "quote": "86-year-old",
       "start": null,
       "end": null
      },
@@ -5341,12 +5100,12 @@
    },
    "reporter": {
     "identifiable": true,
-    "name": "Maria Silva",
+    "name": "Wei Garcia",
     "qualification": "consumer",
-    "contact": "maria.silva@health.com",
+    "contact": "wei.garcia@gmail.org",
     "evidence": [
      {
-      "quote": "Maria Silva",
+      "quote": "Wei Garcia",
       "start": null,
       "end": null
      }
@@ -5370,7 +5129,7 @@
    "reactions": [
     {
      "term": "overdose",
-     "onset_date": "2026-08-20",
+     "onset_date": "2026-09-30",
      "outcome": "unknown",
      "evidence": [
       {
@@ -5382,7 +5141,7 @@
     },
     {
      "term": "drug dependence",
-     "onset_date": "2026-08-20",
+     "onset_date": "2026-09-30",
      "outcome": "unknown",
      "evidence": [
       {
@@ -5408,8 +5167,8 @@
      }
     ]
    },
-   "event_date": "2026-08-20",
-   "summary": "Maria Novak 37-year-old female on Oxycontin developed overdose, drug dependence.",
+   "event_date": "2026-09-30",
+   "summary": "Grace Lee 86-year-old female on Oxycontin developed overdose, drug dependence.",
    "missing_information": [
     "dose"
    ]
@@ -5419,114 +5178,6 @@
   "duplicate_of": null,
   "followup_of": null
  },
- "MSG-0037-DUP": {
-  "extraction": {
-   "language": "en",
-   "is_followup": false,
-   "followup_reference": null,
-   "patient": {
-    "identifiable": true,
-    "initials": "E.P.",
-    "age": 37,
-    "sex": "F",
-    "evidence": [
-     {
-      "quote": "patient E.P.",
-      "start": null,
-      "end": null
-     },
-     {
-      "quote": "37-year-old",
-      "start": null,
-      "end": null
-     },
-     {
-      "quote": "female",
-      "start": null,
-      "end": null
-     }
-    ]
-   },
-   "reporter": {
-    "identifiable": true,
-    "name": "Dr. Olu Novak",
-    "qualification": "physician",
-    "contact": "olunovak@clinic.com",
-    "evidence": [
-     {
-      "quote": "Dr. Olu Novak",
-      "start": null,
-      "end": null
-     }
-    ]
-   },
-   "drugs": [
-    {
-     "name": "Oxycontin",
-     "role": "suspect",
-     "dose": null,
-     "start_date": null,
-     "evidence": [
-      {
-       "quote": "Oxycontin",
-       "start": null,
-       "end": null
-      }
-     ]
-    }
-   ],
-   "reactions": [
-    {
-     "term": "overdose",
-     "onset_date": "2026-09-08",
-     "outcome": "unknown",
-     "evidence": [
-      {
-       "quote": "overdose",
-       "start": null,
-       "end": null
-      }
-     ]
-    },
-    {
-     "term": "drug dependence",
-     "onset_date": "2026-09-08",
-     "outcome": "unknown",
-     "evidence": [
-      {
-       "quote": "drug dependence",
-       "start": null,
-       "end": null
-      }
-     ]
-    }
-   ],
-   "seriousness": {
-    "death": false,
-    "life_threatening": false,
-    "hospitalization": false,
-    "disability": false,
-    "congenital_anomaly": false,
-    "other_medically_important": true,
-    "evidence": [
-     {
-      "quote": "The treating physician considered this medically significant.",
-      "start": null,
-      "end": null
-     }
-    ]
-   },
-   "event_date": "2026-09-08",
-   "summary": "patient E.P. 37-year-old female on Oxycontin developed overdose, drug dependence.",
-   "missing_information": [
-    "dose"
-   ]
-  },
-  "truth_case": "23353661",
-  "variant": "duplicate",
-  "duplicate_of": "MSG-0037",
-  "followup_of": null
- },
  "MSG-0038": {
   "extraction": {
    "language": "en",
@@ -5534,12 +5185,12 @@
    "followup_reference": null,
    "patient": {
     "identifiable": true,
-    "initials": "G.N.",
+    "initials": null,
     "age": 55,
     "sex": "M",
     "evidence": [
      {
-      "quote": "patient G.N.",
+      "quote": "Sofia Okafor",
       "start": null,
       "end": null
      },
@@ -5557,12 +5208,12 @@
    },
    "reporter": {
     "identifiable": true,
-    "name": "James Brown",
+    "name": "Hana Patel",
     "qualification": "consumer",
-    "contact": "james.brown@health.org",
+    "contact": "hana.patel@health.net",
     "evidence": [
      {
-      "quote": "James Brown",
+      "quote": "Hana Patel",
       "start": null,
       "end": null
      }
@@ -5599,7 +5250,7 @@
    "reactions": [
     {
      "term": "drug dependence",
-     "onset_date": "2026-08-30",
+     "onset_date": "2026-09-24",
      "outcome": "unknown",
      "evidence": [
       {
@@ -5611,7 +5262,7 @@
     },
     {
      "term": "loss of personal independence in daily activities",
-     "onset_date": "2026-08-30",
+     "onset_date": "2026-09-24",
      "outcome": "unknown",
      "evidence": [
       {
@@ -5623,7 +5274,7 @@
     },
     {
      "term": "impaired quality of life",
-     "onset_date": "2026-08-30",
+     "onset_date": "2026-09-24",
      "outcome": "unknown",
      "evidence": [
       {
@@ -5649,8 +5300,8 @@
      }
     ]
    },
-   "event_date": "2026-08-30",
-   "summary": "patient G.N. 55-year-old male on Oxycontin, Oxycodone Hydrochloride developed drug dependence, loss of personal independence in daily activities, impaired quality of life.",
+   "event_date": "2026-09-24",
+   "summary": "Sofia Okafor 55-year-old male on Oxycontin, Oxycodone Hydrochloride developed drug dependence, loss of personal independence in daily activities, impaired quality of life.",
    "missing_information": [
     "dose"
    ]
@@ -5660,139 +5311,6 @@
   "duplicate_of": null,
   "followup_of": null
  },
- "MSG-0038-DUP": {
-  "extraction": {
-   "language": "en",
-   "is_followup": false,
-   "followup_reference": null,
-   "patient": {
-    "identifiable": true,
-    "initials": "G.N.",
-    "age": 54,
-    "sex": "M",
-    "evidence": [
-     {
-      "quote": "patient G.N.",
-      "start": null,
-      "end": null
-     },
-     {
-      "quote": "54-year-old",
-      "start": null,
-      "end": null
-     },
-     {
-      "quote": "male",
-      "start": null,
-      "end": null
-     }
-    ]
-   },
-   "reporter": {
-    "identifiable": true,
-    "name": "Dr. Tom Lee",
-    "qualification": "physician",
-    "contact": "tomlee@clinic.com",
-    "evidence": [
-     {
-      "quote": "Dr. Tom Lee",
-      "start": null,
-      "end": null
-     }
-    ]
-   },
-   "drugs": [
-    {
-     "name": "Oxycontin",
-     "role": "suspect",
-     "dose": null,
-     "start_date": null,
-     "evidence": [
-      {
-       "quote": "Oxycontin",
-       "start": null,
-       "end": null
-      }
-     ]
-    },
-    {
-     "name": "Oxycodone Hydrochloride",
-     "role": "suspect",
-     "dose": null,
-     "start_date": null,
-     "evidence": [
-      {
-       "quote": "Oxycodone Hydrochloride",
-       "start": null,
-       "end": null
-      }
-     ]
-    }
-   ],
-   "reactions": [
-    {
-     "term": "drug dependence",
-     "onset_date": "2026-09-07",
-     "outcome": "unknown",
-     "evidence": [
-      {
-       "quote": "drug dependence",
-       "start": null,
-       "end": null
-      }
-     ]
-    },
-    {
-     "term": "loss of personal independence in daily activities",
-     "onset_date": "2026-09-07",
-     "outcome": "unknown",
-     "evidence": [
-      {
-       "quote": "loss of personal independence in daily activities",
-       "start": null,
-       "end": null
-      }
-     ]
-    },
-    {
-     "term": "impaired quality of life",
-     "onset_date": "2026-09-07",
-     "outcome": "unknown",
-     "evidence": [
-      {
-       "quote": "impaired quality of life",
-       "start": null,
-       "end": null
-      }
-     ]
-    }
-   ],
-   "seriousness": {
-    "death": false,
-    "life_threatening": false,
-    "hospitalization": false,
-    "disability": false,
-    "congenital_anomaly": false,
-    "other_medically_important": true,
-    "evidence": [
-     {
-      "quote": "The treating physician considered this medically significant.",
-      "start": null,
-      "end": null
-     }
-    ]
-   },
-   "event_date": "2026-09-07",
-   "summary": "patient G.N. 54-year-old male on Oxycontin, Oxycodone Hydrochloride developed drug dependence, loss of personal independence in daily activities, impaired quality of life.",
-   "missing_information": [
-    "dose"
-   ]
-  },
-  "truth_case": "23353664",
-  "variant": "duplicate",
-  "duplicate_of": "MSG-0038",
-  "followup_of": null
- },
  "MSG-0039": {
   "extraction": {
    "language": "en",
@@ -5800,17 +5318,17 @@
    "followup_reference": null,
    "patient": {
     "identifiable": true,
-    "initials": "B.J.",
-    "age": 41,
+    "initials": null,
+    "age": 48,
     "sex": "M",
     "evidence": [
      {
-      "quote": "patient B.J.",
+      "quote": "Priya Nguyen",
       "start": null,
       "end": null
      },
      {
-      "quote": "41-year-old",
+      "quote": "48-year-old",
       "start": null,
       "end": null
      },
@@ -5823,12 +5341,12 @@
    },
    "reporter": {
     "identifiable": true,
-    "name": "Elena Silva",
+    "name": "Amara Schmidt",
     "qualification": "consumer",
-    "contact": "elena.silva@gmail.com",
+    "contact": "amara.schmidt@gmail.org",
     "evidence": [
      {
-      "quote": "Elena Silva",
+      "quote": "Amara Schmidt",
       "start": null,
       "end": null
      }
@@ -5852,7 +5370,7 @@
    "reactions": [
     {
      "term": "overdose",
-     "onset_date": "2026-09-06",
+     "onset_date": "2026-09-05",
      "outcome": "unknown",
      "evidence": [
       {
@@ -5864,7 +5382,7 @@
     },
     {
      "term": "drug dependence",
-     "onset_date": "2026-09-06",
+     "onset_date": "2026-09-05",
      "outcome": "unknown",
      "evidence": [
       {
@@ -5890,8 +5408,8 @@
      }
     ]
    },
-   "event_date": "2026-09-06",
-   "summary": "patient B.J. 41-year-old male on Oxycontin developed overdose, drug dependence.",
+   "event_date": "2026-09-05",
+   "summary": "Priya Nguyen 48-year-old male on Oxycontin developed overdose, drug dependence.",
    "missing_information": [
     "dose"
    ]
@@ -5901,24 +5419,24 @@
   "duplicate_of": null,
   "followup_of": null
  },
- "MSG-0040": {
+ "MSG-0039-DUP": {
   "extraction": {
    "language": "en",
    "is_followup": false,
    "followup_reference": null,
    "patient": {
     "identifiable": true,
-    "initials": "A.K.",
-    "age": 32,
+    "initials": "L.R.",
+    "age": 48,
     "sex": "M",
     "evidence": [
      {
-      "quote": "patient A.K.",
+      "quote": "patient L.R.",
       "start": null,
       "end": null
      },
      {
-      "quote": "32-year-old",
+      "quote": "48-year-old",
       "start": null,
       "end": null
      },
@@ -5931,12 +5449,120 @@
    },
    "reporter": {
     "identifiable": true,
-    "name": "Grace Patel",
-    "qualification": "consumer",
-    "contact": "(528) 555-8549",
+    "name": "Dr. Sofia Khan",
+    "qualification": "physician",
+    "contact": "sofiakhan@mail.com",
     "evidence": [
      {
-      "quote": "Grace Patel",
+      "quote": "Dr. Sofia Khan",
+      "start": null,
+      "end": null
+     }
+    ]
+   },
+   "drugs": [
+    {
+     "name": "Oxycontin",
+     "role": "suspect",
+     "dose": null,
+     "start_date": null,
+     "evidence": [
+      {
+       "quote": "Oxycontin",
+       "start": null,
+       "end": null
+      }
+     ]
+    }
+   ],
+   "reactions": [
+    {
+     "term": "overdose",
+     "onset_date": "2026-09-30",
+     "outcome": "unknown",
+     "evidence": [
+      {
+       "quote": "overdose",
+       "start": null,
+       "end": null
+      }
+     ]
+    },
+    {
+     "term": "drug dependence",
+     "onset_date": "2026-09-30",
+     "outcome": "unknown",
+     "evidence": [
+      {
+       "quote": "drug dependence",
+       "start": null,
+       "end": null
+      }
+     ]
+    }
+   ],
+   "seriousness": {
+    "death": false,
+    "life_threatening": false,
+    "hospitalization": false,
+    "disability": false,
+    "congenital_anomaly": false,
+    "other_medically_important": true,
+    "evidence": [
+     {
+      "quote": "The treating physician considered this medically significant.",
+      "start": null,
+      "end": null
+     }
+    ]
+   },
+   "event_date": "2026-09-30",
+   "summary": "patient L.R. 48-year-old male on Oxycontin developed overdose, drug dependence.",
+   "missing_information": [
+    "dose"
+   ]
+  },
+  "truth_case": "23353666",
+  "variant": "duplicate",
+  "duplicate_of": "MSG-0039",
+  "followup_of": null
+ },
+ "MSG-0040": {
+  "extraction": {
+   "language": "en",
+   "is_followup": false,
+   "followup_reference": null,
+   "patient": {
+    "identifiable": true,
+    "initials": null,
+    "age": 75,
+    "sex": "M",
+    "evidence": [
+     {
+      "quote": "Maria Khan",
+      "start": null,
+      "end": null
+     },
+     {
+      "quote": "75-year-old",
+      "start": null,
+      "end": null
+     },
+     {
+      "quote": "male",
+      "start": null,
+      "end": null
+     }
+    ]
+   },
+   "reporter": {
+    "identifiable": true,
+    "name": "Olu Rossi",
+    "qualification": "consumer",
+    "contact": "(400) 555-2029",
+    "evidence": [
+     {
+      "quote": "Olu Rossi",
       "start": null,
       "end": null
      }
@@ -5986,7 +5612,7 @@
    "reactions": [
     {
      "term": "overdose",
-     "onset_date": "2026-08-20",
+     "onset_date": "2026-10-02",
      "outcome": "unknown",
      "evidence": [
       {
@@ -5998,7 +5624,7 @@
     },
     {
      "term": "drug dependence",
-     "onset_date": "2026-08-20",
+     "onset_date": "2026-10-02",
      "outcome": "unknown",
      "evidence": [
       {
@@ -6024,8 +5650,8 @@
      }
     ]
    },
-   "event_date": "2026-08-20",
-   "summary": "patient A.K. 32-year-old male on Oxycodone Hydrochloride, Hydrocodone Bitartrate, Acetaminophen\\Oxycodone Hydrochloride developed overdose, drug dependence.",
+   "event_date": "2026-10-02",
+   "summary": "Maria Khan 75-year-old male on Oxycodone Hydrochloride, Hydrocodone Bitartrate, Acetaminophen\\Oxycodone Hydrochloride developed overdose, drug dependence.",
    "missing_information": [
     "dose"
    ]
@@ -6041,36 +5667,20 @@
    "is_followup": false,
    "followup_reference": null,
    "patient": {
-    "identifiable": true,
-    "initials": "L.F.",
-    "age": 28,
-    "sex": "M",
-    "evidence": [
-     {
-      "quote": "patient L.F.",
-      "start": null,
-      "end": null
-     },
-     {
-      "quote": "28-year-old",
-      "start": null,
-      "end": null
-     },
-     {
-      "quote": "male",
-      "start": null,
-      "end": null
-     }
-    ]
+    "identifiable": false,
+    "initials": null,
+    "age": null,
+    "sex": "unknown",
+    "evidence": []
    },
    "reporter": {
     "identifiable": true,
-    "name": "Grace Brown",
+    "name": "Sofia Silva",
     "qualification": "consumer",
-    "contact": "grace.brown@gmail.net",
+    "contact": "(458) 555-8044",
     "evidence": [
      {
-      "quote": "Grace Brown",
+      "quote": "Sofia Silva",
       "start": null,
       "end": null
      }
@@ -6120,7 +5730,7 @@
    "reactions": [
     {
      "term": "drug dependence",
-     "onset_date": "2026-08-12",
+     "onset_date": "2026-10-03",
      "outcome": "unknown",
      "evidence": [
       {
@@ -6132,7 +5742,7 @@
     },
     {
      "term": "product prescribing issue",
-     "onset_date": "2026-08-12",
+     "onset_date": "2026-10-03",
      "outcome": "unknown",
      "evidence": [
       {
@@ -6158,16 +5768,62 @@
      }
     ]
    },
-   "event_date": "2026-08-12",
-   "summary": "patient L.F. 28-year-old male on Oxycontin, Oxycodone Hydrochloride, Buprenorphine developed drug dependence, product prescribing issue.",
+   "event_date": "2026-10-03",
+   "summary": "a patient on Oxycontin, Oxycodone Hydrochloride, Buprenorphine developed drug dependence, product prescribing issue.",
    "missing_information": [
+    "patient identifier",
     "dose"
    ]
   },
   "truth_case": "23353669",
-  "variant": "complete",
+  "variant": "no_patient",
   "duplicate_of": null,
   "followup_of": null
+ },
+ "MSG-0041-FU": {
+  "extraction": {
+   "language": "en",
+   "is_followup": true,
+   "followup_reference": "case reference MSG-0041",
+   "patient": {
+    "identifiable": true,
+    "initials": "C.A.",
+    "age": 43,
+    "sex": "M",
+    "evidence": [
+     {
+      "quote": "initials C.A.",
+      "start": null,
+      "end": null
+     }
+    ]
+   },
+   "reporter": {
+    "identifiable": false,
+    "name": null,
+    "qualification": "unknown",
+    "contact": null,
+    "evidence": []
+   },
+   "drugs": [],
+   "reactions": [],
+   "seriousness": {
+    "death": false,
+    "life_threatening": false,
+    "hospitalization": false,
+    "disability": false,
+    "congenital_anomaly": false,
+    "other_medically_important": false,
+    "evidence": []
+   },
+   "event_date": null,
+   "summary": "Reporter supplies the patient identifier for an earlier report.",
+   "missing_information": []
+  },
+  "truth_case": "23353669",
+  "variant": "followup",
+  "duplicate_of": null,
+  "followup_of": "MSG-0041"
  },
  "MSG-0042": {
   "extraction": {
@@ -6176,12 +5832,12 @@
    "followup_reference": null,
    "patient": {
     "identifiable": true,
-    "initials": "H.D.",
+    "initials": "R.M.",
     "age": 50,
     "sex": "M",
     "evidence": [
      {
-      "quote": "patient H.D.",
+      "quote": "patient R.M.",
       "start": null,
       "end": null
      },
@@ -6199,12 +5855,12 @@
    },
    "reporter": {
     "identifiable": true,
-    "name": "Dr. Hana Haddad",
+    "name": "Dr. Amara Schmidt",
     "qualification": "physician",
-    "contact": "(781) 555-5385",
+    "contact": "amara.schmidt@clinic.net",
     "evidence": [
      {
-      "quote": "Dr. Hana Haddad",
+      "quote": "Dr. Amara Schmidt",
       "start": null,
       "end": null
      }
@@ -6228,7 +5884,7 @@
    "reactions": [
     {
      "term": "obliterative bronchiolitis",
-     "onset_date": "2023-12-01",
+     "onset_date": "2026-08-28",
      "outcome": "recovering",
      "evidence": [
       {
@@ -6254,8 +5910,8 @@
      }
     ]
    },
-   "event_date": "2023-12-01",
-   "summary": "patient H.D. 50-year-old male on Venclexta developed obliterative bronchiolitis.",
+   "event_date": "2026-08-28",
+   "summary": "patient R.M. 50-year-old male on Venclexta developed obliterative bronchiolitis.",
    "missing_information": [
     "dose"
    ]
@@ -6272,12 +5928,12 @@
    "followup_reference": null,
    "patient": {
     "identifiable": true,
-    "initials": "L.C.",
+    "initials": "P.S.",
     "age": 70,
     "sex": "F",
     "evidence": [
      {
-      "quote": "patient L.C.",
+      "quote": "patient P.S.",
       "start": null,
       "end": null
      },
@@ -6295,12 +5951,12 @@
    },
    "reporter": {
     "identifiable": true,
-    "name": "Dr. Hana Lee",
+    "name": "Dr. Wei Nguyen",
     "qualification": "physician",
-    "contact": "hana.lee@hospital.net",
+    "contact": "(337) 555-7829",
     "evidence": [
      {
-      "quote": "Dr. Hana Lee",
+      "quote": "Dr. Wei Nguyen",
       "start": null,
       "end": null
      }
@@ -6324,7 +5980,7 @@
    "reactions": [
     {
      "term": "drug withdrawal syndrome",
-     "onset_date": "2023-12-26",
+     "onset_date": "2026-09-29",
      "outcome": "unknown",
      "evidence": [
       {
@@ -6336,7 +5992,7 @@
     },
     {
      "term": "product availability issue",
-     "onset_date": "2023-12-26",
+     "onset_date": "2026-09-29",
      "outcome": "unknown",
      "evidence": [
       {
@@ -6362,8 +6018,8 @@
      }
     ]
    },
-   "event_date": "2023-12-26",
-   "summary": "patient L.C. 70-year-old female on Oxycontin developed drug withdrawal syndrome, product availability issue.",
+   "event_date": "2026-09-29",
+   "summary": "patient P.S. 70-year-old female on Oxycontin developed drug withdrawal syndrome, product availability issue.",
    "missing_information": [
     "dose"
    ]
@@ -6373,114 +6029,6 @@
   "duplicate_of": null,
   "followup_of": null
  },
- "MSG-0043-DUP": {
-  "extraction": {
-   "language": "en",
-   "is_followup": false,
-   "followup_reference": null,
-   "patient": {
-    "identifiable": true,
-    "initials": "L.C.",
-    "age": 69,
-    "sex": "F",
-    "evidence": [
-     {
-      "quote": "patient L.C.",
-      "start": null,
-      "end": null
-     },
-     {
-      "quote": "69-year-old",
-      "start": null,
-      "end": null
-     },
-     {
-      "quote": "female",
-      "start": null,
-      "end": null
-     }
-    ]
-   },
-   "reporter": {
-    "identifiable": true,
-    "name": "Ahmed Lee",
-    "qualification": "consumer",
-    "contact": "ahmedlee@mail.com",
-    "evidence": [
-     {
-      "quote": "Ahmed Lee",
-      "start": null,
-      "end": null
-     }
-    ]
-   },
-   "drugs": [
-    {
-     "name": "Oxycontin",
-     "role": "suspect",
-     "dose": null,
-     "start_date": null,
-     "evidence": [
-      {
-       "quote": "Oxycontin",
-       "start": null,
-       "end": null
-      }
-     ]
-    }
-   ],
-   "reactions": [
-    {
-     "term": "drug withdrawal syndrome",
-     "onset_date": "2023-12-26",
-     "outcome": "unknown",
-     "evidence": [
-      {
-       "quote": "drug withdrawal syndrome",
-       "start": null,
-       "end": null
-      }
-     ]
-    },
-    {
-     "term": "product availability issue",
-     "onset_date": "2023-12-26",
-     "outcome": "unknown",
-     "evidence": [
-      {
-       "quote": "product availability issue",
-       "start": null,
-       "end": null
-      }
-     ]
-    }
-   ],
-   "seriousness": {
-    "death": false,
-    "life_threatening": false,
-    "hospitalization": false,
-    "disability": false,
-    "congenital_anomaly": false,
-    "other_medically_important": true,
-    "evidence": [
-     {
-      "quote": "The treating physician considered this medically significant.",
-      "start": null,
-      "end": null
-     }
-    ]
-   },
-   "event_date": "2023-12-26",
-   "summary": "patient L.C. 69-year-old female on Oxycontin developed drug withdrawal syndrome, product availability issue.",
-   "missing_information": [
-    "dose"
-   ]
-  },
-  "truth_case": "23353671",
-  "variant": "duplicate",
-  "duplicate_of": "MSG-0043",
-  "followup_of": null
- },
  "MSG-0044": {
   "extraction": {
    "language": "en",
@@ -6488,17 +6036,17 @@
    "followup_reference": null,
    "patient": {
     "identifiable": true,
-    "initials": "R.J.",
-    "age": 56,
+    "initials": null,
+    "age": 41,
     "sex": "M",
     "evidence": [
      {
-      "quote": "patient R.J.",
+      "quote": "Grace Lee",
       "start": null,
       "end": null
      },
      {
-      "quote": "56-year-old",
+      "quote": "41-year-old",
       "start": null,
       "end": null
      },
@@ -6560,7 +6108,7 @@
    "reactions": [
     {
      "term": "overdose",
-     "onset_date": "2026-09-26",
+     "onset_date": "2026-09-20",
      "outcome": "unknown",
      "evidence": [
       {
@@ -6572,7 +6120,7 @@
     },
     {
      "term": "drug dependence",
-     "onset_date": "2026-09-26",
+     "onset_date": "2026-09-20",
      "outcome": "unknown",
      "evidence": [
       {
@@ -6584,7 +6132,7 @@
     },
     {
      "term": "learning disability",
-     "onset_date": "2026-09-26",
+     "onset_date": "2026-09-20",
      "outcome": "unknown",
      "evidence": [
       {
@@ -6610,8 +6158,8 @@
      }
     ]
    },
-   "event_date": "2026-09-26",
-   "summary": "patient R.J. 56-year-old male on Oxycontin, Oxycodone Hydrochloride, Buprenorphine developed overdose, drug dependence, learning disability.",
+   "event_date": "2026-09-20",
+   "summary": "Grace Lee 41-year-old male on Oxycontin, Oxycodone Hydrochloride, Buprenorphine developed overdose, drug dependence, learning disability.",
    "missing_information": [
     "reporter identity",
     "dose"
@@ -6626,7 +6174,7 @@
   "extraction": {
    "language": "en",
    "is_followup": true,
-   "followup_reference": "the Oxycontin, Oxycodone Hydrochloride, Buprenorphine report I sent earlier",
+   "followup_reference": "my report from Wednesday about the patient on Oxycontin, Oxycodone Hydrochloride, Buprenorphine",
    "patient": {
     "identifiable": false,
     "initials": null,
@@ -6636,12 +6184,12 @@
    },
    "reporter": {
     "identifiable": true,
-    "name": "Amara Patel",
+    "name": "Elena Garcia",
     "qualification": "consumer",
-    "contact": "amara.patel@clinic.net",
+    "contact": "(489) 555-4084",
     "evidence": [
      {
-      "quote": "Amara Patel",
+      "quote": "Elena Garcia",
       "start": null,
       "end": null
      }
@@ -6674,17 +6222,17 @@
    "followup_reference": null,
    "patient": {
     "identifiable": true,
-    "initials": null,
-    "age": 82,
+    "initials": "H.R.",
+    "age": 30,
     "sex": "M",
     "evidence": [
      {
-      "quote": "Olu Schmidt",
+      "quote": "patient H.R.",
       "start": null,
       "end": null
      },
      {
-      "quote": "82-year-old",
+      "quote": "30-year-old",
       "start": null,
       "end": null
      },
@@ -6697,12 +6245,12 @@
    },
    "reporter": {
     "identifiable": true,
-    "name": "Wei Okafor",
+    "name": "Maria Khan",
     "qualification": "consumer",
-    "contact": "(409) 555-1515",
+    "contact": "maria.khan@hospital.org",
     "evidence": [
      {
-      "quote": "Wei Okafor",
+      "quote": "Maria Khan",
       "start": null,
       "end": null
      }
@@ -6726,7 +6274,7 @@
    "reactions": [
     {
      "term": "drug dependence",
-     "onset_date": "2026-09-30",
+     "onset_date": "2026-09-23",
      "outcome": "unknown",
      "evidence": [
       {
@@ -6738,7 +6286,7 @@
     },
     {
      "term": "pain",
-     "onset_date": "2026-09-30",
+     "onset_date": "2026-09-23",
      "outcome": "unknown",
      "evidence": [
       {
@@ -6750,7 +6298,7 @@
     },
     {
      "term": "impaired quality of life",
-     "onset_date": "2026-09-30",
+     "onset_date": "2026-09-23",
      "outcome": "unknown",
      "evidence": [
       {
@@ -6776,8 +6324,8 @@
      }
     ]
    },
-   "event_date": "2026-09-30",
-   "summary": "Olu Schmidt 82-year-old male on Oxycontin developed drug dependence, pain, impaired quality of life.",
+   "event_date": "2026-09-23",
+   "summary": "patient H.R. 30-year-old male on Oxycontin developed drug dependence, pain, impaired quality of life.",
    "missing_information": [
     "dose"
    ]
@@ -6794,17 +6342,17 @@
    "followup_reference": null,
    "patient": {
     "identifiable": true,
-    "initials": "N.J.",
-    "age": 29,
+    "initials": null,
+    "age": 66,
     "sex": "F",
     "evidence": [
      {
-      "quote": "patient N.J.",
+      "quote": "Maria Schmidt",
       "start": null,
       "end": null
      },
      {
-      "quote": "29-year-old",
+      "quote": "66-year-old",
       "start": null,
       "end": null
      },
@@ -6817,12 +6365,12 @@
    },
    "reporter": {
     "identifiable": true,
-    "name": "Olu Patel",
+    "name": "Maria Nguyen",
     "qualification": "consumer",
-    "contact": "(520) 555-6852",
+    "contact": "maria.nguyen@clinic.org",
     "evidence": [
      {
-      "quote": "Olu Patel",
+      "quote": "Maria Nguyen",
       "start": null,
       "end": null
      }
@@ -6872,7 +6420,7 @@
    "reactions": [
     {
      "term": "drug dependence",
-     "onset_date": "2026-08-20",
+     "onset_date": "2026-09-03",
      "outcome": "unknown",
      "evidence": [
       {
@@ -6884,7 +6432,7 @@
     },
     {
      "term": "illness",
-     "onset_date": "2026-08-20",
+     "onset_date": "2026-09-03",
      "outcome": "unknown",
      "evidence": [
       {
@@ -6910,8 +6458,8 @@
      }
     ]
    },
-   "event_date": "2026-08-20",
-   "summary": "patient N.J. 29-year-old female on Oxycontin, Oxycodone Hydrochloride, Butrans developed drug dependence, illness.",
+   "event_date": "2026-09-03",
+   "summary": "Maria Schmidt 66-year-old female on Oxycontin, Oxycodone Hydrochloride, Butrans developed drug dependence, illness.",
    "missing_information": [
     "dose"
    ]
@@ -6921,24 +6469,24 @@
   "duplicate_of": null,
   "followup_of": null
  },
- "MSG-0047": {
+ "MSG-0046-DUP": {
   "extraction": {
    "language": "en",
    "is_followup": false,
    "followup_reference": null,
    "patient": {
     "identifiable": true,
-    "initials": null,
-    "age": 24,
+    "initials": "M.G.",
+    "age": 65,
     "sex": "F",
     "evidence": [
      {
-      "quote": "Amara Nguyen",
+      "quote": "patient M.G.",
       "start": null,
       "end": null
      },
      {
-      "quote": "24-year-old",
+      "quote": "65-year-old",
       "start": null,
       "end": null
      },
@@ -6950,11 +6498,151 @@
     ]
    },
    "reporter": {
-    "identifiable": false,
-    "name": null,
-    "qualification": "unknown",
-    "contact": null,
-    "evidence": []
+    "identifiable": true,
+    "name": "Dr. Maria Khan",
+    "qualification": "physician",
+    "contact": "mariakhan@clinic.com",
+    "evidence": [
+     {
+      "quote": "Dr. Maria Khan",
+      "start": null,
+      "end": null
+     }
+    ]
+   },
+   "drugs": [
+    {
+     "name": "Oxycontin",
+     "role": "suspect",
+     "dose": null,
+     "start_date": null,
+     "evidence": [
+      {
+       "quote": "Oxycontin",
+       "start": null,
+       "end": null
+      }
+     ]
+    },
+    {
+     "name": "Oxycodone Hydrochloride",
+     "role": "suspect",
+     "dose": null,
+     "start_date": null,
+     "evidence": [
+      {
+       "quote": "Oxycodone Hydrochloride",
+       "start": null,
+       "end": null
+      }
+     ]
+    },
+    {
+     "name": "Butrans",
+     "role": "suspect",
+     "dose": null,
+     "start_date": null,
+     "evidence": [
+      {
+       "quote": "Butrans",
+       "start": null,
+       "end": null
+      }
+     ]
+    }
+   ],
+   "reactions": [
+    {
+     "term": "drug dependence",
+     "onset_date": "2026-08-26",
+     "outcome": "unknown",
+     "evidence": [
+      {
+       "quote": "drug dependence",
+       "start": null,
+       "end": null
+      }
+     ]
+    },
+    {
+     "term": "illness",
+     "onset_date": "2026-08-26",
+     "outcome": "unknown",
+     "evidence": [
+      {
+       "quote": "illness",
+       "start": null,
+       "end": null
+      }
+     ]
+    }
+   ],
+   "seriousness": {
+    "death": false,
+    "life_threatening": false,
+    "hospitalization": false,
+    "disability": false,
+    "congenital_anomaly": false,
+    "other_medically_important": true,
+    "evidence": [
+     {
+      "quote": "The treating physician considered this medically significant.",
+      "start": null,
+      "end": null
+     }
+    ]
+   },
+   "event_date": "2026-08-26",
+   "summary": "patient M.G. 65-year-old female on Oxycontin, Oxycodone Hydrochloride, Butrans developed drug dependence, illness.",
+   "missing_information": [
+    "dose"
+   ]
+  },
+  "truth_case": "23353683",
+  "variant": "duplicate",
+  "duplicate_of": "MSG-0046",
+  "followup_of": null
+ },
+ "MSG-0047": {
+  "extraction": {
+   "language": "en",
+   "is_followup": false,
+   "followup_reference": null,
+   "patient": {
+    "identifiable": true,
+    "initials": null,
+    "age": 34,
+    "sex": "F",
+    "evidence": [
+     {
+      "quote": "Ahmed Haddad",
+      "start": null,
+      "end": null
+     },
+     {
+      "quote": "34-year-old",
+      "start": null,
+      "end": null
+     },
+     {
+      "quote": "female",
+      "start": null,
+      "end": null
+     }
+    ]
+   },
+   "reporter": {
+    "identifiable": true,
+    "name": "Tom Novak",
+    "qualification": "consumer",
+    "contact": "(964) 555-6852",
+    "evidence": [
+     {
+      "quote": "Tom Novak",
+      "start": null,
+      "end": null
+     }
+    ]
    },
    "drugs": [
     {
@@ -6974,7 +6662,7 @@
    "reactions": [
     {
      "term": "overdose",
-     "onset_date": "2026-09-09",
+     "onset_date": "2026-09-05",
      "outcome": "unknown",
      "evidence": [
       {
@@ -6986,7 +6674,7 @@
     },
     {
      "term": "drug dependence",
-     "onset_date": "2026-09-09",
+     "onset_date": "2026-09-05",
      "outcome": "unknown",
      "evidence": [
       {
@@ -6998,7 +6686,7 @@
     },
     {
      "term": "amnesia",
-     "onset_date": "2026-09-09",
+     "onset_date": "2026-09-05",
      "outcome": "unknown",
      "evidence": [
       {
@@ -7024,62 +6712,16 @@
      }
     ]
    },
-   "event_date": "2026-09-09",
-   "summary": "Amara Nguyen 24-year-old female on Oxycontin developed overdose, drug dependence, amnesia.",
+   "event_date": "2026-09-05",
+   "summary": "Ahmed Haddad 34-year-old female on Oxycontin developed overdose, drug dependence, amnesia.",
    "missing_information": [
-    "reporter identity",
     "dose"
    ]
   },
   "truth_case": "23353686",
-  "variant": "no_reporter",
+  "variant": "complete",
   "duplicate_of": null,
   "followup_of": null
- },
- "MSG-0047-FU": {
-  "extraction": {
-   "language": "en",
-   "is_followup": true,
-   "followup_reference": "my report from Tuesday about the patient on Oxycontin",
-   "patient": {
-    "identifiable": false,
-    "initials": null,
-    "age": null,
-    "sex": "unknown",
-    "evidence": []
-   },
-   "reporter": {
-    "identifiable": true,
-    "name": "Tom Patel",
-    "qualification": "consumer",
-    "contact": "tom.patel@gmail.com",
-    "evidence": [
-     {
-      "quote": "Tom Patel",
-      "start": null,
-      "end": null
-     }
-    ]
-   },
-   "drugs": [],
-   "reactions": [],
-   "seriousness": {
-    "death": false,
-    "life_threatening": false,
-    "hospitalization": false,
-    "disability": false,
-    "congenital_anomaly": false,
-    "other_medically_important": false,
-    "evidence": []
-   },
-   "event_date": null,
-   "summary": "Reporter supplies their identity for an earlier report.",
-   "missing_information": []
-  },
-  "truth_case": "23353686",
-  "variant": "followup",
-  "duplicate_of": null,
-  "followup_of": "MSG-0047"
  },
  "MSG-0048": {
   "extraction": {
@@ -7087,24 +6729,34 @@
    "is_followup": false,
    "followup_reference": null,
    "patient": {
-    "identifiable": false,
-    "initials": null,
-    "age": null,
-    "sex": "unknown",
-    "evidence": []
-   },
-   "reporter": {
     "identifiable": true,
-    "name": "Dr. Priya Schmidt",
-    "qualification": "physician",
-    "contact": "priya.schmidt@clinic.org",
+    "initials": "F.P.",
+    "age": 43,
+    "sex": "F",
     "evidence": [
      {
-      "quote": "Dr. Priya Schmidt",
+      "quote": "patient F.P.",
+      "start": null,
+      "end": null
+     },
+     {
+      "quote": "43-year-old",
+      "start": null,
+      "end": null
+     },
+     {
+      "quote": "female",
       "start": null,
       "end": null
      }
     ]
+   },
+   "reporter": {
+    "identifiable": false,
+    "name": null,
+    "qualification": "unknown",
+    "contact": null,
+    "evidence": []
    },
    "drugs": [
     {
@@ -7124,7 +6776,7 @@
    "reactions": [
     {
      "term": "asthma",
-     "onset_date": "2023-12-26",
+     "onset_date": "2026-09-07",
      "outcome": "recovering",
      "evidence": [
       {
@@ -7150,15 +6802,15 @@
      }
     ]
    },
-   "event_date": "2023-12-26",
-   "summary": "a patient on Risankizumab developed asthma.",
+   "event_date": "2026-09-07",
+   "summary": "patient F.P. 43-year-old female on Risankizumab developed asthma.",
    "missing_information": [
-    "patient identifier",
+    "reporter identity",
     "dose"
    ]
   },
   "truth_case": "23353697",
-  "variant": "no_patient",
+  "variant": "no_reporter",
   "duplicate_of": null,
   "followup_of": null
  },
@@ -7166,26 +6818,26 @@
   "extraction": {
    "language": "en",
    "is_followup": true,
-   "followup_reference": "the Risankizumab report I sent earlier",
+   "followup_reference": "my report from Sunday about the patient on Risankizumab",
    "patient": {
+    "identifiable": false,
+    "initials": null,
+    "age": null,
+    "sex": "unknown",
+    "evidence": []
+   },
+   "reporter": {
     "identifiable": true,
-    "initials": "K.F.",
-    "age": 43,
-    "sex": "F",
+    "name": "Dr. Maria Rossi",
+    "qualification": "physician",
+    "contact": "maria.rossi@health.net",
     "evidence": [
      {
-      "quote": "initials K.F.",
+      "quote": "Dr. Maria Rossi",
       "start": null,
       "end": null
      }
     ]
-   },
-   "reporter": {
-    "identifiable": false,
-    "name": null,
-    "qualification": "unknown",
-    "contact": null,
-    "evidence": []
    },
    "drugs": [],
    "reactions": [],
@@ -7199,7 +6851,7 @@
     "evidence": []
    },
    "event_date": null,
-   "summary": "Reporter supplies the patient identifier for an earlier report.",
+   "summary": "Reporter supplies their identity for an earlier report.",
    "missing_information": []
   },
   "truth_case": "23353697",
@@ -7214,12 +6866,12 @@
    "followup_reference": null,
    "patient": {
     "identifiable": true,
-    "initials": "F.H.",
+    "initials": null,
     "age": 59,
     "sex": "M",
     "evidence": [
      {
-      "quote": "patient F.H.",
+      "quote": "Daniel Lee",
       "start": null,
       "end": null
      },
@@ -7236,17 +6888,11 @@
     ]
    },
    "reporter": {
-    "identifiable": true,
-    "name": "Tom Nguyen",
-    "qualification": "consumer",
-    "contact": "tom.nguyen@hospital.com",
-    "evidence": [
-     {
-      "quote": "Tom Nguyen",
-      "start": null,
-      "end": null
-     }
-    ]
+    "identifiable": false,
+    "name": null,
+    "qualification": "unknown",
+    "contact": null,
+    "evidence": []
    },
    "drugs": [
     {
@@ -7266,7 +6912,7 @@
    "reactions": [
     {
      "term": "passed away",
-     "onset_date": "2023-10-26",
+     "onset_date": "2026-09-20",
      "outcome": "fatal",
      "evidence": [
       {
@@ -7292,16 +6938,62 @@
      }
     ]
    },
-   "event_date": "2023-10-26",
-   "summary": "patient F.H. 59-year-old male on Leuprolide Acetate developed passed away.",
+   "event_date": "2026-09-20",
+   "summary": "Daniel Lee 59-year-old male on Leuprolide Acetate developed passed away.",
    "missing_information": [
+    "reporter identity",
     "dose"
    ]
   },
   "truth_case": "23353698",
-  "variant": "complete",
+  "variant": "no_reporter",
   "duplicate_of": null,
   "followup_of": null
+ },
+ "MSG-0049-FU": {
+  "extraction": {
+   "language": "en",
+   "is_followup": true,
+   "followup_reference": "my report from Friday about the patient on Leuprolide Acetate",
+   "patient": {
+    "identifiable": false,
+    "initials": null,
+    "age": null,
+    "sex": "unknown",
+    "evidence": []
+   },
+   "reporter": {
+    "identifiable": true,
+    "name": "James Nguyen",
+    "qualification": "consumer",
+    "contact": "(523) 555-1874",
+    "evidence": [
+     {
+      "quote": "James Nguyen",
+      "start": null,
+      "end": null
+     }
+    ]
+   },
+   "drugs": [],
+   "reactions": [],
+   "seriousness": {
+    "death": false,
+    "life_threatening": false,
+    "hospitalization": false,
+    "disability": false,
+    "congenital_anomaly": false,
+    "other_medically_important": false,
+    "evidence": []
+   },
+   "event_date": null,
+   "summary": "Reporter supplies their identity for an earlier report.",
+   "missing_information": []
+  },
+  "truth_case": "23353698",
+  "variant": "followup",
+  "duplicate_of": null,
+  "followup_of": "MSG-0049"
  },
  "MSG-0050": {
   "extraction": {
@@ -7311,16 +7003,16 @@
    "patient": {
     "identifiable": true,
     "initials": null,
-    "age": 70,
+    "age": 60,
     "sex": "F",
     "evidence": [
      {
-      "quote": "Olu Schmidt",
+      "quote": "Priya Rossi",
       "start": null,
       "end": null
      },
      {
-      "quote": "70-year-old",
+      "quote": "60-year-old",
       "start": null,
       "end": null
      },
@@ -7333,12 +7025,12 @@
    },
    "reporter": {
     "identifiable": true,
-    "name": "Amara Lee",
+    "name": "Wei Okafor",
     "qualification": "consumer",
-    "contact": "(843) 555-6017",
+    "contact": "wei.okafor@hospital.org",
     "evidence": [
      {
-      "quote": "Amara Lee",
+      "quote": "Wei Okafor",
       "start": null,
       "end": null
      }
@@ -7375,7 +7067,7 @@
    "reactions": [
     {
      "term": "drug dependence",
-     "onset_date": "2026-09-07",
+     "onset_date": "2026-09-26",
      "outcome": "unknown",
      "evidence": [
       {
@@ -7387,7 +7079,7 @@
     },
     {
      "term": "drug ineffective",
-     "onset_date": "2026-09-07",
+     "onset_date": "2026-09-26",
      "outcome": "unknown",
      "evidence": [
       {
@@ -7399,7 +7091,7 @@
     },
     {
      "term": "product availability issue",
-     "onset_date": "2026-09-07",
+     "onset_date": "2026-09-26",
      "outcome": "unknown",
      "evidence": [
       {
@@ -7425,8 +7117,8 @@
      }
     ]
    },
-   "event_date": "2026-09-07",
-   "summary": "Olu Schmidt 70-year-old female on Acetaminophen\\Oxycodone Hydrochloride, Hydrocodone Bitartrate And Acetaminophen developed drug dependence, drug ineffective, product availability issue.",
+   "event_date": "2026-09-26",
+   "summary": "Priya Rossi 60-year-old female on Acetaminophen\\Oxycodone Hydrochloride, Hydrocodone Bitartrate And Acetaminophen developed drug dependence, drug ineffective, product availability issue.",
    "missing_information": [
     "dose"
    ]
@@ -7442,20 +7134,36 @@
    "is_followup": false,
    "followup_reference": null,
    "patient": {
-    "identifiable": false,
-    "initials": null,
-    "age": null,
-    "sex": "unknown",
-    "evidence": []
+    "identifiable": true,
+    "initials": "K.P.",
+    "age": 59,
+    "sex": "F",
+    "evidence": [
+     {
+      "quote": "patient K.P.",
+      "start": null,
+      "end": null
+     },
+     {
+      "quote": "59-year-old",
+      "start": null,
+      "end": null
+     },
+     {
+      "quote": "female",
+      "start": null,
+      "end": null
+     }
+    ]
    },
    "reporter": {
     "identifiable": true,
-    "name": "Dr. Maria Silva",
+    "name": "Dr. Luis Haddad",
     "qualification": "physician",
-    "contact": "maria.silva@health.org",
+    "contact": "(599) 555-7020",
     "evidence": [
      {
-      "quote": "Dr. Maria Silva",
+      "quote": "Dr. Luis Haddad",
       "start": null,
       "end": null
      }
@@ -7479,7 +7187,7 @@
    "reactions": [
     {
      "term": "hypoaesthesia",
-     "onset_date": "2023-12-16",
+     "onset_date": "2026-09-23",
      "outcome": "recovering",
      "evidence": [
       {
@@ -7491,7 +7199,7 @@
     },
     {
      "term": "pain in extremity",
-     "onset_date": "2023-12-16",
+     "onset_date": "2026-09-23",
      "outcome": "recovering",
      "evidence": [
       {
@@ -7511,68 +7219,22 @@
     "other_medically_important": true,
     "evidence": [
      {
-      "quote": "The patient was admitted to hospital.",
+      "quote": "Hospitalized for observation.",
       "start": null,
       "end": null
      }
     ]
    },
-   "event_date": "2023-12-16",
-   "summary": "a patient on Oxaliplatin developed hypoaesthesia, pain in extremity.",
+   "event_date": "2026-09-23",
+   "summary": "patient K.P. 59-year-old female on Oxaliplatin developed hypoaesthesia, pain in extremity.",
    "missing_information": [
-    "patient identifier",
     "dose"
    ]
   },
   "truth_case": "23353724",
-  "variant": "no_patient",
+  "variant": "complete",
   "duplicate_of": null,
   "followup_of": null
- },
- "MSG-0051-FU": {
-  "extraction": {
-   "language": "en",
-   "is_followup": true,
-   "followup_reference": "the Oxaliplatin report I sent earlier",
-   "patient": {
-    "identifiable": true,
-    "initials": "S.R.",
-    "age": 59,
-    "sex": "F",
-    "evidence": [
-     {
-      "quote": "initials S.R.",
-      "start": null,
-      "end": null
-     }
-    ]
-   },
-   "reporter": {
-    "identifiable": false,
-    "name": null,
-    "qualification": "unknown",
-    "contact": null,
-    "evidence": []
-   },
-   "drugs": [],
-   "reactions": [],
-   "seriousness": {
-    "death": false,
-    "life_threatening": false,
-    "hospitalization": false,
-    "disability": false,
-    "congenital_anomaly": false,
-    "other_medically_important": false,
-    "evidence": []
-   },
-   "event_date": null,
-   "summary": "Reporter supplies the patient identifier for an earlier report.",
-   "missing_information": []
-  },
-  "truth_case": "23353724",
-  "variant": "followup",
-  "duplicate_of": null,
-  "followup_of": "MSG-0051"
  },
  "MSG-0052": {
   "extraction": {
@@ -7581,12 +7243,12 @@
    "followup_reference": null,
    "patient": {
     "identifiable": true,
-    "initials": "E.A.",
+    "initials": null,
     "age": 54,
     "sex": "F",
     "evidence": [
      {
-      "quote": "patient E.A.",
+      "quote": "Elena Rossi",
       "start": null,
       "end": null
      },
@@ -7604,12 +7266,12 @@
    },
    "reporter": {
     "identifiable": true,
-    "name": "Tom Haddad",
+    "name": "Tom Nguyen",
     "qualification": "consumer",
-    "contact": "(335) 555-9058",
+    "contact": "tom.nguyen@health.net",
     "evidence": [
      {
-      "quote": "Tom Haddad",
+      "quote": "Tom Nguyen",
       "start": null,
       "end": null
      }
@@ -7646,7 +7308,7 @@
    "reactions": [
     {
      "term": "blood pressure abnormal",
-     "onset_date": "2023-09-01",
+     "onset_date": "2026-09-18",
      "outcome": "unknown",
      "evidence": [
       {
@@ -7658,7 +7320,7 @@
     },
     {
      "term": "heart rate abnormal",
-     "onset_date": "2023-09-01",
+     "onset_date": "2026-09-18",
      "outcome": "unknown",
      "evidence": [
       {
@@ -7684,8 +7346,8 @@
      }
     ]
    },
-   "event_date": "2023-09-01",
-   "summary": "patient E.A. 54-year-old female on Humira, Remicade developed blood pressure abnormal, heart rate abnormal.",
+   "event_date": "2026-09-18",
+   "summary": "Elena Rossi 54-year-old female on Humira, Remicade developed blood pressure abnormal, heart rate abnormal.",
    "missing_information": [
     "dose"
    ]
@@ -7702,12 +7364,12 @@
    "followup_reference": null,
    "patient": {
     "identifiable": true,
-    "initials": null,
+    "initials": "A.C.",
     "age": 59,
     "sex": "F",
     "evidence": [
      {
-      "quote": "Amara Khan",
+      "quote": "patient A.C.",
       "start": null,
       "end": null
      },
@@ -7725,12 +7387,12 @@
    },
    "reporter": {
     "identifiable": true,
-    "name": "Ahmed Patel",
+    "name": "Daniel Patel",
     "qualification": "consumer",
-    "contact": "ahmed.patel@health.org",
+    "contact": "(335) 555-9058",
     "evidence": [
      {
-      "quote": "Ahmed Patel",
+      "quote": "Daniel Patel",
       "start": null,
       "end": null
      }
@@ -7754,7 +7416,7 @@
    "reactions": [
     {
      "term": "metal poisoning",
-     "onset_date": "2024-04-02",
+     "onset_date": "2026-09-18",
      "outcome": "not_recovered",
      "evidence": [
       {
@@ -7766,7 +7428,7 @@
     },
     {
      "term": "oropharyngeal pain",
-     "onset_date": "2024-04-02",
+     "onset_date": "2026-09-18",
      "outcome": "not_recovered",
      "evidence": [
       {
@@ -7778,7 +7440,7 @@
     },
     {
      "term": "nasal discomfort",
-     "onset_date": "2024-04-02",
+     "onset_date": "2026-09-18",
      "outcome": "unknown",
      "evidence": [
       {
@@ -7804,8 +7466,8 @@
      }
     ]
    },
-   "event_date": "2024-04-02",
-   "summary": "Amara Khan 59-year-old female on Acetaminophen\\Oxycodone Hydrochloride developed metal poisoning, oropharyngeal pain, nasal discomfort.",
+   "event_date": "2026-09-18",
+   "summary": "patient A.C. 59-year-old female on Acetaminophen\\Oxycodone Hydrochloride developed metal poisoning, oropharyngeal pain, nasal discomfort.",
    "missing_information": [
     "dose"
    ]
@@ -7827,7 +7489,7 @@
     "sex": "M",
     "evidence": [
      {
-      "quote": "Priya Garcia",
+      "quote": "Amara Khan",
       "start": null,
       "end": null
      },
@@ -7845,12 +7507,12 @@
    },
    "reporter": {
     "identifiable": true,
-    "name": "Ahmed Haddad",
+    "name": "Ahmed Patel",
     "qualification": "consumer",
-    "contact": "ahmed.haddad@clinic.net",
+    "contact": "ahmed.patel@health.org",
     "evidence": [
      {
-      "quote": "Ahmed Haddad",
+      "quote": "Ahmed Patel",
       "start": null,
       "end": null
      }
@@ -7874,7 +7536,7 @@
    "reactions": [
     {
      "term": "overdose",
-     "onset_date": "2023-09-24",
+     "onset_date": "2026-09-27",
      "outcome": "not_recovered",
      "evidence": [
       {
@@ -7886,7 +7548,7 @@
     },
     {
      "term": "asthenia",
-     "onset_date": "2023-09-24",
+     "onset_date": "2026-09-27",
      "outcome": "unknown",
      "evidence": [
       {
@@ -7898,7 +7560,7 @@
     },
     {
      "term": "somnolence",
-     "onset_date": "2023-09-24",
+     "onset_date": "2026-09-27",
      "outcome": "unknown",
      "evidence": [
       {
@@ -7924,8 +7586,8 @@
      }
     ]
    },
-   "event_date": "2023-09-24",
-   "summary": "Priya Garcia 75-year-old male on Buprenorphine developed overdose, asthenia, somnolence.",
+   "event_date": "2026-09-27",
+   "summary": "Amara Khan 75-year-old male on Buprenorphine developed overdose, asthenia, somnolence.",
    "missing_information": [
     "dose"
    ]
@@ -7943,16 +7605,16 @@
    "patient": {
     "identifiable": true,
     "initials": null,
-    "age": 47,
+    "age": 81,
     "sex": "F",
     "evidence": [
      {
-      "quote": "Daniel Nguyen",
+      "quote": "Daniel Brown",
       "start": null,
       "end": null
      },
      {
-      "quote": "47-year-old",
+      "quote": "81-year-old",
       "start": null,
       "end": null
      },
@@ -7965,12 +7627,12 @@
    },
    "reporter": {
     "identifiable": true,
-    "name": "Hana Patel",
+    "name": "Tom Patel",
     "qualification": "consumer",
-    "contact": "(962) 555-1791",
+    "contact": "tom.patel@gmail.com",
     "evidence": [
      {
-      "quote": "Hana Patel",
+      "quote": "Tom Patel",
       "start": null,
       "end": null
      }
@@ -8020,7 +7682,7 @@
    "reactions": [
     {
      "term": "overdose",
-     "onset_date": "2012-01-01",
+     "onset_date": "2026-09-07",
      "outcome": "unknown",
      "evidence": [
       {
@@ -8032,7 +7694,7 @@
     },
     {
      "term": "drug dependence",
-     "onset_date": "2012-01-01",
+     "onset_date": "2026-09-07",
      "outcome": "unknown",
      "evidence": [
       {
@@ -8058,8 +7720,8 @@
      }
     ]
    },
-   "event_date": "2012-01-01",
-   "summary": "Daniel Nguyen 47-year-old female on Oxycontin, Dilaudid, Hydrocodone Bitartrate And Acetaminophen developed overdose, drug dependence.",
+   "event_date": "2026-09-07",
+   "summary": "Daniel Brown 81-year-old female on Oxycontin, Dilaudid, Hydrocodone Bitartrate And Acetaminophen developed overdose, drug dependence.",
    "missing_information": [
     "dose"
    ]
@@ -8070,6 +7732,139 @@
   "followup_of": null
  },
  "MSG-0056": {
+  "extraction": {
+   "language": "en",
+   "is_followup": false,
+   "followup_reference": null,
+   "patient": {
+    "identifiable": true,
+    "initials": null,
+    "age": 60,
+    "sex": "F",
+    "evidence": [
+     {
+      "quote": "Grace Lee",
+      "start": null,
+      "end": null
+     },
+     {
+      "quote": "60-year-old",
+      "start": null,
+      "end": null
+     },
+     {
+      "quote": "female",
+      "start": null,
+      "end": null
+     }
+    ]
+   },
+   "reporter": {
+    "identifiable": true,
+    "name": "Priya Schmidt",
+    "qualification": "consumer",
+    "contact": "(729) 555-5155",
+    "evidence": [
+     {
+      "quote": "Priya Schmidt",
+      "start": null,
+      "end": null
+     }
+    ]
+   },
+   "drugs": [
+    {
+     "name": "Oxycodone Hydrochloride",
+     "role": "suspect",
+     "dose": null,
+     "start_date": null,
+     "evidence": [
+      {
+       "quote": "Oxycodone Hydrochloride",
+       "start": null,
+       "end": null
+      }
+     ]
+    },
+    {
+     "name": "Dilaudid",
+     "role": "suspect",
+     "dose": null,
+     "start_date": null,
+     "evidence": [
+      {
+       "quote": "Dilaudid",
+       "start": null,
+       "end": null
+      }
+     ]
+    }
+   ],
+   "reactions": [
+    {
+     "term": "overdose",
+     "onset_date": "2026-08-21",
+     "outcome": "recovered",
+     "evidence": [
+      {
+       "quote": "overdose",
+       "start": null,
+       "end": null
+      }
+     ]
+    },
+    {
+     "term": "prescribed overdose",
+     "onset_date": "2026-08-21",
+     "outcome": "unknown",
+     "evidence": [
+      {
+       "quote": "prescribed overdose",
+       "start": null,
+       "end": null
+      }
+     ]
+    },
+    {
+     "term": "somnolence",
+     "onset_date": "2026-08-21",
+     "outcome": "unknown",
+     "evidence": [
+      {
+       "quote": "somnolence",
+       "start": null,
+       "end": null
+      }
+     ]
+    }
+   ],
+   "seriousness": {
+    "death": false,
+    "life_threatening": false,
+    "hospitalization": false,
+    "disability": false,
+    "congenital_anomaly": false,
+    "other_medically_important": true,
+    "evidence": [
+     {
+      "quote": "The treating physician considered this medically significant.",
+      "start": null,
+      "end": null
+     }
+    ]
+   },
+   "event_date": "2026-08-21",
+   "summary": "Grace Lee 60-year-old female on Oxycodone Hydrochloride, Dilaudid developed overdose, prescribed overdose, somnolence.",
+   "missing_information": [
+    "dose"
+   ]
+  },
+  "truth_case": "23353737",
+  "variant": "complete",
+  "duplicate_of": null,
+  "followup_of": null
+ },
+ "MSG-0057": {
   "extraction": {
    "language": "en",
    "is_followup": false,
@@ -8119,13 +7914,26 @@
      ]
     },
     {
-     "name": "Dilaudid",
+     "name": "Acetaminophen\\Oxycodone Hydrochloride",
      "role": "suspect",
      "dose": null,
      "start_date": null,
      "evidence": [
       {
-       "quote": "Dilaudid",
+       "quote": "Acetaminophen\\Oxycodone Hydrochloride",
+       "start": null,
+       "end": null
+      }
+     ]
+    },
+    {
+     "name": "Heroin",
+     "role": "suspect",
+     "dose": null,
+     "start_date": null,
+     "evidence": [
+      {
+       "quote": "Heroin",
        "start": null,
        "end": null
       }
@@ -8135,8 +7943,8 @@
    "reactions": [
     {
      "term": "overdose",
-     "onset_date": "2026-09-02",
-     "outcome": "recovered",
+     "onset_date": "2026-09-13",
+     "outcome": "unknown",
      "evidence": [
       {
        "quote": "overdose",
@@ -8146,24 +7954,24 @@
      ]
     },
     {
-     "term": "prescribed overdose",
-     "onset_date": "2026-09-02",
+     "term": "drug dependence",
+     "onset_date": "2026-09-13",
      "outcome": "unknown",
      "evidence": [
       {
-       "quote": "prescribed overdose",
+       "quote": "drug dependence",
        "start": null,
        "end": null
       }
      ]
     },
     {
-     "term": "somnolence",
-     "onset_date": "2026-09-02",
+     "term": "quality of life decreased",
+     "onset_date": "2026-09-13",
      "outcome": "unknown",
      "evidence": [
       {
-       "quote": "somnolence",
+       "quote": "quality of life decreased",
        "start": null,
        "end": null
       }
@@ -8174,34 +7982,34 @@
     "death": false,
     "life_threatening": false,
     "hospitalization": false,
-    "disability": false,
+    "disability": true,
     "congenital_anomaly": false,
     "other_medically_important": true,
     "evidence": [
      {
-      "quote": "The treating physician considered this medically significant.",
+      "quote": "The patient has not regained function and may have lasting disability.",
       "start": null,
       "end": null
      }
     ]
    },
-   "event_date": "2026-09-02",
-   "summary": "patient P.P. 38-year-old female on Oxycodone Hydrochloride, Dilaudid developed overdose, prescribed overdose, somnolence.",
+   "event_date": "2026-09-13",
+   "summary": "patient P.P. 38-year-old female on Oxycodone Hydrochloride, Acetaminophen\\Oxycodone Hydrochloride, Heroin developed overdose, drug dependence, quality of life decreased.",
    "missing_information": [
     "reporter identity",
     "dose"
    ]
   },
-  "truth_case": "23353737",
+  "truth_case": "23353742",
   "variant": "no_reporter",
   "duplicate_of": null,
   "followup_of": null
  },
- "MSG-0056-FU": {
+ "MSG-0057-FU": {
   "extraction": {
    "language": "en",
    "is_followup": true,
-   "followup_reference": "case reference MSG-0056",
+   "followup_reference": "case reference MSG-0057",
    "patient": {
     "identifiable": false,
     "initials": null,
@@ -8237,12 +8045,12 @@
    "summary": "Reporter supplies their identity for an earlier report.",
    "missing_information": []
   },
-  "truth_case": "23353737",
+  "truth_case": "23353742",
   "variant": "followup",
   "duplicate_of": null,
-  "followup_of": "MSG-0056"
+  "followup_of": "MSG-0057"
  },
- "MSG-0057": {
+ "MSG-0058": {
   "extraction": {
    "language": "en",
    "is_followup": false,
@@ -8298,152 +8106,6 @@
      ]
     },
     {
-     "name": "Acetaminophen\\Oxycodone Hydrochloride",
-     "role": "suspect",
-     "dose": null,
-     "start_date": null,
-     "evidence": [
-      {
-       "quote": "Acetaminophen\\Oxycodone Hydrochloride",
-       "start": null,
-       "end": null
-      }
-     ]
-    },
-    {
-     "name": "Heroin",
-     "role": "suspect",
-     "dose": null,
-     "start_date": null,
-     "evidence": [
-      {
-       "quote": "Heroin",
-       "start": null,
-       "end": null
-      }
-     ]
-    }
-   ],
-   "reactions": [
-    {
-     "term": "overdose",
-     "onset_date": "2026-09-27",
-     "outcome": "unknown",
-     "evidence": [
-      {
-       "quote": "overdose",
-       "start": null,
-       "end": null
-      }
-     ]
-    },
-    {
-     "term": "drug dependence",
-     "onset_date": "2026-09-27",
-     "outcome": "unknown",
-     "evidence": [
-      {
-       "quote": "drug dependence",
-       "start": null,
-       "end": null
-      }
-     ]
-    },
-    {
-     "term": "quality of life decreased",
-     "onset_date": "2026-09-27",
-     "outcome": "unknown",
-     "evidence": [
-      {
-       "quote": "quality of life decreased",
-       "start": null,
-       "end": null
-      }
-     ]
-    }
-   ],
-   "seriousness": {
-    "death": false,
-    "life_threatening": false,
-    "hospitalization": false,
-    "disability": true,
-    "congenital_anomaly": false,
-    "other_medically_important": true,
-    "evidence": [
-     {
-      "quote": "The patient has not regained function and may have lasting disability.",
-      "start": null,
-      "end": null
-     }
-    ]
-   },
-   "event_date": "2026-09-27",
-   "summary": "patient E.G. 61-year-old female on Oxycodone Hydrochloride, Acetaminophen\\Oxycodone Hydrochloride, Heroin developed overdose, drug dependence, quality of life decreased.",
-   "missing_information": [
-    "dose"
-   ]
-  },
-  "truth_case": "23353742",
-  "variant": "complete",
-  "duplicate_of": null,
-  "followup_of": null
- },
- "MSG-0058": {
-  "extraction": {
-   "language": "en",
-   "is_followup": false,
-   "followup_reference": null,
-   "patient": {
-    "identifiable": true,
-    "initials": "M.R.",
-    "age": 27,
-    "sex": "F",
-    "evidence": [
-     {
-      "quote": "patient M.R.",
-      "start": null,
-      "end": null
-     },
-     {
-      "quote": "27-year-old",
-      "start": null,
-      "end": null
-     },
-     {
-      "quote": "female",
-      "start": null,
-      "end": null
-     }
-    ]
-   },
-   "reporter": {
-    "identifiable": true,
-    "name": "Olu Brown",
-    "qualification": "consumer",
-    "contact": "olu.brown@hospital.org",
-    "evidence": [
-     {
-      "quote": "Olu Brown",
-      "start": null,
-      "end": null
-     }
-    ]
-   },
-   "drugs": [
-    {
-     "name": "Oxycodone Hydrochloride",
-     "role": "suspect",
-     "dose": null,
-     "start_date": null,
-     "evidence": [
-      {
-       "quote": "Oxycodone Hydrochloride",
-       "start": null,
-       "end": null
-      }
-     ]
-    },
-    {
      "name": "Fentanyl",
      "role": "suspect",
      "dose": null,
@@ -8460,7 +8122,7 @@
    "reactions": [
     {
      "term": "overdose",
-     "onset_date": "2015-05-01",
+     "onset_date": "2026-09-29",
      "outcome": "fatal",
      "evidence": [
       {
@@ -8480,14 +8142,14 @@
     "other_medically_important": true,
     "evidence": [
      {
-      "quote": "The patient died.",
+      "quote": "Unfortunately the patient passed away.",
       "start": null,
       "end": null
      }
     ]
    },
-   "event_date": "2015-05-01",
-   "summary": "patient M.R. 27-year-old female on Oxycodone Hydrochloride, Fentanyl developed overdose.",
+   "event_date": "2026-09-29",
+   "summary": "patient E.G. 61-year-old female on Oxycodone Hydrochloride, Fentanyl developed overdose.",
    "missing_information": [
     "dose"
    ]
@@ -8504,17 +8166,17 @@
    "followup_reference": null,
    "patient": {
     "identifiable": true,
-    "initials": "M.R.",
-    "age": 26,
+    "initials": "E.G.",
+    "age": 62,
     "sex": "F",
     "evidence": [
      {
-      "quote": "patient M.R.",
+      "quote": "patient E.G.",
       "start": null,
       "end": null
      },
      {
-      "quote": "26-year-old",
+      "quote": "62-year-old",
       "start": null,
       "end": null
      },
@@ -8527,12 +8189,12 @@
    },
    "reporter": {
     "identifiable": true,
-    "name": "Dr. Luis Haddad",
+    "name": "Dr. Amara Brown",
     "qualification": "physician",
-    "contact": "luishaddad@mail.com",
+    "contact": "amarabrown@clinic.com",
     "evidence": [
      {
-      "quote": "Dr. Luis Haddad",
+      "quote": "Dr. Amara Brown",
       "start": null,
       "end": null
      }
@@ -8569,7 +8231,7 @@
    "reactions": [
     {
      "term": "overdose",
-     "onset_date": "2015-05-01",
+     "onset_date": "2026-09-08",
      "outcome": "fatal",
      "evidence": [
       {
@@ -8595,8 +8257,8 @@
      }
     ]
    },
-   "event_date": "2015-05-01",
-   "summary": "patient M.R. 26-year-old female on Oxycodone Hydrochloride, Fentanyl developed overdose.",
+   "event_date": "2026-09-08",
+   "summary": "patient E.G. 62-year-old female on Oxycodone Hydrochloride, Fentanyl developed overdose.",
    "missing_information": [
     "dose"
    ]
@@ -8612,20 +8274,36 @@
    "is_followup": false,
    "followup_reference": null,
    "patient": {
-    "identifiable": false,
+    "identifiable": true,
     "initials": null,
-    "age": null,
-    "sex": "unknown",
-    "evidence": []
+    "age": 26,
+    "sex": "M",
+    "evidence": [
+     {
+      "quote": "Priya Lee",
+      "start": null,
+      "end": null
+     },
+     {
+      "quote": "26-year-old",
+      "start": null,
+      "end": null
+     },
+     {
+      "quote": "male",
+      "start": null,
+      "end": null
+     }
+    ]
    },
    "reporter": {
     "identifiable": true,
-    "name": "James Garcia",
+    "name": "Maria Brown",
     "qualification": "consumer",
-    "contact": "(677) 555-2318",
+    "contact": "maria.brown@clinic.org",
     "evidence": [
      {
-      "quote": "James Garcia",
+      "quote": "Maria Brown",
       "start": null,
       "end": null
      }
@@ -8649,7 +8327,7 @@
    "reactions": [
     {
      "term": "hallucination",
-     "onset_date": "2026-08-24",
+     "onset_date": "2026-08-31",
      "outcome": "unknown",
      "evidence": [
       {
@@ -8661,7 +8339,7 @@
     },
     {
      "term": "drug ineffective",
-     "onset_date": "2026-08-24",
+     "onset_date": "2026-08-31",
      "outcome": "unknown",
      "evidence": [
       {
@@ -8673,7 +8351,7 @@
     },
     {
      "term": "unevaluable event",
-     "onset_date": "2026-08-24",
+     "onset_date": "2026-08-31",
      "outcome": "unknown",
      "evidence": [
       {
@@ -8699,61 +8377,15 @@
      }
     ]
    },
-   "event_date": "2026-08-24",
-   "summary": "a patient on Butrans developed hallucination, drug ineffective, unevaluable event.",
+   "event_date": "2026-08-31",
+   "summary": "Priya Lee 26-year-old male on Butrans developed hallucination, drug ineffective, unevaluable event.",
    "missing_information": [
-    "patient identifier",
     "dose"
    ]
   },
   "truth_case": "23353753",
-  "variant": "no_patient",
+  "variant": "complete",
   "duplicate_of": null,
   "followup_of": null
- },
- "MSG-0059-FU": {
-  "extraction": {
-   "language": "en",
-   "is_followup": true,
-   "followup_reference": "the Butrans report I sent earlier",
-   "patient": {
-    "identifiable": true,
-    "initials": "B.S.",
-    "age": 43,
-    "sex": "M",
-    "evidence": [
-     {
-      "quote": "initials B.S.",
-      "start": null,
-      "end": null
-     }
-    ]
-   },
-   "reporter": {
-    "identifiable": false,
-    "name": null,
-    "qualification": "unknown",
-    "contact": null,
-    "evidence": []
-   },
-   "drugs": [],
-   "reactions": [],
-   "seriousness": {
-    "death": false,
-    "life_threatening": false,
-    "hospitalization": false,
-    "disability": false,
-    "congenital_anomaly": false,
-    "other_medically_important": false,
-    "evidence": []
-   },
-   "event_date": null,
-   "summary": "Reporter supplies the patient identifier for an earlier report.",
-   "missing_information": []
-  },
-  "truth_case": "23353753",
-  "variant": "followup",
-  "duplicate_of": null,
-  "followup_of": "MSG-0059"
  }
 }

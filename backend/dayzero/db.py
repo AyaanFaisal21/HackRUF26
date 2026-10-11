@@ -108,8 +108,8 @@ class PgStore:
             (ev.case_id, ev.at, ev.actor, ev.action, ev.field, Jsonb(ev.old), Jsonb(ev.new), ev.message_id, ev.reason))
 
     def next_case_id(self):
-        n = self.conn.execute("SELECT count(*) AS n FROM cases").fetchone()["n"]
-        return f"DZ-{n:04d}"
+        r = self.conn.execute("SELECT max(substring(id from 4)::int) AS m FROM cases").fetchone()
+        return f"DZ-{(r['m'] or 0) + 1:04d}"
 
     # ---- read side used by the API
     def queue(self):

@@ -71,7 +71,7 @@ class OfflineRenderer:
         for pt, _ in t["reactions"]:
             rx_words.append(LAY.get(pt, pt.lower()) if (channel == "patient_portal" or rng.random() < 0.3) else pt.lower())
         rx_phrase = ", ".join(rx_words) if rx_words else "a reaction"
-        ev_date = datetime.strptime(t["event_date"], "%Y%m%d").replace(tzinfo=timezone.utc) if t["event_date"] else received - timedelta(days=rng.randint(2, 40))
+        ev_date = received - timedelta(days=rng.randint(2, 40))  # FAERS event dates are years old; rebase relative to receipt
         if ev_date > received:
             ev_date = received - timedelta(days=rng.randint(2, 40))
         date_str = _fmt_date(ev_date, rng)
@@ -156,7 +156,7 @@ class OfflineRenderer:
         return body, ext
 
 
-def build_inbox(faers_records: list[dict], n: int = 60, seed: int = 7, now: datetime | None = None, renderer=None) -> tuple[list[dict], dict]:
+def build_inbox(faers_records: list[dict], n: int = 60, seed: int = 7, now: datetime | None = None, renderer=None, days: int = 12) -> tuple[list[dict], dict]:
     """Returns (messages, answer_key). answer_key[message_id] = {extraction, truth_case, variant, duplicate_of, followup_of}."""
     rng = random.Random(seed)
     now = now or datetime.now(timezone.utc)
@@ -181,7 +181,7 @@ def build_inbox(faers_records: list[dict], n: int = 60, seed: int = 7, now: date
         channel = "patient_portal" if qual == "consumer" else rng.choice(["email", "email", "call_note", "fax_pdf", "site_report"])
         r = rng.random()
         variant = "no_reporter" if r < 0.10 else "no_patient" if r < 0.18 else "complete"
-        received = now - timedelta(hours=rng.uniform(1, 24 * 30))
+        received = now - timedelta(hours=rng.uniform(1, 24 * days))
         mid = f"MSG-{i:04d}"
         body, subject, sender, ext = renderer.render(t, identity, variant, channel, received)
         messages.append({"id": mid, "received_at": received.isoformat(), "channel": channel, "sender": sender, "subject": subject, "body": body})
