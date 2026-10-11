@@ -105,8 +105,10 @@ def _norm_kind(k: str | None) -> str:
     for known in KINDS:
         if known.replace("_", " ") == k:
             return known
-    for known in KINDS:
-        if known.split("_")[0] in k:
+    for word, known in (("urgent", "urgent_care_note"), ("discharge", "discharge_summary"), ("immuniz", "immunization_record"), ("vaccin", "immunization_record"),
+                        ("pharmac", "pharmacy_list"), ("medication list", "pharmacy_list"), ("dispens", "pharmacy_list"), ("lab", "lab_report"), ("result", "lab_report"),
+                        ("note", "clinic_note"), ("visit", "clinic_note"), ("encounter", "clinic_note"), ("consult", "clinic_note"), ("letter", "clinic_note")):
+        if word in k:
             return known
     return "other"
 

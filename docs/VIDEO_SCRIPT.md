@@ -1,52 +1,52 @@
 # Sourced, video script (3:00 limit)
 
-Narration is about 460 words, which is 2:50 at 160 words a minute. Screen directions are in brackets. Every number in the narration is in the table at the end with its source. If you regenerate the evaluation, update the numbers here and in the README together.
+Narration is about 430 words, which is 2:45 at 160 words a minute. Order: hook and problem, overview, the pages (where rules run and where the model runs), proof, Tiger Data, the live upload, the integration close. Screen directions are in brackets. Every number in the narration is in the table at the end with its source. If you regenerate the evaluation, update the numbers here and in the README together.
 
 ---
 
 **[0:00, black screen, a counter ticking up fast]**
 
-One Phase 3 trial. Four hundred patients, twelve visits, sixty fields a visit. Two hundred ninety thousand data points, each typed by hand from a hospital record into the sponsor's forms, then checked by a monitor against the source.
+One Phase 3 trial. Four hundred patients, twelve visits, sixty fields a visit. Two hundred ninety thousand data points, each typed by hand from the hospital record into the sponsor's forms, then checked against the source by a monitor.
 
-**[0:15, the counter stops; "$19,000,000", "15 to 30%", "8 days" fade in one by one]**
+**[0:14, the counter stops; "$19,000,000", "15 to 30%", "17%" fade in one by one]**
 
-The median pivotal trial costs nineteen million dollars. Fifteen to thirty percent of that is the checking. The typing runs eight days behind the visit.
+The median pivotal trial costs nineteen million dollars. Fifteen to thirty percent of that is the checking. Connectors automate the structured part, and the one independent study of them, TransFAIR, moved seventeen percent of the data. The rest is faxes, notes, and other sites' records.
 
-**[0:26, cut to the landing page, hero]**
+**[0:32, landing page: hero, then scroll once through "How it works"]**
 
-So we made Sourced. Clinical data that manages itself, with receipts. It reads the records, structured or faxed, keeps every fact with its origin, fills the form, checks it again, and asks a person only about what disagreed.
+So we made Sourced. Clinical data that manages itself, with receipts. One ledger per patient, forms that fill from it, a verifier that checks every field, a person who decides only what disagreed. We cover the unglamorous plumbing and keep people in the loop.
 
-**[0:42, Documents tab. Choose the photographed fax from the recording notes, click "store and read the photo", wait, open the document: the photo beside its transcription]**
+**[0:48, Patient page for Olu Murphy: "Known at", the documents, the ledger; click the weight concept]**
 
-The part no connector reaches: a photo of a fax from a walk-in clinic. Eight seconds later it is ten facts. The reader must quote every value, and each quote is located to a page and a span. Pounds became kilograms, and what was written is kept.
+Here is one patient known to two organizations. The hospital's FHIR record is read by rules. The clinic's faxes are read by the model, which must quote every value, and the quote is located to a page. Both land in one ledger with a receipt on every fact.
 
-**[0:58, Patient page for Olu Murphy. Point at "Known at", then at the weight concept]**
+**[1:05, Form review: open Noah Lee's school form from the queue, click the flagged weight]**
 
-Every source lands in one ledger per patient.
+Pick a form and a visit. Rules fill it in milliseconds, nearest value first. A second set of rules re-derives every field and compares sources. This weight is flagged: who said what, where, and when; the likely cause from the patient's own history; a suggested decision. The model can give a second reading, but only from the receipts.
 
-**[1:03, choose Vital Signs, visit date 2026-07-06, click "fill and verify"]**
+**[1:27, apply the suggestion, type a name, sign, open the export, scroll to the history with the chain badge]**
 
-Pick a form and a visit. It fills in milliseconds, every field with a receipt and a verdict. The fax weight agrees with the hospital's scale from the day before. The blood pressure does not.
+The coordinator decides, signs, exports in the trial database's format, and every action goes into a hash-chained audit trail. Regeneron's site agent outline asks for the source cited and traceable, acting alone once proven, the coordinator accountable. That is this page.
 
-**[1:17, click the flagged field. Read "Why it is flagged". Click the receipt, the fax opens highlighted. Back. Choose a value, type a reason, sign, open the export]**
+**[1:44, Metrics: the forms table, then the reader table's "variant layouts" row]**
 
-Flagged, not guessed. The field says who recorded what, where, and when. The receipt opens the fax, words highlighted. The coordinator picks, gives a reason, signs. The export is in the trial database's format. Every action is in a hash-chained audit trail.
+Proof before autonomy. Against a planted answer key: every field filled and accurate, thirty-five of thirty-five conflicts caught, no false alarms. The regex scripts sites use today read under one percent of a layout they were not written for. The reader reads all of it.
 
-**[1:35, Metrics tab, scroll to the reader table, hover the "variant layouts" row]**
+**[2:00, Documents tab, with the schema slide as an inset: hypertable, compression, continuous aggregate, pgvector]**
 
-You are probably wondering why this does not exist already. Connectors move structured hospital data into trial databases. The one independent study, TransFAIR, moved seventeen percent of the data. The rest was free text, paper, or another site's records. Sites patch that with scripts. Here is ours. Seventy-four percent on the layouts it was written for. Under one percent on the ones it was not. And a third of real documents are the ones it was not.
+All of it lives on Tiger Data. Facts are a hypertable chunked by time, so "nearest reading to this visit" touches only its chunk. Old history compresses in place. The live chart is a continuous aggregate. Document search is pgvector in the same database. One Postgres, four shapes of data.
 
-**[2:03, landing page, "How it works", one row per sentence]**
+**[2:17, Documents: patient id, organization, choose the photo, "store and read the photo"; open the patient page]**
 
-Our answer is four agents, and only one is a model. The reader turns free text into facts and must quote. The ledger unions every organization. The filler maps facts to the validated form. The verifier re-derives every field and compares sources. Each is checked by the next, so the model can be wrong and the form still cannot lie. On our test trial, structured data alone fills sixty-eight percent of the fields. With the reader, ninety-nine point seven.
+Now the plumbing, live. A photo of a fax from a walk-in clinic. Eight seconds later it is ten facts, every quote located, pounds to kilograms. The patient's document list already has it.
 
-**[2:30, slide: the Regeneron site agent families with "Source-to-EDC" circled; then the standards chips]**
+**[2:31, fill Vital Signs for 2026-09-06; the weight is flagged; click it]**
 
-On Regeneron's own site agent map this is the source-to-EDC data agent: acts alone once proven, study coordinator accountable. Everything it speaks, sites already run. FHIR in. LOINC codes. CDASH forms. ODM out. An audit trail built for FDA eSource. On Tiger Data.
+Fill the vital signs page. Four values agree with the hospital. One does not: the fax says one hundred ninety pounds, the hospital says seventy-eight kilos, and the patient's own year of readings sides with the hospital. Flagged, explained, suggested, not decided.
 
-**[2:45, landing page, "Who uses it"]**
+**[2:46, landing page, "How it works", hold]**
 
-The coordinator stops typing. The monitor verifies with a click. The data manager gets fewer queries. A pediatrician fills a school form from the same ledger. The model reads. The rules fill and check. The human signs.
+Sourced is the middle of the pipe. FHIR and faxes come in; signed, sourced records go out to the trial database. The model reads. The rules fill and check. The human signs.
 
 ---
 
@@ -70,7 +70,7 @@ The coordinator stops typing. The monitor verifies with a click. The data manage
 | 17 percent | data points transferred by EHR-to-EDC connectors; 16.9 percent, medications 7.7 percent, 48 percent of compared points absent from the structured record | TransFAIR, BMJ Health & Care Informatics 2023, PMC10277109 |
 | 74 percent, under 1 percent | scripts baseline recall on standard layouts (74.1) and variant layouts (0.7); a third of documents are variant | `docs/eval-sourced-model.md` |
 | 68 percent, 99.7 percent | visit-page fields a structured-only connector would fill, and fields Sourced fills, on the 128 demo forms | `docs/COMPONENTS.md`, section "Coverage" |
-| 8 seconds, 10 facts | the photographed walk-in clinic fax in `data/samples`, transcribed and read live with gpt-4.1 | measured 2026-10-11 |
+| 8 seconds, 10 facts | `data/samples/fax_demo_upload.jpg`, transcribed and read live with gpt-4.1 (7.5 s in the dry run) | measured 2026-10-11 |
 | 40 percent fewer queries, 0.5 to 1 month | Regeneron site agents outline, lock estimate | HWei outline, page 1 |
 
 ## Optional cut-ins if there is time
@@ -84,21 +84,13 @@ The coordinator stops typing. The monitor verifies with a click. The data manage
 ## Recording notes
 
 - Open these tabs before recording: landing page, Documents, Olu Murphy's patient page (01-701-1415), Metrics. Hide the browser bookmarks bar.
-- The photographed fax is `data/samples/fax_walkin_olu_murphy.jpg`. On the Documents tab enter patient id `01-701-1415`, source organization `Riverside Walk-in Clinic`, leave the kind on "let the reader decide" and the date empty, choose the file, click "store and read the photo, scan, or PDF". The reader names it a clinic note dated 2026-07-06 and returns ten facts. If you prefer to paste text instead, this is the same note:
+- **The live upload is `data/samples/fax_demo_upload.jpg`.** It is not in the ledger. On the Documents tab enter patient id `01-701-1415`, organization `Riverside Walk-in Clinic`, leave the kind on "let the reader decide" and the date empty, choose the file, click "store and read the photo, scan, or PDF". Ten facts, dated 2026-09-06 from the document. Then on the patient page fill Vital Signs for `2026-09-06`: blood pressure, pulse, and temperature agree with the hospital's visit the day before; the weight, 190 lbs, is flagged, and the likely cause says it is out of line with the patient's year of readings and suggests the hospital's 78.02 kg.
+- To re-record, remove it first so the upload is fresh again (the audit events stay, the chain is append-only):
 
-```
-WALK-IN CLINIC OF HOBOKEN            FAX 201-555-0144
-Progress note                        Date of visit: 07/06/2026
-Patient: Olu Murphy     DOB 11/23/1940     Acct 44-2210
-
-Vitals: B/P 128/82   P 72   T 98.4 F   Wt 172 lbs
-Labs drawn today: ALT 28 U/L
-Meds reviewed: Ocuvite 1 tablet BID, continue.
-Plan: follow up with primary in 3 months.
+```bash
+cd /Users/ayaanfaisal/Documents/HackRUF26 && PYTHONPATH=backend ./.venv/bin/python -m sourced.cli forget DOC-U30FBC36F
 ```
 
-- The hospital weighed this patient at 78.02 kg on 2026-07-05. The fax says 172 lbs, which is 78.02 kg, so the weight agrees. The blood pressure, pulse and temperature differ from the hospital's values on 2026-07-05, so they come back "disagree", each with a likely cause from the rules. Fill Vital Signs for 2026-07-06.
-- The fax also says Ampicillin's course was completed in May. On the Medications page that is a second witness for the hospital's stop date against the pharmacy list, and the rules already say a dispensing list cannot show a stop.
-- The document id is derived from the file or the text, so sending the same fax twice is rejected with its existing id. If you re-record, delete the document first or change one character.
+- `data/samples/fax_walkin_olu_murphy.jpg` is the first photographed fax and is already in the ledger as DOC-UABB14A3C, with its vital signs page (2026-07-06) filled. Use it to show a processed photo on the Document page; uploading it again is refused as a duplicate.
 - Record at 1440 wide. The landing page and the form review page are the two screens that carry the story; linger on them.
 - Two safe cuts if the take runs long: the "Every source lands in one ledger" line at 0:58, and the last sentence of the 2:03 block.

@@ -131,6 +131,15 @@ def cmd_fill(a):
     print(f"filled {n} forms for {len(adults)} adults and {len(kids)} children")
 
 
+def cmd_forget(a):
+    from .store import Store
+    st = Store(); st.conn.execute("SET timescaledb.max_tuples_decompressed_per_dml_transaction = 0")
+    n = st.conn.execute("DELETE FROM facts WHERE document_id = %s", (a.document_id,)).rowcount
+    st.conn.execute("DELETE FROM document_chunks WHERE document_id = %s", (a.document_id,))
+    d = st.conn.execute("DELETE FROM documents WHERE id = %s", (a.document_id,)).rowcount
+    print(f"{a.document_id}: {'removed' if d else 'not found'}, {n} facts deleted; audit events kept")
+
+
 def cmd_evaluate(a):
     from .evaluate import evaluate, to_markdown
     from .store import Store
@@ -163,6 +172,7 @@ def main():
     s = sub.add_parser("load"); s.add_argument("--seed", type=int, default=7); s.add_argument("--doc-adults", type=int, default=80); s.add_argument("--children", type=int, default=10)
     s.add_argument("--reader", choices=["oracle", "model"], default=os.environ.get("SOURCED_READER", "oracle")); s.add_argument("--max-docs", type=int, default=0); s.add_argument("--workers", type=int, default=6); s.add_argument("--keep", action="store_true"); s.add_argument("--no-cache", action="store_true", help="call the model even when a cached read exists"); s.set_defaults(f=cmd_load)
     s = sub.add_parser("fill"); s.add_argument("--patients", type=int, default=30); s.add_argument("--visits", type=int, default=2); s.add_argument("--forms", default="vs_visit,lb_visit,cm_log"); s.add_argument("--reset", action="store_true", help="delete existing form instances first"); s.set_defaults(f=cmd_fill)
+    s = sub.add_parser("forget", help="remove a live-uploaded document, its chunks, and its facts (audit events stay)"); s.add_argument("document_id"); s.set_defaults(f=cmd_forget)
     s = sub.add_parser("evaluate"); s.add_argument("--patients", type=int, default=60); s.add_argument("--seed", type=int, default=7); s.add_argument("--reader", default=os.environ.get("SOURCED_READER", "oracle")); s.add_argument("--out", default=None); s.set_defaults(f=cmd_evaluate)
     s = sub.add_parser("compress"); s.add_argument("--days", type=int, default=120); s.set_defaults(f=cmd_compress)
     a = p.parse_args(); a.f(a)

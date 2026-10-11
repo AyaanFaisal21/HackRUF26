@@ -37,3 +37,7 @@ Raw openFDA downloads from the earlier Day Zero prototype. Not used by Sourced.
 ## data/samples/fax_walkin_olu_murphy.jpg
 
 A photographed walk-in clinic note for patient 01-701-1415, generated from typed text with paper grain, a crease, and a tilt. Used to demonstrate photo intake: upload it on the Documents tab and the reader transcribes it, names it a clinic note dated 2026-07-06, and returns ten facts with located quotes.
+
+## data/samples/fax_demo_upload.jpg
+
+The second photographed note for the same patient, dated 2026-09-06, kept out of the ledger so it can be uploaded live. Four vitals and two labs agree with the hospital's visit the day before; the weight (190 lbs) is planted to disagree, so the vital signs page flags it and the rules suggest the hospital's value from the patient's history.
