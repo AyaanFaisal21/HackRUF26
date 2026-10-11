@@ -261,7 +261,7 @@ def decide(iid: int, key: str, d: Decision):
     try:
         return store().decide_field(iid, key, {**d.model_dump(), "at": datetime.now(UTC).isoformat()})
     except KeyError:
-        raise HTTPException(404, key)
+        raise HTTPException(404, key) from None
 
 
 class Sign(BaseModel):
