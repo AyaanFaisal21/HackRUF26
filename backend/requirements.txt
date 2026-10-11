@@ -1,5 +1,6 @@
 anthropic>=1.13
 openai>=1.50
+google-genai>=1.0
 fastapi>=0.120
 uvicorn[standard]>=0.30
 pydantic>=2.7

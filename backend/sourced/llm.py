@@ -1,10 +1,11 @@
-"""One thin seam for every model call. Two providers, same interface. Whichever key is present is used.
+"""One thin seam for every model call. Three providers, same interface. Whichever key is present is used.
 
   parse(system, user, Model) -> Model      structured output validated against a Pydantic model
   text(system, user) -> str                free text (narratives)
 
-Set LLM_PROVIDER=anthropic|openai to force one. Models: ANTHROPIC_MODEL (default claude-opus-5-5),
-OPENAI_MODEL (default gpt-4.1). No key -> provider() returns None and callers fall back to deterministic output."""
+Set LLM_PROVIDER=anthropic|openai|gemini to force one. Models: ANTHROPIC_MODEL (default claude-opus-5-5),
+OPENAI_MODEL (default gpt-4.1), GEMINI_MODEL (default gemini-3.8-flash). Order when several keys are present: Anthropic,
+OpenAI, Gemini. No key -> provider() returns None and callers fall back to deterministic output."""
 from __future__ import annotations
 
 import base64
@@ -104,6 +105,36 @@ class OpenAILLM:
         return _pages(resp.choices[0].message.content or "")
 
 
+class GeminiLLM:
+    name = "gemini"
+
+    def __init__(self, model: str | None = None):
+        from google import genai
+        self.client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY"))
+        self.model = model or os.environ.get("GEMINI_MODEL", "gemini-3.8-flash")
+
+    def _config(self, system: str, **kw):
+        from google.genai import types
+        return types.GenerateContentConfig(system_instruction=system, **kw)
+
+    def parse(self, system: str, user: str, model_cls: Type[T]) -> T:
+        resp = self.client.models.generate_content(model=self.model, contents=user,
+                                                   config=self._config(system, response_mime_type="application/json", response_schema=model_cls))
+        if resp.parsed is None:
+            return model_cls.model_validate_json(resp.text or "")
+        return resp.parsed
+
+    def text(self, system: str, user: str, max_tokens: int = 2000) -> str:
+        resp = self.client.models.generate_content(model=self.model, contents=user, config=self._config(system, max_output_tokens=max_tokens))
+        return resp.text or ""
+
+    def transcribe(self, images: list[tuple[bytes, str]]) -> str:
+        from google.genai import types
+        parts = [types.Part.from_bytes(data=b, mime_type=mt) for b, mt in images] + [TRANSCRIBE]
+        resp = self.client.models.generate_content(model=self.model, contents=parts)
+        return _pages(resp.text or "")
+
+
 def provider():
     if not os.environ.get("OPENAI_API_KEY") and os.environ.get("OPEN_AI_API_KEY"):   # common spelling in .env files
         os.environ["OPENAI_API_KEY"] = os.environ["OPEN_AI_API_KEY"]
@@ -112,4 +143,6 @@ def provider():
         return AnthropicLLM()
     if forced == "openai" or (not forced and os.environ.get("OPENAI_API_KEY")):
         return OpenAILLM()
+    if forced == "gemini" or (not forced and (os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY"))):
+        return GeminiLLM()
     return None
