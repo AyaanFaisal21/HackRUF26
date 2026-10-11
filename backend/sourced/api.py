@@ -207,9 +207,12 @@ def queue():
 
 @app.get("/api/metrics")
 def metrics(refresh: bool = False, max_patients: int = 40):
-    from .evaluate import evaluate
+    from .evaluate import evaluate, reader_metrics
+    from .generate import build_world
     key = f"{max_patients}"
     if refresh or key not in _metrics_cache:
         st = store()
-        _metrics_cache[key] = {"computed_at": datetime.now(timezone.utc).isoformat(), **evaluate(st, answer_key(), st.patients(), max_patients)}
+        m = evaluate(st, answer_key(), st.patients(), max_patients)
+        m["reader"] = reader_metrics(st, answer_key(), build_world(seed=7)["documents"])
+        _metrics_cache[key] = {"computed_at": datetime.now(timezone.utc).isoformat(), **m}
     return _metrics_cache[key]
