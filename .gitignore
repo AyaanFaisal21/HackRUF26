@@ -6,8 +6,6 @@ __pycache__/
 .DS_Store
 node_modules/
 frontend/dist/
-spikes/*/data/*
-!spikes/hiddenlabs/data/edish.png
 data/raw/
 .claude/
 *credentials*.env

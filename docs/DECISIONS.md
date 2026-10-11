@@ -7,7 +7,7 @@ Day Zero (safety intake with a regulatory clock) was built and working. We repla
 
 ## Why Day Zero
 
-Fifty-two sheets were read. Three were spiked far enough to find their roadblocks (see `spikes/`). Day Zero won on floor, not ceiling:
+Fifty-two sheets were read. Three were spiked far enough to find their roadblocks; the spike code was removed in the post-submission cleanup and is in git history before commit a117c2d. Day Zero won on floor, not ceiling:
 
 - It is the only candidate whose ground truth is hundreds of real structured records (openFDA) rather than a handful of hand-made documents.
 - The core is rules, not model output. Validity, seriousness, day zero, and deadlines are written in the regulations and are testable.

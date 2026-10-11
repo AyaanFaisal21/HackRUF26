@@ -33,6 +33,8 @@ make db-up                 # local TimescaleDB with pgvector on :5433 (skip if D
 make db-init               # ledger schema: hypertables, continuous aggregate, vector index
 make load                  # generate the two-clinic world and read every source into the ledger (about 5 seconds locally)
 make fill                  # fill and verify forms for 30 documented patients and the 10 children
+make test                  # 9 tests: units, readers, filler, verifier, diagnoses, audit chain
+make lint                  # ruff (pip install -r backend/requirements-dev.txt)
 make api                   # http://localhost:8000/docs
 make web                   # http://localhost:5173
 ```

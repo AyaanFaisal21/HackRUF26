@@ -4,17 +4,17 @@
 services:
   tiger:
     image: timescale/timescaledb-ha:pg17
-    container_name: dayzero-tiger
+    container_name: sourced-tiger
     environment:
-      POSTGRES_USER: dayzero
-      POSTGRES_PASSWORD: dayzero
-      POSTGRES_DB: dayzero
+      POSTGRES_USER: sourced
+      POSTGRES_PASSWORD: sourced
+      POSTGRES_DB: sourced
     ports:
       - "5433:5432"
     volumes:
       - tiger-data:/home/postgres/pgdata/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U dayzero -d dayzero"]
+      test: ["CMD-SHELL", "pg_isready -U sourced -d sourced"]
       interval: 5s
       timeout: 3s
       retries: 20
