@@ -1,17 +1,15 @@
-"""Extraction: raw message -> Extraction with verbatim evidence. Two implementations behind one interface.
+"""Extraction: raw message -> Extraction with verbatim evidence. Three implementations behind one interface.
 
-ClaudeExtractor  calls the model with structured outputs (client.messages.parse + Pydantic). Requires ANTHROPIC_API_KEY.
-OracleExtractor  returns the answer key. Used for the offline demo and for testing everything downstream of extraction.
-locate_spans     turns the model's verbatim quotes into character offsets so the UI can highlight them.
-"""
+OracleExtractor  returns the answer key (offline demo, tests everything downstream of the model).
+ModelExtractor   uses whichever provider llm.provider() finds (Anthropic or OpenAI key).
+locate_spans     turns verbatim quotes into character offsets so the UI can highlight them."""
 from __future__ import annotations
 
 import os
 from typing import Protocol
 
+from .llm import provider
 from .schema import Evidence, Extraction, Message
-
-DEFAULT_MODEL = os.environ.get("DAYZERO_MODEL", "claude-opus-5-5")
 
 SYSTEM = """You are the intake step of a pharmacovigilance case-processing system. You read one incoming report
 (an email, call-center note, patient portal message, site report, or OCR text of a fax) and fill a structured record.
@@ -36,7 +34,6 @@ class Extractor(Protocol):
 
 
 def locate_spans(ext: Extraction, body: str) -> Extraction:
-    """Fill start/end for every Evidence by exact (then case-insensitive) search in the body."""
     low = body.lower()
 
     def fix(ev: Evidence) -> Evidence:
@@ -56,8 +53,6 @@ def locate_spans(ext: Extraction, body: str) -> Extraction:
 
 
 class OracleExtractor:
-    """Answer-key extractor. answer_key maps message id -> Extraction dict."""
-
     def __init__(self, answer_key: dict):
         self.key = answer_key
 
@@ -66,33 +61,26 @@ class OracleExtractor:
         return locate_spans(ext, message.body)
 
 
-class ClaudeExtractor:
-    def __init__(self, model: str = DEFAULT_MODEL, client=None):
-        import anthropic  # imported here so the offline path never needs the SDK
-        self.client = client or anthropic.Anthropic()
-        self.model = model
+class ModelExtractor:
+    def __init__(self, llm=None):
+        self.llm = llm or provider()
+        if self.llm is None:
+            raise SystemExit("no model key found: set ANTHROPIC_API_KEY or OPENAI_API_KEY in .env")
 
     def extract(self, message: Message) -> Extraction:
         user = (f"<message id=\"{message.id}\" channel=\"{message.channel}\" received=\"{message.received_at.isoformat()}\">\n"
                 f"From: {message.sender or '(unknown)'}\nSubject: {message.subject or '(none)'}\n\n{message.body}\n</message>")
-        resp = self.client.messages.parse(
-            model=self.model,
-            max_tokens=8000,
-            system=[{"type": "text", "text": SYSTEM, "cache_control": {"type": "ephemeral"}}],
-            messages=[{"role": "user", "content": user}],
-            output_format=Extraction,
-        )
-        if resp.stop_reason == "refusal":
-            raise RuntimeError(f"model refused message {message.id}: {resp.stop_details}")
-        if resp.parsed_output is None:
-            raise RuntimeError(f"no structured output for message {message.id} (stop_reason={resp.stop_reason})")
-        return locate_spans(resp.parsed_output, message.body)
+        return locate_spans(self.llm.parse(SYSTEM, user, Extraction), message.body)
+
+
+# kept for callers that imported the old name
+ClaudeExtractor = ModelExtractor
 
 
 def get_extractor(answer_key: dict | None = None) -> Extractor:
     kind = os.environ.get("DAYZERO_EXTRACTOR", "oracle")
-    if kind == "claude":
-        return ClaudeExtractor()
+    if kind in ("claude", "openai", "model"):
+        return ModelExtractor()
     if answer_key is None:
         raise SystemExit("DAYZERO_EXTRACTOR=oracle needs an answer key (pass --answer-key)")
     return OracleExtractor(answer_key)
