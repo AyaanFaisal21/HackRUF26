@@ -35,6 +35,14 @@ class DocExtraction(BaseModel):
     facts: list[DocFact]
 
 
+class Suggestion(BaseModel):
+    """What the model may say about a flagged field. It reasons only from the receipts it is given."""
+    likely_cause: str = Field(description="One or two sentences on the most likely reason the sources disagree, using only the receipts.")
+    confidence: Literal["likely", "possible", "unclear"]
+    suggested_decision: str = Field(description="What the coordinator should record and why, one sentence. Write 'no suggestion' if the evidence does not favor a value.")
+    verify_with: str = Field(description="Who or what to check before signing: a role, a document, or the patient.")
+
+
 class Fact(BaseModel):
     id: int | None = None
     patient_id: str

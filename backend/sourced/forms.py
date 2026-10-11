@@ -60,6 +60,97 @@ def norm_cell(col: str, v) -> str | None:
     return s.lower()
 
 
+def _single_dose(row: dict) -> bool:
+    """True when any source says the medication was given once (frequency cell, or 'ONCE' inside the dose text)."""
+    texts = [x["value"] for x in row["values"].get("frequency", [])] + [x["value"] for x in row["values"].get("dose", [])]
+    return any(t and "once" in str(t).lower().split() for t in texts)
+
+
+def _dose_number(dose) -> float | None:
+    m = _DOSE.search(str(dose or ""))
+    return float(m.group(1)) if m else None
+
+
+def diagnose_row(term: str, row: dict, visit_date: date, kinds: dict) -> dict | None:
+    """Likely cause and a suggested decision for a conflicting list row. Rules only; every claim cites a receipt.
+    The coordinator still decides: this is a hypothesis with its evidence, never an action."""
+    conflicts = row.get("conflicts") or {}
+    srcs = row["sources"]
+    kind_of = lambda s: kinds.get(s.get("document_id") or "", "structured record" if not s.get("document_id") else "document")
+    ev = []
+    if "status" in conflicts:
+        ended = [s for s in srcs if (s.get("attrs") or {}).get("end")]
+        active = [s for s in srcs if not (s.get("attrs") or {}).get("end")]
+        if ended and active:
+            e, a = ended[0], active[0]
+            end = str(e["attrs"]["end"])[:10]; start = str(e["attrs"].get("start") or "")[:10]
+            days = None
+            try:
+                days = (date.fromisoformat(end) - date.fromisoformat(start)).days if start else None
+            except ValueError:
+                pass
+            ev.append(f"{e['source_org']} ({where(e)}) records an explicit stop on {end}" + (f" after a {days}-day course" if days is not None else ""))
+            a_kind = kind_of(a)
+            if a_kind == "pharmacy_list":
+                ev.append(f"{a['source_org']} ({where(a)}) is a dispensing list: it shows what was filled and has no field for a stop")
+                return {"likely_cause": f"Probably not a true conflict. A dispensing list cannot show that {term} was stopped, and the hospital record says it was.",
+                        "confidence": "likely", "evidence": ev, "verify_with": "the prescriber, only if the course length looks wrong",
+                        "suggestion": {"action": "accept", "reason": f"{e['source_org']} has an explicit stop on {end}; the {a['source_org']} list is dispensing-only and cannot record a stop"}}
+            seen = str(a.get("observed_at") or "")[:10]
+            if seen and seen > end:
+                ev.append(f"{a['source_org']} ({where(a)}) still lists it on {seen}, after that stop")
+                return {"likely_cause": f"{term} may have been continued or restarted after {e['source_org']} recorded the stop.",
+                        "confidence": "possible", "evidence": ev, "verify_with": "the patient at the next contact, or the prescriber",
+                        "suggestion": {"action": "accept", "reason": f"ask whether {term} continued after {end}; {a['source_org']} lists it on {seen}"}}
+            ev.append(f"{a['source_org']} ({where(a)}) lists it without a stop date")
+            return {"likely_cause": f"One record has a stop date and the other has none. A {a_kind.replace('_', ' ')} often does not track stops.",
+                    "confidence": "possible", "evidence": ev, "verify_with": "the prescriber",
+                    "suggestion": {"action": "accept", "reason": f"{e['source_org']} has an explicit stop on {end}; {a['source_org']} has no stop field"}}
+    if "dose" in conflicts:
+        nums = [(s, _dose_number((s.get("attrs") or {}).get("dose"))) for s in srcs]
+        nums = [(s, n) for s, n in nums if n]
+        if len(nums) >= 2:
+            hi, lo = max(n for _, n in nums), min(n for _, n in nums)
+            r = hi / lo if lo else None
+            structured = [s for s, _ in nums if not s.get("document_id")]
+            if r and (abs(r - 2) < 0.05 or abs(r - 10) < 0.2):
+                ev.append(f"the doses differ by a factor of {r:g}: {' vs '.join(conflicts['dose'])}")
+                cause = ("One source may record the dose per administration and the other per day, or a digit was doubled in transcription."
+                         if abs(r - 2) < 0.05 else "A decimal point slipped in one source.")
+                pref = structured[0] if structured else None
+                return {"likely_cause": cause, "confidence": "possible", "evidence": ev, "verify_with": "the prescriber or the pharmacy",
+                        "suggestion": {"action": "accept", "reason": (f"prefer the prescriber's record at {pref['source_org']} for the dose; the transcribed document differs by {r:g}x"
+                                                                       if pref else f"doses differ by {r:g}x; confirm with the prescriber")}}
+            ev.append("the doses do not differ by a simple factor")
+            return {"likely_cause": "The two records disagree on the dose and no pattern suggests a slip.", "confidence": "unclear", "evidence": ev,
+                    "verify_with": "the prescriber", "suggestion": None}
+    return None
+
+
+def tidy(quote: str) -> str:
+    """Quote as a reader would say it: runs of spaces collapsed. The receipt keeps the verbatim text."""
+    return re.sub(r"\s+", " ", quote).strip()
+
+
+def where(r: dict) -> str:
+    """One phrase saying where a receipt points: a document page or a structured record."""
+    if r.get("document_id"):
+        return f"{r['document_id']} page {r.get('page') or '?'}"
+    return r.get("resource_ref") or "structured record"
+
+
+def explain_row(term: str, row: dict, visit_date: date) -> str:
+    """Plain-language account of a conflicting list row, built only from the receipts. No model."""
+    parts = []
+    for src in row["sources"]:
+        a = src.get("attrs") or {}
+        said = ", ".join(x for x in (a.get("dose"), a.get("frequency"), f"from {a['start'][:10]}" if a.get("start") else None, f"ending {str(a['end'])[:10]}" if a.get("end") else None) if x)
+        quote = f', "{tidy(src["quote"])}"' if src.get("quote") else ""
+        parts.append(f"{src['source_org']} ({where(src)}{quote}) records {term}{': ' + said if said else ''}")
+    what = "; ".join(f"{col}: {' vs '.join(vals)}" for col, vals in row.get("conflicts", {}).items())
+    return ". ".join(parts) + f". As of the visit on {visit_date.isoformat()} the sources disagree on {what}."
+
+
 def receipt(fact: dict) -> dict:
     return {k: fact.get(k) for k in ("id", "source_org", "document_id", "page", "span_start", "span_end", "quote", "resource_ref", "extractor", "observed_at", "confidence", "unit", "attrs")}
 
@@ -100,6 +191,7 @@ def fill(store, patient_id: str, form: FormDef, visit_date: date) -> FormInstanc
                     status = f"ended {e}" if e and e <= visit_date else "active"
                     row["values"].setdefault("status", []).append({"value": status, "source_org": f["source_org"], "fact_id": f["id"]})
                 row["sources"].append(receipt(f))
+            kinds = store.document_kinds([s.get("document_id") for r in rows.values() for s in r["sources"] if s.get("document_id")]) if hasattr(store, "document_kinds") else {}
             out = []
             for row in rows.values():
                 cells = {}
@@ -110,8 +202,16 @@ def fill(store, patient_id: str, form: FormDef, visit_date: date) -> FormInstanc
                             by_norm.setdefault(norm_cell(col, v["value"]), v["value"])
                     cells[col] = sorted(by_norm.values())[0] if by_norm else None
                     if len(by_norm) > 1:
+                        if col == "status" and _single_dose(row):
+                            continue   # a single dose is over the day it is given; a source listing it without an end date is not in conflict
                         row.setdefault("conflicts", {})[col] = sorted(by_norm.values())
-                out.append({**{c: cells.get(c) for c in fd.columns}, **({"status": cells.get("status")} if "status" in cells else {}), "term": row["term"], "sources": row["sources"], "conflicts": row.get("conflicts", {}), "n_sources": len({s["source_org"] for s in row["sources"]})})
+                built = {**{c: cells.get(c) for c in fd.columns}, **({"status": cells.get("status")} if "status" in cells else {}), "term": row["term"], "sources": row["sources"], "conflicts": row.get("conflicts", {}), "n_sources": len({s["source_org"] for s in row["sources"]})}
+                if built["conflicts"]:
+                    built["explanation"] = explain_row(row["term"], built, visit_date)
+                    dx = diagnose_row(row["term"], built, visit_date, kinds)
+                    if dx:
+                        built["diagnosis"] = dx
+                out.append(built)
             out.sort(key=lambda r: (r.get("start") or r.get("date") or "", r["term"] or ""))
             fields.append(FilledField(key=fd.key, label=fd.label, vtype="list", rows=out, confidence=1.0 if out else 0.0))
             continue

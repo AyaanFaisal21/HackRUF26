@@ -124,10 +124,10 @@ def cmd_fill(a):
             for form_id in a.forms.split(","):
                 if (form_id == "vs_visit" and "sbp" not in has) or (form_id == "lb_visit" and "alt" not in has):
                     continue   # nothing was collected for that page at this visit
-                inst = verify(fill(st, pid, FORMS[form_id], date.fromisoformat(v)), FORMS[form_id])
+                inst = verify(fill(st, pid, FORMS[form_id], date.fromisoformat(v)), FORMS[form_id], store=st)
                 st.save_instance(inst); n += 1
     for pid in kids:
-        st.save_instance(verify(fill(st, pid, FORMS["nj_ch14"], date.today()), FORMS["nj_ch14"])); n += 1
+        st.save_instance(verify(fill(st, pid, FORMS["nj_ch14"], date.today()), FORMS["nj_ch14"], store=st)); n += 1
     print(f"filled {n} forms for {len(adults)} adults and {len(kids)} children")
 
 

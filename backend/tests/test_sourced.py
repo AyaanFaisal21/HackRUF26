@@ -87,3 +87,54 @@ def test_list_fields_union_sources_and_flag_dose_conflict():
     asp = next(r for r in rows if r["term"].lower() == "aspirin")
     assert asp["n_sources"] == 2 and asp["conflicts"]["dose"] == ["162 mg", "81 mg"]
     assert inst.fields[0].verifier["verdict"] == "disagree"
+
+
+def test_conflict_rows_carry_an_explanation_and_single_doses_are_not_status_conflicts():
+    v = date(2026, 7, 5)   # within 90 days of the course ending, so the ended record still belongs on the page
+    facts = [
+        Fact(patient_id="p", concept="medication", display="Medication", value_text="Ampicillin", observed_at=date(2026, 4, 26), end_at=date(2026, 5, 6), attrs={"dose": "250.0 mg TID", "start": "2026-04-26", "end": "2026-05-06"}, source_org="EHR", resource_ref="MedicationStatement/1", extractor="fhir", confidence=1.0),
+        Fact(patient_id="p", concept="medication", display="Medication", value_text="Ampicillin", observed_at=date(2026, 4, 26), attrs={"dose": "250 mg", "frequency": "TID", "start": "2026-04-26"}, source_org="Pharmacy", document_id="DOC-9", page=1, quote="Ampicillin 250 mg TID", extractor="model", confidence=0.95),
+        Fact(patient_id="p", concept="medication", display="Medication", value_text="Promethazine", observed_at=date(2026, 4, 29), end_at=date(2026, 4, 29), attrs={"dose": "1.0 tsp ONCE", "frequency": "ONCE"}, source_org="EHR", resource_ref="MedicationStatement/2", extractor="fhir", confidence=1.0),
+        Fact(patient_id="p", concept="medication", display="Medication", value_text="Promethazine", observed_at=date(2026, 4, 29), attrs={"dose": "1 tsp", "frequency": "ONCE"}, source_org="Pharmacy", document_id="DOC-9", page=1, quote="Promethazine 1 tsp ONCE", extractor="model", confidence=0.95),
+    ]
+    inst = verify(fill(MemoryStore(facts), "p", FORMS["cm_log"], v), FORMS["cm_log"])
+    rows = {r["term"]: r for r in inst.fields[0].rows}
+    assert rows["Ampicillin"]["conflicts"] == {"status": ["active", "ended 2026-05-06"]}
+    assert "DOC-9 page 1" in rows["Ampicillin"]["explanation"] and "MedicationStatement/1" in rows["Ampicillin"]["explanation"]
+    assert not rows["Promethazine"]["conflicts"]
+
+
+def test_diagnosis_unit_label_error_and_history_outlier():
+    # a document's "67.0 kg" is really pounds: the rules notice that 67 lb equals the hospital's 30.4 kg
+    facts = [
+        Fact(patient_id="p", concept="weight", display="Weight", value_num=30.4, unit="kg", observed_at=date(2026, 9, 1), source_org="Sunrise Pediatrics", resource_ref="Observation/w1", extractor="fhir", confidence=1.0),
+        Fact(patient_id="p", concept="weight", display="Weight", value_num=67.0, unit="kg", observed_at=date(2026, 9, 2), source_org="County Urgent Care", document_id="DOC-7", page=1, quote="Wt 67.0 kg", extractor="model", confidence=0.95),
+    ]
+    inst = verify(fill(MemoryStore(facts), "p", FORMS["vs_visit"], date(2026, 9, 1)), FORMS["vs_visit"])
+    w = next(f for f in inst.fields if f.key == "weight")
+    dx = w.verifier["diagnosis"]
+    assert w.verifier["verdict"] == "disagree" and dx["confidence"] == "likely" and "unit" in dx["likely_cause"].lower() and dx["suggestion"]["action"] == "accept"
+    # a 6 kg jump in one day is out of line with the child's own year of readings: suggest the pediatrician's value
+    hist = [Fact(patient_id="p", concept="weight", display="Weight", value_num=v, unit="kg", observed_at=d, source_org="Sunrise Pediatrics", resource_ref=f"Observation/h{i}", extractor="fhir", confidence=1.0)
+            for i, (v, d) in enumerate([(29.6, date(2026, 1, 10)), (29.9, date(2026, 3, 12)), (30.1, date(2026, 5, 14)), (30.3, date(2026, 7, 16))])]
+    facts = hist + [
+        Fact(patient_id="p", concept="weight", display="Weight", value_num=30.4, unit="kg", observed_at=date(2026, 9, 1), source_org="Sunrise Pediatrics", resource_ref="Observation/w1", extractor="fhir", confidence=1.0),
+        Fact(patient_id="p", concept="weight", display="Weight", value_num=36.4, unit="kg", observed_at=date(2026, 9, 2), source_org="County Urgent Care", document_id="DOC-7", page=1, quote="Wt 80.2 LB", extractor="model", confidence=0.95),
+    ]
+    store = MemoryStore(facts)
+    inst = verify(fill(store, "p", FORMS["vs_visit"], date(2026, 9, 2)), FORMS["vs_visit"], store=store)
+    w = next(f for f in inst.fields if f.key == "weight")
+    dx = w.verifier["diagnosis"]
+    assert w.value == 36.4 and dx["confidence"] == "possible" and dx["suggestion"]["action"] == "choose" and dx["suggestion"]["value"] == 30.4
+    assert "history" in dx["suggestion"]["reason"]
+
+
+def test_diagnosis_pharmacy_list_cannot_show_a_stop():
+    facts = [
+        Fact(patient_id="p", concept="medication", display="Medication", value_text="Ampicillin", observed_at=date(2026, 4, 26), end_at=date(2026, 5, 6), attrs={"dose": "250.0 mg TID", "start": "2026-04-26", "end": "2026-05-06"}, source_org="EHR", resource_ref="MedicationStatement/1", extractor="fhir", confidence=1.0),
+        Fact(patient_id="p", concept="medication", display="Medication", value_text="Ampicillin", observed_at=date(2026, 4, 26), attrs={"dose": "250 mg", "frequency": "TID", "start": "2026-04-26"}, source_org="Pharmacy", document_id="DOC-9", page=1, quote="Ampicillin 250 mg TID", extractor="model", confidence=0.95),
+    ]
+    inst = fill(MemoryStore(facts, documents={"DOC-9": "pharmacy_list"}), "p", FORMS["cm_log"], date(2026, 7, 5))
+    row = next(r for r in inst.fields[0].rows if r["term"] == "Ampicillin")
+    dx = row["diagnosis"]
+    assert dx["confidence"] == "likely" and "dispensing" in dx["suggestion"]["reason"] and "10-day course" in dx["evidence"][0]
