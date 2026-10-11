@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS facts (
     created_at   TIMESTAMPTZ NOT NULL DEFAULT now(),
     PRIMARY KEY (id, observed_at)
 );
-SELECT create_hypertable('facts', 'observed_at', chunk_time_interval => INTERVAL '90 days', if_not_exists => TRUE);
+SELECT create_hypertable('facts', 'observed_at', chunk_time_interval => INTERVAL '180 days', if_not_exists => TRUE);
 CREATE INDEX IF NOT EXISTS facts_patient_concept ON facts (patient_id, concept, observed_at DESC);
 CREATE INDEX IF NOT EXISTS facts_document ON facts (document_id);
 ALTER TABLE facts SET (timescaledb.compress, timescaledb.compress_segmentby = 'patient_id', timescaledb.compress_orderby = 'observed_at DESC');

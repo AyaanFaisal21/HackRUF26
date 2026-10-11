@@ -28,7 +28,7 @@ def test_fhir_reader_maps_observations_and_meds():
     ]}
     facts = read_fhir_bundle(bundle, "p1", "Test EHR")
     by = {f.concept: f for f in facts}
-    assert by["birth_date"].value_text == "1960-05-04" and by["sex"].value_text == "F"
+    assert by["birth_date"].value_text == "1960-05-04" and by["sex"].value_text == "F" and by["birth_date"].observed_at.year >= 2026
     assert by["weight"].unit == "kg" and round(by["weight"].value_num, 1) == 71.7 and by["weight"].attrs["unit_as_written"] == "lb"
     assert by["sbp"].value_num == 132 and by["dbp"].value_num == 84 and by["sbp"].resource_ref == "Observation/o2"
     assert by["medication"].value_text == "Lisinopril" and by["medication"].attrs["dose"] == "10 mg daily"

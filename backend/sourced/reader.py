@@ -77,14 +77,15 @@ def read_fhir_bundle(bundle: dict, patient_id: str, source_org: str) -> list[Fac
         rt, ref = r.get("resourceType"), f"{r.get('resourceType')}/{r.get('id')}"
         if rt == "Patient":
             bd = parse_date(r.get("birthDate"))
+            recorded = parse_date(bundle.get("timestamp")) or date.today()
             if bd:
-                facts.append(_fact(patient_id, "birth_date", source_org, ref, bd, value_text=bd.isoformat()))
+                facts.append(_fact(patient_id, "birth_date", source_org, ref, recorded, value_text=bd.isoformat()))
                 g = {"male": "M", "female": "F"}.get(r.get("gender"))
                 if g:
-                    facts.append(_fact(patient_id, "sex", source_org, ref, bd, value_text=g))
+                    facts.append(_fact(patient_id, "sex", source_org, ref, recorded, value_text=g))
                 for ext in r.get("extension", []):
                     if ext.get("url", "").endswith("race") and ext.get("valueString"):
-                        facts.append(_fact(patient_id, "race", source_org, ref, bd, value_text=ext["valueString"]))
+                        facts.append(_fact(patient_id, "race", source_org, ref, recorded, value_text=ext["valueString"]))
         elif rt == "Observation":
             when = parse_date(r.get("effectiveDateTime") or r.get("issued"))
             codes = [c.get("code") for c in r.get("code", {}).get("coding", [])]
@@ -116,7 +117,7 @@ def read_fhir_bundle(bundle: dict, patient_id: str, source_org: str) -> list[Fac
             dosage = (r.get("dosage") or r.get("dosageInstruction") or [{}])[0]
             attrs = {"dose": dosage.get("text"), "start": start.isoformat() if start else None, "end": per.get("end"),
                      "indication": next((rc.get("text") for rc in r.get("reasonCode", [])), None)}
-            facts.append(_fact(patient_id, "medication", source_org, ref, start or date(1900, 1, 1), value_text=name, attrs={k: v for k, v in attrs.items() if v}, end=parse_date(per.get("end"))))
+            facts.append(_fact(patient_id, "medication", source_org, ref, start or parse_date(bundle.get("timestamp")) or date.today(), value_text=name, attrs={k: v for k, v in attrs.items() if v}, end=parse_date(per.get("end"))))
         elif rt == "Condition":
             name = (r.get("code") or {}).get("text")
             onset = parse_date(r.get("onsetDateTime")) or parse_date(r.get("recordedDate"))

@@ -150,7 +150,7 @@ class Builder:
                 entries.append({"resource": {"resourceType": "AdverseEvent", "id": f"{pid}-ae-{i}", "actuality": "actual", "event": {"text": (r.get("pt") or r["term"]).title()}, "subject": {"reference": f"Patient/{pid}"},
                                              "date": d2(r["start_day"]).isoformat(), "severity": {"text": r.get("severity")}, "seriousness": {"text": "Serious" if r.get("serious") else "Non-serious"},
                                              "extension": [{"url": "http://example.org/fhir/StructureDefinition/end", "valueDate": d2(r["end_day"]).isoformat()}] if r.get("end_day") else []}})
-            self.bundles[pid] = {"resourceType": "Bundle", "type": "collection", "entry": entries}
+            self.bundles[pid] = {"resourceType": "Bundle", "type": "collection", "timestamp": self.today.isoformat(), "entry": entries}
             if pid in doc_subjects:
                 self._adult_documents(pid, name, birth, s, ref, by_vs[pid], by_lab[pid], by_cm[pid], gap_weight_day, gap_lab_day, cutoff)
 
@@ -279,7 +279,7 @@ class Builder:
                 onset = birth + timedelta(days=rng.randint(700, 2500))
                 entries.append({"resource": {"resourceType": "Condition", "id": f"{pid}-cond", "code": {"text": "Asthma"}, "subject": {"reference": f"Patient/{pid}"}, "onsetDateTime": onset.isoformat(), "clinicalStatus": {"text": "active"}}})
                 entries.append({"resource": {"resourceType": "MedicationStatement", "id": f"{pid}-med", "status": "active", "medicationCodeableConcept": {"text": "Albuterol inhaler"}, "subject": {"reference": f"Patient/{pid}"}, "effectivePeriod": {"start": onset.isoformat()}, "dosage": [{"text": "2 puffs every 4 to 6 hours as needed"}], "reasonCode": [{"text": "Asthma"}]}})
-            self.bundles[pid] = {"resourceType": "Bundle", "type": "collection", "entry": entries}
+            self.bundles[pid] = {"resourceType": "Bundle", "type": "collection", "timestamp": self.today.isoformat(), "entry": entries}
             self.truth["children"].append({"patient_id": pid, "immunizations_total": len(given), "in_ehr": len(ehr_vax), "in_document": len(doc_vax), "allergy": allergy, "asthma": asthma, "height": height, "weight": weight})
             # documents from the urgent care: immunization card scan and a visit note
             card_lines = [f"{v:<16}{when.strftime('%m/%d/%Y')}" for v, when in sorted(doc_vax, key=lambda x: x[1])]
