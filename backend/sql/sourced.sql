@@ -36,6 +36,8 @@ CREATE TABLE IF NOT EXISTS documents (
     n_facts       INT,
     read_at       TIMESTAMPTZ
 );
+ALTER TABLE documents ADD COLUMN IF NOT EXISTS image BYTEA;        -- the photo, scan, or PDF as received
+ALTER TABLE documents ADD COLUMN IF NOT EXISTS image_type TEXT;
 -- Vector index over document text, for "where in this patient's records is X".
 CREATE TABLE IF NOT EXISTS document_chunks (
     id          SERIAL PRIMARY KEY,

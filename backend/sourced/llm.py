@@ -7,6 +7,7 @@ Set LLM_PROVIDER=anthropic|openai to force one. Models: ANTHROPIC_MODEL (default
 OPENAI_MODEL (default gpt-4.1). No key -> provider() returns None and callers fall back to deterministic output."""
 from __future__ import annotations
 
+import base64
 import copy
 import json
 import os
@@ -15,6 +16,14 @@ from typing import Type, TypeVar
 from pydantic import BaseModel
 
 T = TypeVar("T", bound=BaseModel)
+
+TRANSCRIBE = ("Transcribe this document exactly as written, as plain text. Keep the line breaks and the order on the page. "
+              "Do not summarize, correct, translate, or add anything. Write [illegible] for anything you cannot read. "
+              "If there are several images they are pages in order; put a line containing only <page> between pages.")
+
+
+def _pages(text: str) -> str:
+    return "\f".join(p.strip("\n") for p in text.split("<page>"))
 
 
 def strict_schema(model_cls: Type[BaseModel]) -> dict:
@@ -58,6 +67,12 @@ class AnthropicLLM:
         resp = self.client.messages.create(model=self.model, max_tokens=max_tokens, system=system, messages=[{"role": "user", "content": user}])
         return "".join(b.text for b in resp.content if b.type == "text")
 
+    def transcribe(self, images: list[tuple[bytes, str]]) -> str:
+        content = [{"type": "image", "source": {"type": "base64", "media_type": mt, "data": base64.b64encode(b).decode()}} for b, mt in images]
+        content.append({"type": "text", "text": TRANSCRIBE})
+        resp = self.client.messages.create(model=self.model, max_tokens=6000, messages=[{"role": "user", "content": content}])
+        return _pages("".join(b.text for b in resp.content if b.type == "text"))
+
 
 class OpenAILLM:
     name = "openai"
@@ -81,6 +96,12 @@ class OpenAILLM:
         resp = self.client.chat.completions.create(model=self.model, max_tokens=max_tokens,
                                                    messages=[{"role": "system", "content": system}, {"role": "user", "content": user}])
         return resp.choices[0].message.content or ""
+
+    def transcribe(self, images: list[tuple[bytes, str]]) -> str:
+        content = [{"type": "text", "text": TRANSCRIBE}]
+        content += [{"type": "image_url", "image_url": {"url": f"data:{mt};base64,{base64.b64encode(b).decode()}", "detail": "high"}} for b, mt in images]
+        resp = self.client.chat.completions.create(model=self.model, max_tokens=6000, messages=[{"role": "user", "content": content}])
+        return _pages(resp.choices[0].message.content or "")
 
 
 def provider():

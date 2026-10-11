@@ -40,7 +40,8 @@ def _day(d: date) -> datetime:
 class MemoryStore:
     """Read-side only; enough for the filler and verifier tests."""
 
-    def __init__(self, facts: list[Fact]):
+    def __init__(self, facts: list[Fact], documents: dict | None = None):
+        self._kinds = documents or {}
         self._facts = []
         for i, f in enumerate(facts):
             d = f.model_dump()
@@ -50,6 +51,9 @@ class MemoryStore:
     def facts(self, patient_id, concept, start, end):
         return sorted([f for f in self._facts if f["patient_id"] == patient_id and f["concept"] == concept and start <= f["observed_at"] <= end and f["status"] != "rejected"],
                       key=lambda f: f["observed_at"], reverse=True)
+
+    def document_kinds(self, ids):
+        return {i: self._kinds[i] for i in ids if i in self._kinds}
 
 
 class Store:
@@ -84,16 +88,28 @@ class Store:
         for i in ids:
             self.conn.execute("INSERT INTO patient_identifiers VALUES (%s,%s,%s) ON CONFLICT DO NOTHING", (i["patient_id"], i["org"], i["local_id"]))
 
-    def insert_document(self, doc: Document, sha256: str, embedder=None):
-        self.conn.execute("""INSERT INTO documents (id, patient_id, source_org, kind, received_at, document_date, sha256, text, n_pages)
-                             VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (id) DO NOTHING""",
-                          (doc.id, doc.patient_id, doc.source_org, doc.kind, doc.received_at, doc.document_date, sha256, doc.text.replace("\x00", ""), doc.n_pages))
+    def insert_document(self, doc: Document, sha256: str, embedder=None, image: bytes | None = None, image_type: str | None = None):
+        self.conn.execute("""INSERT INTO documents (id, patient_id, source_org, kind, received_at, document_date, sha256, text, n_pages, image, image_type)
+                             VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (id) DO NOTHING""",
+                          (doc.id, doc.patient_id, doc.source_org, doc.kind, doc.received_at, doc.document_date, sha256, doc.text.replace("\x00", ""), doc.n_pages, image, image_type))
         if embedder is not None:
             for p, page in enumerate(doc.text.split("\f"), start=1):
                 paras = [x for x in page.split("\n\n") if x.strip()] or [page]
                 for ci, chunk in enumerate(paras):
                     self.conn.execute("INSERT INTO document_chunks (document_id, patient_id, page, chunk_index, text, embedding) VALUES (%s,%s,%s,%s,%s,%s::vector)",
                                       (doc.id, doc.patient_id, p, ci, chunk[:2000], _vec(embedder.embed(chunk))))
+
+    def set_document_meta(self, doc_id: str, kind: str | None, document_date):
+        self.conn.execute("UPDATE documents SET kind = coalesce(%s, kind), document_date = coalesce(%s, document_date) WHERE id = %s", (kind, document_date, doc_id))
+
+    def document_kinds(self, ids) -> dict:
+        ids = sorted({i for i in ids if i})
+        if not ids:
+            return {}
+        return {r["id"]: r["kind"] for r in self.conn.execute("SELECT id, kind FROM documents WHERE id = ANY(%s)", (ids,)).fetchall()}
+
+    def document_image(self, doc_id: str):
+        return self.conn.execute("SELECT image, image_type FROM documents WHERE id = %s AND image IS NOT NULL", (doc_id,)).fetchone()
 
     def mark_document(self, doc_id: str, status: str, reader: str | None, n_facts: int | None):
         self.conn.execute("UPDATE documents SET status = %s, reader = %s, n_facts = %s, read_at = now() WHERE id = %s", (status, reader, n_facts, doc_id))
@@ -164,11 +180,11 @@ class Store:
         return {"patient": p, "identifiers": ids, "documents": docs, "concepts": concepts, "forms": forms, "visit_dates": [v["d"] for v in visits]}
 
     def documents(self, status: str | None = None, limit: int = 300):
-        return self.conn.execute("""SELECT d.id, d.patient_id, p.display_name, d.source_org, d.kind, d.received_at, d.document_date, d.n_pages, d.status, d.reader, d.n_facts
+        return self.conn.execute("""SELECT d.id, d.patient_id, p.display_name, d.source_org, d.kind, d.received_at, d.document_date, d.n_pages, d.status, d.reader, d.n_facts, (d.image IS NOT NULL) AS has_image
                                     FROM documents d LEFT JOIN patients p ON p.id = d.patient_id WHERE (%s::text IS NULL OR d.status = %s) ORDER BY d.received_at DESC LIMIT %s""", (status, status, limit)).fetchall()
 
     def document(self, doc_id: str):
-        d = self.conn.execute("SELECT * FROM documents WHERE id = %s", (doc_id,)).fetchone()
+        d = self.conn.execute("SELECT id, patient_id, source_org, kind, received_at, document_date, sha256, text, n_pages, status, reader, n_facts, read_at, (image IS NOT NULL) AS has_image, image_type FROM documents WHERE id = %s", (doc_id,)).fetchone()
         if not d:
             return None
         facts = self.conn.execute("""SELECT id, concept, display, value_num, value_text, unit, observed_at::date AS observed_at, attrs, page, span_start, span_end, quote, confidence, status
