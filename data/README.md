@@ -33,3 +33,7 @@ Written by `make data`: patients, identifiers, and the full text of every genera
 ## data/raw (not committed)
 
 Raw openFDA downloads from the earlier Day Zero prototype. Not used by Sourced.
+
+## data/samples/fax_walkin_olu_murphy.jpg
+
+A photographed walk-in clinic note for patient 01-701-1415, generated from typed text with paper grain, a crease, and a tilt. Used to demonstrate photo intake: upload it on the Documents tab and the reader transcribes it, names it a clinic note dated 2026-07-06, and returns ten facts with located quotes.

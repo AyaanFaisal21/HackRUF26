@@ -15,7 +15,11 @@ export default function DocumentView() {
       <span className="muted small">dated {fmtDate(d.document_date)} · {d.n_pages} page{d.n_pages > 1 ? "s" : ""} · sha256 {d.sha256.slice(0, 12)}… · read by {d.reader}</span>
     </div>
     <div className="grid2">
-      <div className="card"><h2>Text as received <span className="muted small">(highlights are the receipts)</span></h2><Highlight text={d.text} spans={d.facts} active={active} /></div>
+      <div className="card">
+        {d.has_image && <><h2>As received <span className="muted small">({d.image_type})</span></h2>
+          {d.image_type === "application/pdf" ? <embed src={api.imageUrl(d.id)} type="application/pdf" style={{ width: "100%", height: 420, border: "1px solid var(--line)", borderRadius: 6, marginBottom: 12 }} />
+            : <img src={api.imageUrl(d.id)} alt="document as received" style={{ width: "100%", border: "1px solid var(--line)", borderRadius: 6, marginBottom: 12 }} />}</>}
+        <h2>{d.has_image ? "Transcription" : "Text as received"} <span className="muted small">(highlights are the receipts)</span></h2><Highlight text={d.text} spans={d.facts} active={active} /></div>
       <div className="card sticky"><h2>Facts read from this document <span className="muted small">({d.facts.length})</span></h2>
         <table><thead><tr><th>Fact</th><th>Value</th><th>When</th><th>Page</th><th>Conf.</th></tr></thead>
           <tbody>{d.facts.map((f) => <tr key={f.id} className={`row ${active === f.id ? "sel" : ""}`} onClick={() => { setActive(f.id); document.getElementById(`fact-${f.id}`)?.scrollIntoView({ block: "center" }); }}>
