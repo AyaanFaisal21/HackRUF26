@@ -1,50 +1,50 @@
 # Sourced, video script (3:00 limit)
 
-Narration is about 430 words, which is 2:45 at 160 words a minute. Order: hook and problem, overview, the pages (where rules run and where the model runs), proof, Tiger Data, the live upload, the integration close. Screen directions are in brackets. Every number in the narration is in the table at the end with its source. If you regenerate the evaluation, update the numbers here and in the README together.
+A screen recording of the website, start to finish, with one switch to the Tiger Cloud tab. No slides. The landing page carries the hook and the problem; the other pages carry the technical depth; the upload is live. Narration is about 440 words, 2:45 at 160 words a minute. Every number is in the table at the end with its source.
 
 ---
 
-**[0:00, black screen, a counter ticking up fast]**
+**[0:00, website, landing page, hero in view]**
 
 One Phase 3 trial. Four hundred patients, twelve visits, sixty fields a visit. Two hundred ninety thousand data points, each typed by hand from the hospital record into the sponsor's forms, then checked against the source by a monitor.
 
-**[0:14, the counter stops; "$19,000,000", "15 to 30%", "17%" fade in one by one]**
+**[0:14, scroll to "The problem", the three numbers]**
 
-The median pivotal trial costs nineteen million dollars. Fifteen to thirty percent of that is the checking. Connectors automate the structured part: the one independent study, TransFAIR, moved seventeen percent of the data. The rest is faxes, notes, and other sites' records.
+The median pivotal trial costs nineteen million dollars; fifteen to thirty percent of that is the checking. Connectors automate the structured part: the one independent study, TransFAIR, moved seventeen percent of the data. The rest is faxes, notes, and other sites' records.
 
-**[0:32, landing page: hero, then scroll once through "How it works"]**
+**[0:30, back up to the hero, then scroll through "How it works"]**
 
 So we made Sourced. Clinical data that manages itself, with receipts. One ledger per patient, forms that fill from it, a verifier on every field, a person deciding only what disagreed. The unglamorous plumbing, with people in the loop.
 
-**[0:48, Patient page for Olu Murphy: "Known at", the documents, the ledger; click the weight concept]**
+**[0:45, Patients, then Olu Murphy's page: "Known at", the documents, click the weight concept]**
 
 One patient, two organizations. The hospital's FHIR record is read by rules. The clinic's faxes are read by the model, which must quote every value, located to a page. One ledger, a receipt on every fact.
 
-**[1:05, Form review: open Noah Lee's school form from the queue, click the flagged weight]**
+**[1:00, Review queue, open Noah Lee's school form, click the flagged weight]**
 
-Pick a form and a visit. Rules fill it in milliseconds. A second set of rules re-derives every field and compares sources. This weight is flagged: who said what, where, and when; the likely cause from the patient's own history; a suggested decision. The model can add a second reading, only from the receipts.
+Disagreements first. Rules fill a form in milliseconds; more rules re-derive every field and compare sources. This weight is flagged: who said what, where, and when; the likely cause from the patient's own history; a suggested decision. The model can add a second reading, only from the receipts.
 
-**[1:27, apply the suggestion, type a name, sign, open the export, scroll to the history with the chain badge]**
+**[1:20, apply the suggestion, type a name, sign, open the export, scroll to the history with the chain badge]**
 
-The coordinator decides, signs, exports in the trial database's format, and every action goes into a hash-chained audit trail. Regeneron's site agent outline asks for the source cited and traceable, acting alone once proven, the coordinator accountable. That is this page.
+The coordinator decides, signs, exports in the trial database's format, and every action goes into a hash-chained audit trail. Regeneron's site agent outline asks for the source cited and traceable, acting alone once proven, the coordinator accountable.
 
-**[1:44, Metrics: the forms table, then the reader table's "variant layouts" row]**
+**[1:36, Metrics: the forms table, then the reader table's "variant layouts" row]**
 
 Proof before autonomy. Against a planted answer key: every field filled and accurate, thirty-five of thirty-five conflicts caught, no false alarms. The regex scripts sites use today read under one percent of an unfamiliar layout. The reader reads all of it.
 
-**[2:00, Documents tab, with the schema slide as an inset: hypertable, compression, continuous aggregate, pgvector]**
+**[1:51, switch to the Tiger Cloud tab: Overview with the storage panel, then Explorer with `facts` expanded]**
 
-It lives on Tiger Data. Facts are a hypertable chunked by time, so "nearest reading to this visit" touches only its chunk. Old history compresses in place. The live chart is a continuous aggregate. Document search is pgvector in the same database. One Postgres, four shapes of data.
+It lives on Tiger Data. The facts table is a hypertable chunked by time, so "nearest reading to this visit" opens one chunk. Old history compresses in place; that columnstore is it. The home chart is a continuous aggregate. Document search is pgvector in the same database. One Postgres, four shapes of data.
 
-**[2:17, Documents: patient id, organization, choose the photo, "store and read the photo"; open the patient page]**
+**[2:10, back to the website, Documents: patient id, organization, choose the photo, "store and read the photo"; then the patient page]**
 
 Now the plumbing, live. A photo of a fax from a walk-in clinic. Eight seconds later it is ten facts, every quote located, pounds to kilograms. The patient's document list already has it.
 
-**[2:31, fill Vital Signs for 2026-09-06; the weight is flagged; click it]**
+**[2:25, fill Vital Signs for 2026-09-06; click the flagged weight]**
 
 Fill the vital signs page. Four values agree with the hospital. One does not: the fax says one ninety pounds, the hospital says seventy-eight kilos, and the patient's own history sides with the hospital. Flagged, explained, suggested, not decided.
 
-**[2:46, landing page, "How it works", hold]**
+**[2:40, landing page, "How it works", hold]**
 
 Sourced is the middle of the pipe. FHIR and faxes come in; signed, sourced records go out to the trial database. The model reads. The rules fill and check. The human signs.
 
@@ -83,7 +83,9 @@ Sourced is the middle of the pipe. FHIR and faxes come in; signed, sourced recor
 
 ## Recording notes
 
-- Open these tabs before recording: landing page, Documents, Olu Murphy's patient page (01-701-1415), Metrics. Hide the browser bookmarks bar.
+- Open these before recording: the website (landing page), the Tiger Cloud console on the service Overview with the storage panel visible, and a second console tab on Explorer with the `public` schema expanded and `facts` selected so the chunks show. Hide the bookmarks bar.
+- Tiger tab, if you want one query on screen: paste `SELECT hypertable_name, num_chunks, compression_enabled FROM timescaledb_information.hypertables;` into the SQL Editor beforehand and press Run while speaking. It returns facts, 24 chunks, compression on.
+- Website pages in order: landing, Patients, Olu Murphy (01-701-1415), Review queue, Noah Lee's school form (top of the queue), Metrics, Documents, then the patient page again for the fill.
 - **The live upload is `data/samples/fax_demo_upload.jpg`.** It is not in the ledger. On the Documents tab enter patient id `01-701-1415`, organization `Riverside Walk-in Clinic`, leave the kind on "let the reader decide" and the date empty, choose the file, click "store and read the photo, scan, or PDF". Ten facts, dated 2026-09-06 from the document. Then on the patient page fill Vital Signs for `2026-09-06`: blood pressure, pulse, and temperature agree with the hospital's visit the day before; the weight, 190 lbs, is flagged, and the likely cause says it is out of line with the patient's year of readings and suggests the hospital's 78.02 kg.
 - To re-record, remove it first so the upload is fresh again (the audit events stay, the chain is append-only):
 
