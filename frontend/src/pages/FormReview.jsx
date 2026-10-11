@@ -18,9 +18,31 @@ function Receipt({ r }) {
   return (<span className="rcpt"><Org o={r.source_org} />{r.document_id ? <Link to={`/documents/${r.document_id}#fact-${r.id}`}>{r.document_id} p.{r.page}</Link> : <span>{r.resource_ref}</span>} · {fmtDate(r.observed_at)}</span>);
 }
 
+const CONF = { likely: "green", possible: "amber", unclear: "" };
+function Diagnosis({ dx, onApply, compact, applyLabel }) {
+  return (<div className={`dx ${compact ? "compact" : ""}`}>
+    {!compact && <h3>Likely cause</h3>}
+    <div className="small"><span className={`pill ${CONF[dx.confidence] ?? ""}`}>{dx.confidence}</span> {compact && <b>Likely cause. </b>}{dx.likely_cause}</div>
+    {dx.evidence?.length > 0 && <ul className="small evidence">{dx.evidence.map((e, k) => <li key={k}>{e}</li>)}</ul>}
+    {dx.suggestion ? <div className="small suggest"><b>Suggested decision.</b> {dx.suggestion.action === "choose" ? `Use ${dx.suggestion.value}: ` : "Keep the filled value: "}{dx.suggestion.reason}.
+      {onApply && <> <button onClick={(e) => { e.stopPropagation(); onApply(dx.suggestion); }}>{applyLabel ?? "apply suggestion"}</button></>}</div>
+      : <div className="small suggest muted">No suggestion: the receipts do not favor a value. The coordinator decides.</div>}
+    {dx.verify_with && <div className="small muted">Verify with {dx.verify_with}.</div>}
+  </div>);
+}
+function ModelSuggestion({ s, model }) {
+  return (<div className="small">
+    <div><span className={`pill ${CONF[s.confidence] ?? ""}`}>{s.confidence}</span> {s.likely_cause}</div>
+    <div style={{ marginTop: 4 }}><b>Suggested decision.</b> {s.suggested_decision}</div>
+    <div className="muted">Verify with {s.verify_with}. <span>({model})</span></div>
+  </div>);
+}
+
 export default function FormReview() {
   const { id } = useParams();
   const [i, setI] = useState(null); const [sel, setSel] = useState(null); const [actor, setActor] = useState(""); const [manual, setManual] = useState(""); const [reason, setReason] = useState(""); const [msg, setMsg] = useState(null); const [hist, setHist] = useState([]);
+  const [open, setOpen] = useState({}); const [explaining, setExplaining] = useState(false);
+  const askModel = (key) => { setExplaining(true); api.explain(id, key).then(load).catch((e) => setMsg(e.message)).finally(() => setExplaining(false)); };
   const load = () => { api.instance(id).then((x) => { setI(x); if (!sel) setSel(x.fields.find((f) => ["disagree", "rule_fail", "missing"].includes(f.verifier?.verdict) && !f.decision)?.key ?? x.fields[0]?.key); }); api.history(id).then(setHist); };
   useEffect(() => { load(); }, [id]);
   if (!i) return <div className="card">Loading…</div>;
@@ -69,6 +91,12 @@ export default function FormReview() {
             <div className="kv"><span className="muted">Filled value</span><span><b>{show(f.value)}</b> {f.value != null ? f.unit : ""} <Conf c={f.confidence} /></span>
               <span className="muted">Receipt</span><span><Receipt r={f.receipt} />{f.receipt?.quote && <div>“{f.receipt.quote}”</div>}{f.receipt?.attrs?.unit_as_written && f.receipt.attrs.unit_as_written !== f.unit && <div className="muted small">written as {f.receipt.attrs.as_written} {f.receipt.attrs.unit_as_written}, converted</div>}</span>
               <span className="muted">Verifier</span><span><Verdict v={f.verifier?.verdict} /> <span className="muted small">{f.verifier?.method}</span></span></div>
+            {f.verifier?.explanation && (<><h3>Why it is flagged</h3><p className="small" style={{ margin: 0 }}>{f.verifier.explanation}</p></>)}
+            {f.verifier?.diagnosis && <Diagnosis dx={f.verifier.diagnosis} onApply={i.status !== "signed" ? (sg) => act(f.key, sg.action === "choose" ? { action: "choose", fact_id: sg.fact_id, reason: `accepted suggestion: ${sg.reason}` } : { action: "accept", reason: `accepted suggestion: ${sg.reason}` }) : null} />}
+            {(f.verifier?.model_suggestion || f.verifier?.model_explanation || ["disagree", "rule_fail"].includes(f.verifier?.verdict)) && (<><h3>Model's reading of the receipts</h3>
+              {f.verifier?.model_suggestion ? <ModelSuggestion s={f.verifier.model_suggestion} model={f.verifier.model} />
+                : f.verifier?.model_explanation ? <p className="small" style={{ margin: 0 }}>{f.verifier.model_explanation} <span className="muted">({f.verifier.model})</span></p>
+                : <button onClick={() => askModel(f.key)} disabled={explaining}>{explaining ? "asking…" : "explain with the model"}</button>}</>)}
             <h3>Checks</h3>
             {(f.verifier?.checks || []).length ? <ul style={{ margin: "0 0 0 18px" }}>{f.verifier.checks.map((c, k) => <li key={k}><span className={`pill ${c.ok === false ? "red" : c.ok ? "green" : "muted"}`}>{c.check.replace(/_/g, " ")}</span> <span className="small">{detailText(c, f.unit)}</span></li>)}</ul> : <div className="muted small">No checks ran (no value).</div>}
             {f.alternatives?.length > 0 && (<><h3>Other values in the window</h3>{f.alternatives.map((a, k) => (
@@ -82,8 +110,19 @@ export default function FormReview() {
                 <button onClick={() => act(f.key, { action: "blank", reason: reason || "not collected" })}>leave blank</button>
               </div></>)}
           </>) : (<>
-            <table className="rows"><thead><tr>{Object.keys((f.rows || [])[0] || { term: 1 }).filter((k) => !["sources", "conflicts", "values", "n_sources", "name", "vaccine"].includes(k)).map((k) => <th key={k}>{k}</th>)}<th>sources</th></tr></thead>
-              <tbody>{(f.rows || []).map((r, k) => <tr key={k} className={Object.keys(r.conflicts || {}).length ? "conflict" : ""}>{Object.keys(r).filter((c) => !["sources", "conflicts", "values", "n_sources", "name", "vaccine"].includes(c)).map((c) => <td key={c}>{r[c] ?? ""}{r.conflicts?.[c] && <div className="small" style={{ color: "var(--red)" }}>sources disagree: {r.conflicts[c].join(" vs ")}</div>}</td>)}<td>{[...new Set(r.sources.map((s) => s.source_org))].map((o) => <Org key={o} o={o} />)}</td></tr>)}</tbody></table>
+            {(() => { const cols = Object.keys((f.rows || [])[0] || { term: 1 }).filter((k) => !["sources", "conflicts", "values", "n_sources", "name", "vaccine", "explanation", "diagnosis"].includes(k)); return (
+            <table className="rows"><thead><tr>{cols.map((k) => <th key={k}>{k}</th>)}<th>sources</th></tr></thead>
+              <tbody>{(f.rows || []).flatMap((r, k) => { const hasConflict = Object.keys(r.conflicts || {}).length > 0; const isOpen = open[k] ?? hasConflict; return [
+                <tr key={k} className={`row ${hasConflict ? "conflict" : ""}`} onClick={() => setOpen({ ...open, [k]: !isOpen })}>{cols.map((c) => <td key={c}>{r[c] ?? ""}{r.conflicts?.[c] && <div className="small" style={{ color: "var(--red)" }}>sources disagree: {r.conflicts[c].join(" vs ")}</div>}</td>)}<td>{[...new Set(r.sources.map((s) => s.source_org))].map((o) => <Org key={o} o={o} />)}</td></tr>,
+                isOpen ? <tr key={`${k}-d`} className="rowdetail"><td colSpan={cols.length + 1}>
+                  {r.explanation && <div className="small" style={{ marginBottom: 6 }}><b>Why it is flagged.</b> {r.explanation}</div>}
+                  {r.diagnosis && <Diagnosis dx={r.diagnosis} compact onApply={i.status !== "signed" && r.diagnosis.suggestion ? () => setReason(r.diagnosis.suggestion.reason) : null} applyLabel="use this reason" />}
+                  {r.sources.map((s, j) => <div key={j} className="small"><Org o={s.source_org} />{s.document_id ? <Link to={`/documents/${s.document_id}#fact-${s.id}`} onClick={(e) => e.stopPropagation()}>{s.document_id} p.{s.page}</Link> : <span className="muted">{s.resource_ref}</span>} · {fmtDate(s.observed_at)}{s.attrs?.dose ? ` · ${s.attrs.dose}` : ""}{s.attrs?.end ? ` · ended ${String(s.attrs.end).slice(0, 10)}` : ""}{s.quote && <span className="quote"> · “{s.quote.replace(/\s+/g, " ").trim()}”</span>}</div>)}
+                </td></tr> : null]; })}</tbody></table>); })()}
+            {(f.rows || []).some((r) => Object.keys(r.conflicts || {}).length) && (<div style={{ marginTop: 8 }}>
+              {f.verifier?.model_suggestion ? <div className="small"><b>Model's reading of the receipts.</b> <ModelSuggestion s={f.verifier.model_suggestion} model={f.verifier.model} /></div>
+                : f.verifier?.model_explanation ? <p className="small" style={{ margin: 0 }}><b>Model's reading of the receipts.</b> {f.verifier.model_explanation} <span className="muted">({f.verifier.model})</span></p>
+                : <button onClick={() => askModel(f.key)} disabled={explaining}>{explaining ? "asking…" : "explain with the model"}</button>}</div>)}
             {i.status !== "signed" && <div style={{ marginTop: 8 }}><input placeholder="reason" value={reason} onChange={(e) => setReason(e.target.value)} /> <button className="primary" onClick={() => act(f.key, { action: "accept", reason: reason || "rows reviewed" })}>accept rows as reviewed</button></div>}
           </>)}
         </div>)}
