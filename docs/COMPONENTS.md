@@ -34,32 +34,32 @@ Change these only in `backend/sourced/schema.py` and tell the team.
 | ID | Component | Files | Status | Hours left |
 |---|---|---|---|---|
 | S1 | Two-clinic world and answer key | `generate.py`, `scripts/convert_cdisc.py` | done: 264 patients, 220 documents, planted gaps, unit traps, conflicts | 3 to 5 |
-| S2 | Readers | `reader.py`, `llm.py` | FHIR done; model document reader written, never executed (no key); oracle done | 5 to 8 |
+| S2 | Readers | `reader.py`, `llm.py` | FHIR done; model reader run on all 208 documents with gpt-4.1 (100% recall, 99.2% precision, reads cached); regex baseline for comparison; oracle done | 2 to 4 |
 | S3 | Vocabulary and units | `concepts.py` | done for 20 concepts | 2 to 3 |
 | S4 | Ledger on Tiger | `sql/sourced.sql`, `store.py` | done: hypertables, compression, continuous aggregate, pgvector, COPY loads | 2 to 4 |
 | S5 | Forms and filler | `forms.py` | done: 6 CDASH pages and the NJ CH-14 | 3 to 5 |
-| S6 | Verifier | `verifier.py` | done deterministically; model second opinion written, never executed | 3 to 5 |
+| S6 | Verifier | `verifier.py` | done: 35 of 35 planted conflicts, 0 false alarms on model-read data; dose and status normalization for medication rows; model second opinion still untested | 2 to 3 |
 | S7 | Review, sign, export, audit | `api.py`, `store.py` | done | 2 to 3 |
 | S8 | Frontend | `frontend/src` | done: patients, patient, form review, queue, documents with search and ingest, document viewer, metrics | 6 to 10 |
-| S9 | Evaluation | `evaluate.py` | done: 100 percent on oracle, 8/8 conflicts, 15/15 unit traps, 38/38 gaps, 0 false alarms, 10/10 school forms | 2 to 4 |
-| S10 | Packaging and demo | `README.md`, `docs/`, video, slides | README done; video and slides not started | 6 to 8 |
+| S9 | Evaluation | `evaluate.py` | done on model-read data: forms 100 percent, 35/35 conflicts, 12/12 unit traps, 32/32 gaps, 0 false alarms, 10/10 school forms; reader table versus scripts baseline by document kind and layout | 1 to 2 |
+| S10 | Packaging and demo | `README.md`, `docs/`, video, slides | README with results, `docs/VIDEO_SCRIPT.md` written; recording and slides not started | 4 to 6 |
 
 ### What remains, by component
 
 - S1: real fax images and scanned PDFs (render the generated text to PDF, add skew and noise) so the model reader is tested on images, not clean text. Spanish documents. Concomitant medication dates in prose.
-- S2: run the model reader on 20 documents, measure quote-location rate and field accuracy, iterate the prompt. Decide the bulk model. Message Batches for the 220 documents. Image input for faxes.
+- S2: image input for scanned faxes (render the generated text to PDF, add skew and noise) and re-run the reader on images; a second model for comparison.
 - S3: extend the vocabulary as the model reader meets new labels; log uncoded labels from `extraction_to_facts`.
 - S4: Tiger Cloud switch-over (`make check-db`, `make db-init`, `make load`), `make compress` for the size slide, index tuning if the queue slows.
 - S5: visit-aware adverse event windows (previous visit date instead of 35 days); CH-14 immunization schedule completeness (which doses are due).
 - S6: model second opinion on real reads; plausibility of change over time (a child gaining 6 kg in a week).
 - S7: PDF export of a signed form; bulk sign; role names.
 - S8: keyboard flow for review (accept, next); document viewer page thumbnails; mobile check.
-- S9: real-reader numbers; a failure table (which fields the model misses and why).
+- S9: a brittleness curve (recall against number of unseen layouts) if a chart is wanted for the deck.
 - S10: three-minute video, 10 to 12 slides, JEDI team link.
 
 ## Critical path
 
-1. A model key, this week. S2 is the only untested step and the one the numbers depend on.
+1. Record the video from the script and build the slides from the README results table.
 2. S8 polish and S10 video can run entirely on oracle data in parallel.
 3. S4 cloud switch-over is a 15-minute task; do it early so the demo does not depend on Docker.
 

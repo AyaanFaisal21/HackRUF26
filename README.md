@@ -38,14 +38,39 @@ make web                   # http://localhost:5173
 
 Then `make eval` writes `docs/eval-sourced-oracle.md`, and `make test` runs the unit tests.
 
-Live document reading: put `ANTHROPIC_API_KEY` or `OPENAI_API_KEY` in `.env`, set `SOURCED_READER=model`, then `make load` and `make eval`. The Ingest panel on the Documents page reads pasted text live with the same key. With no key, documents are read from the answer key and the rest of the system runs unchanged.
+**Model reading.** Put `ANTHROPIC_API_KEY` or `OPENAI_API_KEY` in `.env` and set `SOURCED_READER=model`. `make load` then has the model read every document, with 8 concurrent requests, and caches each read in `data/samples/model_reads.json` keyed by the document's hash, so later loads (and the Tiger Cloud load) reuse them for free. The committed cache holds the gpt-4.1 reads, so `make load` with `SOURCED_READER=model` reproduces the published numbers without a key. The Ingest panel on the Documents page reads pasted text live. With no key and no cache, documents are read from the answer key and the rest of the system runs unchanged.
+
+## Results
+
+From `docs/eval-sourced-model.md`, 60 patients, 1,022 form fields with a known truth, 208 documents with 1,669 answer-key facts:
+
+| Forms | |
+|---|---|
+| Fields filled automatically | 100% |
+| Accuracy of filled fields | 100% |
+| Filled fields with a receipt | 100% |
+| Planted conflicts caught by the verifier | 35 of 35 |
+| Unit traps (pounds, Fahrenheit) converted correctly | 12 of 12 |
+| Gaps filled from an outside document | 32 of 32 |
+| False alarms | 0 |
+| School forms with immunizations complete across two clinics | 10 of 10 |
+
+| Document reading, against the answer key | Scripts baseline | Model reader (gpt-4.1) |
+|---|---|---|
+| Recall, all documents | 43.9% | 100% |
+| Recall, layouts the scripts were written for | 74.1% | 100% |
+| Recall, layouts they were not (a third of the documents) | 0.7% | 100% |
+| Precision | 100% | 99.2% |
+| Quotes located to a page and span | n/a | 100% |
+
+The scripts baseline is a real regex extractor in `reader.py`, written for these document layouts. The documents are clean synthetic text, not scans, so these are upper bounds for reading; the form, verifier, and receipt numbers do not depend on that.
 
 ## The data
 
 Two clinics per patient, no real people.
 
 - **Memorial General Hospital**, the EHR, as FHIR R4 bundles built from the CDISC SDTM pilot: 254 subjects, labs, vitals, adverse events, medications. Treatment arm removed.
-- **Riverside Clinic and Riverside Diagnostics**, the outside records, generated from the same facts: lab reports, two-page progress notes, pharmacy faxes. Planted gaps (a value that exists only in a document), unit traps (pounds, Fahrenheit), and conflicts (a wrong value).
+- **Riverside Clinic and Riverside Diagnostics**, the outside records, generated from the same facts: lab reports, two-page progress notes, pharmacy faxes. A third use alternate layouts (abbreviations like "B/P" and "Wt.", reordered columns, date-first vaccine cards). Planted gaps (a value that exists only in a document), unit traps (pounds, Fahrenheit), and conflicts (a wrong weight, a doubled dose).
 - **Sunrise Pediatrics and County Urgent Care**: ten children with immunization records split across the two, for the school form.
 - The answer key is every document's facts with exact quotes, plus the planted list. `make eval` scores against it.
 
