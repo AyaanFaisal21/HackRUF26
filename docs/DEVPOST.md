@@ -51,7 +51,7 @@ Connectors for fax servers and EHR document exports, a real EDC export target, s
 
 ## Did you implement a generative AI model or API in your hack this weekend?
 
-Yes, in one role: the reader. OpenAI gpt-4.1, through the OpenAI API, reads every outside document (faxes, clinic notes, lab reports, pharmacy lists, and photos or scans of them) and returns each clinical fact with a verbatim quote under a strict JSON schema. We locate every quote to a page and character span, convert units, and keep what was written. The same model transcribes images before reading them, and on request writes a structured second opinion on a flagged field: likely cause, confidence, suggested decision, what to verify. Gemini (gemini-3.8-flash) runs the same three jobs behind the same seam and was verified this weekend; Anthropic is supported too. Everything else is deterministic rules: the ledger, the filler, the verifier, the diagnoses, the sign-off, and the audit chain. The model reads; it never fills, decides, or signs, so every value it produces can be checked against the page it quoted.
+Yes, in one role: the reader. OpenAI gpt-4.1, through the OpenAI API, reads every outside document, including photos and scans, and returns each clinical fact with a verbatim quote under a strict JSON schema; we locate every quote to a page and span. On request it also writes a structured second opinion on a flagged field. Gemini (gemini-3.8-flash) runs the same jobs behind the same seam and was verified this weekend. Everything else is deterministic rules. The model reads; it never fills, decides, or signs, so every value it produces can be checked against the page it quoted.
 
 ## Why an agent, not more scripts
 
