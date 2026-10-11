@@ -140,10 +140,12 @@ def cmd_evaluate(a):
     truth = json.load(open(SAMPLES / "world_answer_key.json"))
     m = evaluate(st, truth, st.patients(), a.patients)
     m["reader"] = reader_metrics(st, truth, build_world(seed=a.seed)["documents"])
+    m["computed_at"] = datetime.now().astimezone().isoformat(timespec="seconds"); m["reader_mode"] = a.reader
     md = to_markdown(m, a.reader)
     print(md)
+    json.dump(m, open(SAMPLES / "metrics.json", "w"), indent=1, default=str)   # served by /api/metrics without recomputing
     if a.out:
-        Path(a.out).write_text(md + "\n"); print(f"\nwrote {a.out}")
+        Path(a.out).write_text(md + "\n"); print(f"\nwrote {a.out} and {SAMPLES / 'metrics.json'}")
 
 
 def cmd_compress(a):

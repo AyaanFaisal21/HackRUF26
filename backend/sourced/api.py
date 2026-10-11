@@ -207,8 +207,12 @@ def queue():
 
 @app.get("/api/metrics")
 def metrics(refresh: bool = False, max_patients: int = 40):
+    """Serves the metrics computed by `make eval` (data/samples/metrics.json); refresh=true recomputes against the live ledger."""
     from .evaluate import evaluate, reader_metrics
     from .generate import build_world
+    saved = ROOT / "data/samples/metrics.json"
+    if not refresh and saved.exists():
+        return json.load(open(saved))
     key = f"{max_patients}"
     if refresh or key not in _metrics_cache:
         st = store()
