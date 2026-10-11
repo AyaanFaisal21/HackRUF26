@@ -37,6 +37,9 @@ compress:         ## compress ledger chunks older than 120 days and print the si
 test:
 	$(PY) -m pytest -q backend/tests
 
+lint:             ## ruff over the backend (pip install -r backend/requirements-dev.txt)
+	$(PY) -m ruff check backend
+
 api:              ## FastAPI on :8000
 	$(PY) -m uvicorn sourced.api:app --reload --port 8000
 

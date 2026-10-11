@@ -1,12 +1,12 @@
 """Tiger Data store for the ledger, documents, forms and audit. MemoryStore implements the read side for tests."""
 from __future__ import annotations
 
+import contextlib
 import hashlib
-
 import io
 import json
 import os
-from datetime import date, datetime, timedelta, timezone
+from datetime import date, datetime, timedelta, UTC
 from pathlib import Path
 
 import psycopg
@@ -16,9 +16,6 @@ from psycopg.types.json import Jsonb as _Jsonb
 from .schema import Document, Fact, FormInstance
 
 SQL_DIR = Path(__file__).resolve().parents[1] / "sql"
-LEGACY_TABLES = ("case_duplicates", "case_audit", "case_reactions", "case_drugs", "cases", "message_embeddings", "messages", "fda_forms", "briefs", "flags",
-                 "subject_events", "lab_results", "diary_entries", "subjects", "trials")
-
 
 def J(obj):
     return None if obj is None else _Jsonb(json.loads(json.dumps(obj, default=str).replace("\\u0000", "")))
@@ -36,7 +33,7 @@ def _vec(v):
 
 
 def _day(d: date) -> datetime:
-    return datetime.combine(d, datetime.min.time(), tzinfo=timezone.utc)
+    return datetime.combine(d, datetime.min.time(), tzinfo=UTC)
 
 
 GENESIS = "0" * 64
@@ -45,7 +42,7 @@ GENESIS = "0" * 64
 def _canon(v):
     """Canonical JSON for hashing: the same bytes before and after a JSONB round trip."""
     if isinstance(v, datetime):
-        v = v.astimezone(timezone.utc).isoformat(timespec="microseconds")
+        v = v.astimezone(UTC).isoformat(timespec="microseconds")
     v = json.loads(json.dumps(v, default=str))
     return json.dumps(_strip(v), sort_keys=True, separators=(",", ":"))
 
@@ -100,14 +97,7 @@ class Store:
 
     # ---- schema
     def init_schema(self):
-        self.conn.execute(open(SQL_DIR / "sourced.sql").read())
-
-    def drop_legacy(self):
-        for v in ("intake_hourly", "diary_weekly"):
-            self.conn.execute(f"DROP MATERIALIZED VIEW IF EXISTS {v} CASCADE")
-        self.conn.execute("DROP VIEW IF EXISTS queue")
-        for t in LEGACY_TABLES:
-            self.conn.execute(f"DROP TABLE IF EXISTS {t} CASCADE")
+        self.conn.execute(Path(SQL_DIR / "sourced.sql").read_text())
 
     def reset(self):
         self.conn.execute("SET timescaledb.max_tuples_decompressed_per_dml_transaction = 0")
@@ -146,6 +136,17 @@ class Store:
             return {}
         return {r["id"]: r["kind"] for r in self.conn.execute("SELECT id, kind FROM documents WHERE id = ANY(%s)", (ids,)).fetchall()}
 
+    def document_exists(self, doc_id: str) -> bool:
+        return self.conn.execute("SELECT 1 FROM documents WHERE id = %s", (doc_id,)).fetchone() is not None
+
+    def forget_document(self, doc_id: str) -> tuple[bool, int]:
+        """Remove a document, its chunks, and its facts. Audit events stay: the chain is append-only."""
+        self.conn.execute("SET timescaledb.max_tuples_decompressed_per_dml_transaction = 0")
+        n = self.conn.execute("DELETE FROM facts WHERE document_id = %s", (doc_id,)).rowcount
+        self.conn.execute("DELETE FROM document_chunks WHERE document_id = %s", (doc_id,))
+        removed = self.conn.execute("DELETE FROM documents WHERE id = %s", (doc_id,)).rowcount > 0
+        return removed, n
+
     def document_image(self, doc_id: str):
         return self.conn.execute("SELECT image, image_type FROM documents WHERE id = %s AND image IS NOT NULL", (doc_id,)).fetchone()
 
@@ -167,10 +168,8 @@ class Store:
         return len(facts)
 
     def refresh_aggregates(self):
-        try:
+        with contextlib.suppress(psycopg.errors.LockNotAvailable):   # a policy refresh may hold the lock; the next read catches up
             self.conn.execute("CALL refresh_continuous_aggregate('facts_daily', NULL, NULL)")
-        except psycopg.errors.LockNotAvailable:
-            pass
 
     def upsert_form_defs(self, defs):
         for d in defs:
@@ -181,7 +180,7 @@ class Store:
         """Append one event to the tamper-evident audit trail. The chain is serialized with an advisory lock so two
         writers cannot fork it; each hash covers the previous hash and this event's canonical content."""
         entity_id = str(entity_id) if entity_id is not None else None
-        at = datetime.now(timezone.utc)
+        at = datetime.now(UTC)
         with self.conn.transaction():
             self.conn.execute("SELECT pg_advisory_xact_lock(7001)")
             prev = self.conn.execute("SELECT hash FROM audit_log WHERE hash IS NOT NULL ORDER BY seq DESC LIMIT 1").fetchone()
@@ -192,18 +191,6 @@ class Store:
 
     def audit_rows(self):
         return self.conn.execute("SELECT seq, at, actor, action, entity, entity_id, field, old_value, new_value, reason, prev_hash, hash FROM audit_log ORDER BY seq").fetchall()
-
-    def rehash_audit(self) -> int:
-        """One-time: hash events written before the chain existed, in order. Returns the number of rows hashed."""
-        n = 0
-        with self.conn.transaction():
-            self.conn.execute("SELECT pg_advisory_xact_lock(7001)")
-            prev = GENESIS
-            for r in self.audit_rows():
-                h = chain_hash(prev, r)
-                self.conn.execute("UPDATE audit_log SET prev_hash = %s, hash = %s WHERE seq = %s", (prev, h, r["seq"]))
-                prev = h; n += 1
-        return n
 
     def verify_audit(self) -> dict:
         """Walk the chain from genesis and recompute every hash. Any edited, deleted, or reordered event breaks it from that point on."""
@@ -283,6 +270,12 @@ class Store:
         fields.sort(key=lambda f: order.get(f["key"], 99))
         return {**i, "fields": fields}
 
+    def field(self, iid: int, key: str):
+        return self.conn.execute("SELECT * FROM form_fields WHERE instance_id = %s AND key = %s", (iid, key)).fetchone()
+
+    def set_field_verifier(self, iid: int, key: str, verifier: dict):
+        self.conn.execute("UPDATE form_fields SET verifier = %s WHERE instance_id = %s AND key = %s", (J(verifier), iid, key))
+
     def decide_field(self, iid: int, key: str, decision: dict):
         f = self.conn.execute("SELECT * FROM form_fields WHERE instance_id = %s AND key = %s", (iid, key)).fetchone()
         if not f:
@@ -312,7 +305,7 @@ class Store:
             raise ValueError(f"unresolved fields: {', '.join(pending)}")
         inst = self.instance(iid)
         export = {"ODM": {"ClinicalData": {"StudyOID": "CDISCPILOT01", "SubjectData": {"SubjectKey": inst["patient_id"], "StudyEventData": {"StudyEventOID": inst["domain"], "StartDate": inst["visit_date"].isoformat()},
-                  "FormData": {"FormOID": inst["form_id"], "SignedBy": actor, "SignedAt": datetime.now(timezone.utc).isoformat(), "ItemGroupData": [
+                  "FormData": {"FormOID": inst["form_id"], "SignedBy": actor, "SignedAt": datetime.now(UTC).isoformat(), "ItemGroupData": [
                       {"ItemOID": f["key"], "Value": f["value"] if f["vtype"] != "list" else None, "Rows": f["rows"] if f["vtype"] == "list" else None, "Unit": f["unit"],
                        "Receipt": f["receipt"], "Verifier": (f["verifier"] or {}).get("verdict"), "Decision": f["decision"]} for f in inst["fields"]]}}}}}
         self.audit(actor, "form_signed", "form_instance", iid, None, None, {"fields": len(inst["fields"])})
@@ -342,4 +335,4 @@ class Store:
 
     def facts_daily(self, days=400):
         self.refresh_aggregates()
-        return self.conn.execute("SELECT day, source_org, n FROM facts_daily WHERE day > now() - INTERVAL '%s days' ORDER BY day" % int(days)).fetchall()
+        return self.conn.execute("SELECT day, source_org, n FROM facts_daily WHERE day > now() - make_interval(days => %s) ORDER BY day", (int(days),)).fetchall()

@@ -1,4 +1,4 @@
-"""Check that the database in DATABASE_URL has what Day Zero needs. usage: .venv/bin/python backend/scripts/check_db.py"""
+"""Check that the database in DATABASE_URL has what Sourced needs. usage: .venv/bin/python backend/scripts/check_db.py"""
 import os, sys
 from dotenv import load_dotenv
 import psycopg
@@ -10,6 +10,6 @@ with psycopg.connect(url) as conn:
     for ext in ("timescaledb", "vector", "vectorscale", "ai"):
         print(f"  {ext:12} {'available ' + avail[ext] if ext in avail else 'NOT available'}{'  (required)' if ext in ('timescaledb', 'vector') else '  (optional)'}")
     if "vector" in avail and "timescaledb" in avail:
-        print("OK: run `make db-init` then `make load` and `make load-trial`")
+        print("OK: run `make db-init`, then `make load` and `make fill`")
     else:
         print("This service is missing a required extension. Create the service with the AI and vector option.")

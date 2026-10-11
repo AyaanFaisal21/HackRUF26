@@ -19,17 +19,13 @@ class HashEmbedder:
 
     def embed(self, text: str) -> list[float]:
         toks = _TOKEN.findall(text.lower())
-        feats = toks + [a + "_" + b for a, b in zip(toks, toks[1:])]
+        feats = toks + [a + "_" + b for a, b in zip(toks, toks[1:], strict=True)]
         v = [0.0] * self.dim
         for f in feats:
             h = int.from_bytes(hashlib.blake2b(f.encode(), digest_size=8).digest(), "big")
             v[h % self.dim] += 1.0 if (h >> 63) else -1.0
         n = math.sqrt(sum(x * x for x in v)) or 1.0
         return [x / n for x in v]
-
-
-def cosine(a: list[float], b: list[float]) -> float:
-    return sum(x * y for x, y in zip(a, b))  # inputs are unit vectors
 
 
 def get_embedder():

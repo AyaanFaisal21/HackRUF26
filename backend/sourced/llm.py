@@ -10,9 +10,8 @@ from __future__ import annotations
 
 import base64
 import copy
-import json
 import os
-from typing import Type, TypeVar
+from typing import TypeVar
 
 from pydantic import BaseModel
 
@@ -27,7 +26,7 @@ def _pages(text: str) -> str:
     return "\f".join(p.strip("\n") for p in text.split("<page>"))
 
 
-def strict_schema(model_cls: Type[BaseModel]) -> dict:
+def strict_schema(model_cls: type[BaseModel]) -> dict:
     """Pydantic JSON schema -> strict schema: every property required, no defaults, no additionalProperties."""
     def fix(node):
         if isinstance(node, dict):
@@ -53,7 +52,7 @@ class AnthropicLLM:
         self.client = anthropic.Anthropic()
         self.model = model or os.environ.get("ANTHROPIC_MODEL", "claude-opus-5-5")
 
-    def parse(self, system: str, user: str, model_cls: Type[T]) -> T:
+    def parse(self, system: str, user: str, model_cls: type[T]) -> T:
         resp = self.client.messages.parse(
             model=self.model, max_tokens=8000,
             system=[{"type": "text", "text": system, "cache_control": {"type": "ephemeral"}}],
@@ -83,7 +82,7 @@ class OpenAILLM:
         self.client = OpenAI()
         self.model = model or os.environ.get("OPENAI_MODEL", "gpt-4.1")
 
-    def parse(self, system: str, user: str, model_cls: Type[T]) -> T:
+    def parse(self, system: str, user: str, model_cls: type[T]) -> T:
         resp = self.client.chat.completions.create(
             model=self.model,
             messages=[{"role": "system", "content": system}, {"role": "user", "content": user}],
@@ -117,7 +116,7 @@ class GeminiLLM:
         from google.genai import types
         return types.GenerateContentConfig(system_instruction=system, **kw)
 
-    def parse(self, system: str, user: str, model_cls: Type[T]) -> T:
+    def parse(self, system: str, user: str, model_cls: type[T]) -> T:
         resp = self.client.models.generate_content(model=self.model, contents=user,
                                                    config=self._config(system, response_mime_type="application/json", response_schema=model_cls))
         if resp.parsed is None:

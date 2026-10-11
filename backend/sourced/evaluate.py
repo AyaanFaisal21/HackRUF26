@@ -73,15 +73,6 @@ def evaluate(store, truth: dict, patients: list[dict], max_patients: int = 60, l
             "per_concept": {k: {**v, "accuracy": round(v["correct"] / v["filled"], 3) if v["filled"] else None} for k, v in sorted(per_concept.items())}}
 
 
-def _key(f, observed=None):
-    """Set key for comparing readers: concept plus value; dated for immunizations and events, where repeats are real."""
-    concept = f.concept if hasattr(f, "concept") else f["concept"]
-    vnum = f.value_num if hasattr(f, "value_num") else f["value_num"]
-    vtext = f.value_text if hasattr(f, "value_text") else f["value_text"]
-    when = observed if observed is not None else (f.observed_at if hasattr(f, "observed_at") else f["observed_at"])
-    v = round(vnum, 1) if vnum is not None else (vtext or "").strip().lower().rstrip(".")
-    return (concept, v, str(when)[:10]) if concept in ("immunization", "adverse_event") else (concept, v)
-
 
 def _match(truth_facts, reader_facts) -> int:
     """Hits between two fact lists: numbers within tolerance on the same concept; text by fuzzy match (>= 85) on the same concept and,

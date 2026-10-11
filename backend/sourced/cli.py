@@ -2,7 +2,6 @@
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 import os
 import time
@@ -14,22 +13,30 @@ from dotenv import load_dotenv
 
 load_dotenv()
 ROOT = Path(__file__).resolve().parents[2]
+
+
+def read_json(path: Path):
+    with open(path) as f:
+        return json.load(f)
+
+
+def write_json(path: Path, obj, **kw):
+    with open(path, "w") as f:
+        json.dump(obj, f, **kw)
 SAMPLES = ROOT / "data/samples"
 
 
 def cmd_init_db(a):
     from .store import Store
     st = Store()
-    if a.drop_legacy:
-        st.drop_legacy(); print("legacy Day Zero tables dropped")
     st.init_schema(); print("schema applied")
 
 
 def cmd_build_data(a):
     from .generate import build_world
     w = build_world(seed=a.seed, n_doc_adults=a.doc_adults, n_children=a.children)
-    json.dump(w["truth"], open(SAMPLES / "world_answer_key.json", "w"))
-    json.dump({"patients": w["patients"], "identifiers": w["identifiers"], "documents": w["documents"], "orgs": w["orgs"]}, open(SAMPLES / "world_documents.json", "w"), indent=1)
+    write_json(SAMPLES / "world_answer_key.json", w["truth"])
+    write_json(SAMPLES / "world_documents.json", {"patients": w["patients"], "identifiers": w["identifiers"], "documents": w["documents"], "orgs": w["orgs"]}, indent=1)
     print(f"patients {len(w['patients'])}  documents {len(w['documents'])}  planted {dict(Counter(p['kind'] for p in w['truth']['planted']))}")
     print(f"wrote {SAMPLES / 'world_answer_key.json'} and {SAMPLES / 'world_documents.json'}")
 
@@ -46,14 +53,14 @@ def cmd_load(a):
     if not a.keep:
         st.reset()
     w = build_world(seed=a.seed, n_doc_adults=a.doc_adults, n_children=a.children)
-    json.dump(w["truth"], open(SAMPLES / "world_answer_key.json", "w"))
+    write_json(SAMPLES / "world_answer_key.json", w["truth"])
     st.insert_patients(w["patients"]); st.insert_identifiers(w["identifiers"])
     n_fhir = 0
     for p in w["patients"]:
         org = "Memorial General Hospital" if p["kind"] == "adult" else "Sunrise Pediatrics"
         n_fhir += st.insert_facts(read_fhir_bundle(w["bundles"][p["id"]], p["id"], org))
     cache_path = SAMPLES / "model_reads.json"
-    cache = json.load(open(cache_path)) if (a.reader == "model" and cache_path.exists() and not a.no_cache) else {"reads": {}}
+    cache = read_json(cache_path) if (a.reader == "model" and cache_path.exists() and not a.no_cache) else {"reads": {}}
     docs = w["documents"][: a.max_docs] if a.max_docs else w["documents"]
     if a.reader == "oracle":
         reader = OracleDocReader(w["truth"]["doc_extractions"]); reader_name = "oracle"
@@ -83,7 +90,7 @@ def cmd_load(a):
     from concurrent.futures import ThreadPoolExecutor
     with ThreadPoolExecutor(max_workers=a.workers if a.reader == "model" else 1) as ex:
         results = list(ex.map(read_one, docs))
-    for (doc, ext, err, cached), d in zip(results, docs):
+    for (doc, ext, err, cached), d in zip(results, docs, strict=True):
         st.insert_document(doc, d["sha256"], emb)
         if err is not None:
             n_failed += 1; st.mark_document(doc.id, "failed", reader_name, None); print(f"  {doc.id}: reader failed: {err}"); continue
@@ -97,7 +104,7 @@ def cmd_load(a):
         except Exception as e:
             n_failed += 1; st.mark_document(doc.id, "failed", reader_name, None); print(f"  {doc.id}: insert failed: {str(e)[:120]}")
     if a.reader == "model" and n_cached < len(docs) - n_failed:   # only rewrite the cache when new reads were added
-        json.dump({"reader": reader_name, "updated": datetime.now().isoformat(timespec="seconds"), "reads": cache["reads"]}, open(cache_path, "w"))
+        write_json(cache_path, {"reader": reader_name, "updated": datetime.now().isoformat(timespec="seconds"), "reads": cache["reads"]})
     st.upsert_form_defs(FORM_DEFS); st.refresh_aggregates()
     st.audit("loader", "world_loaded", None, None, None, None, {"patients": len(w["patients"]), "fhir_facts": n_fhir, "document_facts": n_doc, "reader": a.reader})
     print(f"patients {len(w['patients'])} | FHIR facts {n_fhir} | documents {len(docs)} -> {n_doc} facts ({n_skipped} uncoded, {n_failed} failed, {n_cached} from cache) | reader={reader_name} | {time.perf_counter() - t0:.1f}s")
@@ -111,7 +118,7 @@ def cmd_fill(a):
     st = Store()
     if a.reset:
         st.conn.execute("DELETE FROM form_instances")
-    truth = json.load(open(SAMPLES / "world_answer_key.json"))
+    truth = read_json(SAMPLES / "world_answer_key.json")
     pids = sorted({p["patient_id"] for p in truth["planted"]})
     adults = [p for p in pids if p.startswith("01-")][: a.patients]
     kids = [c["patient_id"] for c in truth["children"]]
@@ -133,11 +140,8 @@ def cmd_fill(a):
 
 def cmd_forget(a):
     from .store import Store
-    st = Store(); st.conn.execute("SET timescaledb.max_tuples_decompressed_per_dml_transaction = 0")
-    n = st.conn.execute("DELETE FROM facts WHERE document_id = %s", (a.document_id,)).rowcount
-    st.conn.execute("DELETE FROM document_chunks WHERE document_id = %s", (a.document_id,))
-    d = st.conn.execute("DELETE FROM documents WHERE id = %s", (a.document_id,)).rowcount
-    print(f"{a.document_id}: {'removed' if d else 'not found'}, {n} facts deleted; audit events kept")
+    removed, n = Store().forget_document(a.document_id)
+    print(f"{a.document_id}: {'removed' if removed else 'not found'}, {n} facts deleted; audit events kept")
 
 
 def cmd_evaluate(a):
@@ -146,13 +150,13 @@ def cmd_evaluate(a):
     from .evaluate import reader_metrics
     from .generate import build_world
     st = Store()
-    truth = json.load(open(SAMPLES / "world_answer_key.json"))
+    truth = read_json(SAMPLES / "world_answer_key.json")
     m = evaluate(st, truth, st.patients(), a.patients)
     m["reader"] = reader_metrics(st, truth, build_world(seed=a.seed)["documents"])
     m["computed_at"] = datetime.now().astimezone().isoformat(timespec="seconds"); m["reader_mode"] = a.reader
     md = to_markdown(m, a.reader)
     print(md)
-    json.dump(m, open(SAMPLES / "metrics.json", "w"), indent=1, default=str)   # served by /api/metrics without recomputing
+    write_json(SAMPLES / "metrics.json", m, indent=1, default=str)   # served by /api/metrics without recomputing
     if a.out:
         Path(a.out).write_text(md + "\n"); print(f"\nwrote {a.out} and {SAMPLES / 'metrics.json'}")
 
@@ -160,14 +164,14 @@ def cmd_evaluate(a):
 def cmd_compress(a):
     from .store import Store
     st = Store()
-    n = st.conn.execute("SELECT count(compress_chunk(c, true)) AS n FROM show_chunks('facts', older_than => INTERVAL '%s days') c" % int(a.days)).fetchone()["n"]
+    n = st.conn.execute("SELECT count(compress_chunk(c, true)) AS n FROM show_chunks('facts', older_than => make_interval(days => %s)) c", (int(a.days),)).fetchone()["n"]
     s = st.conn.execute("SELECT * FROM hypertable_compression_stats('facts')").fetchone()
     print(f"compressed {n} chunks; {s['number_compressed_chunks']}/{s['total_chunks']} chunks compressed; {s['before_compression_total_bytes'] / 1e6:.1f} MB -> {s['after_compression_total_bytes'] / 1e6:.1f} MB")
 
 
 def main():
     p = argparse.ArgumentParser(prog="sourced"); sub = p.add_subparsers(required=True)
-    s = sub.add_parser("init-db"); s.add_argument("--drop-legacy", action="store_true"); s.set_defaults(f=cmd_init_db)
+    s = sub.add_parser("init-db"); s.set_defaults(f=cmd_init_db)
     s = sub.add_parser("build-data"); s.add_argument("--seed", type=int, default=7); s.add_argument("--doc-adults", type=int, default=80); s.add_argument("--children", type=int, default=10); s.set_defaults(f=cmd_build_data)
     s = sub.add_parser("load"); s.add_argument("--seed", type=int, default=7); s.add_argument("--doc-adults", type=int, default=80); s.add_argument("--children", type=int, default=10)
     s.add_argument("--reader", choices=["oracle", "model"], default=os.environ.get("SOURCED_READER", "oracle")); s.add_argument("--max-docs", type=int, default=0); s.add_argument("--workers", type=int, default=6); s.add_argument("--keep", action="store_true"); s.add_argument("--no-cache", action="store_true", help="call the model even when a cached read exists"); s.set_defaults(f=cmd_load)

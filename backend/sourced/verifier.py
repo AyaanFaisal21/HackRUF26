@@ -52,7 +52,7 @@ def _transposed(a: float, b: float) -> bool:
     if abs(a - round(a)) > 1e-9 or abs(b - round(b)) > 1e-9:
         return False
     x, y = str(int(round(a))), str(int(round(b)))
-    return len(x) == len(y) and x != y and sorted(x) == sorted(y) and sum(c != d for c, d in zip(x, y)) == 2
+    return len(x) == len(y) and x != y and sorted(x) == sorted(y) and sum(c != d for c, d in zip(x, y, strict=True)) == 2
 
 
 def _history(store, patient_id: str, fd, visit_date, exclude: set) -> dict | None:
@@ -178,12 +178,7 @@ def verify(inst: FormInstance, form_def, llm=None, store=None) -> FormInstance:
             for a in others:
                 same = numbers_agree(fd.concept, float(field.value), float(a["value"])) if field.vtype == "number" else str(a["value"]).strip().lower() == str(field.value).strip().lower()
                 (agree if same else disagree).append(a)
-            if disagree and not agree:
-                verdict = "disagree"
-            elif disagree and agree:
-                verdict = "disagree"
-            else:
-                verdict = "agree"
+            verdict = "disagree" if disagree else "agree"
             checks.append({"check": "cross_source", "ok": not disagree, "detail": {"agree": [{"value": a["value"], "source": a["receipt"]["source_org"], "days": a["days_from_visit"]} for a in agree],
                                                                                      "disagree": [{"value": a["value"], "source": a["receipt"]["source_org"], "days": a["days_from_visit"]} for a in disagree]}})
             if disagree:

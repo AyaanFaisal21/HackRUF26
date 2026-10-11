@@ -1,6 +1,7 @@
 """Form definitions and the filler. A form is a list of questions; the filler answers each from the ledger with a receipt."""
 from __future__ import annotations
 
+import contextlib
 import re
 import time
 from datetime import date, timedelta
@@ -85,10 +86,8 @@ def diagnose_row(term: str, row: dict, visit_date: date, kinds: dict) -> dict | 
             e, a = ended[0], active[0]
             end = str(e["attrs"]["end"])[:10]; start = str(e["attrs"].get("start") or "")[:10]
             days = None
-            try:
+            with contextlib.suppress(ValueError):
                 days = (date.fromisoformat(end) - date.fromisoformat(start)).days if start else None
-            except ValueError:
-                pass
             ev.append(f"{e['source_org']} ({where(e)}) records an explicit stop on {end}" + (f" after a {days}-day course" if days is not None else ""))
             a_kind = kind_of(a)
             if a_kind == "pharmacy_list":

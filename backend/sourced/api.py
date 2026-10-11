@@ -4,7 +4,7 @@ from __future__ import annotations
 import hashlib
 import json
 import mimetypes
-from datetime import date, datetime, timezone
+from datetime import date, datetime, UTC
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -16,7 +16,7 @@ from pydantic import BaseModel
 from .embed import get_embedder
 from .forms import FORM_DEFS, FORMS, fill
 from .llm import provider
-from .reader import ModelDocReader, OracleDocReader, extraction_to_facts, parse_date
+from .reader import ModelDocReader, extraction_to_facts, parse_date
 from .schema import Document, Suggestion
 from .store import Store, connect
 from .verifier import verify
@@ -37,7 +37,7 @@ def answer_key():
     global _answer_key
     if _answer_key is None:
         p = ROOT / "data/samples/world_answer_key.json"
-        _answer_key = json.load(open(p)) if p.exists() else {"doc_extractions": {}, "planted": [], "visit_truth": {}, "children": []}
+        _answer_key = json.loads(p.read_text()) if p.exists() else {"doc_extractions": {}, "planted": [], "visit_truth": {}, "children": []}
     return _answer_key
 
 
@@ -119,10 +119,10 @@ def _ingest(st, patient_id: str, source_org: str, kind: str | None, document_dat
     raw = image if image is not None else text.encode()
     sha = hashlib.sha256(raw).hexdigest()
     did = f"DOC-U{sha[:8].upper()}"
-    if st.conn.execute("SELECT 1 FROM documents WHERE id = %s", (did,)).fetchone():
+    if st.document_exists(did):
         raise HTTPException(409, f"this exact document is already stored as {did}")
     auto = kind in (None, "", "auto")
-    doc = Document(id=did, patient_id=patient_id, source_org=source_org, kind="other" if auto else kind, received_at=datetime.now(timezone.utc), document_date=document_date, text=text, n_pages=text.count("\f") + 1)
+    doc = Document(id=did, patient_id=patient_id, source_org=source_org, kind="other" if auto else kind, received_at=datetime.now(UTC), document_date=document_date, text=text, n_pages=text.count("\f") + 1)
     st.insert_document(doc, sha, get_embedder(), image=image, image_type=image_type)
     llm = provider()
     if llm is None:
@@ -133,7 +133,7 @@ def _ingest(st, patient_id: str, source_org: str, kind: str | None, document_dat
         ext = reader.read(doc)
     except Exception as e:
         st.mark_document(did, "failed", reader.name, None)
-        raise HTTPException(502, f"reader failed: {e}")
+        raise HTTPException(502, f"reader failed: {e}") from e
     new_kind = _norm_kind(ext.document_kind) if auto else None
     new_date = parse_date(ext.document_date) if (document_date is None and ext.document_date) else None
     if new_kind or new_date:
@@ -187,7 +187,7 @@ async def upload(file: UploadFile = File(...), patient_id: str = Form(...), sour
         try:
             t = llm.transcribe(images)
         except Exception as e:
-            raise HTTPException(502, f"transcription failed: {e}")
+            raise HTTPException(502, f"transcription failed: {e}") from e
         transcribed = True
         if mt == "application/pdf":
             it = iter(t.split("\f"))
@@ -259,7 +259,7 @@ def decide(iid: int, key: str, d: Decision):
     if d.action not in ("accept", "choose", "manual", "blank"):
         raise HTTPException(400, "action must be accept, choose, manual, or blank")
     try:
-        return store().decide_field(iid, key, {**d.model_dump(), "at": datetime.now(timezone.utc).isoformat()})
+        return store().decide_field(iid, key, {**d.model_dump(), "at": datetime.now(UTC).isoformat()})
     except KeyError:
         raise HTTPException(404, key)
 
@@ -273,14 +273,14 @@ def sign(iid: int, s: Sign):
     try:
         return store().sign(iid, s.actor)
     except ValueError as e:
-        raise HTTPException(409, str(e))
+        raise HTTPException(409, str(e)) from e
 
 
 @app.post("/api/forms/instances/{iid}/fields/{key}/explain")
 def explain(iid: int, key: str):
     """Ask the model to explain a flagged field using only the receipts already on the field. The answer is stored on the field."""
     st = store()
-    f = st.conn.execute("SELECT * FROM form_fields WHERE instance_id = %s AND key = %s", (iid, key)).fetchone()
+    f = st.field(iid, key)
     if not f:
         raise HTTPException(404, key)
     llm = provider()
@@ -294,9 +294,7 @@ def explain(iid: int, key: str):
                     "Say what most likely happened, how sure the receipts let you be, what to record, and what to verify before signing.",
                     json.dumps(facts, default=str), Suggestion)
     verifier = {**(f["verifier"] or {}), "model_suggestion": sug.model_dump(), "model": f"{llm.name}:{llm.model}"}
-    text = sug.likely_cause
-    from .store import J
-    st.conn.execute("UPDATE form_fields SET verifier = %s WHERE instance_id = %s AND key = %s", (J(verifier), iid, key))
+    st.set_field_verifier(iid, key, verifier)
     st.audit("model", "field_explained", "form_instance", iid, key, None, {"model": verifier["model"]})
     return {"suggestion": sug.model_dump(), "model": verifier["model"]}
 
@@ -340,5 +338,5 @@ def metrics(refresh: bool = False, max_patients: int = 40):
         st = store()
         m = evaluate(st, answer_key(), st.patients(), max_patients)
         m["reader"] = reader_metrics(st, answer_key(), build_world(seed=7)["documents"])
-        _metrics_cache[key] = {"computed_at": datetime.now(timezone.utc).isoformat(), **m}
+        _metrics_cache[key] = {"computed_at": datetime.now(UTC).isoformat(), **m}
     return _metrics_cache[key]

@@ -1,0 +1,9 @@
+line-length = 200
+target-version = "py313"
+
+[lint]
+select = ["F", "E9", "B", "SIM", "UP"]
+ignore = ["E501", "SIM108", "SIM102", "UP035", "B008"]   # long lines are deliberate; B008 is FastAPI's File()/Form() idiom
+
+[lint.per-file-ignores]
+"backend/tests/*" = ["B"]

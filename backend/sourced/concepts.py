@@ -52,7 +52,7 @@ SYNONYMS = {
 CATEGORY_DEFAULT = {"medication": "medication", "condition": "condition", "adverse_event": "adverse_event", "allergy": "allergy", "immunization": "immunization"}
 
 _UNIT_ALIASES = {"mmhg": "mmHg", "mm hg": "mmHg", "bpm": "/min", "beats/min": "/min", "/min": "/min", "min-1": "/min",
-                 "c": "Cel", "°c": "Cel", "cel": "Cel", "celsius": "Cel", "deg c": "Cel", "f": "degF", "°f": "degF", "degf": "degF", "fahrenheit": "degF", "deg f": "degF", "b0f": "degF", "b0c": "Cel", "\u00b0f": "degF", "\u00b0c": "Cel",
+                 "c": "Cel", "°c": "Cel", "cel": "Cel", "celsius": "Cel", "deg c": "Cel", "f": "degF", "°f": "degF", "degf": "degF", "fahrenheit": "degF", "deg f": "degF", "b0f": "degF", "b0c": "Cel",
                  "kg": "kg", "kgs": "kg", "kilograms": "kg", "lb": "lb", "lbs": "lb", "pounds": "lb", "cm": "cm", "in": "in", "inches": "in", "inch": "in", "m": "m",
                  "u/l": "U/L", "iu/l": "U/L", "umol/l": "umol/L", "µmol/l": "umol/L", "mg/dl": "mg/dL", "g/l": "g/L", "g/dl": "g/dL",
                  "10*9/l": "10*9/L", "10^9/l": "10*9/L", "gi/l": "10*9/L", "giga/l": "10*9/L", "x10^9/l": "10*9/L", "k/ul": "10*9/L", "mmol/l": "mmol/L"}

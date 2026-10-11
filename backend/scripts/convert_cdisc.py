@@ -28,5 +28,6 @@ meds = [{"subject": r.USUBJID, "name": str(r.CMTRT).title(), "dose": None if pd.
 sites = sorted({s["site"] for s in subjects})
 trial = {"id": "CDISCPILOT01", "name": "Safety and Efficacy of the Xanomeline Transdermal Therapeutic System in Patients with Mild to Moderate Alzheimer's Disease",
          "product": "Study drug (blinded)", "phase": "2", "sites": sites, "source": "CDISC SDTM/ADaM pilot project, educational use; treatment arm removed"}
-json.dump({"trial": trial, "subjects": subjects, "labs": labs, "events": events, "vitals": vitals, "medications": meds}, open(out, "w"))
+with open(out, "w") as f:
+    json.dump({"trial": trial, "subjects": subjects, "labs": labs, "events": events, "vitals": vitals, "medications": meds}, f)
 print(f"subjects {len(subjects)} labs {len(labs)} events {len(events)} vitals {len(vitals)} medications {len(meds)} -> {out}")

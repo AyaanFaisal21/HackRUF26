@@ -11,7 +11,7 @@ import hashlib
 import json
 import random
 from collections import defaultdict
-from datetime import date, datetime, timedelta, timezone
+from datetime import date, datetime, timedelta, UTC
 from pathlib import Path
 
 from .concepts import CDISC_TO_KEY, CONCEPTS
@@ -54,7 +54,7 @@ class Builder:
 
     def _doc(self, patient_id, org, kind, doc_date: date, text: str, facts: list[dict], received_offset_days=1, layout: str = "standard"):
         did = f"DOC-{len(self.documents) + 1:04d}"
-        received = datetime.combine(doc_date + timedelta(days=received_offset_days), datetime.min.time(), tzinfo=timezone.utc) + timedelta(hours=self.rng.randint(8, 17))
+        received = datetime.combine(doc_date + timedelta(days=received_offset_days), datetime.min.time(), tzinfo=UTC) + timedelta(hours=self.rng.randint(8, 17))
         self.documents.append({"id": did, "patient_id": patient_id, "source_org": org, "kind": kind, "layout": layout, "received_at": received.isoformat(), "document_date": doc_date.isoformat(),
                                "text": text, "n_pages": text.count("\f") + 1, "sha256": hashlib.sha256(text.encode()).hexdigest()})
         import re as _re
@@ -96,7 +96,7 @@ class Builder:
         for s in subjects:
             pid = s["id"]
             ref = first_day + timedelta(days=rng.randint(0, 150))
-            d2 = lambda day: ref + timedelta(days=day - 1)
+            d2 = lambda day, ref=ref: ref + timedelta(days=day - 1)   # bound per subject
             name = f"{rng.choice(FIRST)} {rng.choice(LAST)}"
             birth = ref - timedelta(days=s["age"] * 365 + rng.randint(0, 364))
             self.patients.append({"id": pid, "display_name": name, "birth_date": birth.isoformat(), "sex": s["sex"], "race": s.get("race"), "kind": "adult", "trial_id": t["trial"]["id"], "site": s["site"], "ref_date": ref.isoformat()})
@@ -339,5 +339,6 @@ class Builder:
 
 
 def build_world(seed: int = 7, today: date | None = None, trial_path: Path | None = None, n_doc_adults: int = 80, n_children: int = 10) -> dict:
-    trial = json.load(open(trial_path or ROOT / "data/samples/trial_cdiscpilot01.json"))
+    with open(trial_path or ROOT / "data/samples/trial_cdiscpilot01.json") as fh:
+        trial = json.load(fh)
     return Builder(trial, seed=seed, today=today, n_doc_adults=n_doc_adults, n_children=n_children).build()
