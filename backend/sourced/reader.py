@@ -20,7 +20,15 @@ Rules:
 - One record per measurement, lab result, medication, diagnosis, adverse event, allergy, vaccine dose, or demographic item.
 - Copy values and units exactly as written. Do not convert units. Do not infer values that are not written.
 - Every quote must be a verbatim substring of the document, 3 to 160 characters, that contains the value. The system locates it by exact match.
-- Blood pressure written as 132/84 is two records: systolic 132 and diastolic 84, same quote.
+- Blood pressure written as 132/84 or B/P 132/84 is two records: concept_label "systolic blood pressure" with value 132 and
+  "diastolic blood pressure" with value 84, same quote. Name vital signs in full even when the document abbreviates them:
+  "heart rate" for HR, P, or pulse; "temperature" for T or Temp; "weight" for Wt; "height" for Ht.
+- Qualifiers such as "stable", "improved", "controlled" are not conditions. Symptoms (fatigue, cough, ear pain) are conditions; record the symptom word, not the sentence.
+- "NKDA" or "no known allergies" is a statement that there are none; do not record it as an allergy.
+- Always record the patient's date of birth when the document shows it (DOB, Date of birth): concept_label "date of birth",
+  category "demographic", value exactly as written, quote the DOB phrase.
+- Vaccines: concept_label and value are the vaccine name (DTaP, MMR, Hepatitis B); observed_date is the date it was given.
+- Copy the degree sign and units exactly; if a character is unclear, write the unit as F or C.
 - Dates in ISO 8601. If a date is only implied by the document date, use the document date.
 - For medications fill dose, frequency, route, start_date, end_date, indication when written; otherwise null.
 - Ignore boilerplate, headers, signatures, and anything about a different patient.
@@ -46,10 +54,22 @@ def locate(text: str, quote: str) -> tuple[int, int] | None:
     if i < 0:
         i = text.lower().find(quote.lower())
     if i < 0:
-        q = re.sub(r"\s+", r"\\s+", re.escape(quote.strip()))
-        m = re.search(q, text, re.I)
-        if m:
-            return m.start(), m.end()
+        tokens = [re.escape(t) for t in quote.split()]
+        if tokens:
+            m = re.search(r"\s+".join(tokens), text, re.I)
+            if m:
+                return m.start(), m.end()
+        fold = lambda x: re.sub(r"[^\x20-\x7e]", "", x)   # a mangled degree sign should not lose the receipt
+        if fold(quote) != quote or fold(text) != text:
+            j = fold(text).find(fold(quote))
+            if j >= 0:
+                # map back approximately: count non-ASCII characters before j in the original
+                k, seen = 0, 0
+                while k < len(text) and seen < j:
+                    if ord(text[k]) < 0x7f and ord(text[k]) >= 0x20:
+                        seen += 1
+                    k += 1
+                return k, min(len(text), k + len(quote))
         return None
     return i, i + len(quote)
 
@@ -164,11 +184,49 @@ class ModelDocReader:
         return self.llm.parse(SYSTEM, user, DocExtraction)
 
 
+class RegexDocReader:
+    """The conventional-scripts baseline: label and value patterns a careful engineer would write for these documents.
+    Good on tables and 'BP 126/67' lines, blind to prose, wrapped layouts, and anything it was not written for."""
+    name = "scripts:regex"
+    _VITALS = [("systolic blood pressure", "diastolic blood pressure", re.compile(r"\bBP\s*:?\s*(\d{2,3})\s*/\s*(\d{2,3})(?:\s*mmHg)?")),
+               ("heart rate", None, re.compile(r"\b(?:HR|Pulse)\s*:?\s*(\d{2,3})\s*(?:bpm)?")),
+               ("temperature", None, re.compile(r"\bTemp(?:erature)?\s*:?\s*(\d{2,3}(?:\.\d+)?)\s*(F|C)\b")),
+               ("weight", None, re.compile(r"\b(?:Weight|Wt)\s*:?\s*(\d{2,3}(?:\.\d+)?)\s*(kg|lb)\b")),
+               ("height", None, re.compile(r"\bHeight\s*:?\s*(\d{2,3}(?:\.\d+)?)\s*(cm|in)\b"))]
+    _LAB = re.compile(r"^(ALT|AST|Bilirubin, total|Alkaline phosphatase|Creatinine|Hemoglobin|WBC|Platelets|Glucose)\s+([\d.]+)\s+(\S+)", re.M)
+    _IMM = re.compile(r"^(DTaP|IPV|MMR|Varicella|Hepatitis B|Hib|PCV13|Hepatitis A|Influenza)\s+(\d{2}/\d{2}/\d{4})", re.M)
+    _MED = re.compile(r"\bStarted ([A-Z][a-z]+) (\d+ ?mg)")
+
+    def read(self, doc: Document) -> DocExtraction:
+        from .schema import DocFact
+        text, facts = doc.text, []
+        blank = dict(dose=None, frequency=None, route=None, start_date=None, end_date=None, severity=None, serious=None, indication=None)
+        for label, label2, rx in self._VITALS:
+            for m in rx.finditer(text):
+                q = m.group(0)
+                if label2:
+                    facts.append(DocFact(concept_label=label, category="vital", value=m.group(1), unit="mmHg", observed_date=None, quote=q, **blank))
+                    facts.append(DocFact(concept_label=label2, category="vital", value=m.group(2), unit="mmHg", observed_date=None, quote=q, **blank))
+                else:
+                    facts.append(DocFact(concept_label=label, category="vital", value=m.group(1), unit=m.group(2) if m.lastindex and m.lastindex >= 2 else None, observed_date=None, quote=q, **blank))
+        for m in self._LAB.finditer(text):
+            facts.append(DocFact(concept_label=m.group(1), category="lab", value=m.group(2), unit=m.group(3), observed_date=None, quote=m.group(0).strip(), **blank))
+        for m in self._IMM.finditer(text):
+            facts.append(DocFact(concept_label=m.group(1), category="immunization", value=m.group(1), unit=None, observed_date=parse_date(m.group(2)).isoformat(), quote=m.group(0).strip(), **blank))
+        for m in self._MED.finditer(text):
+            facts.append(DocFact(concept_label=m.group(1), category="medication", value=m.group(1), unit=None, observed_date=None, quote=m.group(0), **{**blank, "dose": m.group(2)}))
+        return DocExtraction(document_kind=doc.kind, document_date=doc.document_date.isoformat() if doc.document_date else None, patient_name=None, patient_identifiers=[], facts=facts)
+
+
 def extraction_to_facts(doc: Document, ext: DocExtraction, extractor: str, base_confidence: float = 0.85) -> tuple[list[Fact], list[dict]]:
     """Returns (facts, skipped). A fact whose quote cannot be located keeps a lower confidence and no span."""
     facts, skipped = [], []
     doc_date = parse_date(ext.document_date) or doc.document_date or doc.received_at.date()
     for f in ext.facts:
+        for attr in ("concept_label", "value", "unit", "quote", "dose", "frequency", "route", "indication", "severity"):
+            v = getattr(f, attr)
+            if isinstance(v, str) and "\x00" in v:
+                setattr(f, attr, v.replace("\x00", ""))
         key = code_concept(f.concept_label, f.category)
         if key is None:
             skipped.append({"label": f.concept_label, "value": f.value, "reason": "uncoded"})

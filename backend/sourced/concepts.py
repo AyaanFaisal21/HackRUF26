@@ -38,9 +38,11 @@ CDISC_TO_KEY = {"SYSBP": "sbp", "DIABP": "dbp", "PULSE": "hr", "TEMP": "temp", "
 SYNONYMS = {
     "systolic blood pressure": "sbp", "systolic": "sbp", "bp systolic": "sbp", "sbp": "sbp",
     "diastolic blood pressure": "dbp", "diastolic": "dbp", "bp diastolic": "dbp", "dbp": "dbp",
-    "heart rate": "hr", "pulse": "hr", "pulse rate": "hr", "hr": "hr",
-    "temperature": "temp", "temp": "temp", "body temperature": "temp",
-    "weight": "weight", "body weight": "weight", "wt": "weight", "height": "height", "ht": "height", "body height": "height",
+    "heart rate": "hr", "pulse": "hr", "pulse rate": "hr", "hr": "hr", "p": "hr", "hr bpm": "hr",
+    "temperature": "temp", "temp": "temp", "body temperature": "temp", "t": "temp",
+    "weight": "weight", "body weight": "weight", "wt": "weight", "weight kg": "weight", "weight lb": "weight", "height": "height", "ht": "height", "body height": "height",
+    "b/p systolic": "sbp", "b/p diastolic": "dbp", "bp sys": "sbp", "bp dia": "dbp", "sys": "sbp", "dia": "dbp", "systolic bp": "sbp", "diastolic bp": "dbp",
+    "blood pressure systolic": "sbp", "blood pressure diastolic": "dbp", "systolic pressure": "sbp", "diastolic pressure": "dbp",
     "alt": "alt", "alanine aminotransferase": "alt", "sgpt": "alt", "ast": "ast", "aspartate aminotransferase": "ast", "sgot": "ast",
     "bilirubin": "bili", "total bilirubin": "bili", "bilirubin total": "bili", "alkaline phosphatase": "alp", "alk phos": "alp", "alp": "alp",
     "creatinine": "creat", "serum creatinine": "creat", "hemoglobin": "hgb", "haemoglobin": "hgb", "hgb": "hgb",
@@ -50,7 +52,7 @@ SYNONYMS = {
 CATEGORY_DEFAULT = {"medication": "medication", "condition": "condition", "adverse_event": "adverse_event", "allergy": "allergy", "immunization": "immunization"}
 
 _UNIT_ALIASES = {"mmhg": "mmHg", "mm hg": "mmHg", "bpm": "/min", "beats/min": "/min", "/min": "/min", "min-1": "/min",
-                 "c": "Cel", "°c": "Cel", "cel": "Cel", "celsius": "Cel", "f": "degF", "°f": "degF", "degf": "degF", "fahrenheit": "degF",
+                 "c": "Cel", "°c": "Cel", "cel": "Cel", "celsius": "Cel", "deg c": "Cel", "f": "degF", "°f": "degF", "degf": "degF", "fahrenheit": "degF", "deg f": "degF", "b0f": "degF", "b0c": "Cel", "\u00b0f": "degF", "\u00b0c": "Cel",
                  "kg": "kg", "kgs": "kg", "kilograms": "kg", "lb": "lb", "lbs": "lb", "pounds": "lb", "cm": "cm", "in": "in", "inches": "in", "inch": "in", "m": "m",
                  "u/l": "U/L", "iu/l": "U/L", "umol/l": "umol/L", "µmol/l": "umol/L", "mg/dl": "mg/dL", "g/l": "g/L", "g/dl": "g/dL",
                  "10*9/l": "10*9/L", "10^9/l": "10*9/L", "gi/l": "10*9/L", "giga/l": "10*9/L", "x10^9/l": "10*9/L", "k/ul": "10*9/L", "mmol/l": "mmol/L"}
@@ -59,7 +61,8 @@ _UNIT_ALIASES = {"mmhg": "mmHg", "mm hg": "mmHg", "bpm": "/min", "beats/min": "/
 def normalize_unit(u: str | None) -> str | None:
     if not u:
         return None
-    return _UNIT_ALIASES.get(u.strip().lower(), u.strip())
+    t = u.strip().lower().rstrip(".").strip()
+    return _UNIT_ALIASES.get(t, u.strip().rstrip("."))
 
 
 def convert(value: float, from_unit: str | None, to_unit: str | None, concept: str) -> float | None:
@@ -106,7 +109,9 @@ def code_concept(label: str, category: str | None = None) -> str | None:
         return SYNONYMS[t]
     if category in CATEGORY_DEFAULT:
         return CATEGORY_DEFAULT[category]
-    hit = process.extractOne(t, _SYN_KEYS, scorer=fuzz.WRatio)
+    if len(t) < 4:          # one- and two-letter labels are too ambiguous to fuzzy-match
+        return None
+    hit = process.extractOne(t, [k for k in _SYN_KEYS if len(k) >= 4], scorer=fuzz.WRatio)
     if hit and hit[1] >= 88:
         return SYNONYMS[hit[0]]
     return None
