@@ -1,8 +1,8 @@
 # Sourced
 
-Medical forms that fill themselves, with receipts.
+Clinical data that manages itself, with receipts.
 
-Every trial visit produces data that someone retypes from the hospital record into the sponsor's forms, and someone else checks against the source. Connectors automate the structured part. The one independent multi-sponsor study found that is about 17 percent of trial data points. The rest lives in scanned lab reports, discharge summaries, clinic notes, and medication lists written as prose. Sourced reads those into a ledger where every fact carries its origin, fills forms from the ledger, has a second pass check every field, and lets a human sign only what disagreed.
+Every trial visit produces data that someone retypes from the hospital record into the sponsor's forms, and someone else checks against the source. Connectors automate the structured part. The one independent multi-sponsor study found that is about 17 percent of trial data points. The rest lives in scanned lab reports, discharge summaries, clinic notes, and medication lists written as prose. Sourced reads those into a ledger where every fact carries its origin, fills forms from the ledger, has a second pass check every field, says what probably caused each disagreement, and lets a human sign only what disagreed. Paper comes in as text, a photo, a scan, or a PDF.
 
 Built for the Regeneron track at HackRU Fall 2026. Runs on Tiger Data.
 
@@ -13,10 +13,11 @@ Built for the Regeneron track at HackRU Fall 2026. Runs on Tiger Data.
 | Store | `backend/sourced/store.py`, `backend/sql/sourced.sql` | Raw documents kept unchanged with a hash. A ledger of facts, one row per value with concept code, unit, time, source organization, document page and text span or FHIR resource, extractor, confidence. Hypertable on Tiger Data |
 | Read, structured | `reader.py` `read_fhir_bundle` | FHIR R4 Patient, Observation (LOINC), MedicationStatement, Condition, AllergyIntolerance, Immunization, AdverseEvent into facts, confidence 1.0 |
 | Read, documents | `reader.py` `ModelDocReader` | The model lists every fact with a verbatim quote; the quote is located to a page and span. `OracleDocReader` plays the answer key so the whole system runs with no key |
+| Read, paper | `api.py` `/api/documents/upload` | A photo, scan, or PDF is transcribed by the model first, then read like any text. The receipts point into the transcription and the original is kept beside it. The reader also names the document kind and date when they are not given |
 | Code and convert | `concepts.py` | Small shared vocabulary with LOINC codes, synonyms, fuzzy matching, and unit conversion (pounds, Fahrenheit, mg/dL) |
 | Fill | `forms.py` | A form is a list of questions. Each field is a concept, a time window, a unit. The filler answers from the ledger, nearest to the visit first, with a receipt, a confidence, and the other values it saw |
-| Verify | `verifier.py` | Independent pass: plausible range, the number inside the quote matches the extracted value, agreement across source organizations, conflicts inside list rows. Optional model second opinion |
-| Review | `api.py`, `frontend/` | Queue of filled forms, disagreements first. Accept, choose another source, enter manually, or leave blank, each with a reason. Signing requires every flagged field decided. Export as ODM-shaped JSON. Append-only audit trail |
+| Verify | `verifier.py` | Independent pass: plausible range, the number inside the quote matches the extracted value, agreement across source organizations, conflicts inside list rows. Every flag comes with a plain-language sentence built from the receipts: who recorded what, where, and when. Every disagreement gets a likely cause and a suggested decision from rules: unit arithmetic (a 67 that is really pounds), transposed digits, a decimal slip, the patient's own history, a dispensing list that cannot show a stop. The coordinator decides; the model can be asked for its own reading of the receipts |
+| Review | `api.py`, `frontend/` | Queue of filled forms, disagreements first. Each flagged field or row shows why it is flagged, every source with its document page and quote, and on request a model explanation that reasons only from those receipts (stored on the field, audited). Accept, choose another source, enter manually, or leave blank, each with a reason. Signing requires every flagged field decided. Export as ODM-shaped JSON. Append-only audit trail |
 | Measure | `evaluate.py` | Fill rate, accuracy, receipt coverage, planted conflicts caught, unit traps converted, gaps filled from documents, false alarms, school forms complete across clinics |
 
 Forms included: CDASH Vital Signs, Laboratory, Concomitant Medications, Adverse Events, Demographics, Medical History, and the New Jersey Universal Child Health Record (CH-14) provider section.

@@ -1,10 +1,10 @@
-# Sourced: medical forms that fill themselves, with receipts
+# Sourced: clinical data that manages itself, with receipts
 
 Working name. Change it if you find a better one.
 
 ## The pitch
 
-**Seven words.** Medical forms that fill themselves, with receipts.
+**Seven words.** Clinical data that manages itself, with receipts. (Before 2026-10-11: medical forms that fill themselves.)
 
 **Thirty seconds.** Everyone has filled a form that asks for information that already exists somewhere. A clipboard at the doctor. A school health form. A clinical trial visit form. Someone hunts through records in three systems and a stack of faxes, retypes the values, and someone else checks the typing against the source. We read the records, fill the form, and put a receipt on every field that shows exactly where the value came from. A second pass flags anything that disagrees. A human signs. Nothing is invented, and nothing is retyped.
 

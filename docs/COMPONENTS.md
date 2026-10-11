@@ -38,8 +38,8 @@ Change these only in `backend/sourced/schema.py` and tell the team.
 | S3 | Vocabulary and units | `concepts.py` | done for 20 concepts | 2 to 3 |
 | S4 | Ledger on Tiger | `sql/sourced.sql`, `store.py` | done: hypertables, compression, continuous aggregate, pgvector, COPY loads | 2 to 4 |
 | S5 | Forms and filler | `forms.py` | done: 6 CDASH pages and the NJ CH-14 | 3 to 5 |
-| S6 | Verifier | `verifier.py` | done: 35 of 35 planted conflicts, 0 false alarms on model-read data; dose and status normalization for medication rows; model second opinion still untested | 2 to 3 |
-| S7 | Review, sign, export, audit | `api.py`, `store.py` | done | 2 to 3 |
+| S6 | Verifier | `verifier.py` | done: 35 of 35 planted conflicts, 0 false alarms on model-read data; dose and status normalization for medication rows; a single dose with no end date is not a status conflict; each flag carries a plain-language explanation built from the receipts; each disagreement carries a rule-based likely cause and suggested decision (unit arithmetic, transposed digits, decimal slip, patient history, dispensing lists); model second opinion still untested | 2 to 3 |
+| S7 | Review, sign, export, audit | `api.py`, `store.py` | done; list rows expand to every source with document page, quote, dose and dates; "explain with the model" returns a structured suggestion (likely cause, confidence, decision, what to verify) that reasons only from the receipts and is stored on the field with an audit entry; "apply suggestion" records the rule-based suggestion as the decision with its reason | 2 to 3 |
 | S8 | Frontend | `frontend/src` | done: patients, patient, form review, queue, documents with search and ingest, document viewer, metrics | 6 to 10 |
 | S9 | Evaluation | `evaluate.py` | done on model-read data: forms 100 percent, 35/35 conflicts, 12/12 unit traps, 32/32 gaps, 0 false alarms, 10/10 school forms; reader table versus scripts baseline by document kind and layout | 1 to 2 |
 | S10 | Packaging and demo | `README.md`, `docs/`, video, slides | README with results, `docs/VIDEO_SCRIPT.md` written; recording and slides not started | 4 to 6 |
@@ -77,3 +77,39 @@ Two people: backend owner S1 to S7 and S9 in the order S2, S4, S1, S6; frontend 
 4. 1:20 The verifier caught one: the note says 112 kg, the hospital says 92 kg. Both shown. The coordinator picks, writes a reason, signs. The export and the audit trail appear.
 5. 2:00 The same ledger, the school form: immunizations unioned across two clinics, the urgent-care weight flagged.
 6. 2:30 Metrics slide, then Tiger slide: one hypertable of 30,000 facts, compression, vector search across every page.
+
+## Paper intake
+
+`POST /api/documents` takes text. `POST /api/documents/upload` takes a photo, a scan, or a PDF. An image, or a PDF page with no text layer, is transcribed by the model (`llm.transcribe`), then read by the same reader as any text, so the receipts point into the transcription and the original is stored in `documents.image` and served at `/api/documents/{id}/image`. Kind "auto" lets the reader name the document kind; a missing date is taken from the document. A fax server, a scanner, or an EHR document export would post to these two endpoints; those connectors are not part of the hackathon build.
+
+Sample: `data/samples/fax_walkin_olu_murphy.jpg`, a photographed walk-in clinic note for patient 01-701-1415. Uploaded live on 2026-10-11 it transcribed exactly, produced 10 facts in 7.7 seconds, every quote located, pounds and Fahrenheit and mg/dL converted with the written values kept.
+
+## Coverage: what a structured-only connector would fill
+
+Measured on the 128 demo forms in the ledger on 2026-10-11. A field counts as reachable by a structured-only connector when a FHIR fact exists inside the field's visit window, whether or not it was the value chosen.
+
+| Visit-page fields (vital signs, labs, school form scalars) | Count | Share |
+|---|---|---|
+| Fields | 648 | |
+| Filled by Sourced | 646 | 99.7% |
+| Reachable by a structured-only connector | 440 | 67.9% |
+| Existed only in a document | 206 | 31.8% |
+
+| List rows | Rows | Only in a document | In both | Only structured |
+|---|---|---|---|---|
+| Medications (CM log) | 173 | 20 (11.6%) | 23 | 130 |
+| Immunizations (school form) | 141 | 78 (55.3%) | 7 | 56 |
+
+The gaps were planted by the generator, so these numbers show the mechanism, not a real-world rate. TransFAIR's 16.9 percent is measured on real hospitals. The query:
+
+```sql
+WITH f AS (
+  SELECT value, receipt->>'document_id' AS doc,
+         EXISTS (SELECT 1 FROM jsonb_array_elements(coalesce(alternatives,'[]'::jsonb)) a
+                 WHERE a->'receipt'->>'document_id' IS NULL) AS has_structured_alt
+  FROM form_fields WHERE vtype <> 'list')
+SELECT count(*) AS fields, count(value) AS filled,
+       count(*) FILTER (WHERE value IS NOT NULL AND (doc IS NULL OR has_structured_alt)) AS structured_reachable,
+       count(*) FILTER (WHERE value IS NOT NULL AND doc IS NOT NULL AND NOT has_structured_alt) AS only_a_document
+FROM f;
+```
