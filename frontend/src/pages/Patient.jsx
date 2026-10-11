@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { api } from "../api.js";
-import { Org, Status, fmtDate, fmtDT } from "../components/ui.jsx";
+import { Avatar, Empty, Kind, Org, Status, fmtDate, fmtDT } from "../components/ui.jsx";
 
 export default function Patient() {
   const { id } = useParams(); const nav = useNavigate();
@@ -17,7 +17,7 @@ export default function Patient() {
   return (<>
     <div className="muted small"><Link to="/patients">Patients</Link> › {s.id}</div>
     <div style={{ display: "flex", alignItems: "baseline", gap: 14, flexWrap: "wrap" }}>
-      <h2 style={{ margin: "4px 0 8px" }}>{s.id}</h2><span className="muted">{s.display_name} · born {fmtDate(s.birth_date)} · {s.sex} {s.kind === "child" ? "· child" : `· trial ${s.trial_id}, site ${s.site}`}</span>
+      <Avatar name={s.display_name} id={s.id} /><h2 style={{ margin: "4px 0 8px" }}>{s.display_name} <span className="muted" style={{ fontWeight: 400 }}>{s.id}</span></h2><span className="muted">born {fmtDate(s.birth_date)} · {s.sex} {s.kind === "child" ? "· child" : `· trial ${s.trial_id}, site ${s.site}`}</span>
     </div>
     <div className="card" style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap" }}>
       <b>Fill a form</b>
@@ -35,13 +35,13 @@ export default function Patient() {
         </div>
         <div className="card"><h2>Documents <span className="muted small">({p.documents.length})</span></h2>
           {p.documents.length ? <table><thead><tr><th>Document</th><th>From</th><th>Date</th><th>Status</th><th>Facts</th></tr></thead>
-            <tbody>{p.documents.map((d) => <tr key={d.id} className="row"><td><Link to={`/documents/${d.id}`}><b>{d.id}</b></Link><div className="muted small">{d.kind.replace("_", " ")} · {d.n_pages} page{d.n_pages > 1 ? "s" : ""}</div></td><td><Org o={d.source_org} /></td><td>{fmtDate(d.document_date)}</td><td><Status s={d.status} /></td><td>{d.n_facts ?? ""}</td></tr>)}</tbody></table>
-            : <div className="muted">No outside documents. Everything known comes from the EHR.</div>}
+            <tbody>{p.documents.map((d) => <tr key={d.id} className="row"><td><Link to={`/documents/${d.id}`}><b>{d.id}</b></Link><div className="small"><Kind k={d.kind} /> <span className="muted">· {d.n_pages} page{d.n_pages > 1 ? "s" : ""}</span></div></td><td><Org o={d.source_org} /></td><td>{fmtDate(d.document_date)}</td><td><Status s={d.status} /></td><td>{d.n_facts ?? ""}</td></tr>)}</tbody></table>
+            : <Empty>No outside documents yet. Everything known about this patient comes from the hospital record.</Empty>}
         </div>
         <div className="card"><h2>Forms <span className="muted small">({p.forms.length})</span></h2>
           {p.forms.length ? <table><thead><tr><th>Form</th><th>Visit</th><th>Filled</th><th>Flagged</th><th>Status</th><th>Time</th></tr></thead>
             <tbody>{p.forms.map((f) => <tr key={f.id} className="row" onClick={() => nav(`/forms/${f.id}`)}><td><b>{f.name}</b> <span className="muted small">{f.domain}</span></td><td>{fmtDate(f.visit_date)}</td><td>{f.n_filled}/{f.n_fields}</td><td>{f.n_flagged ? <span className="pill red">{f.n_flagged}</span> : <span className="pill green">0</span>}</td><td><Status s={f.status} /></td><td className="muted small">{f.filled_ms} ms</td></tr>)}</tbody></table>
-            : <div className="muted">No forms yet.</div>}
+            : <Empty>No forms yet. Pick a form and a visit date above.</Empty>}
         </div>
       </div>
       <div>

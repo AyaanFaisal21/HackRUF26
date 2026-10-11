@@ -23,3 +23,8 @@ export function Highlight({ text, spans, active }) {
   });
   return <>{out}</>;
 }
+
+const KIND = { lab_report: ["🧪", "lab report"], clinic_note: ["📝", "clinic note"], pharmacy_list: ["💊", "pharmacy list"], immunization_record: ["💉", "immunization record"], urgent_care_note: ["🏥", "urgent care note"], discharge_summary: ["📄", "discharge summary"], other: ["📄", "document"] };
+export const Kind = ({ k }) => { const [i, t] = KIND[k] ?? KIND.other; return <span className="kind"><span aria-hidden>{i}</span> {t}</span>; };
+export const Avatar = ({ name, id }) => { const t = (name || id || "?").split(" ").map((x) => x[0]).join("").slice(0, 2).toUpperCase(); let h = 0; for (const c of (id || "")) h = (h * 31 + c.charCodeAt(0)) % 360; return <span className="avatar" style={{ background: `hsl(${h} 45% 88%)`, color: `hsl(${h} 45% 30%)` }}>{t}</span>; };
+export const Empty = ({ children }) => <div className="empty">{children}</div>;

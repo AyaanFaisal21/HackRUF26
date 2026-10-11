@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route, NavLink, Navigate } from "react-router-dom";
 import { api } from "./api.js";
+import Home from "./pages/Home.jsx";
 import Patients from "./pages/Patients.jsx";
 import Patient from "./pages/Patient.jsx";
 import FormReview from "./pages/FormReview.jsx";
@@ -15,7 +16,7 @@ function Layout({ children }) {
   return (<>
     <header className="top">
       <span className="brand">Sourced<small>forms that fill themselves, with receipts</small></span>
-      <nav><NavLink to="/patients">Patients</NavLink><NavLink to="/queue">Review queue</NavLink><NavLink to="/documents">Documents</NavLink><NavLink to="/metrics">Metrics</NavLink></nav>
+      <nav><NavLink to="/" end>Home</NavLink><NavLink to="/patients">Patients</NavLink><NavLink to="/queue">Review queue</NavLink><NavLink to="/documents">Documents</NavLink><NavLink to="/metrics">Metrics</NavLink></nav>
       <span className="right">{health ? (health.ok ? `api ok · reader: ${health.model ?? "none, deterministic mode"}` : "api unreachable") : ""}</span>
     </header>
     <main>{children}</main>
@@ -25,7 +26,7 @@ function Layout({ children }) {
 export default function App() {
   return (
     <BrowserRouter><Layout><Routes>
-      <Route path="/" element={<Navigate to="/patients" replace />} />
+      <Route path="/" element={<Home />} />
       <Route path="/patients" element={<Patients />} />
       <Route path="/patients/:id" element={<Patient />} />
       <Route path="/forms/:id" element={<FormReview />} />

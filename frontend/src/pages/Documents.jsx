@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { api } from "../api.js";
-import { Org, Status, fmtDate, fmtDT } from "../components/ui.jsx";
+import { Kind, Org, Status, fmtDate, fmtDT } from "../components/ui.jsx";
 
 export default function Documents() {
   const [rows, setRows] = useState([]); const [q, setQ] = useState(""); const [pid, setPid] = useState(""); const [hits, setHits] = useState(null);
@@ -35,7 +35,7 @@ export default function Documents() {
     <div className="card">
       <table><thead><tr><th>Document</th><th>Patient</th><th>From</th><th>Document date</th><th>Received</th><th>Status</th><th>Facts</th><th>Reader</th></tr></thead>
         <tbody>{rows.map((d) => (<tr key={d.id} className="row" onClick={() => nav(`/documents/${d.id}`)}>
-          <td><b>{d.id}</b><div className="muted small">{d.kind.replace("_", " ")} · {d.n_pages} page{d.n_pages > 1 ? "s" : ""}</div></td><td>{d.patient_id}<div className="muted small">{d.display_name}</div></td><td><Org o={d.source_org} /></td><td>{fmtDate(d.document_date)}</td><td className="muted small">{fmtDT(d.received_at)}</td><td><Status s={d.status} /></td><td>{d.n_facts ?? ""}</td><td className="muted small">{d.reader}</td></tr>))}</tbody></table>
+          <td><b>{d.id}</b><div className="small"><Kind k={d.kind} /> <span className="muted">· {d.n_pages} page{d.n_pages > 1 ? "s" : ""}</span></div></td><td>{d.patient_id}<div className="muted small">{d.display_name}</div></td><td><Org o={d.source_org} /></td><td>{fmtDate(d.document_date)}</td><td className="muted small">{fmtDT(d.received_at)}</td><td><Status s={d.status} /></td><td>{d.n_facts ?? ""}</td><td className="muted small">{d.reader}</td></tr>))}</tbody></table>
     </div>
   </>);
 }

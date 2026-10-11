@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { api } from "../api.js";
-import { Highlight, Org, Status, fmtDate } from "../components/ui.jsx";
+import { Highlight, Kind, Org, Status, fmtDate } from "../components/ui.jsx";
 
 export default function DocumentView() {
   const { id } = useParams(); const loc = useLocation();
@@ -11,7 +11,7 @@ export default function DocumentView() {
   return (<>
     <div className="muted small"><Link to="/documents">Documents</Link> › <Link to={`/patients/${d.patient_id}`}>{d.patient_id}</Link> › {d.id}</div>
     <div style={{ display: "flex", alignItems: "baseline", gap: 12, flexWrap: "wrap" }}>
-      <h2 style={{ margin: "4px 0 8px" }}>{d.id} <span className="muted" style={{ fontWeight: 400 }}>{d.kind.replace("_", " ")}</span></h2><Org o={d.source_org} /><Status s={d.status} />
+      <h2 style={{ margin: "4px 0 8px" }}>{d.id}</h2><Kind k={d.kind} /><Org o={d.source_org} /><Status s={d.status} />
       <span className="muted small">dated {fmtDate(d.document_date)} · {d.n_pages} page{d.n_pages > 1 ? "s" : ""} · sha256 {d.sha256.slice(0, 12)}… · read by {d.reader}</span>
     </div>
     <div className="grid2">

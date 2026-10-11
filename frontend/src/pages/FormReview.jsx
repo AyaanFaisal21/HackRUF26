@@ -28,12 +28,20 @@ export default function FormReview() {
   const unresolved = i.fields.filter((x) => ["disagree", "rule_fail", "missing"].includes(x.verifier?.verdict) && !x.decision).length;
   const act = (key, body) => api.decide(id, key, { ...body, actor: actor || "reviewer", reason: reason || body.reason }).then(() => { setMsg(null); setReason(""); load(); }).catch((e) => setMsg(e.message));
   const sign = () => api.sign(id, actor || "reviewer").then(() => { setMsg(null); load(); }).catch((e) => setMsg(e.message));
+  const acceptClean = () => {
+    const clean = i.fields.filter((x) => ["agree", "single_source"].includes(x.verifier?.verdict) && !x.decision && (x.value != null || x.rows?.length));
+    clean.reduce((p, x) => p.then(() => api.decide(id, x.key, { action: "accept", actor: actor || "reviewer", reason: "no disagreement; accepted in bulk" })), Promise.resolve()).then(load).catch((e) => setMsg(e.message));
+  };
   return (<>
     <div className="muted small"><Link to="/queue">Review queue</Link> › <Link to={`/patients/${i.patient_id}`}>{i.patient_id}</Link> › form #{i.id}</div>
     <div style={{ display: "flex", alignItems: "baseline", gap: 12, flexWrap: "wrap" }}>
       <h2 style={{ margin: "4px 0 8px" }}>{i.name} <span className="muted" style={{ fontWeight: 400 }}>{i.domain}</span></h2><Status s={i.status} />
       <span className="muted">{i.display_name} · visit {fmtDate(i.visit_date)} · filled in {i.filled_ms} ms · {i.n_filled}/{i.n_fields} fields filled</span>
       <span style={{ marginLeft: "auto" }}>{unresolved > 0 ? <span className="pill red">{unresolved} to resolve</span> : <span className="pill green">nothing unresolved</span>}</span>
+    </div>
+    <div className="card strip">
+      {[["agree", "confirmed by two sources"], ["single_source", "one source"], ["disagree", "sources disagree"], ["rule_fail", "check failed"], ["missing", "missing"]].map(([v, l]) => { const n = i.fields.filter((x) => x.verifier?.verdict === v).length; return n ? <span key={v} className="stripitem"><Verdict v={v} /> {n} {l}</span> : null; })}
+      <span className="muted small" style={{ marginLeft: "auto" }}>click a field to see its receipt</span>
     </div>
     <div className="grid2">
       <div className="card">
@@ -47,6 +55,7 @@ export default function FormReview() {
           </div>))}
         <div style={{ display: "flex", gap: 10, alignItems: "center", marginTop: 12, flexWrap: "wrap" }}>
           <input placeholder="your name" value={actor} onChange={(e) => setActor(e.target.value)} />
+          <button onClick={acceptClean} disabled={i.status === "signed"}>accept all unflagged</button>
           <button className="primary" disabled={i.status === "signed" || unresolved > 0 || !actor} onClick={sign}>sign and export</button>
           {i.status === "signed" && <a href={`/api/forms/instances/${i.id}/export`} target="_blank" rel="noreferrer">download export (ODM-shaped JSON)</a>}
           {msg && <span className="pill red">{msg}</span>}
