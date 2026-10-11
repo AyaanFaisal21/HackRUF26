@@ -309,6 +309,12 @@ def export(iid: int):
     return i["export"]
 
 
+@app.get("/api/audit/verify")
+def audit_verify():
+    """Recompute the whole hash chain. intact=false names the first event whose link does not hold."""
+    return store().verify_audit()
+
+
 @app.get("/api/forms/instances/{iid}/history")
 def form_history(iid: int):
     return store().history("form_instance", str(iid))

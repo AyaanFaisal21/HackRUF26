@@ -21,6 +21,7 @@ export const api = {
   explain: (id, key) => post(`/api/forms/instances/${id}/fields/${key}/explain`),
   exportForm: (id) => fetch(`/api/forms/instances/${id}/export`).then(j),
   history: (id) => fetch(`/api/forms/instances/${id}/history`).then(j),
+  auditVerify: () => fetch("/api/audit/verify").then(j),
   queue: () => fetch("/api/queue").then(j),
   metrics: (refresh) => fetch(`/api/metrics${refresh ? "?refresh=true" : ""}`).then(j),
 };

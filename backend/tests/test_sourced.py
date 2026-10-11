@@ -138,3 +138,19 @@ def test_diagnosis_pharmacy_list_cannot_show_a_stop():
     row = next(r for r in inst.fields[0].rows if r["term"] == "Ampicillin")
     dx = row["diagnosis"]
     assert dx["confidence"] == "likely" and "dispensing" in dx["suggestion"]["reason"] and "10-day course" in dx["evidence"][0]
+
+
+def test_audit_hash_chain_detects_tampering():
+    from datetime import datetime, timezone
+    from sourced.store import GENESIS, chain_hash, verify_chain
+    rows, prev = [], GENESIS
+    for i, (actor, action, reason) in enumerate([("filler", "form_filled", None), ("reviewer", "field_choose", "took the pediatrician's value"), ("reviewer", "form_signed", None)]):
+        r = {"seq": i + 1, "at": datetime(2026, 10, 11, 9, 0, i, 123456, tzinfo=timezone.utc), "actor": actor, "action": action, "entity": "form_instance", "entity_id": "769", "field": "weight" if i == 1 else None,
+             "old_value": None, "new_value": {"value": 30.4} if i == 1 else {"fields": 9}, "reason": reason, "prev_hash": prev}
+        r["hash"] = prev = chain_hash(prev, r)
+        rows.append(r)
+    assert verify_chain(rows) == {"events": 3, "intact": True, "first_broken_seq": None, "head": rows[-1]["hash"]}
+    rows[1]["reason"] = "took urgent care's value"          # an edit after the fact
+    v = verify_chain(rows)
+    assert v["intact"] is False and v["first_broken_seq"] == 2
+    assert verify_chain(rows[:1] + rows[2:])["intact"] is False   # a deleted event breaks it too

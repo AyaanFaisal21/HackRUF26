@@ -132,6 +132,11 @@ CREATE TABLE IF NOT EXISTS audit_log (
     reason    TEXT
 );
 SELECT create_hypertable('audit_log', 'at', if_not_exists => TRUE);
+-- Tamper evidence: every event carries the SHA-256 of the previous event's hash plus its own canonical content.
+CREATE SEQUENCE IF NOT EXISTS audit_seq;
+ALTER TABLE audit_log ADD COLUMN IF NOT EXISTS seq BIGINT DEFAULT nextval('audit_seq');
+ALTER TABLE audit_log ADD COLUMN IF NOT EXISTS prev_hash TEXT;
+ALTER TABLE audit_log ADD COLUMN IF NOT EXISTS hash TEXT;
 CREATE INDEX IF NOT EXISTS audit_entity ON audit_log (entity, entity_id, at DESC);
 -- Facts arriving per day per source: the "data left behind" chart.
 CREATE MATERIALIZED VIEW IF NOT EXISTS facts_daily

@@ -1,6 +1,8 @@
 """Tiger Data store for the ledger, documents, forms and audit. MemoryStore implements the read side for tests."""
 from __future__ import annotations
 
+import hashlib
+
 import io
 import json
 import os
@@ -35,6 +37,42 @@ def _vec(v):
 
 def _day(d: date) -> datetime:
     return datetime.combine(d, datetime.min.time(), tzinfo=timezone.utc)
+
+
+GENESIS = "0" * 64
+
+
+def _canon(v):
+    """Canonical JSON for hashing: the same bytes before and after a JSONB round trip."""
+    if isinstance(v, datetime):
+        v = v.astimezone(timezone.utc).isoformat(timespec="microseconds")
+    v = json.loads(json.dumps(v, default=str))
+    return json.dumps(_strip(v), sort_keys=True, separators=(",", ":"))
+
+
+def _strip(v):
+    if isinstance(v, str):
+        return v.replace("\x00", "")
+    if isinstance(v, dict):
+        return {k: _strip(x) for k, x in v.items()}
+    if isinstance(v, list):
+        return [_strip(x) for x in v]
+    return v
+
+
+def chain_hash(prev_hash: str, row: dict) -> str:
+    body = _canon([row.get("at"), row.get("actor"), row.get("action"), row.get("entity"), row.get("entity_id"), row.get("field"), row.get("old_value"), row.get("new_value"), row.get("reason")])
+    return hashlib.sha256((prev_hash + body).encode()).hexdigest()
+
+
+def verify_chain(rows: list[dict]) -> dict:
+    """rows in chain order. Returns the count, whether every link holds, where it first breaks, and the head hash."""
+    prev = GENESIS
+    for i, r in enumerate(rows):
+        if r.get("prev_hash") != prev or r.get("hash") != chain_hash(prev, r):
+            return {"events": len(rows), "intact": False, "first_broken_seq": r.get("seq", i), "head": rows[-1].get("hash") if rows else GENESIS}
+        prev = r["hash"]
+    return {"events": len(rows), "intact": True, "first_broken_seq": None, "head": prev}
 
 
 class MemoryStore:
@@ -140,8 +178,36 @@ class Store:
                               (d.id, d.name, d.domain, d.description, J([f.model_dump() for f in d.fields])))
 
     def audit(self, actor, action, entity=None, entity_id=None, field=None, old=None, new=None, reason=None):
-        self.conn.execute("INSERT INTO audit_log (actor, action, entity, entity_id, field, old_value, new_value, reason) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)",
-                          (actor, action, entity, str(entity_id) if entity_id is not None else None, field, J(old), J(new), reason))
+        """Append one event to the tamper-evident audit trail. The chain is serialized with an advisory lock so two
+        writers cannot fork it; each hash covers the previous hash and this event's canonical content."""
+        entity_id = str(entity_id) if entity_id is not None else None
+        at = datetime.now(timezone.utc)
+        with self.conn.transaction():
+            self.conn.execute("SELECT pg_advisory_xact_lock(7001)")
+            prev = self.conn.execute("SELECT hash FROM audit_log WHERE hash IS NOT NULL ORDER BY seq DESC LIMIT 1").fetchone()
+            prev_hash = prev["hash"] if prev else GENESIS
+            h = chain_hash(prev_hash, {"at": at, "actor": actor, "action": action, "entity": entity, "entity_id": entity_id, "field": field, "old_value": old, "new_value": new, "reason": reason})
+            self.conn.execute("INSERT INTO audit_log (at, actor, action, entity, entity_id, field, old_value, new_value, reason, prev_hash, hash) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
+                              (at, actor, action, entity, entity_id, field, J(old), J(new), reason, prev_hash, h))
+
+    def audit_rows(self):
+        return self.conn.execute("SELECT seq, at, actor, action, entity, entity_id, field, old_value, new_value, reason, prev_hash, hash FROM audit_log ORDER BY seq").fetchall()
+
+    def rehash_audit(self) -> int:
+        """One-time: hash events written before the chain existed, in order. Returns the number of rows hashed."""
+        n = 0
+        with self.conn.transaction():
+            self.conn.execute("SELECT pg_advisory_xact_lock(7001)")
+            prev = GENESIS
+            for r in self.audit_rows():
+                h = chain_hash(prev, r)
+                self.conn.execute("UPDATE audit_log SET prev_hash = %s, hash = %s WHERE seq = %s", (prev, h, r["seq"]))
+                prev = h; n += 1
+        return n
+
+    def verify_audit(self) -> dict:
+        """Walk the chain from genesis and recompute every hash. Any edited, deleted, or reordered event breaks it from that point on."""
+        return verify_chain(self.audit_rows())
 
     # ---- ledger reads
     def facts(self, patient_id: str, concept: str, start: date, end: date) -> list[dict]:
@@ -249,8 +315,10 @@ class Store:
                   "FormData": {"FormOID": inst["form_id"], "SignedBy": actor, "SignedAt": datetime.now(timezone.utc).isoformat(), "ItemGroupData": [
                       {"ItemOID": f["key"], "Value": f["value"] if f["vtype"] != "list" else None, "Rows": f["rows"] if f["vtype"] == "list" else None, "Unit": f["unit"],
                        "Receipt": f["receipt"], "Verifier": (f["verifier"] or {}).get("verdict"), "Decision": f["decision"]} for f in inst["fields"]]}}}}}
-        self.conn.execute("UPDATE form_instances SET status = 'signed', signed_by = %s, signed_at = now(), export = %s WHERE id = %s", (actor, J(export), iid))
         self.audit(actor, "form_signed", "form_instance", iid, None, None, {"fields": len(inst["fields"])})
+        head = self.conn.execute("SELECT hash FROM audit_log ORDER BY seq DESC LIMIT 1").fetchone()
+        export["ODM"]["AuditTrail"] = {"events": len(self.history("form_instance", iid)), "chain_head": head["hash"] if head else None, "note": "SHA-256 hash chain over the append-only audit log; verify at /api/audit/verify"}
+        self.conn.execute("UPDATE form_instances SET status = 'signed', signed_by = %s, signed_at = now(), export = %s WHERE id = %s", (actor, J(export), iid))
         return self.instance(iid)
 
     def queue(self):

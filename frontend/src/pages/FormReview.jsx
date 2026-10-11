@@ -40,10 +40,10 @@ function ModelSuggestion({ s, model }) {
 
 export default function FormReview() {
   const { id } = useParams();
-  const [i, setI] = useState(null); const [sel, setSel] = useState(null); const [actor, setActor] = useState(""); const [manual, setManual] = useState(""); const [reason, setReason] = useState(""); const [msg, setMsg] = useState(null); const [hist, setHist] = useState([]);
+  const [i, setI] = useState(null); const [sel, setSel] = useState(null); const [actor, setActor] = useState(""); const [manual, setManual] = useState(""); const [reason, setReason] = useState(""); const [msg, setMsg] = useState(null); const [hist, setHist] = useState([]); const [chain, setChain] = useState(null);
   const [open, setOpen] = useState({}); const [explaining, setExplaining] = useState(false);
   const askModel = (key) => { setExplaining(true); api.explain(id, key).then(load).catch((e) => setMsg(e.message)).finally(() => setExplaining(false)); };
-  const load = () => { api.instance(id).then((x) => { setI(x); if (!sel) setSel(x.fields.find((f) => ["disagree", "rule_fail", "missing"].includes(f.verifier?.verdict) && !f.decision)?.key ?? x.fields[0]?.key); }); api.history(id).then(setHist); };
+  const load = () => { api.instance(id).then((x) => { setI(x); if (!sel) setSel(x.fields.find((f) => ["disagree", "rule_fail", "missing"].includes(f.verifier?.verdict) && !f.decision)?.key ?? x.fields[0]?.key); }); api.history(id).then(setHist); api.auditVerify().then(setChain).catch(() => {}); };
   useEffect(() => { load(); }, [id]);
   if (!i) return <div className="card">Loading…</div>;
   const f = i.fields.find((x) => x.key === sel);
@@ -127,7 +127,8 @@ export default function FormReview() {
           </>)}
         </div>)}
         <div className="card"><h3 style={{ marginTop: 0 }}>History</h3>
-          {hist.length ? <table><tbody>{hist.map((h, k) => <tr key={k}><td className="muted small">{fmtDT(h.at)}</td><td>{h.actor}</td><td className="small">{h.action.replace(/_/g, " ")}{h.field ? ` · ${h.field}` : ""}{h.reason ? ` · ${h.reason}` : ""}</td></tr>)}</tbody></table> : <div className="muted small">No actions yet.</div>}
+          {chain && <div className="small" style={{ marginBottom: 6 }}>{chain.intact ? <span className="pill green">chain intact</span> : <span className="pill red">chain broken at event {chain.first_broken_seq}</span>} <span className="muted">{chain.events} events in the audit log, each hashed with the one before it (SHA-256); head {String(chain.head).slice(0, 12)}…</span></div>}
+          {hist.length ? <table><tbody>{hist.map((h, k) => <tr key={k}><td className="muted small">{fmtDT(h.at)}</td><td>{h.actor}</td><td className="small">{h.action.replace(/_/g, " ")}{h.field ? ` · ${h.field}` : ""}{h.reason ? ` · ${h.reason}` : ""}</td><td className="muted small" title={h.hash}>{h.hash ? h.hash.slice(0, 10) : ""}</td></tr>)}</tbody></table> : <div className="muted small">No actions yet.</div>}
         </div>
       </div>
     </div>
