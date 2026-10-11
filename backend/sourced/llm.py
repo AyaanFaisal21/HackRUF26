@@ -84,6 +84,8 @@ class OpenAILLM:
 
 
 def provider():
+    if not os.environ.get("OPENAI_API_KEY") and os.environ.get("OPEN_AI_API_KEY"):   # common spelling in .env files
+        os.environ["OPENAI_API_KEY"] = os.environ["OPEN_AI_API_KEY"]
     forced = os.environ.get("LLM_PROVIDER")
     if forced == "anthropic" or (not forced and os.environ.get("ANTHROPIC_API_KEY")):
         return AnthropicLLM()

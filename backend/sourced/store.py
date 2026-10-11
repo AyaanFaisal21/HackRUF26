@@ -19,7 +19,7 @@ LEGACY_TABLES = ("case_duplicates", "case_audit", "case_reactions", "case_drugs"
 
 
 def J(obj):
-    return None if obj is None else _Jsonb(json.loads(json.dumps(obj, default=str)))
+    return None if obj is None else _Jsonb(json.loads(json.dumps(obj, default=str).replace("\\u0000", "")))
 
 
 def connect():
@@ -87,7 +87,7 @@ class Store:
     def insert_document(self, doc: Document, sha256: str, embedder=None):
         self.conn.execute("""INSERT INTO documents (id, patient_id, source_org, kind, received_at, document_date, sha256, text, n_pages)
                              VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (id) DO NOTHING""",
-                          (doc.id, doc.patient_id, doc.source_org, doc.kind, doc.received_at, doc.document_date, sha256, doc.text, doc.n_pages))
+                          (doc.id, doc.patient_id, doc.source_org, doc.kind, doc.received_at, doc.document_date, sha256, doc.text.replace("\x00", ""), doc.n_pages))
         if embedder is not None:
             for p, page in enumerate(doc.text.split("\f"), start=1):
                 paras = [x for x in page.split("\n\n") if x.strip()] or [page]
@@ -106,7 +106,7 @@ class Store:
         for f in facts:
             row = [f.patient_id, f.concept, f.display, f.value_num, f.value_text, f.unit, _day(f.observed_at).isoformat(), _day(f.end_at).isoformat() if f.end_at else None,
                    json.dumps(f.attrs, default=str), f.source_org, f.document_id, f.page, f.span_start, f.span_end, f.quote, f.resource_ref, f.extractor, f.confidence, f.status]
-            buf.write("\t".join("\\N" if v is None else str(v).replace("\\", "\\\\").replace("\t", " ").replace("\n", " ") for v in row) + "\n")
+            buf.write("\t".join("\\N" if v is None else str(v).replace("\x00", "").replace("\\", "\\\\").replace("\t", " ").replace("\n", " ") for v in row) + "\n")
         buf.seek(0)
         with self.conn.cursor() as cur, cur.copy(f"COPY facts ({', '.join(cols)}) FROM STDIN") as cp:
             cp.write(buf.read())

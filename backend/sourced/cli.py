@@ -53,22 +53,46 @@ def cmd_load(a):
         org = "Memorial General Hospital" if p["kind"] == "adult" else "Sunrise Pediatrics"
         n_fhir += st.insert_facts(read_fhir_bundle(w["bundles"][p["id"]], p["id"], org))
     reader = OracleDocReader(w["truth"]["doc_extractions"]) if a.reader == "oracle" else ModelDocReader()
+    reader_name = getattr(reader, "name", a.reader)
+    cache_path = SAMPLES / "model_reads.json"
+    cache = json.load(open(cache_path)) if (a.reader == "model" and cache_path.exists() and not a.no_cache) else {"reads": {}}
+    if a.reader == "model" and cache.get("reader") not in (None, reader_name):
+        cache = {"reads": {}}   # a different model: start a fresh cache
     emb = get_embedder()
-    n_doc = n_skipped = 0
+    n_doc = n_skipped = n_failed = n_cached = 0
     docs = w["documents"][: a.max_docs] if a.max_docs else w["documents"]
-    for d in docs:
-        doc = Document(id=d["id"], patient_id=d["patient_id"], source_org=d["source_org"], kind=d["kind"], received_at=datetime.fromisoformat(d["received_at"]), document_date=date.fromisoformat(d["document_date"]), text=d["text"], n_pages=d["n_pages"])
-        st.insert_document(doc, d["sha256"], emb)
+    as_doc = lambda d: Document(id=d["id"], patient_id=d["patient_id"], source_org=d["source_org"], kind=d["kind"], received_at=datetime.fromisoformat(d["received_at"]), document_date=date.fromisoformat(d["document_date"]), text=d["text"], n_pages=d["n_pages"])
+    def read_one(d):
+        doc = as_doc(d)
+        hit = cache["reads"].get(d["sha256"])
+        if hit is not None:
+            from .schema import DocExtraction
+            return doc, DocExtraction.model_validate(hit), None, True
         try:
-            ext = reader.read(doc)
+            return doc, reader.read(doc), None, False
         except Exception as e:
-            st.mark_document(doc.id, "failed", getattr(reader, "name", a.reader), None); print(f"  {doc.id}: reader failed: {e}"); continue
-        facts, skipped = extraction_to_facts(doc, ext, getattr(reader, "name", a.reader), base_confidence=0.95 if a.reader == "oracle" else 0.85)
-        n_doc += st.insert_facts(facts); n_skipped += len(skipped)
-        st.mark_document(doc.id, "read", getattr(reader, "name", a.reader), len(facts))
+            return doc, None, e, False
+    from concurrent.futures import ThreadPoolExecutor
+    with ThreadPoolExecutor(max_workers=a.workers if a.reader == "model" else 1) as ex:
+        results = list(ex.map(read_one, docs))
+    for (doc, ext, err, cached), d in zip(results, docs):
+        st.insert_document(doc, d["sha256"], emb)
+        if err is not None:
+            n_failed += 1; st.mark_document(doc.id, "failed", reader_name, None); print(f"  {doc.id}: reader failed: {err}"); continue
+        n_cached += cached
+        if a.reader == "model" and not cached:
+            cache["reads"][d["sha256"]] = ext.model_dump()
+        try:
+            facts, skipped = extraction_to_facts(doc, ext, reader_name + (" (cached)" if cached else ""), base_confidence=0.95 if a.reader == "oracle" else 0.85)
+            n_doc += st.insert_facts(facts); n_skipped += len(skipped)
+            st.mark_document(doc.id, "read", reader_name, len(facts))
+        except Exception as e:
+            n_failed += 1; st.mark_document(doc.id, "failed", reader_name, None); print(f"  {doc.id}: insert failed: {str(e)[:120]}")
+    if a.reader == "model":
+        json.dump({"reader": reader_name, "updated": datetime.now().isoformat(timespec="seconds"), "reads": cache["reads"]}, open(cache_path, "w"))
     st.upsert_form_defs(FORM_DEFS); st.refresh_aggregates()
     st.audit("loader", "world_loaded", None, None, None, None, {"patients": len(w["patients"]), "fhir_facts": n_fhir, "document_facts": n_doc, "reader": a.reader})
-    print(f"patients {len(w['patients'])} | FHIR facts {n_fhir} | documents {len(docs)} -> {n_doc} facts ({n_skipped} uncoded) | reader={a.reader} | {time.perf_counter() - t0:.1f}s")
+    print(f"patients {len(w['patients'])} | FHIR facts {n_fhir} | documents {len(docs)} -> {n_doc} facts ({n_skipped} uncoded, {n_failed} failed, {n_cached} from cache) | reader={reader_name} | {time.perf_counter() - t0:.1f}s")
 
 
 def cmd_fill(a):
@@ -102,9 +126,12 @@ def cmd_fill(a):
 def cmd_evaluate(a):
     from .evaluate import evaluate, to_markdown
     from .store import Store
+    from .evaluate import reader_metrics
+    from .generate import build_world
     st = Store()
     truth = json.load(open(SAMPLES / "world_answer_key.json"))
     m = evaluate(st, truth, st.patients(), a.patients)
+    m["reader"] = reader_metrics(st, truth, build_world(seed=a.seed)["documents"])
     md = to_markdown(m, a.reader)
     print(md)
     if a.out:
@@ -124,9 +151,9 @@ def main():
     s = sub.add_parser("init-db"); s.add_argument("--drop-legacy", action="store_true"); s.set_defaults(f=cmd_init_db)
     s = sub.add_parser("build-data"); s.add_argument("--seed", type=int, default=7); s.add_argument("--doc-adults", type=int, default=80); s.add_argument("--children", type=int, default=10); s.set_defaults(f=cmd_build_data)
     s = sub.add_parser("load"); s.add_argument("--seed", type=int, default=7); s.add_argument("--doc-adults", type=int, default=80); s.add_argument("--children", type=int, default=10)
-    s.add_argument("--reader", choices=["oracle", "model"], default=os.environ.get("SOURCED_READER", "oracle")); s.add_argument("--max-docs", type=int, default=0); s.add_argument("--keep", action="store_true"); s.set_defaults(f=cmd_load)
+    s.add_argument("--reader", choices=["oracle", "model"], default=os.environ.get("SOURCED_READER", "oracle")); s.add_argument("--max-docs", type=int, default=0); s.add_argument("--workers", type=int, default=6); s.add_argument("--keep", action="store_true"); s.add_argument("--no-cache", action="store_true", help="call the model even when a cached read exists"); s.set_defaults(f=cmd_load)
     s = sub.add_parser("fill"); s.add_argument("--patients", type=int, default=30); s.add_argument("--visits", type=int, default=2); s.add_argument("--forms", default="vs_visit,lb_visit,cm_log"); s.add_argument("--reset", action="store_true", help="delete existing form instances first"); s.set_defaults(f=cmd_fill)
-    s = sub.add_parser("evaluate"); s.add_argument("--patients", type=int, default=60); s.add_argument("--reader", default=os.environ.get("SOURCED_READER", "oracle")); s.add_argument("--out", default=None); s.set_defaults(f=cmd_evaluate)
+    s = sub.add_parser("evaluate"); s.add_argument("--patients", type=int, default=60); s.add_argument("--seed", type=int, default=7); s.add_argument("--reader", default=os.environ.get("SOURCED_READER", "oracle")); s.add_argument("--out", default=None); s.set_defaults(f=cmd_evaluate)
     s = sub.add_parser("compress"); s.add_argument("--days", type=int, default=120); s.set_defaults(f=cmd_compress)
     a = p.parse_args(); a.f(a)
 
