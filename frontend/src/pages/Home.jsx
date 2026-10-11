@@ -27,7 +27,7 @@ export default function Home() {
     <section className="band">
       <div className="eyebrow">Clinical trial sites · sponsors · any clinician with a stack of forms</div>
       <h1>Clinical data that manages itself, <span>with receipts.</span></h1>
-      <p>Sourced reads every record, structured or on paper, moves the facts where they are needed, flags what disagrees, and keeps a receipt on every value. We cover the unglamorous plumbing and make sure people stay in the loop.</p>
+      <p>Sourced reads every record, structured or on paper, moves the facts where they are needed, flags what disagrees, and keeps a receipt on every value. We cover the unglamorous plumbing for clinical trials and make sure people stay in the loop.</p>
       <div className="ctas">
         <button className="primary" disabled={!demo.form} onClick={() => nav(formTo)}>review a flagged form</button>
         <button disabled={!demo.patient} onClick={() => nav(patientTo)}>open a documented patient</button>
